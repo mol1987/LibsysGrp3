@@ -13,8 +13,6 @@ namespace UtilLibrary.MsSqlRepsoitory
 {
     /// <summary>
     /// A repository for our library application.
-    /// Uses a singleton, that only gets created once.
-    /// Use GetInstance() to get the instance instead of new.
     /// </summary>
     public class LibsysRepo : ILibsysRepo
     {
