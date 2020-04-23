@@ -4,6 +4,6 @@ namespace LibsysGrp3WPF
 {
     public interface IVisitorsProcessor
     {
-        IVisitors LoginVisitor(string IdentityNo, string Password);
+        IVisitors LoginVisitorProcess(string IdentityNo, string Password);
     }
 }

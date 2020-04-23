@@ -19,8 +19,32 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Button Command="{Binding ButtonPage2}">Go To Page2</Button>
+            <Button Command="{Binding ButtonGotoLogin}">Login</Button>
             <Button Command="{Binding ButtonQuit}">Quit Application</Button>
         </StackPanel>
+
+        <Popup Margin="10,10,0,13" Name="Popup1" HorizontalAlignment="Left"   
+     VerticalAlignment="Top" Width="194" Height="200" IsOpen="{Binding PopupIsOpen}" Placement="Center">
+            <TextBlock Name="McTextBlock"   
+                 Background="LightBlue" >  
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+ 
+                    <Label Grid.Row="0" Content="Identity No:" Margin="5,0"/>
+                    <TextBox Grid.Row="1" Name="IDTextBox" Margin="5,0" Text="{Binding IDTextBox}"  Width="200"/>
+                    <Label Grid.Row="2" Content="Password:"  Margin="5,0"/>
+                    <TextBox Grid.Row="3" Name="PasswordTextBox" Margin="5,0" Text="{Binding PasswordTextBox}" Width="200"/>
+                    <Button Grid.Row="4" Content="Login" Command="{Binding ButtonLogin}" Margin="5,0"/>
+                </Grid>
+            </TextBlock>
+        </Popup>
+
         <TextBlock>Hello</TextBlock>
     </Grid>
 </UserControl>

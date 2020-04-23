@@ -24,5 +24,17 @@ namespace LibsysGrp3WPF
         {
             Processor = processor;
         }
+
+        public void LoginVisitor(string IdentityNo, string Password)
+        {
+            var tempVisitor = Processor.LoginVisitorProcess(IdentityNo, Password);
+            Firstname = tempVisitor.Firstname;
+            Lastname = tempVisitor.Lastname;
+            Banned = tempVisitor.Banned;
+            IdentityNo = tempVisitor.IdentityNo;
+            JoinDate = tempVisitor.JoinDate;
+            Password = tempVisitor.Password;
+            VisitorsID = tempVisitor.VisitorsID;
+        }
     }
 }

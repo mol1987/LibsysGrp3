@@ -11,7 +11,7 @@ namespace LibsysGrp3WPF
         {
 
         }
-        public IVisitors LoginVisitor(string IdentityNo, string Password)
+        public IVisitors LoginVisitorProcess(string IdentityNo, string Password)
         {
             #region DatavValidation
             // Data validation
