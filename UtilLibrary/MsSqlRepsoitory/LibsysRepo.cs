@@ -22,9 +22,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         #endregion
 
         #region constructor
-        /// <summary>
-        /// Can't be created with new.
-        /// </summary>
         public LibsysRepo()
         {
             _connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
