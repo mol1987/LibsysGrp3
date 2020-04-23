@@ -27,7 +27,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         /// <summary>
         /// Can't be created with new.
         /// </summary>
-        LibsysRepo()
+        public LibsysRepo()
         {
             _connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
         }
