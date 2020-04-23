@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibsysGrp3WPF", "LibsysGrp3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{0A25292C-8593-4216-8C49-D935A141F94E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilLibrary", "UtilLibrary\UtilLibrary.csproj", "{841EE678-ED22-405C-B327-E8B4C16E1446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUITest", "ConsoleUITest\ConsoleUITest.csproj", "{1ABAFCE0-2E80-4AC3-848D-ED59D93F4840}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{0A25292C-8593-4216-8C49-D935A141F94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A25292C-8593-4216-8C49-D935A141F94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A25292C-8593-4216-8C49-D935A141F94E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841EE678-ED22-405C-B327-E8B4C16E1446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841EE678-ED22-405C-B327-E8B4C16E1446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841EE678-ED22-405C-B327-E8B4C16E1446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841EE678-ED22-405C-B327-E8B4C16E1446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ABAFCE0-2E80-4AC3-848D-ED59D93F4840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ABAFCE0-2E80-4AC3-848D-ED59D93F4840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ABAFCE0-2E80-4AC3-848D-ED59D93F4840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ABAFCE0-2E80-4AC3-848D-ED59D93F4840}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
