@@ -10,9 +10,9 @@ namespace LibsysGrp3WPF.ViewModel
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
 
-        public List<IPageViewModel> PageViewModels
+        public List<IPageViewModel> PageViewModels //vad händer om det är inte null
         {
-            get
+            get 
             {
                 if (_pageViewModels == null)
                     _pageViewModels = new List<IPageViewModel>();
