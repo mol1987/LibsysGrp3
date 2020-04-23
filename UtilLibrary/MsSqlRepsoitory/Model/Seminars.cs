@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LibsysGrp3WPF.Model
+namespace UtilLibrary.MsSqlRepsoitory
 {
     public class Seminars
     {

@@ -1,4 +1,4 @@
-﻿namespace LibsysGrp3WPF.Model
+﻿namespace UtilLibrary.MsSqlRepsoitory
 {
     public class Stock
     {

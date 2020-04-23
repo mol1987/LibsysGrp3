@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace LibsysGrp3WPF.Model
+namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Books
+    public class FullBooks : Items
     {
         public int BooksID { get; set; }
-        public int ItemsID { get; set; }
         public DateTime Date { get; set; }
         public int Pages { get; set; }
         public string Author { get; set; }
