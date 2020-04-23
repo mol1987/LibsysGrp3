@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibsysGrp3WPF.ViewModel
+namespace LibsysGrp3WPF
 {
-    class ManageSuperUserViewModel
+    public class ManageSuperUserViewModel : BaseViewModel, IPageViewModel
     {
     }
 }

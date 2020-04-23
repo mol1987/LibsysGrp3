@@ -1,6 +1,6 @@
 ﻿namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Items
+    public class Items : IItems
     {
         public int ItemsID { get; set; }
         public string ItemType { get; set; }

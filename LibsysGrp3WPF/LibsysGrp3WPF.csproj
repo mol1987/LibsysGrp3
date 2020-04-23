@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UtilLibrary\UtilLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\winbows.jpg" />
   </ItemGroup>
 

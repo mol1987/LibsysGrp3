@@ -48,7 +48,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         /// and adds it to librarian.
         /// </summary>
         /// <param name="visitor">A filled librarian object</param>
-        public void AddNewLibrarian(Librarian librarian)
+        public void AddNewLibrarian(ILibrarians librarian)
         {
             string storedProcedure = StoredProcedures.AddNewLibrarians.ToString();
 
@@ -73,7 +73,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         /// and adds it to visitor.
         /// </summary>
         /// <param name="visitor">A filled visitor object</param>
-        public void AddNewVisitor(Visitor visitor)
+        public void AddNewVisitor(IVisitors visitor)
         {
             string storedProcedure = StoredProcedures.AddNewVisitor.ToString();
 

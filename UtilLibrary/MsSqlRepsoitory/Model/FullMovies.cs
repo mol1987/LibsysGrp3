@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class FullMovies : Items
+    public class FullMovies : Items, IFullMovies
     {
         public int MoviesID { get; set; }
         public string Director { get; set; }

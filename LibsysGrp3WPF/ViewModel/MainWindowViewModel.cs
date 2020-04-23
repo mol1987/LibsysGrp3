@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LibsysGrp3WPF.ViewModel
+namespace LibsysGrp3WPF
 {
     public class MainWindowViewModel : BaseViewModel
     {
@@ -57,8 +57,8 @@ namespace LibsysGrp3WPF.ViewModel
         public MainWindowViewModel()
         {
             // Add available pages and set page
-            PageViewModels.Add(new Page1ViewModel());
-            PageViewModels.Add(new Page2ViewModel());
+            PageViewModels.Add(new StartPageViewModel());
+            PageViewModels.Add(new VisitorsProfilePageViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
 

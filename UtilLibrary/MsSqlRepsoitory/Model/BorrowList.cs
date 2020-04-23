@@ -2,7 +2,7 @@
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class BorrowList
+    public class BorrowList : IBorrowList
     {
         public int BorrowListID { get; set; }
         public int StockID { get; set; }

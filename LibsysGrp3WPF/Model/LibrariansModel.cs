@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Librarian
+    public class LibrariansModel : ILibrarians
     {
         public int LibrarianID { get; set; }
         public bool CheifLibrarian { get; set; }

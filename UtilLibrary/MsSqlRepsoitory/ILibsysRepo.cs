@@ -2,7 +2,7 @@
 {
     public interface ILibsysRepo
     {
-        void AddNewLibrarian(Librarian librarian);
-        void AddNewVisitor(Visitor visitor);
+        void AddNewLibrarian(ILibrarians librarian);
+        void AddNewVisitor(IVisitors visitor);
     }
 }

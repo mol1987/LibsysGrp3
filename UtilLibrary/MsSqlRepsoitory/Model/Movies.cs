@@ -1,6 +1,6 @@
 ﻿namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Movies
+    public class Movies : IMovies
     {
         public int MoviesID { get; set; }
         public int ItemsID { get; set; }

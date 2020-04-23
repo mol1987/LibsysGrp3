@@ -1,6 +1,6 @@
 ﻿namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Stock
+    public class Stock : IStock
     {
         public int StockID { get; set; }
         public int ItemsID { get; set; }

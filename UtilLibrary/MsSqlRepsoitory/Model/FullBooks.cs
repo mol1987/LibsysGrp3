@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class FullBooks : Items
+    public class FullBooks : Items, IFullBooks
     {
         public int BooksID { get; set; }
         public DateTime Date { get; set; }

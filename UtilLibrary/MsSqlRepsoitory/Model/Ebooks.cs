@@ -1,6 +1,6 @@
 ﻿namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Ebooks
+    public class Ebooks : IEbooks
     {
         public int EbooksID { get; set; }
         public int ItemsID { get; set; }

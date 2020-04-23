@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LibsysGrp3WPF"
              xmlns:views="clr-namespace:LibsysGrp3WPF.Views">
-    <Application.Resources>
-        <DataTemplate DataType="{x:Type local:Page1ViewModel}">
-            <views:Page1/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:Page2ViewModel}">
-            <views:Page2 />
-        </DataTemplate>
-    </Application.Resources>
-</Application>
 
+<Application.Resources>
+    <DataTemplate DataType="{x:Type local:StartPageViewModel}">
+        <views:StartPage/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
+        <views:VisitorsProfilePage/>
+    </DataTemplate>
+</Application.Resources>
+</Application>

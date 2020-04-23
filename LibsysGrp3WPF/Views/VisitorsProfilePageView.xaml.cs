@@ -16,9 +16,9 @@ namespace LibsysGrp3WPF.Views
     /// <summary>
     /// Interaction logic for VisitorsProfileView.xaml
     /// </summary>
-    public partial class VisitorsProfileView : UserControl
+    public partial class VisitorsProfilePage : UserControl
     {
-        public VisitorsProfileView()
+        public VisitorsProfilePage()
         {
             InitializeComponent();
         }

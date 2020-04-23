@@ -2,7 +2,7 @@
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class Books
+    public class Books : IBooks
     {
         public int BooksID { get; set; }
         public int ItemsID { get; set; }
