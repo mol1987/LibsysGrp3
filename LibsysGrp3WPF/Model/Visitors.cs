@@ -10,6 +10,6 @@ namespace LibsysGrp3WPF.Model
         public string Lastname { get; set; }
         public DateTime JoinDate { get; set; }
         public string Password { get; set; }
-        public ushort Banned { get; set; }
+        public bool Banned { get; set; }
     }
 }
