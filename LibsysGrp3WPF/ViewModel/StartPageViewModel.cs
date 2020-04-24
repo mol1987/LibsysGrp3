@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
@@ -90,9 +91,9 @@ namespace LibsysGrp3WPF
             {
                 return _buttonLogin ?? (_buttonLogin = new RelayCommand(x =>
                 {
-                    var visitor = new VisitorsModel(new VisitorsProcessor());
-                    visitor.LoginVisitor(IDTextBox, PasswordTextBox);
-                    string str = "" + visitor.VisitorsID + ": " + visitor.Firstname + " " + visitor.Lastname + " Joined: " + visitor.JoinDate;
+                    var visitor = new UsersModel(new UsersProcessor(new LibsysRepo()));
+                    visitor.LoginUser(IDTextBox, PasswordTextBox);
+                    string str = "" + visitor.UsersID + ": " + visitor.Firstname + " " + visitor.Lastname + " Joined: " + visitor.JoinDate;
                     PopupIsOpen = false;
                     MessageBox.Show(str, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Question);
                 }));

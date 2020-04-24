@@ -91,5 +91,26 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
         #endregion
+
+        #region User
+        public IUsers LoginUser(string identityNo, string password)
+        {
+            IUsers returnUser = null;
+            string storedProcedure = StoredProcedures.Login.ToString();
+
+            var obj = new
+            {
+                IdentityNo = identityNo,
+                Password = password
+            };
+
+            using (var conn = Create_Connection())
+            {
+                returnUser = conn.Query<Users>(storedProcedure, obj, commandType: CommandType.StoredProcedure).Single();
+            }
+
+            return returnUser;
+        }
+        #endregion
     }
 }

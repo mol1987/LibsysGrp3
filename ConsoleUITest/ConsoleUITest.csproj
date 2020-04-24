@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LibsysGrp3WPF\LibsysGrp3WPF.csproj" />
     <ProjectReference Include="..\UtilLibrary\UtilLibrary.csproj" />
   </ItemGroup>
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class VisitorsModel : IVisitors
+    public class Visitors : IVisitors
     {
         public int VisitorsID { get; set; }
         public string IdentityNo { get; set; }

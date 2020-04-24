@@ -7,6 +7,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
     public enum StoredProcedures
     {
         AddNewLibrarians,
-        AddNewVisitor
+        AddNewVisitor,
+        Login
     }
 }

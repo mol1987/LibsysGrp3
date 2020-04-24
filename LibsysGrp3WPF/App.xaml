@@ -8,8 +8,8 @@
     <DataTemplate DataType="{x:Type local:StartPageViewModel}">
         <views:StartPage/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
-        <views:VisitorsProfilePage/>
-    </DataTemplate>
-</Application.Resources>
+        <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
+            <views:VisitorsProfilePage/>
+        </DataTemplate>
+    </Application.Resources>
 </Application>
