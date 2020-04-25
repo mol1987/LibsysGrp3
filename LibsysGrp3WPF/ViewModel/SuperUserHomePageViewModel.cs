@@ -1,15 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows.Input;
 
 namespace LibsysGrp3WPF
 {
     public class SuperUserHomePageViewModel : BaseViewModel, IPageViewModel
     {
-        private void btnBook_Click(object sender, RoutedEventArgs e)
+        private ICommand _btnManageVisitor;
+        private ICommand _btnManageLibrarian;
+
+        public ICommand btnManageVisitor
         {
-            MessageBox.Show("here I am");
+            get
+            {
+                return _btnManageVisitor ?? (_btnManageVisitor = new RelayCommand(x =>
+                {
+                    Mediator.Notify(PagesChoice.pageManageVisitor, "");
+                }));
+            }
+        }
+
+        public ICommand btnManageLibrarian
+        {
+            get
+            {
+                return _btnManageLibrarian ?? (_btnManageLibrarian = new RelayCommand(x =>
+                {
+                    Mediator.Notify(PagesChoice.pageManageLibrarian, "");
+                }));
+            }
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LibsysGrp3WPF
 {
@@ -12,7 +10,7 @@ namespace LibsysGrp3WPF
 
         public List<IPageViewModel> PageViewModels //vad händer om det är inte null
         {
-            get 
+            get
             {
                 if (_pageViewModels == null)
                     _pageViewModels = new List<IPageViewModel>();
@@ -43,6 +41,7 @@ namespace LibsysGrp3WPF
                 .FirstOrDefault(vm => vm == viewModel);
         }
 
+        #region Page assignmen to enums
         private void OnGoPage1Screen(object obj)
         {
             ChangeViewModel(PageViewModels[0]);
@@ -52,18 +51,41 @@ namespace LibsysGrp3WPF
         {
             ChangeViewModel(PageViewModels[1]);
         }
-      
 
+        private void OnGoPageManageVisitor(object obj)
+        {
+            ChangeViewModel(PageViewModels[2]);
+        }
+
+        private void OnGoPageManageLibrarian(object obj)
+        {
+            ChangeViewModel(PageViewModels[3]);
+        }
+
+        private void OnGoSuperuserHomePage(object obj)
+        {
+            ChangeViewModel(PageViewModels[6]);
+        }
+        #endregion
+
+        #region Constructor
         public MainWindowViewModel()
         {
             // Add available pages and set page
             PageViewModels.Add(new StartPageViewModel());
             PageViewModels.Add(new VisitorsProfilePageViewModel());
+            PageViewModels.Add(new SuperUserHomePageViewModel());
+            PageViewModels.Add(new ManageVisitorsViewModel());
+            PageViewModels.Add(new ManageLibrariansViewModel());
 
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentPageViewModel = PageViewModels[2];
 
             Mediator.Subscribe(PagesChoice.Page1, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
+            Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);
+            Mediator.Subscribe(PagesChoice.pageManageLibrarian, OnGoPageManageLibrarian);
+            Mediator.Subscribe(PagesChoice.pageSuperUserHomepage, OnGoSuperuserHomePage);
         }
+        #endregion
     }
 }

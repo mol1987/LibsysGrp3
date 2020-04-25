@@ -11,12 +11,19 @@
     <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
         <views:VisitorsProfilePage/>
     </DataTemplate>
-        <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
-            <views:SuperUserHomePage/>
-        </DataTemplate>
-        <Style TargetType="Button" x:Key="navButton" >
-            <Setter Property="Margin" Value="15"/>
-            <Setter Property="FontSize" Value="35"/>
-        </Style>
+    <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
+        <views:SuperUserHomePage/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
+        <views:ManageVisitorsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
+         <views:ManageLibrariansView/>
+     </DataTemplate>
+
+     <Style TargetType="Button" x:Key="navButton" >
+         <Setter Property="Margin" Value="15"/>
+          <Setter Property="FontSize" Value="35"/>
+      </Style>
     </Application.Resources>
 </Application>
