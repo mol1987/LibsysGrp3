@@ -8,7 +8,33 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SuperUserHomePage">
 
-    <Grid>
-        
+    <Grid Background="Red">
+        <!--Grid har 3 kolumner och 5 rader för knappnavigeringen-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Content="Bibliotekarie startsida" VerticalAlignment="Center" 
+               HorizontalAlignment="Center" FontSize="36"/>
+        <!--Navigering knappar-->
+        <Button x:Name="btnLogout" Content="Logga ut" Grid.Column="2" Grid.Row="0" 
+                Margin="30"/>
+        <Button x:Name="btnBook" Content="Böcker" Grid.Column="1" Grid.Row="1" 
+                Style="{StaticResource navButton}" Click="btnBook_Click"/>
+        <Button x:Name="btnEbook" Content="E-böcker" Grid.Column="1" Grid.Row="2" 
+                Style="{StaticResource navButton}"/>
+        <Button x:Name="btnSeminarium" Content="Seminarier" Grid.Column="1" Grid.Row="3" 
+                Style="{StaticResource navButton}"/>
+        <Button x:Name="btnManageVisitor" Content="Hantera besökare" Grid.Column="1" 
+                Grid.Row="4" Style="{StaticResource navButton}"/>
     </Grid>
 </Page>

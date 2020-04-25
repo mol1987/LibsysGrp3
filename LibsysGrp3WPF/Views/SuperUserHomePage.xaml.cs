@@ -22,5 +22,9 @@ namespace LibsysGrp3WPF.Views
         {
             InitializeComponent();
         }
+        private void btnBook_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("here I am");
+        }
     }
 }
