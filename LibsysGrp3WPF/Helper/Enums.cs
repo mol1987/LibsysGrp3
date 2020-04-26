@@ -6,8 +6,12 @@
         Page2 = 1,
         pageManageVisitor = 2,
         pageManageLibrarian = 3,
-        pageManageAdmin = 4,
-        pageRepport = 5,
-        pageSuperUserHomepage = 6
+        pageManageSuperUser = 4,
+        pageReport = 5,
+        pageSuperUserHomepage = 6,
+        pageLibrarianHomepage = 7,
+        pageManageBook = 8,
+        pageManageEbook = 9, 
+        pageManageSeminar = 10
     }
 }

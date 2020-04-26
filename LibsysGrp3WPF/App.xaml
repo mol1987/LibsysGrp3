@@ -20,8 +20,26 @@
     <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
          <views:ManageLibrariansView/>
      </DataTemplate>
+     <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
+         <views:ManageSuperUserView/>
+     </DataTemplate>
+     <DataTemplate DataType="{x:Type local:ReportsViewModel}">
+         <views:ReportsView/>
+     </DataTemplate>
+        <DataTemplate DataType="{x:Type local:LibrariansHomePageViewModel}">
+            <views:LibrariansHomePage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ManageBookPageViewModel}">
+            <views:BooksPageView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ManageEbookPageViewModel}">
+            <views:EbooksPageView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ManageSeminarPageViewModel}">
+            <views:SeminarPageView/>
+        </DataTemplate>
 
-     <Style TargetType="Button" x:Key="navButton" >
+        <Style TargetType="Button" x:Key="navButton" >
          <Setter Property="Margin" Value="15"/>
           <Setter Property="FontSize" Value="35"/>
       </Style>
