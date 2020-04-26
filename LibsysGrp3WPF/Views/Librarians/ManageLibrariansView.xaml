@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="LightBlue">
+        <Label Content="manage librarians"/>
     </Grid>
 </UserControl>

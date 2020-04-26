@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="LightBlue">
+        <Button x:Name="btnBack" Content="Back" Grid.Column="2" Grid.Row="0" 
+                Margin="200 150" Command="{Binding btnBack}"/>
+        <Label Content="manage visitor"/>
     </Grid>
 </UserControl>
