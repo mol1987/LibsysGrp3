@@ -8,7 +8,7 @@ namespace LibsysGrp3WPF
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
 
-        public List<IPageViewModel> PageViewModels //vad händer om det är inte null
+        public List<IPageViewModel> PageViewModels 
         {
             get
             {
@@ -96,6 +96,21 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[10]);
         }
 
+        private void OnGoAddLibrarianPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[11]);
+        }
+
+        private void OnGoDeleteLibrarianPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[12]);
+        }
+
+        private void OnGoEditLibrarianPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[13]);
+        }
+
         #endregion
 
         #region Constructor
@@ -113,7 +128,9 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new ManageBookPageViewModel());
             PageViewModels.Add(new ManageEbookPageViewModel());
             PageViewModels.Add(new ManageSeminarPageViewModel());
-
+            PageViewModels.Add(new AddLibrarianViewModel());
+            PageViewModels.Add(new DeleteLibrarianViewModel());
+            PageViewModels.Add(new EditLibrarian());
 
             CurrentPageViewModel = PageViewModels[0];
 
@@ -128,6 +145,9 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageManageBook, OnGoBookPage);
             Mediator.Subscribe(PagesChoice.pageManageEbook, OnGoEbookPage);
             Mediator.Subscribe(PagesChoice.pageManageSeminar, OnGoSeminarPage);
+            Mediator.Subscribe(PagesChoice.pageAddLibrarian, OnGoAddLibrarianPage);
+            Mediator.Subscribe(PagesChoice.pageDeleteLibrarian, OnGoDeleteLibrarianPage);
+            Mediator.Subscribe(PagesChoice.pageEditLibrarian, OnGoEditLibrarianPage);
         }
         #endregion
     }

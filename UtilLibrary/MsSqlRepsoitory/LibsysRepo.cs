@@ -24,7 +24,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         #region constructor
         public LibsysRepo()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["LibsysAzureJesse"].ConnectionString;
         }
         #endregion
 
