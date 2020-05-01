@@ -4,28 +4,37 @@
              xmlns:local="clr-namespace:LibsysGrp3WPF"
              xmlns:views="clr-namespace:LibsysGrp3WPF.Views">
 
-<Application.Resources>
-    <DataTemplate DataType="{x:Type local:StartPageViewModel}">
-        <views:StartPage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
-        <views:VisitorsProfilePage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
-        <views:SuperUserHomePage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
-        <views:ManageVisitorsView/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
-         <views:ManageLibrariansView/>
-     </DataTemplate>
-     <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
-         <views:ManageSuperUserView/>
-     </DataTemplate>
-     <DataTemplate DataType="{x:Type local:ReportsViewModel}">
-         <views:ReportsView/>
-     </DataTemplate>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Purple.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+        <DataTemplate DataType="{x:Type local:StartPageViewModel}">
+            <views:StartPage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
+            <views:VisitorsProfilePage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
+            <views:SuperUserHomePage/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
+            <views:ManageVisitorsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
+            <views:ManageLibrariansView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
+            <views:ManageSuperUserView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ReportsViewModel}">
+            <views:ReportsView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type local:LibrariansHomePageViewModel}">
             <views:LibrariansHomePage/>
         </DataTemplate>
@@ -58,8 +67,9 @@
         </DataTemplate>
 
         <Style TargetType="Button" x:Key="navButton" >
-         <Setter Property="Margin" Value="15"/>
-          <Setter Property="FontSize" Value="35"/>
-      </Style>
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="FontSize" Value="35"/>
+        </Style>
+
     </Application.Resources>
 </Application>
