@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibsysGrp3WPF
 {
-    public class EditLibrarian : BaseViewModel, IPageViewModel
+    public class EditLibrarianViewModel : BaseViewModel, IPageViewModel
     {
     }
 }

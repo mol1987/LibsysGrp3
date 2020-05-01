@@ -4,10 +4,15 @@ namespace LibsysGrp3WPF
 {
     public class ManageLibrariansViewModel : BaseViewModel, IPageViewModel
     {
+        #region Private properties
+
         private ICommand _btnAddLibrarian;
         private ICommand _btnDeleteLibrarian;
         private ICommand _btnEditLibrarian;
 
+        #endregion
+
+        #region Public properties
         public ICommand btnAddLibrarian
         {
             get
@@ -41,8 +46,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-
-
+        #endregion
 
     }
 }

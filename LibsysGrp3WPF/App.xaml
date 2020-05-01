@@ -41,6 +41,12 @@
         <DataTemplate DataType="{x:Type local:AddLibrarianViewModel}">
             <views:AddLibrarianView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:DeleteLibrarianViewModel}">
+            <views:DeleteLibrarianView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:EditLibrarianViewModel}">
+            <views:EditLibrarianView/>
+        </DataTemplate>
 
 
         <Style TargetType="Button" x:Key="navButton" >

@@ -130,7 +130,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new ManageSeminarPageViewModel());
             PageViewModels.Add(new AddLibrarianViewModel());
             PageViewModels.Add(new DeleteLibrarianViewModel());
-            PageViewModels.Add(new EditLibrarian());
+            PageViewModels.Add(new EditLibrarianViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
 
