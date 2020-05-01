@@ -15,7 +15,9 @@
         pageManageSeminar = 10,
         pageAddLibrarian = 11,
         pageDeleteLibrarian = 12,
-        pageEditLibrarian = 13
-
+        pageEditLibrarian = 13,
+        pageAddVisitor = 14,
+        pageDeleteVisitor = 15,
+        pageEditVisitor= 16
     }
 }

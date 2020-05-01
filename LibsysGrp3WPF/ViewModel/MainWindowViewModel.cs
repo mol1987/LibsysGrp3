@@ -111,6 +111,21 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[13]);
         }
 
+        private void OnGoAddVisitorPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[14]);
+        }
+
+        private void OnGoDeleteVisitorPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[15]);
+        }
+
+        private void OnGoEditVisitorPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[16]);
+        }
+
         #endregion
 
         #region Constructor
@@ -131,6 +146,9 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new AddLibrarianViewModel());
             PageViewModels.Add(new DeleteLibrarianViewModel());
             PageViewModels.Add(new EditLibrarianViewModel());
+            PageViewModels.Add(new AddVisitorViewModel());
+            PageViewModels.Add(new DeleteVisitorViewModel());
+            PageViewModels.Add(new EditLibrarianViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
 
@@ -148,6 +166,9 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageAddLibrarian, OnGoAddLibrarianPage);
             Mediator.Subscribe(PagesChoice.pageDeleteLibrarian, OnGoDeleteLibrarianPage);
             Mediator.Subscribe(PagesChoice.pageEditLibrarian, OnGoEditLibrarianPage);
+            Mediator.Subscribe(PagesChoice.pageAddVisitor, OnGoAddVisitorPage);
+            Mediator.Subscribe(PagesChoice.pageDeleteVisitor, OnGoDeleteVisitorPage);
+            Mediator.Subscribe(PagesChoice.pageEditVisitor, OnGoEditVisitorPage);
         }
         #endregion
     }

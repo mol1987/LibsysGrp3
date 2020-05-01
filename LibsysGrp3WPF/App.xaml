@@ -47,7 +47,15 @@
         <DataTemplate DataType="{x:Type local:EditLibrarianViewModel}">
             <views:EditLibrarianView/>
         </DataTemplate>
-
+        <DataTemplate DataType="{x:Type local:AddVisitorViewModel}">
+            <views:AddVisitorView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:DeleteVisitorViewModel}">
+            <views:DeleteVisitorView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:EditVisitorViewModel}">
+            <views:EditVisitorView/>
+        </DataTemplate>
 
         <Style TargetType="Button" x:Key="navButton" >
          <Setter Property="Margin" Value="15"/>
