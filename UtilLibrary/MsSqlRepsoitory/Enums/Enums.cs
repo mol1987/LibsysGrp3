@@ -8,6 +8,10 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
     {
         AddNewLibrarians,
         AddNewVisitor,
-        Login
+        Login,
+        AddUser,
+        GetUsers,
+        DeleteUser,
+        EditUser
     }
 }
