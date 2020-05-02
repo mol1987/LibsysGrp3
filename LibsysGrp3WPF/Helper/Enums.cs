@@ -18,4 +18,11 @@
         pageEditLibrarian = 13
 
     }
+
+    public enum UsersCategory
+    {
+        Visitor = 0,
+        Librarian = 1,
+        Chieflibrarian = 2
+    }
 }

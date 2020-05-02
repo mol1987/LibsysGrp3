@@ -4,7 +4,10 @@ namespace LibsysGrp3WPF
 {
     public interface IUsersProcessor
     {
-        IUsers LoginUsersProcess(string IdentityNo, string Password);
         public ILibsysRepo _repo { get; set; }
+        IUsers LoginUsersProcess(string IdentityNo, string Password);
+        public void AddUserProcess(IUsers user);
+        public void RemoveUserProcess(IUsers user);
+        public void EditUserProcess(IUsers user);
     }
 }

@@ -16,6 +16,15 @@ namespace UtilLibrary.MsSqlRepsoitory
             throw new NotImplementedException();
         }
 
+        public void AddUser(IUsers user)
+        {
+            return;
+        }
+        public void EditUser(IUsers user)
+        {
+            return;
+        }
+
         public IUsers LoginUser(string identityNo, string password)
         {
             return new Users()
@@ -26,9 +35,14 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Banned = false,
                 Firstname = "Arne",
                 Lastname = "Weise",
-                UserCategory = 0,
+                UsersCategory = 0,
                 JoinDate = DateTime.Now
             };
+        }
+
+        public void RemoveUser(IUsers user)
+        {
+            return;
         }
     }
 }
