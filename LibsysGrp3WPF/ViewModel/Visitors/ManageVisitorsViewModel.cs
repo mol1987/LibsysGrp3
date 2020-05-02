@@ -14,9 +14,24 @@ namespace LibsysGrp3WPF
         private ICommand _btnDeleteVisitor;
         private ICommand _btnEditVisitor;
 
+        private IPageViewModel _currentContent;
+
         #endregion
 
         #region public properties
+
+        public IPageViewModel CurrentContent
+        {
+            get
+            {
+                return _currentContent;
+            }
+            set
+            {
+                _currentContent = value;
+                OnPropertyChanged(nameof(CurrentContent));
+            }
+        }
 
         public ICommand btnAddVisitor
         {
@@ -24,7 +39,7 @@ namespace LibsysGrp3WPF
             {
                 return _btnAddVisitor ?? (_btnAddVisitor = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.pageAddVisitor);
+                    CurrentContent = new AddVisitorViewModel();
                 }));
             }
         }
@@ -35,7 +50,7 @@ namespace LibsysGrp3WPF
             {
                 return _btnDeleteVisitor ?? (_btnDeleteVisitor = new RelayCommand(x =>
                 {
-                   Mediator.Notify(PagesChoice.pageDeleteVisitor);
+                    CurrentContent = new DeleteVisitorViewModel();
                 }));
             }
         }
@@ -46,9 +61,18 @@ namespace LibsysGrp3WPF
             {
                 return _btnEditVisitor ?? (_btnEditVisitor = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.pageEditVisitor);
+                    CurrentContent = new EditVisitorViewModel();
                 }));
             }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        public ManageVisitorsViewModel()
+        {
+            CurrentContent = null;
         }
 
         #endregion

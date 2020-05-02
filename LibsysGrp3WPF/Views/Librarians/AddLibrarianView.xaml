@@ -18,17 +18,17 @@
             
          
                 <StackPanel>
-                    <Label Content="Identity No:" Margin="5,0"/>
+                    <Label Content="Personnummer:" Margin="5,0"/>
                     <TextBox Margin="5,0" Text="{Binding IDTextBox}"  Width="200"/>
-                    <Label Content="Firstname:"  Margin="5,0"/>
+                    <Label Content="Förnamn:"  Margin="5,0"/>
                     <TextBox Margin="5,0" Text="{Binding FirstnameTextBox}" Width="200"/>
 
-                    <Label Content="Lastname:" Margin="5,0"/>
+                    <Label Content="Efternamn:" Margin="5,0"/>
                     <TextBox Margin="5,0" Text="{Binding LastnameTextBox}"  Width="200"/>
-                    <Label Content="Password:" Margin="5,0"/>
+                    <Label Content="Lösenord:" Margin="5,0"/>
                     <TextBox Margin="5,0" Text="{Binding PasswordTextBox}"  Width="200"/>
                     
-                    <Button Content="Add" Command="{Binding ButtonAdd}" Margin="5,10"/>
+                    <Button Content="Lägg till" Command="{Binding ButtonAdd}" Margin="5,10"/>
                 </StackPanel>
             
         </ScrollViewer>
