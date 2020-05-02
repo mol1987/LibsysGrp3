@@ -1,6 +1,7 @@
 ﻿<Application x:Class="LibsysGrp3WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:LibsysGrp3WPF"
              xmlns:views="clr-namespace:LibsysGrp3WPF.Views">
 
@@ -9,60 +10,39 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-<<<<<<< HEAD
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Purple.xaml" />
-=======
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
->>>>>>> developer
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
-        <DataTemplate DataType="{x:Type local:StartPageViewModel}">
-<<<<<<< HEAD
+         <DataTemplate DataType="{x:Type local:StartPageViewModel}">
+
             <views:StartPage/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
-            <views:VisitorsProfilePage/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
-            <views:SuperUserHomePage/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
-            <views:ManageVisitorsView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
-            <views:ManageLibrariansView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
-            <views:ManageSuperUserView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ReportsViewModel}">
-            <views:ReportsView/>
-        </DataTemplate>
-=======
-        <views:StartPage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
+         </DataTemplate>
+
+     <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
         <views:VisitorsProfilePage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
+      </DataTemplate>
+     <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
         <views:SuperUserHomePage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
-        <views:ManageVisitorsView/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
-         <views:ManageLibrariansView/>
      </DataTemplate>
+     <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
+        <views:ManageVisitorsView/>
+     </DataTemplate>
+     <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
+         <views:ManageLibrariansView/>
+      </DataTemplate>
      <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
          <views:ManageSuperUserView/>
      </DataTemplate>
-     <DataTemplate DataType="{x:Type local:ReportsViewModel}">
-         <views:ReportsView/>
-     </DataTemplate>
->>>>>>> developer
+        <DataTemplate DataType="{x:Type local:ReportsViewModel}">
+            <views:ReportsView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type local:LibrariansHomePageViewModel}">
             <views:LibrariansHomePage/>
         </DataTemplate>
