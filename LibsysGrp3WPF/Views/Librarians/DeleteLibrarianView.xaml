@@ -15,12 +15,14 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Viewbox>
-                <DockPanel Grid.Column="0" Grid.Row="0">
-
-                </DockPanel>
-            </Viewbox>
+            <DockPanel>
+                <ListBox  ItemsSource="{Binding UsersList, Mode=OneWay}" 
+                      SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
+                <Button Content="Remove" Command="{Binding ButtonRemove}" Margin="5,10"/>
+            </DockPanel>
+            
         </ScrollViewer>
+        
 
     </Grid>
 </UserControl>

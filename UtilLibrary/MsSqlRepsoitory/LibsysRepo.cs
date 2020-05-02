@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -110,6 +111,70 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
 
             return returnUser;
+        }
+        public void AddUser(IUsers user)
+        {
+            string storedProcedure = StoredProcedures.AddUser.ToString();
+            int affectedRows;
+
+            var obj = new
+            {
+                IdentityNo = user.IdentityNo,
+                Password = user.Password,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                JoinDate = user.JoinDate,
+                Banned = user.Banned,
+                UsersCategory = user.UsersCategory
+            };
+
+            using (var conn = Create_Connection())
+            {
+                affectedRows = conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+          
+        }
+
+        public IEnumerable<T> GetUsers<T>()
+        {
+            string storedProcedure = StoredProcedures.GetUsers.ToString();
+            IEnumerable<T> usersList;
+            using (var conn = Create_Connection())
+            {
+                usersList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return usersList;
+        } 
+        public void RemoveUser(IUsers user)
+        {
+            string storedProcedure = StoredProcedures.DeleteUser.ToString();
+            var obj = new
+            {
+                UsersID = user.UsersID
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void EditUser(IUsers user)
+        {
+            string storedProcedure = StoredProcedures.EditUser.ToString();
+            var obj = new
+            {
+                UsersID = user.UsersID,
+                IdentityNo = user.IdentityNo,
+                Password = user.Password,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                JoinDate = user.JoinDate,
+                Banned = user.Banned,
+                UsersCategory = user.UsersCategory
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
         }
         #endregion
     }

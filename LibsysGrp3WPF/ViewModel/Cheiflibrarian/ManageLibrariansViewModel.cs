@@ -10,16 +10,30 @@ namespace LibsysGrp3WPF
         private ICommand _btnDeleteLibrarian;
         private ICommand _btnEditLibrarian;
 
+        private IPageViewModel _currentContent;
+
         #endregion
 
         #region Public properties
+        public IPageViewModel CurrentContent { 
+            get 
+            {
+                return _currentContent;
+            } 
+            set 
+            {
+                _currentContent = value;
+                OnPropertyChanged(nameof(CurrentContent));
+            } 
+        }
+
         public ICommand btnAddLibrarian
         {
             get
             {
                 return _btnAddLibrarian ?? (_btnAddLibrarian = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.pageAddLibrarian);
+                    CurrentContent = new AddLibrarianViewModel();
                 }));
             }
         }
@@ -30,7 +44,7 @@ namespace LibsysGrp3WPF
             {
                 return _btnDeleteLibrarian ?? (_btnDeleteLibrarian = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.pageDeleteLibrarian);
+                    CurrentContent = new DeleteLibrarianViewModel();
                 }));
             }
         }
@@ -41,12 +55,18 @@ namespace LibsysGrp3WPF
             {
                 return _btnEditLibrarian ?? (_btnEditLibrarian = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.pageEditLibrarian);
+                    CurrentContent = new EditLibrarianViewModel();
                 }));
             }
         }
 
         #endregion
 
+        #region Constructor
+        public ManageLibrariansViewModel()
+        {
+            CurrentContent = null;
+        }
+        #endregion
     }
 }

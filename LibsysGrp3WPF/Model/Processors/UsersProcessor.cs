@@ -28,5 +28,54 @@ namespace LibsysGrp3WPF
             return returnVisitor;
         }
 
+        public void AddUserProcess(IUsers user)
+        {
+            #region DatavValidation
+            // Data validation
+
+            if (user.IdentityNo.Length != 12) throw new Exception();
+            if (String.IsNullOrEmpty(user.Password)) throw new Exception();
+            if (String.IsNullOrEmpty(user.Firstname)) throw new Exception();
+            if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
+            if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
+            if (user.Password.Length > 50) throw new Exception();
+            #endregion
+
+            _repo.AddUser(user);
+        }
+
+        public void RemoveUserProcess(IUsers user)
+        {
+            #region DatavValidation
+            // Data validation
+
+            if (user.IdentityNo.Length != 12) throw new Exception();
+            if (String.IsNullOrEmpty(user.Password)) throw new Exception();
+            if (String.IsNullOrEmpty(user.Firstname)) throw new Exception();
+            if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
+            if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
+            if (user.Password.Length > 50) throw new Exception();
+            #endregion
+
+
+            _repo.RemoveUser(user);
+        }
+        public void EditUserProcess(IUsers user)
+        {
+            #region DatavValidation
+            // Data validation
+
+            if (user.IdentityNo.Length != 12) throw new Exception();
+            if (String.IsNullOrEmpty(user.Password)) throw new Exception();
+            if (String.IsNullOrEmpty(user.Firstname)) throw new Exception();
+            if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
+            if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
+            if (user.Password.Length > 50) throw new Exception();
+            #endregion
+
+
+            _repo.EditUser(user);
+        }
+
     }
 }

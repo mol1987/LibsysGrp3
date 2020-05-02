@@ -28,6 +28,7 @@
             <Button Command="{Binding btnEditLibrarian}" Content="Förändra bibliotekariet" Padding="0 20" Margin="10 0 10 0" FontSize="14" Background="#FF2525CB" Foreground="White"></Button> 
 
         </StackPanel>
+        <ContentControl Content="{Binding CurrentContent}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
         <Border Background="#FF0F3EC1" BorderBrush="Black" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"></Border>
     </Grid>

@@ -20,4 +20,11 @@
         pageDeleteVisitor = 15,
         pageEditVisitor= 16
     }
+
+    public enum UsersCategory
+    {
+        Visitor = 0,
+        Librarian = 1,
+        Chieflibrarian = 2
+    }
 }
