@@ -43,57 +43,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         #region seminars
         #endregion
 
-        #region librarian
-        /// <summary>
-        /// Adds a librarian to the database. Returns an ID number
-        /// and adds it to librarian.
-        /// </summary>
-        /// <param name="visitor">A filled librarian object</param>
-        public void AddNewLibrarian(ILibrarians librarian)
-        {
-            string storedProcedure = StoredProcedures.AddNewLibrarians.ToString();
-
-            var obj = new { 
-                CheifLibrarian = librarian.CheifLibrarian,
-                Password = librarian.Password,
-                FirstName = librarian.Firstname,
-                LastName = librarian.Firstname
-            };
-
-            using (var conn = Create_Connection())
-            {
-                var id = conn.Query<int>(storedProcedure, obj, commandType: CommandType.StoredProcedure).Single();
-                librarian.LibrarianID = id;
-            }
-        }
-        #endregion
-
-        #region visitors
-        /// <summary>
-        /// Adds a visitor to the database. Returns an ID number
-        /// and adds it to visitor.
-        /// </summary>
-        /// <param name="visitor">A filled visitor object</param>
-        public void AddNewVisitor(IVisitors visitor)
-        {
-            string storedProcedure = StoredProcedures.AddNewVisitor.ToString();
-
-            var obj = new { 
-                IdentityNo = visitor.IdentityNo,
-                Firstname = visitor.Firstname,
-                Lastname = visitor.Lastname,
-                Password = visitor.Password
-            };
-
-            using (var conn = Create_Connection())
-            {
-                var id = conn.Query<int>(storedProcedure, obj, commandType: CommandType.StoredProcedure).Single();
-                visitor.VisitorsID = id;
-            }
-        }
-        #endregion
-
-        #region User
+        #region Users
         public IUsers LoginUser(string identityNo, string password)
         {
             IUsers returnUser = null;
@@ -134,7 +84,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
           
         }
-
         public IEnumerable<T> GetUsers<T>()
         {
             string storedProcedure = StoredProcedures.GetUsers.ToString();

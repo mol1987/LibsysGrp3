@@ -6,16 +6,6 @@ namespace UtilLibrary.MsSqlRepsoitory
 {
     public class MockLibsysRepo : ILibsysRepo
     {
-        public void AddNewLibrarian(ILibrarians librarian)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddNewVisitor(IVisitors visitor)
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddUser(IUsers user)
         {
             return;
