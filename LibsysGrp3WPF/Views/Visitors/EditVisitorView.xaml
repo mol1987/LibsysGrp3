@@ -15,12 +15,26 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Viewbox>
-                <DockPanel Grid.Column="0" Grid.Row="0">
+            <DockPanel>
+                <ListBox  ItemsSource="{Binding UsersList, Mode=OneWay}" 
+                      SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
+                <StackPanel>
+                    <Label Content="Personnummer:" Margin="5,0"/>
+                    <TextBox Margin="5,0" Text="{Binding IDTextBox}"  Width="200"/>
+                    <Label Content="Förnamn:"  Margin="5,0"/>
+                    <TextBox Margin="5,0" Text="{Binding FirstnameTextBox}" Width="200"/>
 
-                </DockPanel>
-            </Viewbox>
+                    <Label Content="Efternamn:" Margin="5,0"/>
+                    <TextBox Margin="5,0" Text="{Binding LastnameTextBox}"  Width="200"/>
+                    <Label Content="Lösenord:" Margin="5,0"/>
+                    <TextBox Margin="5,0" Text="{Binding PasswordTextBox}"  Width="200"/>
+
+                    <Button Content="Ok" Command="{Binding ButtonOk}" Margin="5,10"/>
+                </StackPanel>
+
+            </DockPanel>
+
         </ScrollViewer>
-
     </Grid>
 </UserControl>
+

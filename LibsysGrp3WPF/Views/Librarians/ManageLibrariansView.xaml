@@ -30,6 +30,8 @@
         </StackPanel>
         <ContentControl Content="{Binding CurrentContent}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-        <Border Background="#FF0F3EC1" BorderBrush="Black" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"></Border>
+        <Border Background="#FF0F3EC1" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0">
+            <Image Source="photos/LIBSYS.png" Height="60"/>
+        </Border>
     </Grid>
 </UserControl>
