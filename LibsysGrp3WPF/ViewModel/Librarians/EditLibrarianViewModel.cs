@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
@@ -113,8 +114,7 @@ namespace LibsysGrp3WPF
                     UsersList[listIndex].EditUser();
 
                     // update whole list from database, a quick fix (should be fixed later)
-                    var repo = new LibsysRepo();
-                    UsersList = UsersModel.convertToObservableCollection(repo.GetUsers<Users>());
+                    getLibrarians();
                 }));
             }
         }
@@ -122,8 +122,15 @@ namespace LibsysGrp3WPF
 
         public EditLibrarianViewModel()
         {
+            getLibrarians();
+        }
+
+        private void getLibrarians()
+        {
+            // gets all users and filters to all librarians.
             var repo = new LibsysRepo();
-            UsersList = UsersModel.convertToObservableCollection(repo.GetUsers<Users>());
+            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Librarian);
+            UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
     }
 }

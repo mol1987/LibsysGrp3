@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
+using System.Linq;
 
 namespace LibsysGrp3WPF
 {
@@ -49,8 +50,15 @@ namespace LibsysGrp3WPF
 
         public DeleteLibrarianViewModel()
         {
+            getLibrarians();
+        }
+
+        private void getLibrarians()
+        {
+            // gets all users and filters to all librarians.
             var repo = new LibsysRepo();
-            UsersList = UsersModel.convertToObservableCollection(repo.GetUsers<Users>());
+            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Librarian);
+            UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
     }
 }
