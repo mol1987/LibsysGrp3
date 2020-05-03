@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -106,15 +107,18 @@ namespace LibsysGrp3WPF
             {
                 return _buttonOk ?? (_buttonOk = new RelayCommand(x =>
                 {
-                    var listIndex = UsersList.IndexOf(_selectedItem);
-                    UsersList[listIndex].IdentityNo = IDTextBox;
-                    UsersList[listIndex].Firstname = FirstnameTextBox;
-                    UsersList[listIndex].Lastname = LastnameTextBox;
-                    UsersList[listIndex].Password = PasswordTextBox;
-                    UsersList[listIndex].EditUser();
+                    if (_selectedItem != null)
+                    {
+                        var listIndex = UsersList.IndexOf(_selectedItem);
+                        UsersList[listIndex].IdentityNo = IDTextBox;
+                        UsersList[listIndex].Firstname = FirstnameTextBox;
+                        UsersList[listIndex].Lastname = LastnameTextBox;
+                        UsersList[listIndex].Password = PasswordTextBox;
+                        UsersList[listIndex].EditUser();
 
-                    // update whole list from database, a quick fix (should be fixed later)
-                    getLibrarians();
+                        // update whole list from database, a quick fix (should be fixed later)
+                        getLibrarians();
+                    }
                 }));
             }
         }
@@ -122,6 +126,7 @@ namespace LibsysGrp3WPF
 
         public EditLibrarianViewModel()
         {
+            Trace.WriteLine("EditLibrarian");
             getLibrarians();
         }
 
