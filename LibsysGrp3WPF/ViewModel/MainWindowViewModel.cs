@@ -137,7 +137,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageVisitorsViewModel());
             PageViewModels.Add(new ManageLibrariansViewModel());
-            PageViewModels.Add(new ManageSuperUserViewModel());
+            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new ReportsViewModel());
             PageViewModels.Add(new LibrariansHomePageViewModel());
             PageViewModels.Add(new ManageBookPageViewModel());

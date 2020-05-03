@@ -29,7 +29,7 @@
     <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
          <views:ManageLibrariansView/>
      </DataTemplate>
-     <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
+     <DataTemplate DataType="{x:Type local:ManageSuperuserViewModel}">
          <views:ManageSuperUserView/>
      </DataTemplate>
      <DataTemplate DataType="{x:Type local:ReportsViewModel}">
@@ -64,6 +64,15 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:EditVisitorViewModel}">
             <views:EditVisitorView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:AddSuperuserViewModel}">
+            <views:AddSuperuserView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:DeleteSuperuserViewModel}">
+            <views:DeleteSuperuser/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:EditSuperuserViewModel}">
+            <views:EditSuperuser/>
         </DataTemplate>
 
 
