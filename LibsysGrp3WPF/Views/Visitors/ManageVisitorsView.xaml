@@ -21,20 +21,24 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Content="manage visitors"/>
+
+        <Border Background="#FF0F3EC1" BorderBrush="Black" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0">
+            <Image Source="photos/LIBSYS.png" Height="60"/>
+        </Border>
+
+        <Button x:Name="btnLogout" Content="Logga ut" Grid.Column="4" Grid.Row="0" 
+                Margin="30" Command="{Binding btnLogout}"/>
 
         <StackPanel Background="LightGray" Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="2" Grid.Column="0">
             <Button Command="{Binding btnAddVisitor}" Content="Lägg till besökare" Padding="0 20" Margin="10 10 10 20" FontSize="14" Background="#FF0F3EC1" Foreground="#FFFBF7F7" ></Button>
             <Button Command="{Binding btnDeleteVisitor}" Content="Ta bort besökare" Padding="0 20" Margin="10 0 10 20" FontSize="14" Background="#FF2525CB" Foreground="#FFFBF7F7" ></Button>
             <Button Command="{Binding btnEditVisitor}" Content="Förändra besökare" Padding="0 20" Margin="10 0 10 0" FontSize="14" Background="#FF2525CB" Foreground="#FFFBF7F7"></Button>
-
+            <Button Command="{Binding btnGoBack}" Content="Gå tillbaka" Padding="0 20" Margin="10 20 10 20" FontSize="14" Background="White"></Button>
         </StackPanel>
 
         <ContentControl Content="{Binding CurrentContent}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
 
-        <Border Background="#FF0F3EC1" BorderBrush="Black" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0">
-            <Image Source="photos/LIBSYS.png" Height="60"/>
-        </Border>
+
     </Grid>
 </UserControl>

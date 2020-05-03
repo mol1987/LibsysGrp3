@@ -12,5 +12,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         string Password { get; set; }
         int UsersCategory { get; set; }
         int UsersID { get; set; }
+        string Email { get; set; }
+        string PhoneNumber { get; set; }
     }
 }

@@ -25,7 +25,14 @@
 
                     <Label Content="Efternamn:" Margin="5,0"/>
                     <TextBox Margin="5,0" Text="{Binding LastnameTextBox}"  Width="200"/>
-                    <Label Content="Lösenord:" Margin="5,0"/>
+                    
+                    <Label Content="Mobil:" Margin="5,0"/>
+                    <TextBox Margin="5,0" Text="{Binding MobilTextBox}"  Width="200"/>
+
+                    <Label Content="Email:" Margin="5,0"/>
+                    <TextBox Margin="5,0" Text="{Binding EmailTextBox}"  Width="200"/>
+
+                <Label Content="Lösenord:" Margin="5,0"/>
                     <TextBox Margin="5,0" Text="{Binding PasswordTextBox}"  Width="200"/>
                     
                     <Button Content="Lägg till" Command="{Binding ButtonAdd}" Margin="5,10"/>

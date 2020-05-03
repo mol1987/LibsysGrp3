@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
@@ -51,8 +52,15 @@ namespace LibsysGrp3WPF
 
         public DeleteVisitorViewModel()
         {
+            getVisitors();
+        }
+
+        private void getVisitors()
+        {
+            // gets all users and filters to all visitors.
             var repo = new LibsysRepo();
-            UsersList = UsersModel.convertToObservableCollection(repo.GetUsers<Users>());
+            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Visitor);
+            UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
     }
 }
