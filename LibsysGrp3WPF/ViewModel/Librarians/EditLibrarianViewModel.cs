@@ -138,16 +138,19 @@ namespace LibsysGrp3WPF
             {
                 return _buttonOk ?? (_buttonOk = new RelayCommand(x =>
                 {
-                    var listIndex = UsersList.IndexOf(_selectedItem);
-                    UsersList[listIndex].IdentityNo = IDTextBox;
-                    UsersList[listIndex].Firstname = FirstnameTextBox;
-                    UsersList[listIndex].Lastname = LastnameTextBox;
-                    UsersList[listIndex].PhoneNumber = MobilTextBox;
-                    UsersList[listIndex].Email = EmailTextBox;
-                    UsersList[listIndex].Password = PasswordTextBox;
-                    UsersList[listIndex].EditUser();
+                    if (_selectedItem != null)
+                    {
+                        var listIndex = UsersList.IndexOf(_selectedItem);
+                        UsersList[listIndex].IdentityNo = IDTextBox;
+                        UsersList[listIndex].Firstname = FirstnameTextBox;
+                        UsersList[listIndex].Lastname = LastnameTextBox;
+                        UsersList[listIndex].PhoneNumber = MobilTextBox;
+                        UsersList[listIndex].Email = EmailTextBox;
+                        UsersList[listIndex].Password = PasswordTextBox;
+                        UsersList[listIndex].EditUser();
 
-                    getLibrarians();
+                        getLibrarians();
+                    }
                 }));
             }
         }
