@@ -39,7 +39,6 @@ namespace LibsysGrp3WPF
             if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
             if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
             if (user.Password.Length > 50) throw new Exception();
-            if (user.UsersCategory > (int)UsersCategory.Chieflibrarian)
             #endregion
 
             _repo.AddUser(user);
