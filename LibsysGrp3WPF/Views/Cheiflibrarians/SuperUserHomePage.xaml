@@ -31,13 +31,13 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Orientation="Vertical">
         <!--Navigering knappar-->
         <Button x:Name="btnManageVisitor" Content="Hantera besökare" Background="#FF0F3EC1" Foreground="White" Margin="100 20 100 0" FontSize="18"
-                Style="{StaticResource navButton}" Command="{Binding btnManageVisitor}"/>
+                 Command="{Binding btnManageVisitor}"/>
         <Button x:Name="btnManageLibrarian" Content="Hantera bibliotekarie" Background="#FF0F3EC1" Foreground="White" Margin="100 20 100 0" FontSize="18"
-                Style="{StaticResource navButton}" Command="{Binding btnManageLibrarian}"/>
+                 Command="{Binding btnManageLibrarian}"/>
             <Button x:Name="btnManageAdmin" Content="Hantera administratörer" Background="#FF0F3EC1" Foreground="White" Margin="100 20 100 0" FontSize="18"
-                Style="{StaticResource navButton}" Command="{Binding btnManageSuperUser}" />
+                 Command="{Binding btnManageSuperUser}" />
         <Button x:Name="btnReport" Content="Raporter" Background="#FF0F3EC1" Foreground="White" Margin="100 20 100 0" FontSize="18"
-                Grid.Row="4" Style="{StaticResource navButton}" Command="{Binding btnReport}"  />
+                Grid.Row="4"  Command="{Binding btnReport}"  />
         </StackPanel>
     </Grid>
 </UserControl>
