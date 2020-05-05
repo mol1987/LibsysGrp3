@@ -14,8 +14,9 @@ namespace UtilLibrary.MsSqlRepsoitory
         public string Password { get; set; }
         public bool Banned { get; set; }
 
-        public int UserCategory { get; set; }
-
+        public int UsersCategory { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get ; set ; }
     }
 
 }

@@ -6,14 +6,13 @@ namespace UtilLibrary.MsSqlRepsoitory
 {
     public class MockLibsysRepo : ILibsysRepo
     {
-        public void AddNewLibrarian(ILibrarians librarian)
+        public void AddUser(IUsers user)
         {
-            throw new NotImplementedException();
+            return;
         }
-
-        public void AddNewVisitor(IVisitors visitor)
+        public void EditUser(IUsers user)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public IUsers LoginUser(string identityNo, string password)
@@ -26,9 +25,14 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Banned = false,
                 Firstname = "Arne",
                 Lastname = "Weise",
-                UserCategory = 0,
+                UsersCategory = 0,
                 JoinDate = DateTime.Now
             };
+        }
+
+        public void RemoveUser(IUsers user)
+        {
+            return;
         }
     }
 }

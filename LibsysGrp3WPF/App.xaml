@@ -2,46 +2,78 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LibsysGrp3WPF"
-             xmlns:views="clr-namespace:LibsysGrp3WPF.Views">
+             xmlns:views="clr-namespace:LibsysGrp3WPF.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-<Application.Resources>
-    <DataTemplate DataType="{x:Type local:StartPageViewModel}">
-        <views:StartPage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
-        <views:VisitorsProfilePage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
-        <views:SuperUserHomePage/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
-        <views:ManageVisitorsView/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
-         <views:ManageLibrariansView/>
-     </DataTemplate>
-     <DataTemplate DataType="{x:Type local:ManageSuperUserViewModel}">
-         <views:ManageSuperUserView/>
-     </DataTemplate>
-     <DataTemplate DataType="{x:Type local:ReportsViewModel}">
-         <views:ReportsView/>
-     </DataTemplate>
-        <DataTemplate DataType="{x:Type local:LibrariansHomePageViewModel}">
-            <views:LibrariansHomePage/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ManageBookPageViewModel}">
-            <views:BooksPageView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ManageEbookPageViewModel}">
-            <views:EbooksPageView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ManageSeminarPageViewModel}">
-            <views:SeminarPageView/>
-        </DataTemplate>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <Style TargetType="Button" x:Key="navButton" >
-         <Setter Property="Margin" Value="15"/>
-          <Setter Property="FontSize" Value="35"/>
-      </Style>
+            <DataTemplate DataType="{x:Type local:StartPageViewModel}">
+                <views:StartPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:VisitorsProfilePageViewModel}">
+                <views:VisitorsProfilePage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:SuperUserHomePageViewModel}">
+                <views:SuperUserHomePage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageVisitorsViewModel}">
+                <views:ManageVisitorsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageLibrariansViewModel}">
+                <views:ManageLibrariansView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageSuperuserViewModel}">
+                <views:ManageSuperUserView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ReportsViewModel}">
+                <views:ReportsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:LibrariansHomePageViewModel}">
+                <views:LibrariansHomePage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageBookPageViewModel}">
+                <views:BooksPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageEbookPageViewModel}">
+                <views:EbooksPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageSeminarPageViewModel}">
+                <views:SeminarPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:AddLibrarianViewModel}">
+                <views:AddLibrarianView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:DeleteLibrarianViewModel}">
+                <views:DeleteLibrarianView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:EditLibrarianViewModel}">
+                <views:EditLibrarianView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:AddVisitorViewModel}">
+                <views:AddVisitorView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:DeleteVisitorViewModel}">
+                <views:DeleteVisitorView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:EditVisitorViewModel}">
+                <views:EditVisitorView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:AddSuperuserViewModel}">
+                <views:AddSuperuserView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:DeleteSuperuserViewModel}">
+                <views:DeleteSuperuser/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:EditSuperuserViewModel}">
+                <views:EditSuperuser/>
+            </DataTemplate>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

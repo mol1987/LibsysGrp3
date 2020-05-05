@@ -10,7 +10,9 @@ namespace UtilLibrary.MsSqlRepsoitory
         DateTime JoinDate { get; set; }
         string Lastname { get; set; }
         string Password { get; set; }
-        int UserCategory { get; set; }
+        int UsersCategory { get; set; }
         int UsersID { get; set; }
+        string Email { get; set; }
+        string PhoneNumber { get; set; }
     }
 }

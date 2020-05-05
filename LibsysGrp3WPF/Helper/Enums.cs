@@ -12,6 +12,19 @@
         pageLibrarianHomepage = 7,
         pageManageBook = 8,
         pageManageEbook = 9, 
-        pageManageSeminar = 10
+        pageManageSeminar = 10,
+        pageAddLibrarian = 11,
+        pageDeleteLibrarian = 12,
+        pageEditLibrarian = 13,
+        pageAddVisitor = 14,
+        pageDeleteVisitor = 15,
+        pageEditVisitor= 16
+    }
+
+    public enum UsersCategory
+    {
+        Visitor = 0,
+        Librarian = 1,
+        Chieflibrarian = 2
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using UtilLibrary.MsSqlRepsoitory;
 
@@ -15,7 +16,9 @@ namespace LibsysGrp3WPF
         public DateTime JoinDate { get; set; }
         public string Password { get; set; }
         public bool Banned { get; set; }
-        public int UserCategory { get; set; }
+        public int UsersCategory { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 
         public UsersModel(IUsersProcessor processor)
         {
@@ -32,6 +35,46 @@ namespace LibsysGrp3WPF
             this.JoinDate = tempVisitor.JoinDate;
             this.Password = tempVisitor.Password;
             this.UsersID = tempVisitor.UsersID;
+            this.Email = tempVisitor.Email;
+            this.PhoneNumber = tempVisitor.PhoneNumber;
+        }
+        public void AddUser()
+        {
+            Processor.AddUserProcess(this);
+        }
+        public void RemoveUser()
+        {
+            Processor.RemoveUserProcess(this);
+        }
+        public void EditUser()
+        {
+            Processor.EditUserProcess(this);
+        }
+        public static ObservableCollection<UsersModel> convertToObservableCollection(IEnumerable<IUsers> inData)
+        {
+            var usersList = new ObservableCollection<UsersModel>();
+            foreach (var item in inData)
+            {
+                usersList.Add(new UsersModel(new UsersProcessor(new LibsysRepo()))
+                {
+                    UsersID = item.UsersID,
+                    IdentityNo = item.IdentityNo,
+                    Firstname = item.Firstname,
+                    Lastname = item.Lastname,
+                    Password = item.Password,
+                    Banned = item.Banned,
+                    JoinDate = item.JoinDate,
+                    UsersCategory = item.UsersCategory,
+                    Email = item.Email,
+                    PhoneNumber = item.PhoneNumber
+                }
+                );
+            }
+            return usersList;
+        }
+        public override string ToString()
+        {
+            return "" + IdentityNo + ": " + Firstname + " " + Lastname;
         }
     }
 }
