@@ -137,7 +137,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageVisitorsViewModel());
             PageViewModels.Add(new ManageLibrariansViewModel());
-            PageViewModels.Add(new ManageSuperUserViewModel());
+            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new ReportsViewModel());
             PageViewModels.Add(new LibrariansHomePageViewModel());
             PageViewModels.Add(new ManageBookPageViewModel());
@@ -150,7 +150,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new DeleteVisitorViewModel());
             PageViewModels.Add(new EditLibrarianViewModel());
 
-            CurrentPageViewModel = PageViewModels[4];
+            CurrentPageViewModel = PageViewModels[2];
 
             Mediator.Subscribe(PagesChoice.Page1, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);

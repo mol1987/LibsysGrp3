@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
@@ -17,6 +18,8 @@ namespace LibsysGrp3WPF
         private string _firstnameTextBox;
         private string _lastnameTextBox;
         private string _passwordTextBox;
+        private string _mobilTextBox;
+        private string _emailTextBox;
         #endregion
 
         #region Properties
@@ -68,6 +71,33 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(PasswordTextBox));
             }
         }
+
+        public string MobilTextBox
+        {
+            get
+            {
+                return _mobilTextBox;
+            }
+            set
+            {
+                _mobilTextBox = value;
+                OnPropertyChanged(nameof(MobilTextBox));
+            }
+        }
+
+        public string EmailTextBox
+        {
+            get
+            {
+                return _emailTextBox;
+            }
+            set
+            {
+                _emailTextBox = value;
+                OnPropertyChanged(nameof(EmailTextBox));
+            }
+        }
+
         public ObservableCollection<UsersModel> UsersList
         {
             get
@@ -96,6 +126,8 @@ namespace LibsysGrp3WPF
                     FirstnameTextBox = _selectedItem.Firstname;
                     LastnameTextBox = _selectedItem.Lastname;
                     PasswordTextBox = _selectedItem.Password;
+                    MobilTextBox = _selectedItem.PhoneNumber;
+                    EmailTextBox = _selectedItem.Email;
                 }
             }
         }
@@ -109,12 +141,12 @@ namespace LibsysGrp3WPF
                     UsersList[listIndex].IdentityNo = IDTextBox;
                     UsersList[listIndex].Firstname = FirstnameTextBox;
                     UsersList[listIndex].Lastname = LastnameTextBox;
+                    UsersList[listIndex].PhoneNumber = MobilTextBox;
+                    UsersList[listIndex].Email = EmailTextBox;
                     UsersList[listIndex].Password = PasswordTextBox;
                     UsersList[listIndex].EditUser();
 
-                    // update whole list from database, a quick fix (should be fixed later)
-                    var repo = new LibsysRepo();
-                    UsersList = UsersModel.convertToObservableCollection(repo.GetUsers<Users>());
+                    getVisitors();
                 }));
             }
         }
@@ -122,8 +154,15 @@ namespace LibsysGrp3WPF
 
         public EditVisitorViewModel()
         {
+            getVisitors();
+        }
+
+        private void getVisitors()
+        {
+            // gets all users and filters to all librarians.
             var repo = new LibsysRepo();
-            UsersList = UsersModel.convertToObservableCollection(repo.GetUsers<Users>());
+            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Visitor);
+            UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
     }
 }

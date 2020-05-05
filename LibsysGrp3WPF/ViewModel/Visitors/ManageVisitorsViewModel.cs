@@ -10,6 +10,8 @@ namespace LibsysGrp3WPF
         private ICommand _btnAddVisitor;
         private ICommand _btnDeleteVisitor;
         private ICommand _btnEditVisitor;
+        private ICommand _btnLogout;
+        private ICommand _btnGoBack;
 
         private IPageViewModel _currentContent;
 
@@ -62,6 +64,29 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
+
+        public ICommand btnLogout
+        {
+            get
+            {
+                return _btnLogout ?? (_btnLogout = new RelayCommand(x =>
+                {
+                    Mediator.Notify(PagesChoice.Page1, "");
+                }));
+            }
+        }
+
+        public ICommand btnGoBack
+        {
+            get
+            {
+                return _btnGoBack ?? (_btnGoBack = new RelayCommand(x =>
+                {
+                    Mediator.Notify(PagesChoice.pageSuperUserHomepage, "");
+                }));
+            }
+        }
+
 
         #endregion
 

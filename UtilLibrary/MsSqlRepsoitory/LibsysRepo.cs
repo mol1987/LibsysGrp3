@@ -80,7 +80,7 @@ namespace UtilLibrary.MsSqlRepsoitory
 
             using (var conn = Create_Connection())
             {
-                affectedRows = conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                conn.Query<Users>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
           
         }

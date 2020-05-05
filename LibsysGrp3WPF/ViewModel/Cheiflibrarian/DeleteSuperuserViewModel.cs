@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class DeleteVisitorViewModel : BaseViewModel, IPageViewModel
+    public class DeleteSuperuserViewModel : BaseViewModel, IPageViewModel
     {
         private UsersModel _selectedItem;
         private ICommand _buttonRemove;
@@ -50,16 +47,16 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public DeleteVisitorViewModel()
+        public DeleteSuperuserViewModel()
         {
-            getVisitors();
+            getSuperuser();
         }
 
-        private void getVisitors()
+        private void getSuperuser()
         {
-            // gets all users and filters to all visitors.
+            // gets all users and filters to all librarians.
             var repo = new LibsysRepo();
-            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Visitor);
+            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Chieflibrarian);
             UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
     }

@@ -17,6 +17,8 @@ namespace LibsysGrp3WPF
         public string Password { get; set; }
         public bool Banned { get; set; }
         public int UsersCategory { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 
         public UsersModel(IUsersProcessor processor)
         {
@@ -33,6 +35,8 @@ namespace LibsysGrp3WPF
             this.JoinDate = tempVisitor.JoinDate;
             this.Password = tempVisitor.Password;
             this.UsersID = tempVisitor.UsersID;
+            this.Email = tempVisitor.Email;
+            this.PhoneNumber = tempVisitor.PhoneNumber;
         }
         public void AddUser()
         {
@@ -60,7 +64,9 @@ namespace LibsysGrp3WPF
                     Password = item.Password,
                     Banned = item.Banned,
                     JoinDate = item.JoinDate,
-                    UsersCategory = item.UsersCategory
+                    UsersCategory = item.UsersCategory,
+                    Email = item.Email,
+                    PhoneNumber = item.PhoneNumber
                 }
                 );
             }

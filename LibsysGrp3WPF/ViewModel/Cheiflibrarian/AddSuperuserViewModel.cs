@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class AddLibrarianViewModel : BaseViewModel, IPageViewModel
+    public class AddSuperuserViewModel : BaseViewModel, IPageViewModel
     {
         #region private members
         private ICommand _buttonAdd;
@@ -112,8 +110,8 @@ namespace LibsysGrp3WPF
                     user.PhoneNumber = MobilTextBox;
                     user.Email = EmailTextBox;
                     user.Password = PasswordTextBox;
-                    
-                    user.AddUser();                    
+
+                    user.AddUser();
                     string str = "" + user.Firstname + " " + user.Lastname;
                     MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
                 }));

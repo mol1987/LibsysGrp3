@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class EditLibrarianViewModel : BaseViewModel, IPageViewModel
+    public class EditSuperuserViewModel : BaseViewModel, IPageViewModel
     {
         #region privates
         private UsersModel _selectedItem;
@@ -149,23 +146,23 @@ namespace LibsysGrp3WPF
                         UsersList[listIndex].Password = PasswordTextBox;
                         UsersList[listIndex].EditUser();
 
-                        getLibrarians();
+                        getSuperuser();
                     }
                 }));
             }
         }
         #endregion
 
-        public EditLibrarianViewModel()
+        public EditSuperuserViewModel()
         {
-            getLibrarians();
+            getSuperuser();
         }
 
-        private void getLibrarians()
+        private void getSuperuser()
         {
             // gets all users and filters to all librarians.
             var repo = new LibsysRepo();
-            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Librarian);
+            var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Chieflibrarian);
             UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
     }
