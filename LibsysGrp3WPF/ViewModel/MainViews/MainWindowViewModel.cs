@@ -146,6 +146,11 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[20]);
         }
 
+        private void OnGoVisitorSeminarPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[20]);
+        }
+
         #endregion
 
         #region Constructor
@@ -173,6 +178,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorEditProfilViewModel());
             PageViewModels.Add(new VisitorMyItemsViewModel());
             PageViewModels.Add(new VisitorSearchViewModel());
+            PageViewModels.Add(new VisitorSeminarViewModel());
 
 
             CurrentPageViewModel = PageViewModels[0];
@@ -198,6 +204,7 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorEditProfil, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
+            Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage;
         }
         #endregion
     }
