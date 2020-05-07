@@ -204,7 +204,7 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorEditProfil, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
-            Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage;
+            Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
         }
         #endregion
     }
