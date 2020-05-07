@@ -9,11 +9,8 @@
   <ItemGroup>
     <None Remove=".gitignore" />
     <None Remove="Images\winbows.jpg" />
-    <None Remove="Views\Cheiflibrarians\Photos\LIBSYS.png" />
-    <None Remove="Views\Librarians\Photos\LIBSYS.png" />
     <None Remove="Views\LIBSYS.png" />
     <None Remove="Views\Photos\LIBSYS.png" />
-    <None Remove="Views\Visitors\Photos\LIBSYS.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,11 +23,8 @@
 
   <ItemGroup>
     <Resource Include="Images\winbows.jpg" />
-    <Resource Include="Views\Cheiflibrarians\Photos\LIBSYS.png" />
-    <Resource Include="Views\Librarians\Photos\LIBSYS.png" />
     <Resource Include="Images\LIBSYS.png" />
     <Resource Include="Views\Photos\LIBSYS.png" />
-    <Resource Include="Views\Visitors\Photos\LIBSYS.png" />
   </ItemGroup>
 
 </Project>
