@@ -5,25 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibsysGrp3WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="auto" Width="auto">
 
     <Grid Background="White">
 
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.8*"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF0F3EC1" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="1">
-            <Image Source="images/LIBSYS.png" Height="60"/>
-        </StackPanel>-->
-        <ContentControl Content="{Binding CurrentPageViewModel}" />
+        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF0F3EC1" Grid.Row="0" Grid.RowSpan="1" 
+                    Grid.Column="0" Grid.ColumnSpan="4">
+            <Image Source="images/LIBSYS.png" Height="60" Margin="0 20"/>
+        </StackPanel>
+        <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" />
     </Grid>
 </Window>

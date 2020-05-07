@@ -150,7 +150,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new DeleteVisitorViewModel());
             PageViewModels.Add(new EditLibrarianViewModel());
 
-            CurrentPageViewModel = PageViewModels[2];
+            CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe(PagesChoice.Page1, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
