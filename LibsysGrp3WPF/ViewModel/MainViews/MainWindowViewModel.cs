@@ -1,12 +1,90 @@
-﻿using System.Collections.Generic;
+﻿using MaterialDesignThemes.Wpf;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using LibsysGrp3WPF.Views;
+using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        
+        private ICommand _btnSignIn;
+
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
+
+        private string _iDTextBox;
+        private string _passwordTextBox;
+        private string _accountCategory = "Bilfantast";
+        private bool _isOpen = false;
+
+        /// <summary>
+        /// Sign in command
+        /// </summary>
+        public ICommand btnSignIn
+        {
+            get
+            {
+                return _btnSignIn ?? (_btnSignIn = new RelayCommand(x =>
+                {
+                    Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
+                    Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
+                    AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
+                    IsOpen = false;
+                }));
+            }
+        }
+
+        public bool IsOpen
+        {
+            get
+            {
+                return _isOpen;
+            }
+            set
+            {
+                _isOpen = value;
+                OnPropertyChanged(nameof(IsOpen));
+            }
+        }
+        public string AccountCategory
+        {
+            get
+            {
+                return _accountCategory;
+            }
+            set
+            {
+                _accountCategory = value;
+                OnPropertyChanged(nameof(AccountCategory));
+            }
+        }
+        public string IDTextBox
+        {
+            get
+            {
+                return _iDTextBox;
+            }
+            set
+            {
+                _iDTextBox = value;
+                OnPropertyChanged(nameof(IDTextBox));
+            }
+        }
+        public string PasswordTextBox
+        {
+            get
+            {
+                return _passwordTextBox;
+            }
+            set
+            {
+                _passwordTextBox = value;
+                OnPropertyChanged(nameof(PasswordTextBox));
+            }
+        }
 
         public List<IPageViewModel> PageViewModels 
         {

@@ -4,9 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibsysGrp3WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="auto" Width="auto">
-
+    <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
+        
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Height="200" Width="200" Margin="50,50,50,50">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                <TextBlock>Personnummer</TextBlock>
+                        <TextBox Text="{Binding IDTextBox}"/>
+                <TextBlock>Lösenord</TextBlock>
+                        <TextBox Text="{Binding PasswordTextBox}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0">
+                    <Button Command="{Binding btnSignIn}">Logga In</Button>
+                </StackPanel>
+                </Grid>
+            </StackPanel>
+            
+        </materialDesign:DialogHost.DialogContent>
+        <!-- put the content over which the dialog is shown here (e.g. your main window grid)-->
+    
     <Grid Background="White">
 
         <Grid.ColumnDefinitions>
@@ -25,6 +51,24 @@
                     Grid.Column="0" Grid.ColumnSpan="4">
             <Image Source="images/LIBSYS.png" Height="60" Margin="0 20"/>
         </StackPanel>
+        <!--views area-->
         <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" />
-    </Grid>
+
+        <!--account status-->
+            <WrapPanel Grid.Column="3" Margin="0,35">
+            <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
+                <TextBlock Foreground="white"  Height="50" Text="{Binding AccountCategory}"/>
+            </WrapPanel>
+            <!--buttons-->
+        <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                ToolTip="MaterialDesignFlatLightButton" 
+                Background="#FF0F3EC1" BorderThickness="0" Width="60" Height="50"
+                BorderBrush="#FF0F3EC1" Grid.Column="3" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+            <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
+        </Button>
+
+            
+
+        </Grid>
+    </materialDesign:DialogHost>
 </Window>

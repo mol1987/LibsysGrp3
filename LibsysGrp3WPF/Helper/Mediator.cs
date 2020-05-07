@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
     public static class Mediator
     {
+        // Global user, so user can be accessed across views
+        public static UsersModel User = null;
+
         private static IDictionary<PagesChoice, List<Action<object>>> pl_dict =
            new Dictionary<PagesChoice, List<Action<object>>>();
 
