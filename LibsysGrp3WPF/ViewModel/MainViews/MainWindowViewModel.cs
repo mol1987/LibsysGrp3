@@ -126,6 +126,26 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[16]);
         }
 
+        private void OnGoManageUsersPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[17]);
+        }
+
+        private void OnGoEditProfilPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[18]);
+        }
+
+        private void OnGoMyItemsPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[19]);
+        }
+
+        private void OnGoVisitorSearchPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[20]);
+        }
+
         #endregion
 
         #region Constructor
@@ -140,15 +160,20 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new ReportsViewModel());
             PageViewModels.Add(new LibrariansHomePageViewModel());
-            PageViewModels.Add(new ManageBookPageViewModel());
+            PageViewModels.Add(new ManageBookViewModel());
             PageViewModels.Add(new ManageEbookPageViewModel());
-            PageViewModels.Add(new ManageSeminarPageViewModel());
+            PageViewModels.Add(new ManageSeminarViewModel());
             PageViewModels.Add(new AddLibrarianViewModel());
             PageViewModels.Add(new DeleteLibrarianViewModel());
             PageViewModels.Add(new EditLibrarianViewModel());
             PageViewModels.Add(new AddVisitorViewModel());
             PageViewModels.Add(new DeleteVisitorViewModel());
             PageViewModels.Add(new EditLibrarianViewModel());
+            PageViewModels.Add(new ManageUsersViewModel());
+            PageViewModels.Add(new VisitorEditProfilViewModel());
+            PageViewModels.Add(new VisitorMyItemsViewModel());
+            PageViewModels.Add(new VisitorSearchViewModel());
+
 
             CurrentPageViewModel = PageViewModels[0];
 
@@ -169,6 +194,10 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageAddVisitor, OnGoAddVisitorPage);
             Mediator.Subscribe(PagesChoice.pageDeleteVisitor, OnGoDeleteVisitorPage);
             Mediator.Subscribe(PagesChoice.pageEditVisitor, OnGoEditVisitorPage);
+            Mediator.Subscribe(PagesChoice.pageManageUsers, OnGoManageUsersPage);
+            Mediator.Subscribe(PagesChoice.pageVisitorEditProfil, OnGoEditProfilPage);
+            Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
+            Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
         }
         #endregion
     }

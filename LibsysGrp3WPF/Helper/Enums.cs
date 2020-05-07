@@ -18,7 +18,12 @@
         pageEditLibrarian = 13,
         pageAddVisitor = 14,
         pageDeleteVisitor = 15,
-        pageEditVisitor= 16
+        pageEditVisitor= 16,
+        pageManageUsers= 17,
+        pageVisitorEditProfil = 18,
+        pageVisitorMyItems = 19,
+        pageVisitorSearch =20
+
     }
 
     public enum UsersCategory

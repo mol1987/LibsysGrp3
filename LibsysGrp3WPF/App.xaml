@@ -9,8 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type local:StartPageViewModel}">
@@ -37,14 +37,14 @@
             <DataTemplate DataType="{x:Type local:LibrariansHomePageViewModel}">
                 <views:LibrariansHomePage/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type local:ManageBookPageViewModel}">
-                <views:BooksPageView/>
+            <DataTemplate DataType="{x:Type local:ManageBookViewModel}">
+                <views:ManageBookView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:ManageEbookPageViewModel}">
                 <views:EbooksPageView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type local:ManageSeminarPageViewModel}">
-                <views:SeminarPageView/>
+            <DataTemplate DataType="{x:Type local:ManageSeminarViewModel}">
+                <views:SeminarView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:AddLibrarianViewModel}">
                 <views:AddLibrarianView/>
@@ -72,6 +72,18 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:EditSuperuserViewModel}">
                 <views:EditSuperuser/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageUsersViewModel}">
+                <views:ManageUsersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:VisitorEditProfilViewModel}">
+                <views:VisitorEditProfilView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:VisitorMyItemsViewModel}">
+                <views:VisitorMyItemsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:VisitorSearchViewModel}">
+                <views:VisitorSearchView/>
             </DataTemplate>
         </ResourceDictionary>
 

@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace LibsysGrp3WPF.Views
 {
     /// <summary>
-    /// Interaction logic for BooksPageView.xaml
+    /// Interaction logic for SeminarPageView.xaml
     /// </summary>
-    public partial class BooksPageView : UserControl
+    public partial class SeminarView : UserControl
     {
-        public BooksPageView()
+        public SeminarView()
         {
             InitializeComponent();
         }

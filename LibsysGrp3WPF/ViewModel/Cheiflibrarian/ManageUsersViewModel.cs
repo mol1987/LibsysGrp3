@@ -7,7 +7,7 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class ReportsViewModel : BaseViewModel, IPageViewModel
+    public class ManageUsersViewModel : BaseViewModel, IPageViewModel
     {
     }
 }

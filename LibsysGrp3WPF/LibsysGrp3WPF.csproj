@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\UtilLibrary\UtilLibrary.csproj" />
   </ItemGroup>
 
