@@ -32,6 +32,23 @@ namespace LibsysGrp3WPF
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
                     Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
                     AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
+                    
+                    // Switches view to match User previlige
+                    switch ((UsersCategory)Mediator.User.UsersCategory)
+                    {
+                        case UsersCategory.Visitor:
+                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageVisitorSearch];
+                            break;
+                        case UsersCategory.Librarian:
+                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
+                            break;
+                        case UsersCategory.Chieflibrarian:
+                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
+                            break;
+                        default:
+                            break;
+                    }
+
                     IsOpen = false;
                 }));
             }

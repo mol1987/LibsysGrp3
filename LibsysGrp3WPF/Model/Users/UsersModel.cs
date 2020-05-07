@@ -37,6 +37,7 @@ namespace LibsysGrp3WPF
             this.UsersID = tempVisitor.UsersID;
             this.Email = tempVisitor.Email;
             this.PhoneNumber = tempVisitor.PhoneNumber;
+            this.UsersCategory = tempVisitor.UsersCategory;
         }
         public void AddUser()
         {
