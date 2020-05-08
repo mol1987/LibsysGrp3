@@ -32,43 +32,57 @@
             
         </materialDesign:DialogHost.DialogContent>
         <!-- put the content over which the dialog is shown here (e.g. your main window grid)-->
-    
-    <Grid Background="White">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+        <Grid Background="White">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#304ffe" Grid.Row="0" Grid.RowSpan="1" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#304ffe" Grid.Row="0" Grid.RowSpan="1" 
                     Grid.Column="0" Grid.ColumnSpan="4">
-            <Image Source="images/LIBSYS.png" Height="60" Margin="0 20"/>
-        </StackPanel>
-        <!--views area-->
-        <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" />
+                <Image Source="images/LIBSYS.png" Height="60" Margin="0 20"/>
+            </StackPanel>
+            <!--views area-->
+            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" />
 
-        <!--account status-->
+            <!--account status-->
             <WrapPanel Grid.Column="3" Margin="0,35">
-            <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
+                <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
                 <TextBlock Foreground="white"  Height="50" Text="{Binding AccountCategory}"/>
             </WrapPanel>
             <!--buttons-->
-        <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                ToolTip="MaterialDesignFlatLightButton" 
-                Background="#304ffe" BorderThickness="0" Width="60" Height="50"
-                BorderBrush="#304ffe" Grid.Column="3" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
-            <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
-        </Button>
 
-            
 
+            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
+            ToolTip="MaterialDesignFlatLightButton" 
+            Background="#304ffe" BorderThickness="0" Width="60" Height="50"
+            BorderBrush="#304ffe" Grid.Column="3" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
+            </Button>
+
+            <Menu IsMainMenu="True" Background="#304ffe" Foreground="White">
+                <MenuItem  ItemsSource="{Binding MenuList}">
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.MenuItemsCommand}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}" />
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                    <MenuItem.Header>
+                        <materialDesign:PackIcon Kind="Menu" Foreground="White" Width="30" Height="30"/>
+                    </MenuItem.Header>
+
+                </MenuItem>
+            </Menu>
         </Grid>
     </materialDesign:DialogHost>
 </Window>

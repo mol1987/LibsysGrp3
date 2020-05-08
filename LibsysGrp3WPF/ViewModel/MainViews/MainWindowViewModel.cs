@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Input;
 using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace LibsysGrp3WPF
 {
@@ -11,6 +13,7 @@ namespace LibsysGrp3WPF
     {
         
         private ICommand _btnSignIn;
+        private ICommand _menuItemsCommand;
 
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
@@ -19,6 +22,41 @@ namespace LibsysGrp3WPF
         private string _passwordTextBox;
         private string _accountCategory = "Bilfantast";
         private bool _isOpen = false;
+
+        private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
+        {
+            {
+                UsersCategory.Visitor, new ObservableCollection<PagesChoice>
+                {
+                    PagesChoice.pageVisitorMyItems,
+                    PagesChoice.pageVisitorSeminar
+                }
+            },
+            {
+                UsersCategory.Librarian, new ObservableCollection<PagesChoice>
+                {
+                    PagesChoice.pageManageLibrarian,
+                    PagesChoice.pageManageUsers,
+                    PagesChoice.pageManageSeminar,
+                    PagesChoice.pageReport
+                }
+            },
+            {
+                UsersCategory.Chieflibrarian, new ObservableCollection<PagesChoice>
+                {
+                    PagesChoice.pageManageUsers,
+                    PagesChoice.pageManageLibrarian,
+                    PagesChoice.pageManageSeminar,
+                    PagesChoice.pageReport
+                }
+            }
+        };
+        private ObservableCollection<PagesChoice> _menuList = new ObservableCollection<PagesChoice> 
+        {
+            PagesChoice.pageAddLibrarian,
+            PagesChoice.pageAddVisitor
+        };
+
 
         /// <summary>
         /// Sign in command
@@ -32,25 +70,55 @@ namespace LibsysGrp3WPF
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
                     Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
                     AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
-                    
-                    // Switches view to match User previlige
+
+                    // Switches view to match User previlige and match menu content
                     switch ((UsersCategory)Mediator.User.UsersCategory)
                     {
                         case UsersCategory.Visitor:
                             CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageVisitorSearch];
+                            MenuList = _menuListCategories[UsersCategory.Visitor];
                             break;
                         case UsersCategory.Librarian:
                             CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
+                            MenuList = _menuListCategories[UsersCategory.Librarian];
                             break;
                         case UsersCategory.Chieflibrarian:
                             CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
+                            MenuList = _menuListCategories[UsersCategory.Chieflibrarian];
                             break;
                         default:
                             break;
                     }
 
+                    // close popup
                     IsOpen = false;
                 }));
+            }
+        }
+
+        public ICommand MenuItemsCommand
+        {
+            get
+            {
+                return _menuItemsCommand ?? (_menuItemsCommand = new RelayCommand(x =>
+                {
+                    
+                    Trace.WriteLine("hello " + x.ToString());
+                    ChangeViewModel(PageViewModels[(int)((PagesChoice)x)]);
+                }));
+            }
+        }
+
+        public ObservableCollection<PagesChoice> MenuList
+        {
+            get
+            {
+                return _menuList;
+            }
+            set
+            {
+                _menuList = value;
+                OnPropertyChanged(nameof(MenuList));
             }
         }
 
