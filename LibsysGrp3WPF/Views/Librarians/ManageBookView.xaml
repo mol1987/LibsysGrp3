@@ -3,10 +3,149 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
 
     <Grid >
-      
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>-->
+
+        <StackPanel Orientation="Vertical">
+
+            <ComboBox HorizontalAlignment="Left" Width="250" Margin="30 20 20 20"
+              materialDesign:HintAssist.Hint="Sök"
+              materialDesign:HintAssist.HintOpacity=".26"
+              IsEditable="True">
+                <ComboBoxItem Content="{Binding BookList}"/>
+            </ComboBox>
+
+            <!--Panel for two views nex to each other-->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
+                    <!--<ItemsControl ItemsSource="{Binding Books}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>-->
+                    <StackPanel Orientation="Vertical">
+                        <Border Margin="30 5 30 5" BorderBrush="Black" CornerRadius="7">
+                            <StackPanel Orientation="Horizontal">
+
+                                <!--Info of the book-->
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Författare:"/>
+                                        <TextBlock Text="Aata binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Titel:"/>
+                                        <TextBlock Text="Harry Potter binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ISBN:"/>
+                                        <TextBlock Text="9769696 binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="År:"/>
+                                        <TextBlock Text="2020 binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Format: "/>
+                                        <TextBlock Text="Pocket binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Kategori:"/>
+                                        <TextBlock Text="Fakta binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Saldo:"/>
+                                        <TextBlock Text="1/10 binda"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Beskrivning:"/>
+                                        <TextBlock Text="dfdfdf binda"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical">
+                                    <Button Content="Ändra"/>
+                                    <Button Content="Ta bort"/>
+                                    <Button Content="Lägg till e-bok"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    <!--</DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>-->
+                </ScrollViewer>
+
+                <!--Border for adding a book-->
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4">
+                    <Border Margin="30 5 30 5" BorderBrush="Black" CornerRadius="7">
+                        <!--Info of the book-->
+                        <StackPanel Orientation="Vertical">
+                            <TextBox Text="{Binding TxBAuthor}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Författare"/>
+
+                            <TextBox Text="{Binding TxBTitel}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Titel"/>
+
+                            <TextBox Text="{Binding TxBISBN}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="ISBN"/>
+
+                            <TextBox Text="{Binding TxBYear}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="År"/>
+
+                            <TextBox Text="{Binding TxBFormat}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Format"/>
+
+                            <TextBox Text="{Binding TxBCategory}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Kategori"/>
+
+                            <TextBox Text="{Binding TxBSaldo}" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Saldo"/>
+
+                            <TextBox Text="{Binding TxBText }" 
+                                 Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Beskrivning"/>
+
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="Lägg till"/>
+
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
