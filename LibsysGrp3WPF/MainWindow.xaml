@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LibsysGrp3WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="auto">
+        Title="MainWindow" Height="450" Width="800">
     <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
 
         <materialDesign:DialogHost.DialogContent>
@@ -45,7 +45,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
