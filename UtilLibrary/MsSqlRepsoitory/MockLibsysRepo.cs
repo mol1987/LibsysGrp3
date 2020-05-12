@@ -6,10 +6,21 @@ namespace UtilLibrary.MsSqlRepsoitory
 {
     public class MockLibsysRepo : ILibsysRepo
     {
+        public void AddBook(IFullBooks books)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddUser(IUsers user)
         {
             return;
         }
+
+        public void EditBook(IFullBooks books)
+        {
+            throw new NotImplementedException();
+        }
+
         public void EditUser(IUsers user)
         {
             return;
@@ -28,6 +39,11 @@ namespace UtilLibrary.MsSqlRepsoitory
                 UsersCategory = 0,
                 JoinDate = DateTime.Now
             };
+        }
+
+        public void RemoveBook(IFullBooks books)
+        {
+            throw new NotImplementedException();
         }
 
         public void RemoveUser(IUsers user)

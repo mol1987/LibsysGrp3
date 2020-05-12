@@ -9,5 +9,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         public string Author { get; set; }
         public string Category { get; set; }
         public int ISBN { get; set; }
+        public string Publisher { get ; set; }
     }
 }

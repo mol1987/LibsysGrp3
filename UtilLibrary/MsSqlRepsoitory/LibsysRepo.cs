@@ -38,6 +38,16 @@ namespace UtilLibrary.MsSqlRepsoitory
         #endregion
 
         #region items
+        public IEnumerable<T> GetBooks<T>()
+        {
+            string storedProcedure = StoredProcedures.GetUsers.ToString();
+            IEnumerable<T> usersList;
+            using (var conn = Create_Connection())
+            {
+                usersList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return usersList;
+        }
         public void AddBook(IFullBooks books)
         {
             throw new NotImplementedException();
