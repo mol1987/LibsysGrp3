@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
+using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
     public class ManageBookViewModel : BaseViewModel, IPageViewModel
     {
         #region Private properties
-        private UsersModel _booklist;
+        private ObservableCollection<FullBooksModel> _booksList;
+        private FullBooksModel _selectedItem;
         private ICommand _btnEditBook;
         private ICommand _btnDeleteBook;
-        private ICommand _btnAddEbok; 
         private ICommand _btnAddBook;
         #endregion
 
@@ -282,26 +284,130 @@ namespace LibsysGrp3WPF
         }
 
 
-
-
-
-
-
         #endregion
 
         #region Other public properties
 
-        public ICommand BtnEditBook;
+        public ObservableCollection<FullBooksModel> BooksList
+        {
+            get
+            {
+                return _booksList;
+            }
+            set
+            {
+                _booksList = value;
+                OnPropertyChanged(nameof(BooksList));
+            }
+        }
 
-        public ICommand BtnDeleteBook;
+        /// <summary>
+        /// For editing book
+        /// </summary>
+        public FullBooksModel SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                if (_selectedItem != null)
+                {
+                    TxBEditTitel = _selectedItem.Title;
+                    TxBEditItemType = _selectedItem.ItemType;
+                    TxBEditISBN = _selectedItem.ISBN;
+                    TxBEditAuthor = _selectedItem.Author;
+                    TxBEditPublisher = _selectedItem.Publisher;
+                    TxBEditCategory = _selectedItem.Category;
+                    TxBEditPages = _selectedItem.Pages;
+                    TxBEditPrice = _selectedItem.Price;
+                    TxBEditDescription = _selectedItem.Description;
+                }
+            }
+        }
 
-        public ICommand BtnAddEbok;
+        public ICommand BtnEditBook
+        {
+            get
+            {
+                return _btnEditBook ?? (_btnEditBook = new RelayCommand(x =>
+                {
+            if (_selectedItem != null)
+            {
+                var listIndex = BooksList.IndexOf(_selectedItem);
+                        BooksList[listIndex].Title = TxBEditTitel;
+                        BooksList[listIndex].ItemType = TxBEditItemType;
+                        BooksList[listIndex].ISBN = TxBEditISBN;
+                        BooksList[listIndex].Author = TxBEditAuthor;
+                        BooksList[listIndex].Publisher = TxBEditPublisher;
+                        BooksList[listIndex].Category = TxBEditCategory;
+                        BooksList[listIndex].Pages = TxBEditPages;
+                        BooksList[listIndex].Price = TxBEditPrice;
+                        BooksList[listIndex].Description = TxBEditDescription;
+                        BooksList[listIndex].EditBook();
 
-        public ICommand BtnAddBook;
+                        getBooks();
+            }
+                }));
+            }
+        } 
 
+        public ICommand BtnAddBook
+        {
+            get
+            {
+                return _btnAddBook ?? (_btnAddBook = new RelayCommand(x =>
+                {
+                    var item = new FullBooksModel(new BooksProcessor(new LibsysRepo()));
 
+                    item.Date = DateTime.Now;
+                    item.Title = TxBAddTitel;
+                    item.ItemType = TxBAddItemType;
+                    item.ISBN = TxBAddISBN;
+                    item.Author = TxBAddAuthor;
+                    item.Publisher = TxBAddPublisher;
+                    item.Category = TxBAddCategory;
+                    item.Pages = TxBAddPages;
+                    item.Price = TxBAddPrice;
+                    item.Description = TxBAddDescription;
 
+                    item.CreateBook();
+                    string str = "" + item.Title;
+                    MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                }));
+            }
+        }
+        
+        public ICommand BtnDeleteBook
+        {
+            get
+            {
+                return _btnDeleteBook ?? (_btnDeleteBook = new RelayCommand(x =>
+                {
+                    _selectedItem.RemoveBook();
+                    BooksList.Remove(_selectedItem);
+                }));
+            }
+        }
         #endregion
+
+        #region Constructor
+        public ManageBookViewModel()
+        {
+            getBooks();
+        }
+        #endregion
+
+        private void getBooks()
+        {
+            // gets all books..
+            var repo = new LibsysRepo();
+            var tempUsersList = repo.GetBooks<FullBooks>();
+            BooksList = FullBooksModel.ConvertToObservableCollection(tempUsersList);
+        }
 
 
 

@@ -6,19 +6,20 @@ namespace UtilLibrary.MsSqlRepsoitory
 {
     public class MockLibsysRepo : ILibsysRepo
     {
-        public void AddBook(IFullBooks books)
-        {
-            throw new NotImplementedException();
-        }
 
         public void AddUser(IUsers user)
         {
             return;
         }
 
+        public void CreateBook(IFullBooks books)
+        {
+            return;
+        }
+
         public void EditBook(IFullBooks books)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void EditUser(IUsers user)
@@ -43,7 +44,7 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         public void RemoveBook(IFullBooks books)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void RemoveUser(IUsers user)

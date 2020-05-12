@@ -2,7 +2,7 @@
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public interface IFullBooks
+    public interface IFullBooks : IItems
     {
         string Author { get; set; }
         int ISBN { get; set; }

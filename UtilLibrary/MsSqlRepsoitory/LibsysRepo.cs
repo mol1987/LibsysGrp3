@@ -37,36 +37,81 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         #endregion
 
-        #region items
+        #region Items
         public IEnumerable<T> GetBooks<T>()
         {
-            string storedProcedure = StoredProcedures.GetUsers.ToString();
-            IEnumerable<T> usersList;
+            string storedProcedure = StoredProcedures.SearchBook.ToString();
+            IEnumerable<T> booksList;
             using (var conn = Create_Connection())
             {
-                usersList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+                booksList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
             }
-            return usersList;
+            return booksList;
         }
-        public void AddBook(IFullBooks books)
+
+
+        public void CreateBook(IFullBooks books)
         {
-            throw new NotImplementedException();
+            string storedProcedure = StoredProcedures.CreateBook.ToString();
+
+            var obj = new
+            {
+                Title = books.Title,
+                ItemType = books.ItemType,
+                ISBN = books.ISBN,
+                Author = books.Author,
+                Publisher = books.Publisher,
+                Category = books.Category,
+                Pages = books.Pages,
+                Price = books.Price,
+                Description = books.Description,
+                Date = books.Date
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Query<Users>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public void RemoveBook(IFullBooks books)
         {
-            throw new NotImplementedException();
+            
+                string storedProcedure = StoredProcedures.RemoveBook.ToString();
+                var obj = new
+                {
+                    ItemID = books.ItemsID
+                };
+                using (var conn = Create_Connection())
+                {
+                    conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                }
+            
         }
 
         public void EditBook(IFullBooks books)
         {
-            throw new NotImplementedException();
+            string storedProcedure = StoredProcedures.EditBook.ToString();
+            var obj = new
+            {
+                Title = books.Title,
+                ItemType = books.ItemType,
+                ISBN = books.ISBN,
+                Author = books.Author,
+                Publisher = books.Publisher,
+                Category = books.Category,
+                Pages = books.Pages,
+                Price = books.Price,
+                Description = books.Description,
+                Date = books.Date
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
         }
         #endregion
-
-        #region seminars
-        #endregion
-
 
         #region Users
         public IUsers LoginUser(string identityNo, string password)
@@ -151,6 +196,9 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        #endregion
+
+        #region Seminars
         #endregion
     }
 }
