@@ -8,156 +8,288 @@ namespace LibsysGrp3WPF
 {
     public class ManageBookViewModel : BaseViewModel, IPageViewModel
     {
-        #region privates
+        #region Private properties
         private UsersModel _booklist;
         private ICommand _btnEditBook;
         private ICommand _btnDeleteBook;
         private ICommand _btnAddEbok; 
         private ICommand _btnAddBook;
-
-        private int _itemTypeTextBox; 
-        private int _ISBNTextBox;
-        private string _authorTextBox;
-        private string _titelTextBox;
-        private string _publisherTextBox;
-        //private int _releaseYearTextBox;
-        private string _categoryTextBox;
-        private int _pagesTextBox;
-        private int _priceTextBox;
-        private string _descriptionTextBox;
         #endregion
 
-        #region public properties
+        #region Private properties for adding a book
+        private string _txBAddTitel; 
+        private string _txBAddItemType;
+        private int _txBAddISBN;
+        private string _txBAddAuthor;
+        private string _txBAddPublisher;
+        private string _txBAddCategory;
+        private int _txBAddPages;
+        private int _txBAddPrice;
+        private string _txBAddDescription;
+        #endregion
 
-        public int ItemTypeTextBox
+        #region Private properties for editing a book
+        private string _txBEditTitel;
+        private string _txBEditItemType;
+        private int _txBEditISBN;
+        private string _txBEditAuthor;
+        private string _txBEditPublisher;
+        private string _txBEditCategory;
+        private int _txBEditPages;
+        private int _txBEditPrice;
+        private string _txBEditDescription;
+        #endregion
+
+        #region Public properties for adding a book
+
+        public string TxBAddTitel
         {
             get
             {
-                return _itemTypeTextBox;
+                return _txBAddTitel;
             }
             set
             {
-                _itemTypeTextBox = value;
-                OnPropertyChanged(nameof(ItemTypeTextBox));
+                _txBAddTitel = value;
+                OnPropertyChanged(nameof(TxBAddTitel));
             }
         }
 
-        public int ISBNTextBox
+        public string TxBAddItemType
         {
             get
             {
-                return _ISBNTextBox;
+                return _txBAddItemType;
             }
             set
             {
-                _ISBNTextBox = value;
-                OnPropertyChanged(nameof(ISBNTextBox));
+                _txBAddItemType = value;
+                OnPropertyChanged(nameof(TxBAddItemType));
             }
         }
 
-        public string AuthorTextBox
+        public int TxBAddISBN
         {
             get
             {
-                return _authorTextBox;
+                return _txBAddISBN;
             }
             set
             {
-                _authorTextBox = value;
-                OnPropertyChanged(nameof(AuthorTextBox));
+                _txBAddISBN = value;
+                OnPropertyChanged(nameof(TxBAddISBN));
             }
         }
 
-        public string TitelTextBox
+        public string TxBAddAuthor
         {
             get
             {
-                return _titelTextBox;
+                return _txBAddAuthor;
             }
             set
             {
-                _titelTextBox = value;
-                OnPropertyChanged(nameof(TitelTextBox));
+                _txBAddAuthor = value;
+                OnPropertyChanged(nameof(TxBAddAuthor));
             }
         }
 
-        public string PublisherTextBox
+        public string TxBAddPublisher
         {
             get
             {
-                return _publisherTextBox;
+                return _txBAddPublisher;
             }
             set
             {
-                _publisherTextBox = value;
-                OnPropertyChanged(nameof(PublisherTextBox));
+                _txBAddPublisher = value;
+                OnPropertyChanged(nameof(TxBAddPublisher));
             }
         }
 
-        //public int ReleaseYearTextBox
-        //{
-        //    get
-        //    {
-        //        return _releaseYearTextBox;
-        //    }
-        //    set
-        //    {
-        //        _releaseYearTextBox = value;
-        //        OnPropertyChanged(nameof(ReleaseYearTextBox));
-        //    }
-        //}
-
-        public string CategoryTextBox
+        public string TxBAddCategory
         {
             get
             {
-                return _categoryTextBox;
+                return _txBAddCategory;
             }
             set
             {
-                _categoryTextBox = value;
-                OnPropertyChanged(nameof(CategoryTextBox));
+                _txBAddCategory = value;
+                OnPropertyChanged(nameof(TxBAddCategory));
             }
         }
 
-        public int PagesTextBox
+        public int TxBAddPages
         {
             get
             {
-                return _pagesTextBox;
+                return _txBAddPages;
             }
             set
             {
-                _pagesTextBox = value;
-                OnPropertyChanged(nameof(PagesTextBox));
+                _txBAddPages = value;
+                OnPropertyChanged(nameof(TxBAddPages));
             }
         }
 
-        public int PriceTextBox
+        public int TxBAddPrice
         {
             get
             {
-                return _priceTextBox;
+                return _txBAddPrice;
             }
             set
             {
-                _priceTextBox = value;
-                OnPropertyChanged(nameof(PriceTextBox));
+                _txBAddPrice = value;
+                OnPropertyChanged(nameof(TxBAddPrice));
             }
         }
 
-        public string DescriptionTextBox
+        public string TxBAddDescription
         {
             get
             {
-                return _descriptionTextBox;
+                return _txBAddDescription;
             }
             set
             {
-                _descriptionTextBox = value;
-                OnPropertyChanged(nameof(DescriptionTextBox));
+                _txBAddDescription = value;
+                OnPropertyChanged(nameof(TxBAddDescription));
             }
         }
+
+        #endregion
+
+        #region Public propoerties for editing a book
+
+        public string TxBEditTitel
+        {
+            get
+            {
+                return _txBEditTitel;
+            }
+            set
+            {
+                _txBEditTitel = value;
+                OnPropertyChanged(nameof(TxBEditTitel));
+            }
+        }
+
+        public string TxBEditItemType
+        {
+            get
+            {
+                return _txBEditItemType;
+            }
+            set
+            {
+                _txBEditItemType = value;
+                OnPropertyChanged(nameof(TxBEditItemType));
+            }
+        }
+
+        public int TxBEditISBN
+        {
+            get
+            {
+                return _txBEditISBN;
+            }
+            set
+            {
+                _txBEditISBN = value;
+                OnPropertyChanged(nameof(TxBEditISBN));
+            }
+        }
+
+
+        public string TxBEditAuthor
+        {
+            get
+            {
+                return _txBEditAuthor;
+            }
+            set
+            {
+                _txBEditAuthor = value;
+                OnPropertyChanged(nameof(TxBEditAuthor));
+            }
+        }
+
+        public string TxBEditPublisher
+        {
+            get
+            {
+                return _txBEditPublisher;
+            }
+            set
+            {
+                _txBEditPublisher = value;
+                OnPropertyChanged(nameof(TxBEditPublisher));
+            }
+        }
+
+        public string TxBEditCategory
+        {
+            get
+            {
+                return _txBEditCategory;
+            }
+            set
+            {
+                _txBEditCategory = value;
+                OnPropertyChanged(nameof(TxBEditCategory));
+            }
+        }
+
+        public int TxBEditPages
+        {
+            get
+            {
+                return _txBEditPages;
+            }
+            set
+            {
+                _txBEditPages = value;
+                OnPropertyChanged(nameof(TxBEditPages));
+            }
+        }
+
+        public int TxBEditPrice
+        {
+            get
+            {
+                return _txBEditPrice;
+            }
+            set
+            {
+                _txBEditPrice = value;
+                OnPropertyChanged(nameof(TxBEditPrice));
+            }
+        }
+
+        public string TxBEditDescription
+        {
+            get
+            {
+                return _txBEditDescription;
+            }
+            set
+            {
+                _txBEditDescription = value;
+                OnPropertyChanged(nameof(TxBEditDescription));
+            }
+        }
+
+
+
+
+
+
+
+        #endregion
+
+        #region Other public properties
 
         public ICommand BtnEditBook;
 

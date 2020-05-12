@@ -9,5 +9,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         string Category { get; set; }
         int ItemsID { get; set; }
         int Pages { get; set; }
+        string Publisher { get; set; }
     }
 }

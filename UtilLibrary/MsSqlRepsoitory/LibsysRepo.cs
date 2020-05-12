@@ -38,6 +38,20 @@ namespace UtilLibrary.MsSqlRepsoitory
         #endregion
 
         #region items
+        public void AddBook(IFullBooks books)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBook(IFullBooks books)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditBook(IFullBooks books)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region seminars
@@ -126,6 +140,7 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+
         #endregion
     }
 }
