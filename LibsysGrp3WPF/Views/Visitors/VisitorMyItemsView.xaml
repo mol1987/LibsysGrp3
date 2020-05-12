@@ -5,7 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
+
     <Grid>
-            
+        <StackPanel Orientation="Vertical">
+    <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
+    <StackPanel Orientation="Vertical">
+        <TextBlock>
+                    klsjdflkjsdkl
+            klasjdflkjsd
+            kasjlkgj
+            slkjg
+            </TextBlock>
+            <Button Content="Lämna tillbaka" Margin="320 2 2 2" Background="Orange"/>
+        </StackPanel>
+    </Border>
+    <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
+        <StackPanel Orientation="Vertical">
+            <TextBlock>
+                    klsjdflkjsdkl
+            klasjdflkjsd
+            kasjlkgj
+            slkjg
+            </TextBlock>
+            <Button Content="Få länk" Margin="320 2 2 2" Background="Blue"/>
+        </StackPanel>
+        </Border>
+        </StackPanel>
     </Grid>
+
 </UserControl>

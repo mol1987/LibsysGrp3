@@ -38,6 +38,18 @@ namespace UtilLibrary.MsSqlRepsoitory
         #endregion
 
         #region items
+
+        //public IEnumerable<T> GetBorrowList<T>()
+        //{
+        //    string storedProcedure = StoredProcedures.GetBorrowList.ToString();
+        //    IEnumerable<T> borrowList;
+        //    using (var conn = Create_Connection())
+        //    {
+        //        borrowList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+        //    }
+        //    return borrowList;
+        //}
+
         #endregion
 
         #region seminars
@@ -127,5 +139,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
         #endregion
+
+            }
     }
-}
