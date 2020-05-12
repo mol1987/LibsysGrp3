@@ -40,7 +40,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         #region Items
         public IEnumerable<T> GetBooks<T>()
         {
-            string storedProcedure = StoredProcedures.SearchBook.ToString();
+            string storedProcedure = StoredProcedures.GetBooks.ToString();
             IEnumerable<T> booksList;
             using (var conn = Create_Connection())
             {

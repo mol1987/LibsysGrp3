@@ -21,7 +21,7 @@ namespace LibsysGrp3WPF
         #region Private properties for adding a book
         private string _txBAddTitel; 
         private string _txBAddItemType;
-        private int _txBAddISBN;
+        private long _txBAddISBN;
         private string _txBAddAuthor;
         private string _txBAddPublisher;
         private string _txBAddCategory;
@@ -33,7 +33,7 @@ namespace LibsysGrp3WPF
         #region Private properties for editing a book
         private string _txBEditTitel;
         private string _txBEditItemType;
-        private int _txBEditISBN;
+        private long _txBEditISBN;
         private string _txBEditAuthor;
         private string _txBEditPublisher;
         private string _txBEditCategory;
@@ -70,7 +70,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public int TxBAddISBN
+        public long TxBAddISBN
         {
             get
             {
@@ -191,7 +191,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public int TxBEditISBN
+        public long TxBEditISBN
         {
             get
             {
