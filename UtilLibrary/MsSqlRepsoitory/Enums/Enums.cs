@@ -12,6 +12,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         AddUser,
         GetUsers,
         DeleteUser,
-        EditUser
+        EditUser,
+        GetBorrowList
     }
 }
