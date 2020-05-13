@@ -41,6 +41,7 @@ namespace LibsysGrp3WPF
             {
                 booksList.Add(new FullBooksModel(new BooksProcessor(new LibsysRepo()))
                 {
+                    ItemsID = item.ItemsID,
                     Title = item.Title,
                     ItemType = item.ItemType,
                     ISBN = item.ISBN,

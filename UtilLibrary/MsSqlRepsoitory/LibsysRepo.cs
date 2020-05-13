@@ -49,7 +49,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             return booksList;
         }
 
-
         public void CreateBook(IFullBooks books)
         {
             string storedProcedure = StoredProcedures.CreateBook.ToString();
@@ -78,10 +77,10 @@ namespace UtilLibrary.MsSqlRepsoitory
         public void RemoveBook(IFullBooks books)
         {
             
-                string storedProcedure = StoredProcedures.RemoveBook.ToString();
+                string storedProcedure = StoredProcedures.RemoveItem.ToString();
                 var obj = new
                 {
-                    ItemID = books.ItemsID
+                    ItemsID = books.ItemsID
                 };
                 using (var conn = Create_Connection())
                 {

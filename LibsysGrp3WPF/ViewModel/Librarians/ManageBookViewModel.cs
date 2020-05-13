@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
+using System.Linq;
 
 namespace LibsysGrp3WPF
 {
@@ -390,11 +392,16 @@ namespace LibsysGrp3WPF
             {
                 return _btnDeleteBook ?? (_btnDeleteBook = new RelayCommand(x =>
                 {
-                    _selectedItem.RemoveBook();
-                    BooksList.Remove(_selectedItem);
+                    var obj = (FullBooksModel)x;
+                    var bookIndex = BooksList.IndexOf(obj);
+                    BooksList[bookIndex].RemoveBook();
+                    BooksList.RemoveAt(bookIndex);
+                    //_selectedItem.RemoveBook();
+                    //BooksList.Remove(_selectedItem);
 
-                    string str = _selectedItem.Title;
+                    string str = obj.Title;
                     MessageBox.Show(str + " bortagen", "Bortagen", MessageBoxButton.OK, MessageBoxImage.Question);
+
                 }));
             }
 

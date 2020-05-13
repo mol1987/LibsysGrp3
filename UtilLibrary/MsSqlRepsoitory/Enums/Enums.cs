@@ -18,6 +18,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         RemoveBook,
         EditBook,
         GetBook,
-        GetBooks
+        GetBooks,
+        RemoveItem
     }
 }
