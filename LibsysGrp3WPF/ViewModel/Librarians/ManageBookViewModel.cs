@@ -392,6 +392,7 @@ namespace LibsysGrp3WPF
                     BooksList.Remove(_selectedItem);
                 }));
             }
+
         }
         #endregion
 
@@ -402,6 +403,7 @@ namespace LibsysGrp3WPF
         }
         #endregion
 
+        #region Get books method
         private void getBooks()
         {
             // gets all books..
@@ -410,7 +412,7 @@ namespace LibsysGrp3WPF
             BooksList = FullBooksModel.ConvertToObservableCollection(tempUsersList);
         }
 
-
+        #endregion
 
     }
 }
