@@ -57,7 +57,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             var obj = new
             {
                 Title = books.Title,
-                ItemType = books.ItemType,
                 ISBN = books.ISBN,
                 Author = books.Author,
                 Publisher = books.Publisher,
@@ -72,6 +71,7 @@ namespace UtilLibrary.MsSqlRepsoitory
             using (var conn = Create_Connection())
             {
                 conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
             }
         }
 

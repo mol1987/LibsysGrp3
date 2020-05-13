@@ -339,7 +339,6 @@ namespace LibsysGrp3WPF
             {
                 var listIndex = BooksList.IndexOf(_selectedItem);
                         BooksList[listIndex].Title = TxBEditTitel;
-                        BooksList[listIndex].ItemType = TxBEditItemType;
                         BooksList[listIndex].ISBN = TxBEditISBN;
                         BooksList[listIndex].Author = TxBEditAuthor;
                         BooksList[listIndex].Publisher = TxBEditPublisher;
@@ -365,7 +364,6 @@ namespace LibsysGrp3WPF
 
                     item.Date = DateTime.Now;
                     item.Title = TxBAddTitel;
-                    item.ItemType = TxBAddItemType;
                     item.ISBN = TxBAddISBN;
                     item.Author = TxBAddAuthor;
                     item.Publisher = TxBAddPublisher;
@@ -377,6 +375,9 @@ namespace LibsysGrp3WPF
                     item.CreateBook();
                     string str = "" + item.Title;
                     MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+
+                    getBooks();
+                    
                 }));
             }
         }

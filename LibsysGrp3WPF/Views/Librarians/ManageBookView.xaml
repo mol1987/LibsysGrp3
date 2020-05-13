@@ -18,8 +18,6 @@
                         <StackPanel >
                             <TextBlock>Titel</TextBlock>
                             <TextBox Text="{Binding TxBEditTitel}"/>
-                            <TextBlock>Objekt typ</TextBlock>
-                            <TextBox Text="{Binding TxBEditItemType}"/>
                             <TextBlock>ISBN</TextBlock>
                             <TextBox Text="{Binding TxBEditISBN}"/>
                             <TextBlock>Författare</TextBlock>
@@ -37,7 +35,7 @@
                         </StackPanel>
                         <StackPanel Margin="50 10 50 0">
                             <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">Ändra</Button>
-                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">AVBRYT</Button>
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
                         </StackPanel>
 
                     </StackPanel>
@@ -45,7 +43,7 @@
                 </materialDesign:DialogHost.DialogContent>
 
                 <!--#region ScrollView for books-->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" HorizontalAlignment="Center"  Grid.RowSpan="3">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" HorizontalAlignment="Center"  Grid.RowSpan="2">
                 <ItemsControl  ItemsSource="{Binding BooksList, Mode=OneWay}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate> 
@@ -75,7 +73,7 @@
                                                     <TextBlock Text="{Binding Pages}" Margin="0 0 5 10" FontWeight="Normal"/>
                                                     <TextBlock Text="Inköpris:" Margin="0 0 5 10"/>
                                                     <TextBlock Text="{Binding Price}" Margin="0 0 0 10" FontWeight="Normal"/>
-                                                    <TextBlock Text="Datum:" Margin="5 0 5 10"/>
+                                                    <TextBlock Text="Skapelsedatum:" Margin="5 0 5 10"/>
                                                     <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                                 </StackPanel>
                                                 <TextBlock Text="Beskrivning" />
@@ -117,8 +115,6 @@
                         <StackPanel >
                             <TextBlock>Titel</TextBlock>
                             <TextBox Text="{Binding TxBAddTitel}"/>
-                            <TextBlock>Objekt typ</TextBlock>
-                            <TextBox Text="{Binding TxBAddItemType}"/>
                             <TextBlock>ISBN</TextBlock>
                             <TextBox Text="{Binding TxBAddISBN}"/>
                             <TextBlock>Författare</TextBlock>
@@ -136,7 +132,7 @@
                         </StackPanel>
                         <StackPanel Margin="50 10 50 0">
                             <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
-                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">AVBRYT</Button>
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
                         </StackPanel>
 
                     </StackPanel>
