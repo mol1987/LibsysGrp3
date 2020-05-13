@@ -328,7 +328,9 @@ namespace LibsysGrp3WPF
                 }
             }
         }
+        #endregion
 
+        #region Commands
         public ICommand BtnEditBook
         {
             get
@@ -390,6 +392,9 @@ namespace LibsysGrp3WPF
                 {
                     _selectedItem.RemoveBook();
                     BooksList.Remove(_selectedItem);
+
+                    string str = _selectedItem.Title;
+                    MessageBox.Show(str + " bortagen", "Bortagen", MessageBoxButton.OK, MessageBoxImage.Question);
                 }));
             }
 
@@ -408,8 +413,8 @@ namespace LibsysGrp3WPF
         {
             // gets all books..
             var repo = new LibsysRepo();
-            var tempUsersList = repo.GetBooks<FullBooks>();
-            BooksList = FullBooksModel.ConvertToObservableCollection(tempUsersList);
+            var tempBooksList = repo.GetBooks<FullBooks>();
+            BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
 
         #endregion
