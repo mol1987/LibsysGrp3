@@ -71,7 +71,7 @@ namespace UtilLibrary.MsSqlRepsoitory
 
             using (var conn = Create_Connection())
             {
-                conn.Query<Users>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
 
