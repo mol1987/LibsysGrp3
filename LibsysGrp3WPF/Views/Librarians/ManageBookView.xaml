@@ -34,7 +34,7 @@
                             <TextBox Text="{Binding TxBEditDescription}"/>
                         </StackPanel>
                         <StackPanel Margin="50 10 50 0">
-                            <Button Margin="0 0 0 10" Command="{Binding BtnEditBook}" Background="#F9A20B" BorderBrush="#F9A20B">Ändra</Button>
+                            <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">Ändra</Button>
                             <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
                         </StackPanel>
 

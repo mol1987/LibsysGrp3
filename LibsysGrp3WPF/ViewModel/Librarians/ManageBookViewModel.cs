@@ -438,8 +438,11 @@ namespace LibsysGrp3WPF
                         BooksList[listIndex].Description = TxBAddDescription;
                         BooksList[listIndex].ItemsID = objToEdit.ItemsID;
                         BooksList[listIndex].EditBook();
+                        string str = "" + objToEdit.Title;
+                        MessageBox.Show(str + " edited.", "Edit Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
                         getBooks();
                         // toggle it to null so there is no object to change
+                        IsOpen = false;
                         objToEdit = null;
                     }
                 }));
