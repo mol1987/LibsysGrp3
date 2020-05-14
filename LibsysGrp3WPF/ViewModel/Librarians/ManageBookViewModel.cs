@@ -19,6 +19,10 @@ namespace LibsysGrp3WPF
         private ICommand _btnEditBook;
         private ICommand _btnDeleteBook;
         private ICommand _btnAddBook;
+
+
+        private ICommand _showDialogCommand;
+        private bool _isOpen = false;
         #endregion
 
         #region Private properties for adding a book
@@ -304,31 +308,17 @@ namespace LibsysGrp3WPF
             }
         }
 
-        /// <summary>
-        /// For editing book
-        /// </summary>
-        public FullBooksModel SelectedItem
+
+        public bool IsOpen
         {
             get
             {
-                return _selectedItem;
+                return _isOpen;
             }
             set
             {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-                if (_selectedItem != null)
-                {
-                    TxBEditTitel = _selectedItem.Title;
-                    TxBEditItemType = _selectedItem.ItemType;
-                    TxBEditISBN = _selectedItem.ISBN;
-                    TxBEditAuthor = _selectedItem.Author;
-                    TxBEditPublisher = _selectedItem.Publisher;
-                    TxBEditCategory = _selectedItem.Category;
-                    TxBEditPages = _selectedItem.Pages;
-                    TxBEditPrice = _selectedItem.Price;
-                    TxBEditDescription = _selectedItem.Description;
-                }
+                _isOpen = value;
+                OnPropertyChanged(nameof(IsOpen));
             }
         }
         #endregion
@@ -340,9 +330,10 @@ namespace LibsysGrp3WPF
             {
                 return _btnEditBook ?? (_btnEditBook = new RelayCommand(x =>
                 {
-            if (_selectedItem != null)
-            {
-                var listIndex = BooksList.IndexOf(_selectedItem);
+                    var obj = (FullBooksModel)x;
+                    if (obj != null)
+                    {
+                        var listIndex = BooksList.IndexOf(obj);
                         BooksList[listIndex].Title = TxBEditTitel;
                         BooksList[listIndex].ISBN = TxBEditISBN;
                         BooksList[listIndex].Author = TxBEditAuthor;
@@ -351,14 +342,32 @@ namespace LibsysGrp3WPF
                         BooksList[listIndex].Pages = TxBEditPages;
                         BooksList[listIndex].Price = TxBEditPrice;
                         BooksList[listIndex].Description = TxBEditDescription;
-                        BooksList[listIndex].ItemsID = _selectedItem.ItemsID;
+                        BooksList[listIndex].ItemsID = obj.ItemsID;
                         BooksList[listIndex].EditBook();
-
                         getBooks();
-            }
+                    }
                 }));
             }
         } 
+        public ICommand ShowDialogCommandForEditing
+        {
+            get
+            {
+                return _showDialogCommand ?? (_showDialogCommand = new RelayCommand(x =>
+                {
+                    var obj = (FullBooksModel)x;
+                    TxBEditTitel = obj.Title;
+                    TxBEditISBN = obj.ISBN;
+                    TxBEditAuthor = obj.Author;
+                    TxBEditPublisher = obj.Publisher;
+                    TxBEditCategory = obj.Category;
+                    TxBEditPages = obj.Pages;
+                    TxBEditPrice = obj.Price;
+                    TxBEditDescription = obj.Description;
+                    IsOpen = true;
+                }));
+            }
+        }
 
         public ICommand BtnAddBook
         {
@@ -377,17 +386,16 @@ namespace LibsysGrp3WPF
                     item.Pages = TxBAddPages;
                     item.Price = TxBAddPrice;
                     item.Description = TxBAddDescription;
-
                     item.CreateBook();
                     string str = "" + item.Title;
                     MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
 
                     getBooks();
-                    
+
                 }));
             }
         }
-        
+
         public ICommand BtnDeleteBook
         {
             get
@@ -408,35 +416,6 @@ namespace LibsysGrp3WPF
             }
 
         }
-
-        private ICommand _showDialogCommand;
-        private bool _isOpen = false;
-
-        public ICommand ShowDialogCommand
-        {
-            get
-            {
-                return _showDialogCommand ?? (_showDialogCommand = new RelayCommand(x =>
-                {
-                    IsOpen = true;
-                }));
-            }
-
-        }
-
-        public bool IsOpen
-        {
-            get
-            {
-                return _isOpen;
-            }
-            set
-            {
-                _isOpen = value;
-                OnPropertyChanged(nameof(IsOpen));
-            }
-        }
-
 
         #endregion
 
