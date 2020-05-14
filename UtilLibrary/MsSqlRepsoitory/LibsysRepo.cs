@@ -39,16 +39,38 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         #region items
 
-        //public IEnumerable<T> GetBorrowList<T>()
+        //public IEnumerable<IBorrowList> GetBorrowList<IBorrowList>()
         //{
+
         //    string storedProcedure = StoredProcedures.GetBorrowList.ToString();
-        //    IEnumerable<T> borrowList;
+        //    IEnumerable<IBorrowList> borrowList;
+
+        //    var obj = new
+        //    {
+        //        UserID = borrowList
+        //    };
+
         //    using (var conn = Create_Connection())
         //    {
-        //        borrowList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+        //        borrowList = conn.Query<IBorrowList>(storedProcedure, commandType: CommandType.StoredProcedure);
         //    }
         //    return borrowList;
         //}
+
+        public IEnumerable<IBorrowList> GetBorrowList(int userID)
+        {
+            string storedProcedure = StoredProcedures.GetBorrowList.ToString();
+            IEnumerable<IBorrowList> borrowList;
+            var obj = new
+            {
+                UsersID = userID
+            };
+            using (var conn = Create_Connection())
+            {
+                borrowList = conn.Query<IBorrowList>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return borrowList;
+        }
 
         #endregion
 

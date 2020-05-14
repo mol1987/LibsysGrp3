@@ -15,13 +15,13 @@
                             <ListView Margin="10" ItemsSource="{Binding borrowed}" HorizontalAlignment="Left">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding ItemType}" />
+                                        <GridViewColumn Header="Category" DisplayMemberBinding="{Binding ItemType}" />
                                         <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
                                         <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button Content="Lämna tillbaka" Margin="320 2 2 2" Background="Orange"/>
+                            <Button Content="Lämna tillbaka" Margin="320 2 2 2" Background="Orange" Command="{Binding LeaveBack}"/>
                         </StackPanel>
                     </Border>
                     <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
@@ -33,7 +33,7 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button Content="Få länk" Margin="320 2 2 2" Background="Blue"/>
+                            <Button Content="Få länk" Margin="320 2 2 2" Background="Blue" Command="{Binding GetLink}"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
