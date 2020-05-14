@@ -21,8 +21,11 @@ namespace LibsysGrp3WPF
         private ICommand _btnAddBook;
 
 
+        private ICommand _btnOpenBookDialog;
         private ICommand _showDialogCommand;
         private bool _isOpen = false;
+
+        private FullBooksModel objToEdit = null;
         #endregion
 
         #region Private properties for adding a book
@@ -356,15 +359,41 @@ namespace LibsysGrp3WPF
                 return _showDialogCommand ?? (_showDialogCommand = new RelayCommand(x =>
                 {
                     var obj = (FullBooksModel)x;
-                    TxBEditTitel = obj.Title;
-                    TxBEditISBN = obj.ISBN;
-                    TxBEditAuthor = obj.Author;
-                    TxBEditPublisher = obj.Publisher;
-                    TxBEditCategory = obj.Category;
-                    TxBEditPages = obj.Pages;
-                    TxBEditPrice = obj.Price;
-                    TxBEditDescription = obj.Description;
+                    TxBAddTitel = obj.Title;
+                    TxBAddISBN = obj.ISBN;
+                    TxBAddAuthor = obj.Author;
+                    TxBAddPublisher = obj.Publisher;
+                    TxBAddCategory = obj.Category;
+                    TxBAddPages = obj.Pages;
+                    TxBAddPrice = obj.Price;
+                    TxBAddDescription = obj.Description;
                     IsOpen = true;
+
+                    objToEdit = obj;
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Button command for opening book dialog for adding
+        /// clears the object to edit and all textboxes
+        /// </summary>
+        public ICommand BtnOpenBookDialog
+        {
+            get
+            {
+                return _btnOpenBookDialog ?? (_btnOpenBookDialog = new RelayCommand(x =>
+                {
+                    IsOpen = true;
+                    TxBAddTitel = "";
+                    TxBAddISBN = 0;
+                    TxBAddAuthor = "";
+                    TxBAddPublisher = "";
+                    TxBAddCategory = "";
+                    TxBAddPages = 0;
+                    TxBAddPrice = 0;
+                    TxBAddDescription = "";
+                    objToEdit = null;
                 }));
             }
         }
@@ -375,23 +404,44 @@ namespace LibsysGrp3WPF
             {
                 return _btnAddBook ?? (_btnAddBook = new RelayCommand(x =>
                 {
-                    var item = new FullBooksModel(new BooksProcessor(new LibsysRepo()));
+                    // if there isnt an object to edit make it so it will add instead
+                    if (objToEdit == null)
+                    {
+                        var item = new FullBooksModel(new BooksProcessor(new LibsysRepo()));
 
-                    item.Date = DateTime.Now;
-                    item.Title = TxBAddTitel;
-                    item.ISBN = TxBAddISBN;
-                    item.Author = TxBAddAuthor;
-                    item.Publisher = TxBAddPublisher;
-                    item.Category = TxBAddCategory;
-                    item.Pages = TxBAddPages;
-                    item.Price = TxBAddPrice;
-                    item.Description = TxBAddDescription;
-                    item.CreateBook();
-                    string str = "" + item.Title;
-                    MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        item.Date = DateTime.Now;
+                        item.Title = TxBAddTitel;
+                        item.ISBN = TxBAddISBN;
+                        item.Author = TxBAddAuthor;
+                        item.Publisher = TxBAddPublisher;
+                        item.Category = TxBAddCategory;
+                        item.Pages = TxBAddPages;
+                        item.Price = TxBAddPrice;
+                        item.Description = TxBAddDescription;
+                        item.CreateBook();
+                        string str = "" + item.Title;
+                        MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
 
-                    getBooks();
-
+                        getBooks();
+                    } 
+                    // if there is an object to edit update changes
+                    else
+                    {
+                        var listIndex = BooksList.IndexOf(objToEdit);
+                        BooksList[listIndex].Title = TxBAddTitel;
+                        BooksList[listIndex].ISBN = TxBAddISBN;
+                        BooksList[listIndex].Author = TxBAddAuthor;
+                        BooksList[listIndex].Publisher = TxBAddPublisher;
+                        BooksList[listIndex].Category = TxBAddCategory;
+                        BooksList[listIndex].Pages = TxBAddPages;
+                        BooksList[listIndex].Price = TxBAddPrice;
+                        BooksList[listIndex].Description = TxBAddDescription;
+                        BooksList[listIndex].ItemsID = objToEdit.ItemsID;
+                        BooksList[listIndex].EditBook();
+                        getBooks();
+                        // toggle it to null so there is no object to change
+                        objToEdit = null;
+                    }
                 }));
             }
         }

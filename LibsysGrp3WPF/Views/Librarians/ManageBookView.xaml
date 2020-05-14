@@ -138,7 +138,7 @@
                 <!--#region Button for adding a book-->
                 <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
                     <Button Content="Lägg till ny bok" Margin="10"
-                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
+                        Command="{Binding BtnOpenBookDialog}"/>
                     <!--<Button Content="Lägg till e-bok" Margin="10"/>
                 <Button Content="Lägg till film" Margin="10"/>-->
                 </StackPanel>
