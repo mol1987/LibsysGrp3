@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 using System.Linq;
+using MaterialDesignThemes.Wpf;
 
 namespace LibsysGrp3WPF
 {
@@ -350,6 +351,7 @@ namespace LibsysGrp3WPF
                         BooksList[listIndex].Pages = TxBEditPages;
                         BooksList[listIndex].Price = TxBEditPrice;
                         BooksList[listIndex].Description = TxBEditDescription;
+                        BooksList[listIndex].ItemsID = _selectedItem.ItemsID;
                         BooksList[listIndex].EditBook();
 
                         getBooks();
@@ -406,6 +408,36 @@ namespace LibsysGrp3WPF
             }
 
         }
+
+        private ICommand _showDialogCommand;
+        private bool _isOpen = false;
+
+        public ICommand ShowDialogCommand
+        {
+            get
+            {
+                return _showDialogCommand ?? (_showDialogCommand = new RelayCommand(x =>
+                {
+                    IsOpen = true;
+                }));
+            }
+
+        }
+
+        public bool IsOpen
+        {
+            get
+            {
+                return _isOpen;
+            }
+            set
+            {
+                _isOpen = value;
+                OnPropertyChanged(nameof(IsOpen));
+            }
+        }
+
+
         #endregion
 
         #region Constructor
