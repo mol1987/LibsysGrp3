@@ -12,7 +12,7 @@
                 <StackPanel Orientation="Vertical">
                     <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
                         <StackPanel Orientation="Vertical">
-                            <ListView Margin="10" ItemsSource="{Binding borrowed}" HorizontalAlignment="Left">
+                            <ListView Margin="10" ItemsSource="{Binding items}" HorizontalAlignment="Left">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Category" DisplayMemberBinding="{Binding ItemType}" />

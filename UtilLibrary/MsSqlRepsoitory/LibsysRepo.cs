@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -39,37 +40,31 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         #region items
 
-        //public IEnumerable<IBorrowList> GetBorrowList<IBorrowList>()
-        //{
-
-        //    string storedProcedure = StoredProcedures.GetBorrowList.ToString();
-        //    IEnumerable<IBorrowList> borrowList;
-
-        //    var obj = new
-        //    {
-        //        UserID = borrowList
-        //    };
-
-        //    using (var conn = Create_Connection())
-        //    {
-        //        borrowList = conn.Query<IBorrowList>(storedProcedure, commandType: CommandType.StoredProcedure);
-        //    }
-        //    return borrowList;
-        //}
-
-        public IEnumerable<IBorrowList> GetBorrowList(int userID)
+        public IEnumerable<T> GetBorrowList<T>(int userID)
         {
             string storedProcedure = StoredProcedures.GetBorrowList.ToString();
-            IEnumerable<IBorrowList> borrowList;
+            IEnumerable<T> booksList;
+            IBorrowList borrowList;
             var obj = new
             {
-                UsersID = userID
+                UserID = userID
             };
+            //using (var conn = Create_Connection())
+            //{
+            //    borrowList = conn.Query<IBorrowList>(storedProcedure, commandType: CommandType.StoredProcedure);
+            //}
+            //return borrowList;
             using (var conn = Create_Connection())
             {
-                borrowList = conn.Query<IBorrowList>(storedProcedure, commandType: CommandType.StoredProcedure);
+                booksList = conn.Query<T>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
-            return borrowList;
+            return booksList;
+        }
+
+
+        internal void RemoveBook()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

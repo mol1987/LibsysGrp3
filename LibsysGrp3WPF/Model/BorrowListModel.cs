@@ -10,6 +10,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         public int VisitorID { get; set; }
         public DateTime BorrowDate { get; set; }
         public DateTime DueDate { get; set; }
+        public int UserID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         internal static ObservableCollection<BorrowListModel> ConvertToObservableCollection(object tempBorrowedList)
         {
