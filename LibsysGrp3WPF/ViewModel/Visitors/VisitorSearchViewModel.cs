@@ -14,36 +14,7 @@ namespace LibsysGrp3WPF
 
         #region Public properties
 
-        public string BtnBorrowBook
-        {
-            get
-            {
-                return _btnborrowBook;
-            }
 
-            set
-            {
-                _btnborrowBook = value;
-                OnPropertyChanged(nameof(BtnBorrowBook));
-            }
-        }
-
-        public ICommand BorrowBook
-        {
-            get
-            {
-                return _borrowBook ?? (_borrowBook = new RelayCommand(x =>
-                {
-
-                    BtnBorrowBook = "Lånad";
-                }));
-            }
-        }
-
-        public VisitorSearchViewModel()
-        {
-            BtnBorrowBook = "Låna";
-        }
 
 
         #endregion
