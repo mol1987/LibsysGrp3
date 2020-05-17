@@ -206,6 +206,7 @@ namespace LibsysGrp3WPF
                 return _btnAddVisitor ?? (_btnAddVisitor = new RelayCommand(x =>
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     // if there isnt an object to edit make it so it will add instead
                     if (userToEdit == null)
                     {
@@ -243,6 +244,9 @@ namespace LibsysGrp3WPF
                         IsOpen = false;
                         userToEdit = null;
                     }
+=======
+                    Mediator.Notify(PagesChoice.pageStartView, "");
+>>>>>>> 1d6abf4c919090394f1d9d10217a7e25f07453a5
 =======
                     Mediator.Notify(PagesChoice.pageStartView, "");
 >>>>>>> 1d6abf4c919090394f1d9d10217a7e25f07453a5
