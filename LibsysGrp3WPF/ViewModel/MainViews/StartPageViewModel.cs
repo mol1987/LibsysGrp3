@@ -7,7 +7,7 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class StartPageViewModel : BaseViewModel, IPageViewModel
+    public class StartPageViewModel : ManageBookViewModel, IPageViewModel
     {
         private ICommand _buttonPage2;
         private ICommand _buttonLogin;

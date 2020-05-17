@@ -95,7 +95,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             var obj = new
             {
                 Title = books.Title,
-                ItemType = books.ItemType,
                 ISBN = books.ISBN,
                 Author = books.Author,
                 Publisher = books.Publisher,
@@ -103,7 +102,8 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Pages = books.Pages,
                 Price = books.Price,
                 Description = books.Description,
-                Date = books.Date
+                Date = books.Date,
+                ID = books.ItemsID
             };
             using (var conn = Create_Connection())
             {

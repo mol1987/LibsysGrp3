@@ -17,7 +17,7 @@
 
                         <StackPanel >
                             <TextBlock Text="Titel" FontWeight="Bold" />
-                            <TextBox Text="{Binding TxBEditTitel}"/>
+                            <TextBox Text="{Binding TxBEditTitel}"/> 
                             <TextBlock Text="ISBN" FontWeight="Bold"/>
                             <TextBox Text="{Binding TxBEditISBN}"/>
                             <TextBlock Text="Författare" FontWeight="Bold"/>
@@ -43,9 +43,8 @@
                 </materialDesign:DialogHost.DialogContent>
                 <!--#endregion-->
 
-            <!--#region List of books-->
-                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" 
-                        SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
+                <!--#region List of books-->
+                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
@@ -58,7 +57,7 @@
                                                 <TextBlock Text="ISBN:" Margin="0 10 5 10"/>
                                                 <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
                                                 <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
-                                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
+                                                        Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
                                                 <Button Content="Ta bort" Command="{Binding Path = DataContext.BtnDeleteBook, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
@@ -102,7 +101,7 @@
                 </ListBox>
             </materialDesign:DialogHost>
             <!--#endregion-->
-            
+
             <!--#region Pop up for adding a book-->
             <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
                 <materialDesign:DialogHost.DialogContent>
@@ -134,15 +133,15 @@
                     </StackPanel>
 
                 </materialDesign:DialogHost.DialogContent>
-    <!--#endregion-->
-             
-            <!--#region Button for adding a book-->
+                <!--#endregion-->
+
+                <!--#region Button for adding a book-->
                 <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
-                <Button Content="Lägg till ny bok" Margin="10"
-                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
-                <!--<Button Content="Lägg till e-bok" Margin="10"/>
+                    <Button Content="Lägg till ny bok" Margin="10"
+                        Command="{Binding BtnOpenBookDialog}"/>
+                    <!--<Button Content="Lägg till e-bok" Margin="10"/>
                 <Button Content="Lägg till film" Margin="10"/>-->
-            </StackPanel>
+                </StackPanel>
             </materialDesign:DialogHost>
             <!--#endregion-->
 

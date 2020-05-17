@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 using System.Linq;
+using MaterialDesignThemes.Wpf;
 
 namespace LibsysGrp3WPF
 {
@@ -18,6 +19,13 @@ namespace LibsysGrp3WPF
         private ICommand _btnEditBook;
         private ICommand _btnDeleteBook;
         private ICommand _btnAddBook;
+
+
+        private ICommand _btnOpenBookDialog;
+        private ICommand _showDialogCommand;
+        private bool _isOpen = false;
+
+        private FullBooksModel objToEdit = null;
         #endregion
 
         #region Private properties for adding a book
@@ -303,31 +311,17 @@ namespace LibsysGrp3WPF
             }
         }
 
-        /// <summary>
-        /// For editing book
-        /// </summary>
-        public FullBooksModel SelectedItem
+
+        public bool IsOpen
         {
             get
             {
-                return _selectedItem;
+                return _isOpen;
             }
             set
             {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-                if (_selectedItem != null)
-                {
-                    TxBEditTitel = _selectedItem.Title;
-                    TxBEditItemType = _selectedItem.ItemType;
-                    TxBEditISBN = _selectedItem.ISBN;
-                    TxBEditAuthor = _selectedItem.Author;
-                    TxBEditPublisher = _selectedItem.Publisher;
-                    TxBEditCategory = _selectedItem.Category;
-                    TxBEditPages = _selectedItem.Pages;
-                    TxBEditPrice = _selectedItem.Price;
-                    TxBEditDescription = _selectedItem.Description;
-                }
+                _isOpen = value;
+                OnPropertyChanged(nameof(IsOpen));
             }
         }
         #endregion
@@ -339,9 +333,10 @@ namespace LibsysGrp3WPF
             {
                 return _btnEditBook ?? (_btnEditBook = new RelayCommand(x =>
                 {
-            if (_selectedItem != null)
-            {
-                var listIndex = BooksList.IndexOf(_selectedItem);
+                    var obj = (FullBooksModel)x;
+                    if (obj != null)
+                    {
+                        var listIndex = BooksList.IndexOf(obj);
                         BooksList[listIndex].Title = TxBEditTitel;
                         BooksList[listIndex].ISBN = TxBEditISBN;
                         BooksList[listIndex].Author = TxBEditAuthor;
@@ -350,13 +345,58 @@ namespace LibsysGrp3WPF
                         BooksList[listIndex].Pages = TxBEditPages;
                         BooksList[listIndex].Price = TxBEditPrice;
                         BooksList[listIndex].Description = TxBEditDescription;
+                        BooksList[listIndex].ItemsID = obj.ItemsID;
                         BooksList[listIndex].EditBook();
-
                         getBooks();
-            }
+                    }
                 }));
             }
         } 
+        public ICommand ShowDialogCommandForEditing
+        {
+            get
+            {
+                return _showDialogCommand ?? (_showDialogCommand = new RelayCommand(x =>
+                {
+                    var obj = (FullBooksModel)x;
+                    TxBAddTitel = obj.Title;
+                    TxBAddISBN = obj.ISBN;
+                    TxBAddAuthor = obj.Author;
+                    TxBAddPublisher = obj.Publisher;
+                    TxBAddCategory = obj.Category;
+                    TxBAddPages = obj.Pages;
+                    TxBAddPrice = obj.Price;
+                    TxBAddDescription = obj.Description;
+                    IsOpen = true;
+
+                    objToEdit = obj;
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Button command for opening book dialog for adding
+        /// clears the object to edit and all textboxes
+        /// </summary>
+        public ICommand BtnOpenBookDialog
+        {
+            get
+            {
+                return _btnOpenBookDialog ?? (_btnOpenBookDialog = new RelayCommand(x =>
+                {
+                    IsOpen = true;
+                    TxBAddTitel = "";
+                    TxBAddISBN = 0;
+                    TxBAddAuthor = "";
+                    TxBAddPublisher = "";
+                    TxBAddCategory = "";
+                    TxBAddPages = 0;
+                    TxBAddPrice = 0;
+                    TxBAddDescription = "";
+                    objToEdit = null;
+                }));
+            }
+        }
 
         public ICommand BtnAddBook
         {
@@ -364,28 +404,51 @@ namespace LibsysGrp3WPF
             {
                 return _btnAddBook ?? (_btnAddBook = new RelayCommand(x =>
                 {
-                    var item = new FullBooksModel(new BooksProcessor(new LibsysRepo()));
+                    // if there isnt an object to edit make it so it will add instead
+                    if (objToEdit == null)
+                    {
+                        var item = new FullBooksModel(new BooksProcessor(new LibsysRepo()));
 
-                    item.Date = DateTime.Now;
-                    item.Title = TxBAddTitel;
-                    item.ISBN = TxBAddISBN;
-                    item.Author = TxBAddAuthor;
-                    item.Publisher = TxBAddPublisher;
-                    item.Category = TxBAddCategory;
-                    item.Pages = TxBAddPages;
-                    item.Price = TxBAddPrice;
-                    item.Description = TxBAddDescription;
+                        item.Date = DateTime.Now;
+                        item.Title = TxBAddTitel;
+                        item.ISBN = TxBAddISBN;
+                        item.Author = TxBAddAuthor;
+                        item.Publisher = TxBAddPublisher;
+                        item.Category = TxBAddCategory;
+                        item.Pages = TxBAddPages;
+                        item.Price = TxBAddPrice;
+                        item.Description = TxBAddDescription;
+                        item.CreateBook();
+                        string str = "" + item.Title;
+                        MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
 
-                    item.CreateBook();
-                    string str = "" + item.Title;
-                    MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
-
-                    getBooks();
-                    
+                        getBooks();
+                    } 
+                    // if there is an object to edit update changes
+                    else
+                    {
+                        var listIndex = BooksList.IndexOf(objToEdit);
+                        BooksList[listIndex].Title = TxBAddTitel;
+                        BooksList[listIndex].ISBN = TxBAddISBN;
+                        BooksList[listIndex].Author = TxBAddAuthor;
+                        BooksList[listIndex].Publisher = TxBAddPublisher;
+                        BooksList[listIndex].Category = TxBAddCategory;
+                        BooksList[listIndex].Pages = TxBAddPages;
+                        BooksList[listIndex].Price = TxBAddPrice;
+                        BooksList[listIndex].Description = TxBAddDescription;
+                        BooksList[listIndex].ItemsID = objToEdit.ItemsID;
+                        BooksList[listIndex].EditBook();
+                        string str = "" + objToEdit.Title;
+                        MessageBox.Show(str + " edited.", "Edit Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        getBooks();
+                        // toggle it to null so there is no object to change
+                        IsOpen = false;
+                        objToEdit = null;
+                    }
                 }));
             }
         }
-        
+
         public ICommand BtnDeleteBook
         {
             get
@@ -406,6 +469,7 @@ namespace LibsysGrp3WPF
             }
 
         }
+
         #endregion
 
         #region Constructor
