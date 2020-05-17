@@ -9,5 +9,8 @@ namespace LibsysGrp3WPF
 {
     public class ReportsViewModel : BaseViewModel, IPageViewModel
     {
+        public void run()
+        {
+        }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UtilLibrary.MsSqlRepsoitory.Enums;
 
 namespace UtilLibrary.MsSqlRepsoitory
@@ -34,40 +37,80 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         #endregion
 
-        #region items
-
-        public IEnumerable<T> GetBorrowList<T>(int userID)
+        #region Items
+        public IEnumerable<T> GetBooks<T>()
         {
-            string storedProcedure = StoredProcedures.GetBorrowList.ToString();
-            IEnumerable<T> itemsList;
-            //IBorrowList borrowList;
-            var obj = new
-            {
-                UserID = userID
-            };
-            //using (var conn = Create_Connection())
-            //{
-            //    borrowList = conn.Query<IBorrowList>(storedProcedure, commandType: CommandType.StoredProcedure);
-            //}
-            //return borrowList;
+            string storedProcedure = StoredProcedures.GetBooks.ToString();
+            IEnumerable<T> booksList;
             using (var conn = Create_Connection())
             {
-                itemsList = conn.Query<T>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                booksList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
             }
-            return itemsList;
+            return booksList;
         }
 
-
-        internal void RemoveBook()
+        public void CreateBook(IFullBooks books)
         {
-            throw new NotImplementedException();
+            string storedProcedure = StoredProcedures.CreateBook.ToString();
+
+            var obj = new
+            {
+                Title = books.Title,
+                ISBN = books.ISBN,
+                Author = books.Author,
+                Publisher = books.Publisher,
+                Category = books.Category,
+                Pages = books.Pages,
+                Price = books.Price,
+                Description = books.Description,
+                Date = books.Date
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
+            }
         }
 
-        #endregion
+        public void RemoveBook(IFullBooks books)
+        {
+            
+                string storedProcedure = StoredProcedures.RemoveItem.ToString();
+                var obj = new
+                {
+                    ItemsID = books.ItemsID
+                };
+                using (var conn = Create_Connection())
+                {
+                    conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                }
+            
+        }
 
-        #region seminars
+        public void EditBook(IFullBooks books)
+        {
+            string storedProcedure = StoredProcedures.EditBook.ToString();
+            var obj = new
+            {
+                Title = books.Title,
+                ISBN = books.ISBN,
+                Author = books.Author,
+                Publisher = books.Publisher,
+                Category = books.Category,
+                Pages = books.Pages,
+                Price = books.Price,
+                Description = books.Description,
+                Date = books.Date,
+                ID = books.ItemsID
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
         #endregion
-
 
         #region Users
         public IUsers LoginUser(string identityNo, string password)
@@ -151,7 +194,10 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+
         #endregion
 
+        #region Seminars
+        #endregion
     }
 }

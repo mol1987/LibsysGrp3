@@ -10,6 +10,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         public int Pages { get; set; }
         public string Author { get; set; }
         public string Category { get; set; }
-        public int ISBN { get; set; }
+        public long ISBN { get; set; }
+        public string Publisher { get; set; }
     }
 }

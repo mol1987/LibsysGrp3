@@ -7,7 +7,7 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class StartPageViewModel : BaseViewModel, IPageViewModel
+    public class StartPageViewModel : ManageBookViewModel, IPageViewModel
     {
         private ICommand _buttonPage2;
         private ICommand _buttonLogin;
@@ -98,6 +98,9 @@ namespace LibsysGrp3WPF
                     MessageBox.Show(str, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Question);
                 }));
             }
+        }
+        public void run()
+        {
         }
     }
 }

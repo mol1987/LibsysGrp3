@@ -6,5 +6,6 @@ namespace LibsysGrp3WPF
 {
     public interface IPageViewModel
     {
+        public void run();
     }
 }

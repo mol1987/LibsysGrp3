@@ -21,6 +21,7 @@ namespace LibsysGrp3WPF
         private string _iDTextBox;
         private string _passwordTextBox;
         private string _accountCategory = "Bilfantast";
+        private string _accountName = "John Doe";
         private bool _isOpen = false;
 
         private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
@@ -70,6 +71,7 @@ namespace LibsysGrp3WPF
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
                     Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
                     AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
+                    AccountName = Mediator.User.Firstname + " " + Mediator.User.Lastname;
 
                     // Switches view to match User previlige and match menu content
                     switch ((UsersCategory)Mediator.User.UsersCategory)
@@ -146,6 +148,18 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(AccountCategory));
             }
         }
+        public string AccountName
+        {
+            get
+            {
+                return _accountName;
+            }
+            set
+            {
+                _accountName = value;
+                OnPropertyChanged(nameof(AccountName));
+            }
+        }
         public string IDTextBox
         {
             get
@@ -191,6 +205,8 @@ namespace LibsysGrp3WPF
             set
             {
                 _currentPageViewModel = value;
+                // Runs this method everytime the view gets changed
+                _currentPageViewModel.run();
                 OnPropertyChanged("CurrentPageViewModel");
             }
         }

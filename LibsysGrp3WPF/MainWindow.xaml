@@ -52,7 +52,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#304ffe" Grid.Row="0" Grid.RowSpan="1" 
                     Grid.Column="0" Grid.ColumnSpan="5">
-                <Image Source="images/LIBSYS.png" Height="60" Margin="0 20"/>
+                <Image Source="images/LIBSYS.png" Height="60" Margin="0 20" Width="146"/>
             </StackPanel>
 
             <!--top search-->
@@ -67,10 +67,16 @@
             <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
 
             <!--account status-->
-            <WrapPanel Grid.Column="4" Margin="0,35">
-                <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
-                <TextBlock Margin="0 10 0 0" Foreground="white"  Height="50" Text="{Binding AccountCategory}"/>
-            </WrapPanel>
+            <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35">
+                <WrapPanel >
+                    <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
+                    <TextBlock  Foreground="white"   Text="{Binding AccountCategory}"/>
+                    
+                </WrapPanel>
+                <StackPanel>
+                    <TextBlock Grid.Row="4" Foreground="White" Text="{Binding AccountName}"/>
+                </StackPanel>
+            </StackPanel>
             <!--buttons-->
 
 

@@ -6,5 +6,9 @@ namespace LibsysGrp3WPF
 {
     public class VisitorEditProfilViewModel : BaseViewModel, IPageViewModel
     {
+
+        public void run()
+        {
+        }
     }
 }
