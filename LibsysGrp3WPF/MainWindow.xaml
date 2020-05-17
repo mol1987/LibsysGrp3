@@ -84,7 +84,7 @@
                     Margin=" 10 0 0 0"
             ToolTip="MaterialDesignFlatLightButton" 
             Background="#304ffe" BorderThickness="0" Width="60" Height="50"
-            BorderBrush="#304ffe" Grid.Column="4" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+            BorderBrush="#304ffe" Grid.Column="4" Command="{Binding BtnUserAccess}" >
                 <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
             </Button>
 
