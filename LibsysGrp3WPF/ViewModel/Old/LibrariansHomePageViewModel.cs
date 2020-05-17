@@ -64,7 +64,7 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-        public void run()
+        public void Run()
         {
         }
     }

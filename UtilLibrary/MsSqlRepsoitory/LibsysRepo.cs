@@ -1,12 +1,8 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UtilLibrary.MsSqlRepsoitory.Enums;
 
 namespace UtilLibrary.MsSqlRepsoitory
@@ -74,19 +70,36 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        public IEnumerable<T> GetBorrowList<T>(int userID)
+        {
+            string storedProcedure = StoredProcedures.GetBorrowList.ToString();
+            IEnumerable<T> borrowList;
+
+            var obj = new
+            {
+                UserID = userID
+            };
+
+            using (var conn = Create_Connection())
+            {
+                borrowList = conn.Query<T>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+            return borrowList;
+        }
+
         public void RemoveBook(IFullBooks books)
         {
-            
-                string storedProcedure = StoredProcedures.RemoveItem.ToString();
-                var obj = new
-                {
-                    ItemsID = books.ItemsID
-                };
-                using (var conn = Create_Connection())
-                {
-                    conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
-                }
-            
+
+            string storedProcedure = StoredProcedures.RemoveItem.ToString();
+            var obj = new
+            {
+                ItemsID = books.ItemsID
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+
         }
 
         public void EditBook(IFullBooks books)

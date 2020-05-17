@@ -206,7 +206,7 @@ namespace LibsysGrp3WPF
             {
                 _currentPageViewModel = value;
                 // Runs this method everytime the view gets changed
-                _currentPageViewModel.run();
+                _currentPageViewModel.Run();
                 OnPropertyChanged("CurrentPageViewModel");
             }
         }

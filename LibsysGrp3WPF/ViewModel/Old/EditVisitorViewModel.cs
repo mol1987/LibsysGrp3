@@ -164,7 +164,7 @@ namespace LibsysGrp3WPF
             var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Visitor);
             UsersList = UsersModel.convertToObservableCollection(tempUsersList);
         }
-        public void run()
+        public void Run()
         {
         }
     }

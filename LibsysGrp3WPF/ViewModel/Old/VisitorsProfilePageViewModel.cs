@@ -6,7 +6,7 @@ namespace LibsysGrp3WPF
 {
     public class VisitorsProfilePageViewModel : BaseViewModel, IPageViewModel
     {
-        public void run()
+        public void Run()
         {
         }
     }

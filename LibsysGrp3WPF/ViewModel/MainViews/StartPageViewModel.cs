@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
@@ -43,16 +40,17 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public bool PopupIsOpen { 
-            get 
+        public bool PopupIsOpen
+        {
+            get
             {
                 return _popupIsOpen;
             }
-            set 
+            set
             {
                 _popupIsOpen = value;
                 OnPropertyChanged(nameof(PopupIsOpen));
-            } 
+            }
         }
 
         public ICommand ButtonPage2
@@ -99,8 +97,8 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-        public void run()
-        {
-        }
+        //public void Run()
+        //{
+        //}
     }
 }

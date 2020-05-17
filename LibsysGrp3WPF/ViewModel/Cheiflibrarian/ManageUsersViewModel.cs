@@ -9,7 +9,7 @@ namespace LibsysGrp3WPF
 {
     public class ManageUsersViewModel : BaseViewModel, IPageViewModel
     {
-        public void run()
+        public void Run()
         {
         }
     }

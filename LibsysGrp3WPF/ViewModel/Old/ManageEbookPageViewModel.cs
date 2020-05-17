@@ -2,7 +2,7 @@
 {
     public class ManageEbookPageViewModel : BaseViewModel, IPageViewModel
     {
-        public void run()
+        public void Run()
         {
         }
     }

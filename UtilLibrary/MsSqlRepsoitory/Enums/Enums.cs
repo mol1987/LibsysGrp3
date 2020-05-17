@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UtilLibrary.MsSqlRepsoitory.Enums
+﻿namespace UtilLibrary.MsSqlRepsoitory.Enums
 {
     public enum StoredProcedures
     {
@@ -19,6 +15,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         EditBook,
         GetBook,
         GetBooks,
-        RemoveItem
+        RemoveItem,
+        GetBorrowList
     }
 }
