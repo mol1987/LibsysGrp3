@@ -4,41 +4,130 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="0 20 0 0">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.8*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+            <!--#region Pop up for editing a book-->
+            <materialDesign:DialogHost>
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel  Width="400" Margin="10">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
+                        <StackPanel >
+                            <TextBlock Text="Förstnamn" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddFirstnameTextBox}"/>
+                            <TextBlock Text="Efternamn" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddLastnameTextBox}"/>
+                            <TextBlock Text="Mobil" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddMobilTextBox}"/>
+                            <TextBlock Text="Email" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddEmailTextBox}"/>
+                            <TextBlock Text="Lösenord" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddPasswordTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Margin="50 10 50 0">
+                            <Button Margin="0 0 0 10" Command="{Binding BtnAddVisitor}" Background="#F9A20B" BorderBrush="#F9A20B">Ändra</Button>
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
+                        </StackPanel>
 
-        <Border Background="#FF0F3EC1" BorderBrush="Black" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0">
-            <Image Source="photos/LIBSYS.png" Height="60"/>
-        </Border>
+                    </StackPanel>
 
-        <Button x:Name="btnLogout" Content="Logga ut" Grid.Column="4" Grid.Row="0" 
-                Margin="30" Command="{Binding btnLogout}"/>
+                </materialDesign:DialogHost.DialogContent>
+                <!--#endregion-->
 
-        <StackPanel Background="LightGray" Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="2" Grid.Column="0">
-            <Button Command="{Binding btnAddVisitor}" Content="Lägg till besökare" Padding="0 20" Margin="10 10 10 20" FontSize="14" Background="#FF0F3EC1" Foreground="#FFFBF7F7" ></Button>
-            <Button Command="{Binding btnDeleteVisitor}" Content="Ta bort besökare" Padding="0 20" Margin="10 0 10 20" FontSize="14" Background="#FF2525CB" Foreground="#FFFBF7F7" ></Button>
-            <Button Command="{Binding btnEditVisitor}" Content="Förändra besökare" Padding="0 20" Margin="10 0 10 0" FontSize="14" Background="#FF2525CB" Foreground="#FFFBF7F7"></Button>
-            <Button Command="{Binding btnGoBack}" Content="Gå tillbaka" Padding="0 20" Margin="10 20 10 20" FontSize="14" Background="White"></Button>
+                <!--#region List of visitors-->
+                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding VisitorList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
+                                <StackPanel>
+                                    <Expander HorizontalAlignment="Stretch" Header="{Binding Email}" FontWeight="Bold" Width="700">
+                                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Förstnamn:" Margin="0 10 5 10"/>
+                                                <TextBlock Text="{Binding Firstname}" Margin="0 10 5 10" FontWeight="Normal"/>
+                                                <TextBlock Text="Efternamn:" Margin="0 10 5 10"/>
+                                                <TextBlock Text="{Binding Lastname}" Margin="0 10 200 10" FontWeight="Normal"/>
+                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
+                                                        Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                                                <Button Content="Ta bort" Command="{Binding Path = DataContext.BtnDeleteVisitor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Personnummer:" Margin="0 0 5 10"/>
+                                                <TextBlock Text="{Binding IdentityNO}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                                <TextBlock Text="Mobil:" Margin="0 0 5 10"/>
+                                                <TextBlock Text="{Binding PhoneNumber}" Margin="0 0 0 10" FontWeight="Normal"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Password:" Margin="0 0 5 10"/>
+                                                <TextBlock Text="{Binding Password}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                                <TextBlock Text="Datum för registrering:" Margin="0 0 5 10"/>
+                                                <TextBlock Text="{Binding JoinDate}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                    <Border Background="{DynamicResource MaterialDesignDivider}"
+                                                  Height="1"
+                                                  HorizontalAlignment="Stretch"
+                                                  SnapsToDevicePixels="True" />
+
+                                    <Border
+                                              Background="{DynamicResource MaterialDesignDivider}"
+                                              Height="1"
+                                              HorizontalAlignment="Stretch"
+                                              SnapsToDevicePixels="True" />
+
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+            </materialDesign:DialogHost>
+            <!--#endregion-->
+
+            <!--#region Pop up for adding a visitor-->
+            <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel  Width="400" Margin="10">
+
+                        <StackPanel >
+                            <TextBlock Text="Förstnamn" FontWeight="Bold" />
+                            <TextBox Text="{Binding AddFirstnameTextBox}"/>
+                            <TextBlock Text="Efternamn" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddLastnameTextBox}"/>
+                            <TextBlock Text="Personnummer (12 siffror)" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddIDTextBox}"/>
+                            <TextBlock Text="Email" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddEmailTextBox}"/>
+                            <TextBlock Text="Mobil" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddMobilTextBox}"/>
+                            <TextBlock Text="Lösenord" FontWeight="Bold"/>
+                            <TextBox Text="{Binding AddPasswordTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Margin="50 10 50 0">
+                            <Button Margin="0 0 0 10" Command="{Binding BtnAddVisitor}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </materialDesign:DialogHost.DialogContent>
+                <!--#endregion-->
+
+                <!--#region Button for adding a book-->
+                <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
+                    <Button Content="Lägg till ny användare" Margin="10"
+                        Command="{Binding BtnOpenVisitorDialog}"/>
+                    <!--<Button Content="Lägg till e-bok" Margin="10"/>
+                <Button Content="Lägg till film" Margin="10"/>-->
+                </StackPanel>
+            </materialDesign:DialogHost>
+            <!--#endregion-->
+
         </StackPanel>
-
-        <ContentControl Content="{Binding CurrentContent}" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2"/>
-
-
-
     </Grid>
+
 </UserControl>
