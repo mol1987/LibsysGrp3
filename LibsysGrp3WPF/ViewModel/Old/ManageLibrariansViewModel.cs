@@ -93,5 +93,8 @@ namespace LibsysGrp3WPF
             CurrentContent = null;
         }
         #endregion
+        public void run()
+        {
+        }
     }
 }
