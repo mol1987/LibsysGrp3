@@ -39,8 +39,8 @@ namespace UtilLibrary.MsSqlRepsoitory
         public IEnumerable<T> GetBorrowList<T>(int userID)
         {
             string storedProcedure = StoredProcedures.GetBorrowList.ToString();
-            IEnumerable<T> booksList;
-            IBorrowList borrowList;
+            IEnumerable<T> itemsList;
+            //IBorrowList borrowList;
             var obj = new
             {
                 UserID = userID
@@ -52,9 +52,9 @@ namespace UtilLibrary.MsSqlRepsoitory
             //return borrowList;
             using (var conn = Create_Connection())
             {
-                booksList = conn.Query<T>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                itemsList = conn.Query<T>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
-            return booksList;
+            return itemsList;
         }
 
 

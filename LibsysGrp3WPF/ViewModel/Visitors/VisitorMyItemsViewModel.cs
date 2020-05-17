@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Data;
+using System.Linq;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
@@ -55,7 +56,26 @@ namespace LibsysGrp3WPF
         #region Constructor
         public VisitorMyItemsViewModel()
         {
+            DataTable datatable = GetTable();
+            //var dataRow = datatable.AsEnumerable().Where(x => x.Field<int>("Id") == 2).FirstOrDefault();
+
+            var dataRow = (from item in datatable.AsEnumerable()
+                           where item.Field<string>("IdentityNO") == "198001011234"
+                           select item).First();
+
             GetBorrowed();
+        }
+
+        private DataTable GetTable()
+        {
+            DataTable datatable = new DataTable();
+            datatable.Columns.Add("IdentityNO", typeof(string));
+            datatable.Columns.Add("UsersID", typeof(int));
+
+            datatable.Rows.Add("198001011234", 20);
+            datatable.Rows.Add("198002021234", 21);
+
+            return datatable;
         }
         #endregion
 
@@ -70,21 +90,22 @@ namespace LibsysGrp3WPF
         private void GetBorrowed()
         {
             // gets all borrowed books..
-            var repo = new LibsysRepo();
-            var list = repo.GetBorrowList<BorrowList>(13);
-            var res = repo.GetBorrowList<ItemsModel>(13);
 
-            foreach (var item in list)
+            if (Mediator.User != null)
             {
-                borrowed.Add(item);
-            }
-            foreach (var item in res)
-            {
-                items.Add(item);
-            }
+                var repo = new LibsysRepo();
+                var list = repo.GetBorrowList<BorrowList>(Mediator.User.UsersID);
+                var res = repo.GetBorrowList<ItemsModel>(Mediator.User.UsersID);
 
-
-            //borrowed = ItemsModel.ConvertToObservableCollection(tempBorrowedList);
+                foreach (var item in list)
+                {
+                    borrowed.Add(item);
+                }
+                foreach (var item in res)
+                {
+                    items.Add(item);
+                }
+            }
         }
     }
 }
