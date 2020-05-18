@@ -37,12 +37,121 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         #endregion
 
-        #region items
-        #endregion
+        #region Items
 
-        #region seminars
-        #endregion
+        public IEnumerable<FullBooks> GetBooks()
+        {
+            string storedProcedure = StoredProcedures.GetBooks.ToString();
+            IEnumerable<FullBooks> booksList;
+            using (var conn = Create_Connection())
+            {
+                booksList = conn.Query<FullBooks>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return booksList;
+        }
+        public IEnumerable<SearchItems> SearchItems(string Key)
+        {
+            IEnumerable<SearchItems> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<SearchItems>("SearchItems", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+        }
+      
+        
+        public IEnumerable<SearchItems> SearchBooks(string Key)
+        {
+            IEnumerable<SearchItems> booksList;
+            using (var conn = Create_Connection())
+            {
+                booksList = conn.Query<SearchItems>("SearchBook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return booksList;
+        }
+        public IEnumerable<SearchEbook> SearchEbooks(string Key)
+        {
+            IEnumerable<SearchEbook> moviesList;
+            using (var conn = Create_Connection())
+            {
+                moviesList = conn.Query<SearchEbook>("SearchEbook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return moviesList;
+        }
+        public IEnumerable<SearchMovie> SearchMovies(string Key)
+        {
+            IEnumerable<SearchMovie> moviesList;
+            using (var conn = Create_Connection())
+            {
+                moviesList = conn.Query<SearchMovie>("SearchMovie", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return moviesList;
+        }
 
+
+        public void CreateBook(IFullBooks books)
+        {
+            string storedProcedure = StoredProcedures.CreateBook.ToString();
+
+            var obj = new
+            {
+                Title = books.Title,
+                ISBN = books.ISBN,
+                Author = books.Author,
+                Publisher = books.Publisher,
+                Category = books.Category,
+                Pages = books.Pages,
+                Price = books.Price,
+                Description = books.Description,
+                Date = books.Date
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
+            }
+        }
+
+        public void RemoveBook(IFullBooks books)
+        {
+            
+                string storedProcedure = StoredProcedures.RemoveItem.ToString();
+                var obj = new
+                {
+                    ItemsID = books.ItemsID
+                };
+                using (var conn = Create_Connection())
+                {
+                    conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                }
+            
+        }
+
+        public void EditBook(IFullBooks books)
+        {
+            string storedProcedure = StoredProcedures.EditBook.ToString();
+            var obj = new
+            {
+                Title = books.Title,
+                ItemType = books.ItemType,
+                ISBN = books.ISBN,
+                Author = books.Author,
+                Publisher = books.Publisher,
+                Category = books.Category,
+                Pages = books.Pages,
+                Price = books.Price,
+                Description = books.Description,
+                Date = books.Date
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        #endregion
 
         #region Users
         public IUsers LoginUser(string identityNo, string password)
@@ -126,6 +235,10 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+
+        #endregion
+
+        #region Seminars
         #endregion
     }
 }

@@ -12,7 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- primary -->
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#304ffe"/>
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="Black"/>
             <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#304ffe"/>
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>

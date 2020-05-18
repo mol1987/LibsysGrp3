@@ -1,4 +1,6 @@
-﻿namespace UtilLibrary.MsSqlRepsoitory
+﻿using System;
+
+namespace UtilLibrary.MsSqlRepsoitory
 {
     public interface IItems
     {
@@ -6,5 +8,8 @@
         int ItemsID { get; set; }
         string ItemType { get; set; }
         string Title { get; set; }
+        int Price { get; set; }
+        DateTime Date { get; set; }
+
     }
 }

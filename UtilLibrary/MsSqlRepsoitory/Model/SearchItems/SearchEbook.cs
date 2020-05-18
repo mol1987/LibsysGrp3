@@ -4,13 +4,13 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
-    public class FullBooks : Items, IFullBooks
+    public class SearchEbook : ISearchEbook
     {
-
-        public int Pages { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public string Author { get; set; }
+        public int Pages { get; set; }
+        public int Size { get; set; }
         public string Category { get; set; }
-        public long ISBN { get; set; }
-        public string Publisher { get; set; }
     }
 }
