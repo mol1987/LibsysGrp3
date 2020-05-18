@@ -40,7 +40,7 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageStartView,
                     PagesChoice.pageManageLibrarian,
-                    PagesChoice.pageManageUsers,
+                    PagesChoice.pageManageVisitor,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
                     PagesChoice.pageReport
@@ -374,7 +374,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
 
 
-            CurrentPageViewModel = PageViewModels[3];
+            CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
