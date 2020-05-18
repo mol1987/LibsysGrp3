@@ -8,8 +8,8 @@ namespace LibsysGrp3WPF
     {
         #region Private properties
 
-        private ItemsModel _selectedItem;
-        private ICommand _btnleaveBack;
+        //private ItemsModel _selectedItem;
+        private ICommand _btnLeaveBack;
         private ICommand _btnGetLink;
 
         #endregion
@@ -18,23 +18,22 @@ namespace LibsysGrp3WPF
 
         public ObservableCollection<BorrowList> borrowed { get; set; } = new ObservableCollection<BorrowList>();
         public ObservableCollection<ItemsModel> items { get; set; } = new ObservableCollection<ItemsModel>();
+        public ItemsModel MySelectedItem { get; set; }
 
         #endregion
 
         #region public button commands
 
         // not working yet
-        public ICommand btnLeaveBack
-        {
-            get
-            {
-                return _btnleaveBack ?? (_btnleaveBack = new RelayCommand(x =>
+        public ICommand btnLeaveBack => _btnLeaveBack ?? (_btnLeaveBack = new RelayCommand(x =>
                 {
-                    //_selectedItem.RemoveBook();
-                    //borrowed.Remove(_selectedItem);
+                    var obj = (BorrowList)x;
+                    var bookIndex = borrowed.IndexOf(obj);
+                    borrowed.RemoveAt(bookIndex);
+                    //items.RemoveAt(bookIndex);
+
+                    //borrowed.RemoveAt(MySelectedItem.ItemsID);
                 }));
-            }
-        }
 
         #endregion
 
@@ -42,26 +41,9 @@ namespace LibsysGrp3WPF
         #region Constructor
         public VisitorMyItemsViewModel()
         {
-            //DataTable datatable = GetTable();
-
-            //var dataRow = (from item in datatable.AsEnumerable()
-            //               where item.Field<string>("IdentityNO") == "198001011234"
-            //               select item).First();
-
             GetBorrowed();
         }
 
-        //private DataTable GetTable()
-        //{
-        //    DataTable datatable = new DataTable();
-        //    datatable.Columns.Add("IdentityNO", typeof(string));
-        //    datatable.Columns.Add("UsersID", typeof(int));
-
-        //    datatable.Rows.Add("198001011234", 20);
-        //    datatable.Rows.Add("198002021234", 21);
-
-        //    return datatable;
-        //}
         #endregion
 
         public void Run()

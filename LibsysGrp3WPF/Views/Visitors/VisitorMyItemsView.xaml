@@ -12,7 +12,8 @@
                 <StackPanel Orientation="Vertical">
                     <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
                         <StackPanel Orientation="Vertical">
-                            <ListView Margin="10" ItemsSource="{Binding items}" HorizontalAlignment="Left">
+                            <ListView Margin="10" ItemsSource="{Binding items}" HorizontalAlignment="Left"
+                                      SelectedItem="{Binding MySelectedItem}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Category" DisplayMemberBinding="{Binding ItemType}" />
@@ -21,7 +22,7 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button Content="Lämna tillbaka" Margin="320 2 2 2" Background="Orange" Command="{Binding LeaveBack}"/>
+                            <Button Content="Lämna tillbaka" Margin="320 2 2 2" Background="Orange" Command="{Binding btnLeaveBack}"/>
                         </StackPanel>
                     </Border>
                     <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
