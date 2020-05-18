@@ -493,12 +493,11 @@ namespace LibsysGrp3WPF
 
                 return _btnAddStockID ?? (_btnAddStockID = new RelayCommand(x =>
                 {
-                    if (objToEdit == null)
-                    {
-                        var objekt = (FullBooks)x;
-                        _repo.CreateItemWithStockID(objekt);
 
-                    }
+                     var objekt = (Stock)x;
+                     TxBStockID = objekt.StockID;
+                    _repo.CreateItemWithStockID(objekt);
+
                 }));
              
 

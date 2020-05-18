@@ -58,7 +58,7 @@
                                                 <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
                                                 <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
                                                         Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
-                                               
+                                                <Button Content="Lägg till lager ID" Command="{Binding Path = DataContext.BtnAddStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Författare:" Margin="0 0 5 10"/>
@@ -77,9 +77,8 @@
                                                 <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Lager ID"
-                                                           Margin="0 5 0 10"/>
-                                                <Button Content="Lägg till lager ID" Command="{Binding Path = DataContext.BtnAddStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
+                                                <TextBlock Text="Lager ID:" Margin="0 5 0 10"/>
+                                                <TextBlock Text="{Binding Path = DataContext.TxBStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
                                             </StackPanel>
                                             <TextBlock Text="Beskrivning" />
                                             <TextBlock
@@ -93,7 +92,7 @@
                                                   HorizontalAlignment="Stretch"
                                                   SnapsToDevicePixels="True" />
 
-                                    <Border
+                                     <Border
                                               Background="{DynamicResource MaterialDesignDivider}"
                                               Height="1"
                                               HorizontalAlignment="Stretch"
