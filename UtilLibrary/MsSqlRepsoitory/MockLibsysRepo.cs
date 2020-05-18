@@ -17,6 +17,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             return;
         }
 
+        public void CreateItemWithStockID(FullBooks books)
+        {
+            return;
+        }
+
         public void EditBook(IFullBooks books)
         {
             return;
