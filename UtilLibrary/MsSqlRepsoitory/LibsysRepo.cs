@@ -157,7 +157,9 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Lastname = user.Lastname,
                 JoinDate = user.JoinDate,
                 Banned = user.Banned,
-                UsersCategory = user.UsersCategory
+                UsersCategory = user.UsersCategory,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.Email
             };
 
             using (var conn = Create_Connection())

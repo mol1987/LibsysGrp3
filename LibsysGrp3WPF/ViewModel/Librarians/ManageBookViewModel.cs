@@ -15,7 +15,6 @@ namespace LibsysGrp3WPF
     {
         #region Private properties
         private ObservableCollection<FullBooksModel> _booksList;
-        private FullBooksModel _selectedItem;
         private ICommand _btnEditBook;
         private ICommand _btnDeleteBook;
         private ICommand _btnAddBook;

@@ -14,14 +14,15 @@ namespace LibsysGrp3WPF
         
         private ICommand _btnSignIn;
         private ICommand _menuItemsCommand;
+        private ICommand _btnUserAccess;
 
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
 
         private string _iDTextBox;
         private string _passwordTextBox;
-        private string _accountCategory = "Bilfantast";
-        private string _accountName = "John Doe";
+        private string _accountCategory = "";
+        private string _accountName = "";
         private bool _isOpen = false;
 
         private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
@@ -29,6 +30,7 @@ namespace LibsysGrp3WPF
             {
                 UsersCategory.Visitor, new ObservableCollection<PagesChoice>
                 {
+                    PagesChoice.pageVisitorSearch,
                     PagesChoice.pageVisitorMyItems,
                     PagesChoice.pageVisitorSeminar
                 }
@@ -36,15 +38,18 @@ namespace LibsysGrp3WPF
             {
                 UsersCategory.Librarian, new ObservableCollection<PagesChoice>
                 {
+                    PagesChoice.pageStartView,
                     PagesChoice.pageManageLibrarian,
                     PagesChoice.pageManageUsers,
                     PagesChoice.pageManageSeminar,
+                    PagesChoice.pageManageBook,
                     PagesChoice.pageReport
                 }
             },
             {
                 UsersCategory.Chieflibrarian, new ObservableCollection<PagesChoice>
                 {
+                    PagesChoice.pageStartView,
                     PagesChoice.pageManageUsers,
                     PagesChoice.pageManageLibrarian,
                     PagesChoice.pageManageSeminar,
@@ -52,12 +57,7 @@ namespace LibsysGrp3WPF
                 }
             }
         };
-        private ObservableCollection<PagesChoice> _menuList = new ObservableCollection<PagesChoice> 
-        {
-            PagesChoice.pageAddLibrarian,
-            PagesChoice.pageAddVisitor
-        };
-
+        private ObservableCollection<PagesChoice> _menuList = null;
 
         /// <summary>
         /// Sign in command
@@ -81,11 +81,11 @@ namespace LibsysGrp3WPF
                             MenuList = _menuListCategories[UsersCategory.Visitor];
                             break;
                         case UsersCategory.Librarian:
-                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
+                            //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
                             MenuList = _menuListCategories[UsersCategory.Librarian];
                             break;
                         case UsersCategory.Chieflibrarian:
-                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
+                            //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
                             MenuList = _menuListCategories[UsersCategory.Chieflibrarian];
                             break;
                         default:
@@ -97,15 +97,29 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-
+        
+        public ICommand BtnUserAccess
+        {
+            get
+            {
+                return _btnUserAccess ?? (_btnUserAccess = new RelayCommand(x =>
+                {
+                    if (Mediator.User == null)
+                    {
+                        IsOpen = true;
+                    } else
+                    {
+                        SignOutProcess();
+                    }
+                }));
+            }
+        }
         public ICommand MenuItemsCommand
         {
             get
             {
                 return _menuItemsCommand ?? (_menuItemsCommand = new RelayCommand(x =>
                 {
-                    
-                    Trace.WriteLine("hello " + x.ToString());
                     ChangeViewModel(PageViewModels[(int)((PagesChoice)x)]);
                 }));
             }
@@ -360,9 +374,9 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
 
 
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentPageViewModel = PageViewModels[3];
 
-            Mediator.Subscribe(PagesChoice.Page1, OnGoPage1Screen);
+            Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
             Mediator.Subscribe(PagesChoice.pageSuperUserHomepage, OnGoSuperuserHomePage);
             Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);
@@ -384,6 +398,20 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
+        }
+        #endregion
+
+        #region methods
+        /// <summary>
+        /// Reset the all data.
+        /// </summary>
+        public void SignOutProcess()
+        {
+            Mediator.User = null;
+            MenuList = null;
+            AccountCategory = "";
+            AccountName = "";
+            CurrentPageViewModel = PageViewModels[0];
         }
         #endregion
     }

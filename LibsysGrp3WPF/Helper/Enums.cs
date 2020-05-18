@@ -2,7 +2,7 @@
 {
     public enum PagesChoice
     {
-        Page1 = 0,
+        pageStartView = 0,
         Page2 = 1,
         pageManageVisitor = 2,
         pageManageLibrarian = 3,
