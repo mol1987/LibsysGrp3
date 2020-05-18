@@ -27,6 +27,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             return;
         }
 
+        public IEnumerable<IStockWithBorrow> GetStock(IItems item)
+        {
+            return null;
+        }
+
         public IUsers LoginUser(string identityNo, string password)
         {
             return new Users()

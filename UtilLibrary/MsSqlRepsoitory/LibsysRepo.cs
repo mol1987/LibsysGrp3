@@ -47,6 +47,28 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return booksList;
         }
+        
+        /// <summary>
+        /// Gets all stockentries that is bind to items
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public IEnumerable<IStockWithBorrow> GetStock(IItems item)
+        {
+            string storedProcedure = StoredProcedures.GetStock.ToString();
+            var obj = new
+            {
+                UsersID = item.ItemsID
+            };
+
+            IEnumerable <IStockWithBorrow> stockWithBorrow;
+            using (var conn = Create_Connection())
+            {
+                stockWithBorrow = conn.Query<IStockWithBorrow>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+            return stockWithBorrow;
+        }
 
         public void CreateBook(IFullBooks books)
         {
