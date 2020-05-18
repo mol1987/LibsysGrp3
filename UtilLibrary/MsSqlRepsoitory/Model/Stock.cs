@@ -4,6 +4,7 @@
     {
         public int StockID { get; set; }
         public int ItemsID { get; set; }
-        public int Qty { get; set; }
+        public bool Available { get; set ; }
+        public string Reason { get; set; }
     }
 }

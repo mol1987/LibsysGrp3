@@ -73,6 +73,25 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        public void CreateItemWithStockID(FullBooks books)
+        {
+            string storedProcedure = StoredProcedures.CreateItemWithStockID.ToString();
+
+            var obj = new
+            {
+                ItemsID = books.ItemsID,
+                Available = true
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
+            }
+
+        }
+
         public void RemoveBook(IFullBooks books)
         {
             
