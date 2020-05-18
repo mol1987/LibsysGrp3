@@ -46,8 +46,15 @@ namespace LibsysGrp3WPF
 
         #endregion
 
+        /// <summary>
+        /// Run() metod körs varje gång när programmet startas. 
+        /// </summary>
         public void Run()
         {
+            // Återsäller både lista.
+            borrowed.Clear();
+            items.Clear();
+
             GetBorrowed();
         }
 

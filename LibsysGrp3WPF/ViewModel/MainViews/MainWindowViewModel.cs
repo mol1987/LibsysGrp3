@@ -412,6 +412,8 @@ namespace LibsysGrp3WPF
             AccountCategory = "";
             AccountName = "";
             CurrentPageViewModel = PageViewModels[0];
+
+            //ObservableCollection < BorrowList > = null;
         }
         #endregion
     }
