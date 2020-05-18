@@ -15,9 +15,12 @@ namespace LibsysGrp3WPF
     {
         #region Private properties
         private ObservableCollection<FullBooksModel> _booksList;
+        private ObservableCollection<StockModel> _stocklist;
+        private int _txbStockID;
         private ICommand _btnEditBook;
         private ICommand _btnDeleteBook;
         private ICommand _btnAddBook;
+        private ICommand _btnAddStockID;
 
 
         private ICommand _btnOpenBookDialog;
@@ -25,6 +28,7 @@ namespace LibsysGrp3WPF
         private bool _isOpen = false;
 
         private FullBooksModel objToEdit = null;
+        private StockModel objToAddStockID = null;
         #endregion
 
         #region Private properties for adding a book
@@ -311,6 +315,33 @@ namespace LibsysGrp3WPF
         }
 
 
+        public ObservableCollection<StockModel> Stocklist
+        {
+            get
+            {
+                return _stocklist;
+            }
+            set
+            {
+                _stocklist = value;
+                OnPropertyChanged(nameof(Stocklist));
+            }
+        }
+
+        public int TxBStockID
+        {
+            get
+            {
+                return _txbStockID;
+            }
+            set
+            {
+                _txbStockID = value;
+                OnPropertyChanged(nameof(TxBStockID));
+            }
+        }
+
+
         public bool IsOpen
         {
             get
@@ -322,6 +353,12 @@ namespace LibsysGrp3WPF
                 _isOpen = value;
                 OnPropertyChanged(nameof(IsOpen));
             }
+        }
+
+        public ILibsysRepo _repo { get; set; } = null;
+        public ManageBookViewModel(ILibsysRepo repo)
+        {
+            _repo = repo;
         }
         #endregion
 
@@ -417,6 +454,7 @@ namespace LibsysGrp3WPF
                         item.Pages = TxBAddPages;
                         item.Price = TxBAddPrice;
                         item.Description = TxBAddDescription;
+                        item.Available = false;
                         item.CreateBook();
                         string str = "" + item.Title;
                         MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
@@ -445,6 +483,25 @@ namespace LibsysGrp3WPF
                         objToEdit = null;
                     }
                 }));
+            }
+        }
+
+        public ICommand BtnAddStockID
+        {
+            get
+            {
+
+                return _btnAddStockID ?? (_btnAddStockID = new RelayCommand(x =>
+                {
+                    if (objToEdit == null)
+                    {
+                        var objekt = (FullBooks)x;
+                        _repo.CreateItemWithStockID(objekt);
+
+                    }
+                }));
+             
+
             }
         }
 

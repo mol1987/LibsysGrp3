@@ -2,8 +2,10 @@
 {
     public interface IStock
     {
-        int ItemsID { get; set; }
-        int Qty { get; set; }
         int StockID { get; set; }
+        int ItemsID { get; set; }
+        bool Available { get; set; }
+       
+        string Reason { get; set; }
     }
 }
