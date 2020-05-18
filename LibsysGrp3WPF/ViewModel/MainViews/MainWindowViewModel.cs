@@ -40,7 +40,7 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageStartView,
                     PagesChoice.pageManageLibrarian,
-                    PagesChoice.pageManageUsers,
+                    PagesChoice.pageManageVisitor,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
                     PagesChoice.pageReport
