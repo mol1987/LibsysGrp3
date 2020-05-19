@@ -1,4 +1,6 @@
-﻿namespace UtilLibrary.MsSqlRepsoitory
+﻿using System.Collections.Generic;
+
+namespace UtilLibrary.MsSqlRepsoitory
 {
     public interface ILibsysRepo
     {
@@ -10,8 +12,7 @@
         public void CreateBook(IFullBooks books);
         public void RemoveBook(IFullBooks books);
         public void EditBook(IFullBooks books);
-
+        public IEnumerable<IStockWithBorrow> GetStock(IItems item);
         public void CreateItemWithStockID(IFullBooks books);
-
     }
 }
