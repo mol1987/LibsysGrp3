@@ -78,7 +78,7 @@
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Lager ID:" Margin="0 5 0 10"/>
-                                                <TextBlock Text="{Binding Path = DataContext.TxBStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                                                <TextBlock Text="{Binding Path = DataContext.Stocklist.ID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
                                             </StackPanel>
                                             <TextBlock Text="Beskrivning" />
                                             <TextBlock

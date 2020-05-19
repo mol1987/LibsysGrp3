@@ -28,11 +28,11 @@ namespace LibsysGrp3WPF
         private bool _isOpen = false;
 
         private FullBooksModel objToEdit = null;
-        private StockModel objToAddStockID = null;
+        private StockModel objToAddStockID;
         #endregion
 
         #region Private properties for adding a book
-        private string _txBAddTitel; 
+        private string _txBAddTitel;
         private string _txBAddItemType;
         private long _txBAddISBN;
         private string _txBAddAuthor;
@@ -355,11 +355,10 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public ILibsysRepo _repo { get; set; } = null;
-        public ManageBookViewModel(ILibsysRepo repo)
-        {
-            _repo = repo;
-        }
+        public LibsysRepo repo = new LibsysRepo();
+
+
+
         #endregion
 
         #region Commands
@@ -494,12 +493,10 @@ namespace LibsysGrp3WPF
                 return _btnAddStockID ?? (_btnAddStockID = new RelayCommand(x =>
                 {
 
-                     var objekt = (Stock)x;
-                     TxBStockID = objekt.StockID;
-                    _repo.CreateItemWithStockID(objekt);
+                    var objekt = (Stock)x;
 
                 }));
-             
+
 
             }
         }
@@ -531,16 +528,28 @@ namespace LibsysGrp3WPF
         public ManageBookViewModel()
         {
             getBooks();
+            getStockID();
         }
         #endregion
 
-        #region Get books method
+        #region Methods
         private void getBooks()
         {
             // gets all books..
             var repo = new LibsysRepo();
             var tempBooksList = repo.GetBooks<FullBooks>();
             BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
+        }
+
+        // Get StockID for books
+        private void getStockID()
+        {
+            for (int i = 0; i < BooksList.Count; i++)
+            {
+            var tempStockIDList = repo.GetStockData<StockModel>().Where(x => x.ItemsID == BooksList[i].ItemsID);
+            Stocklist = StockModel.ConvertToObservableCollection(tempStockIDList);
+            }
+
         }
 
         #endregion

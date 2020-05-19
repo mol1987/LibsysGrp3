@@ -20,6 +20,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         GetBook,
         GetBooks,
         RemoveItem,
-        CreateItemWithStockID
+        CreateItemWithStockID,
+        GetStockData
     }
 }

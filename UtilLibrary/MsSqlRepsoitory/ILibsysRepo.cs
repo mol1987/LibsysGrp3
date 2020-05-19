@@ -11,6 +11,7 @@
         public void RemoveBook(IFullBooks books);
         public void EditBook(IFullBooks books);
 
-        public void CreateItemWithStockID(Stock stockItem);
+        public void CreateItemWithStockID(IFullBooks books);
+
     }
 }

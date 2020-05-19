@@ -48,6 +48,18 @@ namespace UtilLibrary.MsSqlRepsoitory
             return booksList;
         }
 
+        public IEnumerable<T> GetStockData<T>()
+        {
+            string storedProcedure = StoredProcedures.GetStockData.ToString();
+            IEnumerable<T> stockIDList;
+            using (var conn = Create_Connection())
+            {
+                stockIDList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return stockIDList;
+        }
+
+
         public void CreateBook(IFullBooks books)
         {
             string storedProcedure = StoredProcedures.CreateBook.ToString();
@@ -73,20 +85,20 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
-        public void CreateItemWithStockID(Stock stockItem)
+        public void CreateItemWithStockID(IFullBooks books)
         {
             string storedProcedure = StoredProcedures.CreateItemWithStockID.ToString();
 
             var obj = new
             {
-                ItemsID = stockItem.ItemsID,
+                ItemsID = books.ItemsID,
                 Available = true
 
             };
 
             using (var conn = Create_Connection())
             {
-                conn.Query<Stock>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
 
             }
 
