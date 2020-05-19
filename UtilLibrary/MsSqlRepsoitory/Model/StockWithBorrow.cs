@@ -15,5 +15,17 @@ namespace UtilLibrary.MsSqlRepsoitory
         public DateTime BorrowDate { get; set; }
         public DateTime DueDate { get; set; }
         public int UsersID { get; set; }
+
+        public override string ToString()
+        {
+            string retStr = "";
+            if (UsersID != 0) {
+                retStr = "Ex. " + StockID + ". lånad. Är tillbaka " + DueDate;
+            } else
+            {
+                retStr = "Ex. " + StockID + ". finns.";
+            }
+            return retStr;
+        }
     }
 }
