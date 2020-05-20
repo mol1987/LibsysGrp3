@@ -56,15 +56,10 @@
             </StackPanel>
 
             <!--top search-->
-            <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Top"
-              materialDesign:HintAssist.Hint="Sök"
-              materialDesign:HintAssist.HintOpacity=".26"
-              IsEditable="True">
-                <ComboBoxItem Content="{Binding BookList}"/>
-            </ComboBox>
+           
 
             <!--views area-->
-            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
+            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
 
             <!--account status-->
             <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35">
