@@ -80,7 +80,7 @@
                                             <TextBlock Text="Beskrivning" />
                                             <TextBlock
                                                   Opacity=".68"
-                                                  Text="{Binding Description}"
+                                                  Text="{Binding DescriptionC:\Users\fmole\source\repos\LibsysGrp3WPF\LibsysGrp3WPF\Views\Main\StartPageView.xaml}"
                                                   TextWrapping="Wrap" />
                                             <!--StockList beginning-->
                                             <ListView ItemsSource="{Binding StockItems}">
