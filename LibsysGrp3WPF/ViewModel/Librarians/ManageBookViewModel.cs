@@ -54,6 +54,53 @@ namespace LibsysGrp3WPF
         private int _txBEditPrice;
         private string _txBEditDescription;
         #endregion
+        #region Public PropertiesSearch
+
+        ///<summary>
+        ///Bound Button Search
+        /// </summary>
+        public RelayCommand btnSearch { get; set; }
+
+
+        /// <summary>
+        /// Bound to the search key textbox
+        /// </summary>
+        public string SearchKey { get; set; } = "";
+
+        /// <summary>
+        /// Array that contains all of the search filters
+        /// </summary>
+        public string[] CbxSearchFilters { get; set; }
+
+        /// <summary>
+        /// FiltertypeID
+        /// </summary>
+        public int FilterTypID { get; set; }
+
+        ///<summary>
+        ///Get Multiple Bindings
+        /// </summary>
+
+
+        /// <summary>
+        /// Contains the search result
+        /// </summary>
+        private ObservableCollection<SearchItems> searchResultList;
+        /// <summary>
+        /// Contains the search result
+        /// </summary>
+
+        public ObservableCollection<SearchItems> SearchResultList
+        {
+            get => searchResultList;
+            set
+            {
+                searchResultList = value;
+
+                OnPropertyChanged(nameof(SearchResultList));
+            }
+        }
+        #endregion
 
         #region Public properties for adding a book
 
@@ -556,6 +603,28 @@ namespace LibsysGrp3WPF
 
         public void run()
         {
+            CbxSearchFilters = new string[] { "Böker" };
+
+            // Create the search Command
+            btnSearch = new RelayCommand((o) => SearchItems(o));
+        }
+        /// <summary>
+        /// Search for objects
+        /// </summary>
+        /// <param name="o"></param>
+        private void SearchItems(object o)
+        {
+            switch (FilterTypID)
+            {
+
+             
+                case 0:
+                    {
+                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchBooks(SearchKey));
+                    }
+                    break;
+                
+            }
         }
     }
 }

@@ -10,7 +10,76 @@
     <Grid>
         <StackPanel Orientation="Vertical" Margin="0 20 0 0">
             <!--#region List of books-->
-                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+            <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+
+                <Grid Width="1000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="10,20,132,0" Grid.RowSpan="3" Grid.ColumnSpan="4">
+            <!-- Search start-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                      ItemsSource="{Binding CbxSearchFilters}" 
+                      SelectedIndex="{Binding FilterTypID}"
+                      SelectedItem="{Binding SelectedItem}"/>
+
+                <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" ></TextBox>
+                <Button   Grid.Row="0" Grid.Column="2" Width="30" HorizontalAlignment="Left"  Command="{Binding btnSearch}"></Button>
+            </Grid>
+            <!-- Search End-->
+
+            <!--#region Pop up for editing a book-->
+            <materialDesign:DialogHost>
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel  Width="400" Margin="10">
+
+                        <StackPanel >
+                            <TextBlock Text="Titel" FontWeight="Bold" />
+                            <TextBox Text="{Binding TxBEditTitel}"/> 
+                            <TextBlock Text="ISBN" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditISBN}"/>
+                            <TextBlock Text="Författare" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditAuthor}"/>
+                            <TextBlock Text="Förlag" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditPublisher}"/>
+                            <TextBlock Text="Kategori" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditCategory}"/>
+                            <TextBlock Text="Sidor" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditPages}"/>
+                            <TextBlock Text="Inköpris" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditPrice}"/>
+                            <TextBlock Text="Beskrivning" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditDescription}"/>
+                        </StackPanel>
+                        <StackPanel Margin="50 10 50 0">
+                            <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">Ändra</Button>
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </materialDesign:DialogHost.DialogContent>
+                <!--#endregion-->
+
+                <!--#region List of books-->
+                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding SearchResultList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
