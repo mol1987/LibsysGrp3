@@ -502,7 +502,7 @@ namespace LibsysGrp3WPF
                         item.Available = false;
                         item.CreateBook();
                         string str = "" + item.Title;
-                        MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " tillagd .", "Tillagd lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
 
                         getBooks();
                     } 
@@ -521,7 +521,7 @@ namespace LibsysGrp3WPF
                         BooksList[listIndex].ItemsID = objToEdit.ItemsID;
                         BooksList[listIndex].EditBook();
                         string str = "" + objToEdit.Title;
-                        MessageBox.Show(str + " edited.", "Edit Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " redigerad.", "Redigering lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
                         getBooks();
                         // toggle it to null so there is no object to change
                         IsOpen = false;

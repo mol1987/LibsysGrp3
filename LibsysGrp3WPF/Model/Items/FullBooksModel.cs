@@ -15,6 +15,7 @@ namespace LibsysGrp3WPF
         public string Category { get; set; }
         public long ISBN { get; set; }
         public string Publisher { get; set; }
+        public int StockID { get; set; }
         public ObservableCollection<IStockWithBorrow> StockItems { get; set; } = new ObservableCollection<IStockWithBorrow>();
 
         public FullBooksModel(IBooksProcessor processor)
