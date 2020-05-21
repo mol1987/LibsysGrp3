@@ -109,16 +109,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             return stockWithBorrow;
         }
 
-        public IEnumerable<T> GetStockData<T>()
-        {
-            string storedProcedure = StoredProcedures.GetStockData.ToString();
-            IEnumerable<T> stockIDList;
-            using (var conn = Create_Connection())
-            {
-                stockIDList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
-            }
-            return stockIDList;
-        }
 
 
         public void CreateBook(IFullBooks books)

@@ -28,7 +28,6 @@ namespace LibsysGrp3WPF
         private bool _isOpen = false;
 
         private FullBooksModel objToEdit = null;
-        private StockModel objToAddStockID;
         #endregion
 
         #region Private properties for adding a book
@@ -575,7 +574,6 @@ namespace LibsysGrp3WPF
         public ManageBookViewModel()
         {
             getBooks();
-            getStockID();
         }
         #endregion
 
@@ -588,22 +586,12 @@ namespace LibsysGrp3WPF
             BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
 
-        // Get StockID for books
-        private void getStockID()
-        {
-            for (int i = 0; i < BooksList.Count; i++)
-            {
-            var tempStockIDList = repo.GetStockData<StockModel>().Where(x => x.ItemsID == BooksList[i].ItemsID);
-            Stocklist = StockModel.ConvertToObservableCollection(tempStockIDList);
-            }
-
-        }
 
         #endregion
 
         public void run()
         {
-            CbxSearchFilters = new string[] { "Böker" };
+            CbxSearchFilters = new string[] { "Böcker" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
