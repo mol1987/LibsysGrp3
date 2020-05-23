@@ -25,6 +25,8 @@ namespace LibsysGrp3WPF
         private string _accountName = "";
         private bool _isOpen = false;
 
+       
+
         private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
         {
             {
@@ -345,10 +347,12 @@ namespace LibsysGrp3WPF
         }
 
         #endregion
-
+        
         #region Constructor
         public MainWindowViewModel()
         {
+     
+
             // Add available pages and set page
             PageViewModels.Add(new StartPageViewModel());
             PageViewModels.Add(new VisitorsProfilePageViewModel());
@@ -374,7 +378,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
 
 
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentPageViewModel = PageViewModels[20];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
@@ -399,6 +403,16 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
         }
+        #endregion
+
+        #region Command functions
+
+        /// <summary>
+        /// Search for objects
+        /// </summary>
+        /// <param name="o"></param>
+       
+
         #endregion
 
         #region methods
