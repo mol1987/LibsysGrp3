@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Margin="10,20,132,10" Grid.ColumnSpan="4"  Grid.RowSpan="5">
-            <!-- Search start-->
+            <!--Search start-->
             <Grid Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -34,21 +34,21 @@
                 <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori"  Grid.Row="0" Grid.Column="0"  Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
                       ItemsSource="{Binding CbxSearchFilters}" 
                       SelectedIndex="{Binding FilterTypID}"
-                      SelectedItem="{Binding SelectedItem}"/>
+                      SelectedItem="{Binding BookList}"/>
 
                 <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" Margin="10 0 0 0" VerticalAlignment="Bottom" ></TextBox>
                 <Button   Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Left" Content="Sök" Command="{Binding btnSearch}" Margin="10 0 0 0" ></Button>
             </Grid>
-            <!-- Search End-->
+            <!--Search End-->
 
-            <!--#region Pop up for editing a book-->
+            <!--region Pop up for editing a book-->
             <materialDesign:DialogHost>
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel  Width="400" Margin="10">
 
                         <StackPanel >
                             <TextBlock Text="Titel" FontWeight="Bold" />
-                            <TextBox Text="{Binding TxBEditTitel}"/> 
+                            <TextBox Text="{Binding TxBEditTitel}"/>
                             <TextBlock Text="ISBN" FontWeight="Bold"/>
                             <TextBox Text="{Binding TxBEditISBN}"/>
                             <TextBlock Text="Författare" FontWeight="Bold"/>
@@ -75,7 +75,7 @@
                 <!--#endregion-->
 
                 <!--#region List of books-->
-                <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding SearchResultList, Mode=OneWay}" HorizontalAlignment="Center" Height="400">
+                <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BookList, Mode=OneWay}" HorizontalAlignment="Center" Height="400">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
@@ -85,7 +85,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
 
-                                           
+
                                                 <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
                                                 <TextBlock Text="ISBN:" Margin="0 10 5 10"/>
                                                 <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
@@ -111,7 +111,17 @@
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Exempel ID:" Margin="0 0 5 10"/>
-                                                <TextBlock Text="{Binding StockID}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                                <!--StockList beginning-->
+                                                <ListView ItemsSource="{Binding StockItems}">
+
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding StockID}" Margin="0 0 0 5" FontWeight="Normal"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ListView>
                                             </StackPanel>
 
                                             <TextBlock Text="Beskrivning" />
@@ -141,7 +151,7 @@
             <!--#endregion-->
 
 
-        <!--#region Pop up for adding a book-->
+            <!--#region Pop up for adding a book-->
             <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel  Width="400" Margin="10">
@@ -175,7 +185,7 @@
                 <!--#endregion-->
 
                 <!--#region Button for adding a book-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Lägg till ny bok" Margin="10"
                         Command="{Binding BtnOpenBookDialog}"/>
                     <!--<Button Content="Lägg till e-bok" Margin="10"/>
