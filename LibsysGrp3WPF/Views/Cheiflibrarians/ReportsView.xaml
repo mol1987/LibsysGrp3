@@ -3,9 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
 
-    <Grid Background="LightBlue">
+    <Grid>
+        <!--#region List of books-->
+        <ListView Height="450"
+           ItemsSource="{Binding BooksList, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Namn"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding ISBN}"  Header="EAN" />
+
+
+                    <GridViewColumn
+                            Header="Exempel ID            Aktiv                Syfte                Välja syfte">
+                            <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding StockItems}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    
+                                                    <TextBlock Text="{Binding StockID}" Margin="30 0 70 0"/>
+                                                    <TextBlock Text="{Binding Available}" Margin="0 0 70 0"/>
+                                                    <TextBlock Text="{Binding Reason}" Margin="0 0 70 0"/>
+                                                    
+                                                    <ComboBox Padding="0 0 0 10"
+                                                         Width="100">
+                                                        <ComboBoxItem
+                                                             Content="OK" />
+                                                        <ComboBoxItem
+                                                         Content="Trasig" />
+                                                        <ComboBoxItem
+                                                         Content="Stulen" />
+                                                        <ComboBoxItem
+                                                        Content="Saknas" />
+                                                    </ComboBox>
+
+                                            </StackPanel>
+                                                
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+
+                                    </ListBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    
+
+
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+
+
+
     </Grid>
+
 </UserControl>
