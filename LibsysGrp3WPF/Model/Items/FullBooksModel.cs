@@ -68,26 +68,26 @@ namespace LibsysGrp3WPF
 
                 // add all stockitems to book
                 var booksItem = booksList.Last();
-                IEnumerable<IStockWithBorrow> stockList = new List<IStockWithBorrow>
-                {
-                    new StockWithBorrow()
-                    {
-                        StockID = 1,
-                        Available = true,
-                        BorrowDate = DateTime.Now,
-                        DueDate = DateTime.Now,
-                        ItemsID = 2,
-                        UsersID = 1,
-                        Reason = "no"
-                    },
-                    new StockWithBorrow()
-                    {
-                        StockID = 2,
-                        Available = true,
-                        Reason = ""
-                    }
-                };
-                //var stockList = booksItem.Processor._repo.GetStock(booksItem);
+                //IEnumerable<IStockWithBorrow> stockList = new List<IStockWithBorrow>
+                //{
+                //    new StockWithBorrow()
+                //    {
+                //        StockID = 1,
+                //        Available = true,
+                //        BorrowDate = DateTime.Now,
+                //        DueDate = DateTime.Now,
+                //        ItemsID = 2,
+                //        UsersID = 1,
+                //        Reason = "no"
+                //    },
+                //    new StockWithBorrow()
+                //    {
+                //        StockID = 2,
+                //        Available = true,
+                //        Reason = ""
+                //    }
+                //};
+                var stockList = booksItem.Processor._repo.GetStock(booksItem);
                 foreach (var stock in stockList)
                 {
                     booksItem.StockItems.Add(stock);

@@ -98,13 +98,13 @@ namespace UtilLibrary.MsSqlRepsoitory
             string storedProcedure = StoredProcedures.GetStock.ToString();
             var obj = new
             {
-                UsersID = item.ItemsID
+                ItemsID = item.ItemsID
             };
 
             IEnumerable <IStockWithBorrow> stockWithBorrow;
             using (var conn = Create_Connection())
             {
-                stockWithBorrow = conn.Query<IStockWithBorrow>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+                stockWithBorrow = conn.Query<StockWithBorrow>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
             return stockWithBorrow;
         }
