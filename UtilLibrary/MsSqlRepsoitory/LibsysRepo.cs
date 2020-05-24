@@ -136,13 +136,13 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
-        public void CreateItemWithStockID(IFullBooks books)
+        public void CreateItemWithStockID(IItems item)
         {
             string storedProcedure = StoredProcedures.CreateItemWithStockID.ToString();
 
             var obj = new
             {
-                ItemsID = books.ItemsID,
+                ItemsID = item.ItemsID,
                 Available = true
 
             };

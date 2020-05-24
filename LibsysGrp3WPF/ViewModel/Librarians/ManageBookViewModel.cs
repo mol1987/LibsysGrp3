@@ -18,9 +18,8 @@ namespace LibsysGrp3WPF
         private ObservableCollection<StockModel> _stocklist;
         private int _txbStockID;
         private ICommand _btnEditBook;
-        private ICommand _btnDeleteBook;
-        private ICommand _btnAddBook;
         private ICommand _btnAddStockID;
+        private ICommand _btnAddBook;
 
 
         private ICommand _btnOpenBookDialog;
@@ -53,6 +52,7 @@ namespace LibsysGrp3WPF
         private int _txBEditPrice;
         private string _txBEditDescription;
         #endregion
+
         #region Public PropertiesSearch
 
         ///<summary>
@@ -374,18 +374,6 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public int TxBStockID
-        {
-            get
-            {
-                return _txbStockID;
-            }
-            set
-            {
-                _txbStockID = value;
-                OnPropertyChanged(nameof(TxBStockID));
-            }
-        }
 
 
         public bool IsOpen
@@ -531,37 +519,19 @@ namespace LibsysGrp3WPF
             }
         }
 
+
         public ICommand BtnAddStockID
         {
             get
             {
-
                 return _btnAddStockID ?? (_btnAddStockID = new RelayCommand(x =>
                 {
-
-                    var objekt = (Stock)x;
-
-                }));
-
-
-            }
-        }
-
-        public ICommand BtnDeleteBook
-        {
-            get
-            {
-                return _btnDeleteBook ?? (_btnDeleteBook = new RelayCommand(x =>
-                {
                     var obj = (FullBooksModel)x;
-                    var bookIndex = BooksList.IndexOf(obj);
-                    BooksList[bookIndex].RemoveBook();
-                    BooksList.RemoveAt(bookIndex);
-                    //_selectedItem.RemoveBook();
-                    //BooksList.Remove(_selectedItem);
+                    repo.CreateItemWithStockID(obj);
 
-                    string str = obj.Title;
-                    MessageBox.Show(str + " bortagen", "Bortagen", MessageBoxButton.OK, MessageBoxImage.Question);
+                    string str = "" + obj.Title;
+                    MessageBox.Show("Ny fysisk exempel tillagt till " + str, "Ny fysisk exempel har lagts till", MessageBoxButton.OK, MessageBoxImage.Question);
+                    getBooks();
 
                 }));
             }
