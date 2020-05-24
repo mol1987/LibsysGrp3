@@ -39,6 +39,12 @@ namespace LibsysGrp3WPF
             {
                 _selectedReason = value;
                 OnPropertyChanged(nameof(SelectedReason));
+
+                if (_selectedReason != null)
+                {
+                    var item = new StockModel();
+                    _selectedReason = item.Reason;
+                }
             }
         }
         #endregion
