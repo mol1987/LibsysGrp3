@@ -127,6 +127,8 @@ namespace UtilLibrary.MsSqlRepsoitory
             return stockWithBorrow;
         }
 
+
+
         public void CreateBook(IFullBooks books)
         {
             string storedProcedure = StoredProcedures.CreateBook.ToString();
@@ -150,6 +152,25 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
 
             }
+        }
+
+        public void CreateItemWithStockID(IItems item)
+        {
+            string storedProcedure = StoredProcedures.CreateItemWithStockID.ToString();
+
+            var obj = new
+            {
+                ItemsID = item.ItemsID,
+                Available = true
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
+            }
+
         }
 
         public void RemoveBook(IFullBooks books)

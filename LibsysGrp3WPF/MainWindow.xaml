@@ -10,24 +10,19 @@
     <materialDesign:DialogHost IsOpen="{Binding IsOpen}" CloseOnClickAway="True">
 
         <materialDesign:DialogHost.DialogContent>
-            <StackPanel Height="200" Width="200" Margin="50,50,50,50">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Height="200" Width="200" Margin="50,50,50,50">
 
-                    <StackPanel Grid.Row="0" Grid.Column="0">
+                    <StackPanel Margin="0 0 0 30">
                         <TextBlock>Personnummer</TextBlock>
                         <TextBox Text="{Binding IDTextBox}"/>
                         <TextBlock>Lösenord</TextBlock>
                         <TextBox Text="{Binding PasswordTextBox}"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="2" Grid.Column="0">
+                    <StackPanel Orientation="Vertical">
                         <Button Command="{Binding btnSignIn}">Logga In</Button>
+                    <Button Command="materialDesign:DialogHost.CloseDialogCommand" Content="Avbryt" Margin="0 10 0 0" Background="#F9A20B" BorderBrush="#F9A20B"/>
                     </StackPanel>
-                </Grid>
+
             </StackPanel>
 
         </materialDesign:DialogHost.DialogContent>

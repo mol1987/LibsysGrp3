@@ -378,7 +378,8 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
 
 
-            CurrentPageViewModel = PageViewModels[20];
+
+            CurrentPageViewModel = PageViewModels[8];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);

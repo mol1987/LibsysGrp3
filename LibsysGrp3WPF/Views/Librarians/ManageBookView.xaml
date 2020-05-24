@@ -8,46 +8,16 @@
              mc:Ignorable="d" >
 
 
-    <Grid Width="1000">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Margin="10,20,132,0" Grid.RowSpan="3" Grid.ColumnSpan="4">
-            <!-- Search start-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <ComboBox Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
-                      ItemsSource="{Binding CbxSearchFilters}" 
-                      SelectedIndex="{Binding FilterTypID}"
-                      SelectedItem="{Binding SelectedItem}"/>
-
-                <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" ></TextBox>
-                <Button   Grid.Row="0" Grid.Column="2" Width="30" HorizontalAlignment="Left"  Command="{Binding btnSearch}"></Button>
-            </Grid>
-            <!-- Search End-->
-
-            <!--#region Pop up for editing a book-->
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+            <!--region Pop up for editing a book-->
             <materialDesign:DialogHost>
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel  Width="400" Margin="10">
 
                         <StackPanel >
                             <TextBlock Text="Titel" FontWeight="Bold" />
-                            <TextBox Text="{Binding TxBEditTitel}"/> 
+                            <TextBox Text="{Binding TxBEditTitel}"/>
                             <TextBlock Text="ISBN" FontWeight="Bold"/>
                             <TextBox Text="{Binding TxBEditISBN}"/>
                             <TextBlock Text="Författare" FontWeight="Bold"/>
@@ -74,7 +44,7 @@
                 <!--#endregion-->
 
                 <!--#region List of books-->
-                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding SearchResultList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
@@ -83,12 +53,14 @@
                                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
+
+
                                                 <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
                                                 <TextBlock Text="ISBN:" Margin="0 10 5 10"/>
-                                                <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
-                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
+                                                <TextBlock Text="{Binding ISBN}" Margin="0 10 170 10" FontWeight="Normal"/>
+                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 5 0"
                                                         Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
-                                                <Button Content="Ta bort" Command="{Binding Path = DataContext.BtnDeleteBook, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
+                                                <Button Content="Lägg till fysisk exempel" Command="{Binding Path = DataContext.BtnAddStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Författare:" Margin="0 0 5 10"/>
@@ -106,15 +78,35 @@
                                                 <TextBlock Text="Skapelsedatum:" Margin="5 0 5 10"/>
                                                 <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                             </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Fysisk bok ID:" Margin="0 0 5 10"/>
+                                                
+                                                <!--StockList beginning-->
+                                                <ItemsControl ItemsSource="{Binding StockItems}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding StockID}" Margin="0 0 0 5" FontWeight="Normal"/>
+                                                                <TextBlock Text=", "></TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel></WrapPanel>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                            <!--StocList end-->
+
                                             <TextBlock Text="Beskrivning" />
                                             <TextBlock
                                                   Opacity=".68"
                                                   Text="{Binding Description}"
                                                   TextWrapping="Wrap" />
-                                            
                                         </StackPanel>
-                                        
-                                </Expander>
+                                    </Expander>
                                     <Border Background="{DynamicResource MaterialDesignDivider}"
                                                   Height="1"
                                                   HorizontalAlignment="Stretch"
@@ -133,6 +125,7 @@
                 </ListBox>
             </materialDesign:DialogHost>
             <!--#endregion-->
+
 
             <!--#region Pop up for adding a book-->
             <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
@@ -168,16 +161,15 @@
                 <!--#endregion-->
 
                 <!--#region Button for adding a book-->
-                <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Lägg till ny bok" Margin="10"
                         Command="{Binding BtnOpenBookDialog}"/>
-                    <!--<Button Content="Lägg till e-bok" Margin="10"/>
-                <Button Content="Lägg till film" Margin="10"/>-->
                 </StackPanel>
             </materialDesign:DialogHost>
             <!--#endregion-->
-
         </StackPanel>
+
+
     </Grid>
 
 </UserControl>

@@ -15,8 +15,10 @@ namespace LibsysGrp3WPF
     {
         #region Private properties
         private ObservableCollection<FullBooksModel> _booksList;
+        private ObservableCollection<StockModel> _stocklist;
+        private int _txbStockID;
         private ICommand _btnEditBook;
-        private ICommand _btnDeleteBook;
+        private ICommand _btnAddStockID;
         private ICommand _btnAddBook;
 
 
@@ -28,7 +30,7 @@ namespace LibsysGrp3WPF
         #endregion
 
         #region Private properties for adding a book
-        private string _txBAddTitel; 
+        private string _txBAddTitel;
         private string _txBAddItemType;
         private long _txBAddISBN;
         private string _txBAddAuthor;
@@ -50,6 +52,7 @@ namespace LibsysGrp3WPF
         private int _txBEditPrice;
         private string _txBEditDescription;
         #endregion
+
         #region Public PropertiesSearch
 
         ///<summary>
@@ -358,6 +361,21 @@ namespace LibsysGrp3WPF
         }
 
 
+        public ObservableCollection<StockModel> Stocklist
+        {
+            get
+            {
+                return _stocklist;
+            }
+            set
+            {
+                _stocklist = value;
+                OnPropertyChanged(nameof(Stocklist));
+            }
+        }
+
+
+
         public bool IsOpen
         {
             get
@@ -370,6 +388,11 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(IsOpen));
             }
         }
+
+        public LibsysRepo repo = new LibsysRepo();
+
+
+
         #endregion
 
         #region Commands
@@ -464,9 +487,10 @@ namespace LibsysGrp3WPF
                         item.Pages = TxBAddPages;
                         item.Price = TxBAddPrice;
                         item.Description = TxBAddDescription;
+                        item.Available = false;
                         item.CreateBook();
                         string str = "" + item.Title;
-                        MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " tillagd .", "Tillagd lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
 
                         getBooks();
                     } 
@@ -485,7 +509,7 @@ namespace LibsysGrp3WPF
                         BooksList[listIndex].ItemsID = objToEdit.ItemsID;
                         BooksList[listIndex].EditBook();
                         string str = "" + objToEdit.Title;
-                        MessageBox.Show(str + " edited.", "Edit Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " redigerad.", "Redigering lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
                         getBooks();
                         // toggle it to null so there is no object to change
                         IsOpen = false;
@@ -495,21 +519,19 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public ICommand BtnDeleteBook
+
+        public ICommand BtnAddStockID
         {
             get
             {
-                return _btnDeleteBook ?? (_btnDeleteBook = new RelayCommand(x =>
+                return _btnAddStockID ?? (_btnAddStockID = new RelayCommand(x =>
                 {
                     var obj = (FullBooksModel)x;
-                    var bookIndex = BooksList.IndexOf(obj);
-                    BooksList[bookIndex].RemoveBook();
-                    BooksList.RemoveAt(bookIndex);
-                    //_selectedItem.RemoveBook();
-                    //BooksList.Remove(_selectedItem);
+                    repo.CreateItemWithStockID(obj);
 
-                    string str = obj.Title;
-                    MessageBox.Show(str + " bortagen", "Bortagen", MessageBoxButton.OK, MessageBoxImage.Question);
+                    string str = "" + obj.Title;
+                    MessageBox.Show("Ny fysisk exempel tillagt till " + str, "Ny fysisk exempel har lagts till", MessageBoxButton.OK, MessageBoxImage.Question);
+                    getBooks();
 
                 }));
             }
@@ -525,7 +547,7 @@ namespace LibsysGrp3WPF
         }
         #endregion
 
-        #region Get books method
+        #region Methods
         private void getBooks()
         {
             // gets all books..
@@ -534,11 +556,12 @@ namespace LibsysGrp3WPF
             BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
 
+
         #endregion
 
         public void run()
         {
-            CbxSearchFilters = new string[] { "Böker" };
+            CbxSearchFilters = new string[] { "Böcker" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));

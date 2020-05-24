@@ -1,10 +1,13 @@
-﻿namespace UtilLibrary.MsSqlRepsoitory
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace UtilLibrary.MsSqlRepsoitory
 {
     public class StockModel : IStock
     {
         public int StockID { get; set; }
         public int ItemsID { get; set; }
-        public bool Available { get; set; }
+        public bool Available { get ; set ; }
         public string Reason { get; set; }
     }
 }
