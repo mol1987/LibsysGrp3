@@ -29,24 +29,24 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public string SelectedReason
-        {
-            get
-            {
-                return _selectedReason;
-            }
-            set
-            {
-                _selectedReason = value;
-                OnPropertyChanged(nameof(SelectedReason));
+        //public string SelectedReason
+        //{
+        //    get
+        //    {
+        //        return _selectedReason;
+        //    }
+        //    set
+        //    {
+        //        _selectedReason = value;
+        //        OnPropertyChanged(nameof(SelectedReason));
 
-                if (_selectedReason != null)
-                {
-                    var item = new StockModel();
-                    _selectedReason = item.Reason;
-                }
-            }
-        }
+        //        if (_selectedReason != null)
+        //        {
+        //            var item = new StockModel();
+        //            _selectedReason = item.Reason;
+        //        }
+        //    }
+        //}
         #endregion
 
 
