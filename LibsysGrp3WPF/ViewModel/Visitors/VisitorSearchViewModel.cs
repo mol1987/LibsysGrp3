@@ -7,11 +7,13 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class VisitorSearchViewModel : ManageBookViewModel, IPageViewModel
+    public class VisitorSearchViewModel : BaseViewModel, IPageViewModel
     {
         #region Privete properties
         private string _btnborrowBook;
         private ICommand _borrowBook;
+
+        private ObservableCollection<FullBooksModel> _booksList;
         #endregion
 
         #region Public Properties
@@ -40,6 +42,18 @@ namespace LibsysGrp3WPF
         ///<summary>
         ///Get Multiple Bindings
         /// </summary>
+        /// 
+
+        public ObservableCollection<FullBooksModel> BooksList
+        {
+            get => _booksList;
+            set
+            {
+                _booksList = value;
+
+                OnPropertyChanged(nameof(BooksList));
+            }
+        }
 
 
         /// <summary>
@@ -61,12 +75,8 @@ namespace LibsysGrp3WPF
             }
         }
         #endregion
-      
 
 
-
-
- 
         public VisitorSearchViewModel()
         {
             // Search Filter Options
@@ -74,7 +84,18 @@ namespace LibsysGrp3WPF
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
+
+            getBooks();
         }
+
+        private void getBooks()
+        {
+            // gets all books..
+            var repo = new LibsysRepo();
+            var tempBooksList = repo.GetBooks<FullBooks>();
+            BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
+        }
+
         /// <summary>
         /// Search for objects
         /// </summary>
@@ -108,11 +129,16 @@ namespace LibsysGrp3WPF
                     break;
             }
         }
+
+        public void run()
+        {
+           
+        }
     }
 }
-           
-     
 
-        
-    
+
+
+
+
 

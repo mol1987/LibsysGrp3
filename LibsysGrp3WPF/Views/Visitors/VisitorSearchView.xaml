@@ -40,7 +40,7 @@
             </Grid>
             <!-- End Search-->
             <!--#region List of books-->
-            <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding SearchResultList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
@@ -77,6 +77,7 @@
                                                   Opacity=".68"
                                                   Text="{Binding Description}"
                                                   TextWrapping="Wrap" />
+                                        
                                     </StackPanel>
                                 </Expander>
                                 <Border Background="{DynamicResource MaterialDesignDivider}"
