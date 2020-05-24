@@ -12,6 +12,7 @@ namespace LibsysGrp3WPF
     {
         #region Private properties
         private ObservableCollection<FullBooksModel> _booksList;
+        private string _selectedReason;
         #endregion
 
         #region Public Properties
@@ -25,6 +26,19 @@ namespace LibsysGrp3WPF
             {
                 _booksList = value;
                 OnPropertyChanged(nameof(BooksList));
+            }
+        }
+
+        public string SelectedReason
+        {
+            get
+            {
+                return _selectedReason;
+            }
+            set
+            {
+                _selectedReason = value;
+                OnPropertyChanged(nameof(SelectedReason));
             }
         }
         #endregion
