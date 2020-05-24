@@ -296,10 +296,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
-        public void CreateItemWithStockID(IItems items)
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion
 
