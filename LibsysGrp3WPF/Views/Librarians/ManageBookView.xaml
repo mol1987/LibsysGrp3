@@ -79,7 +79,7 @@
                                                 <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Exempel ID:" Margin="0 0 5 10"/>
+                                                <TextBlock Text="Fysisk bok ID:" Margin="0 0 5 10"/>
                                                 
                                                 <!--StockList beginning-->
                                                 <ItemsControl ItemsSource="{Binding StockItems}">
