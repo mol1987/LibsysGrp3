@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -87,6 +88,23 @@ namespace UtilLibrary.MsSqlRepsoitory
             return booksList;
         }
         
+        public void BorrowBook(IStockWithBorrow stock)
+        {
+            string storedProcedure = StoredProcedures.BorrowItem.ToString();
+            
+            var obj = new
+            {
+                StockID = stock.StockID,
+                UsersID = stock.UsersID,
+                BorrowDate = stock.BorrowDate,
+                DueDate = stock.DueDate
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         /// <summary>
         /// Gets all stockentries that is bind to items
         /// </summary>
@@ -255,6 +273,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             {
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
+        }
+
+        public void CreateItemWithStockID(IItems items)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -111,8 +111,10 @@
                                                   Opacity=".68"
                                                   Text="{Binding Description}"
                                                   TextWrapping="Wrap" />
+                                            
                                         </StackPanel>
-                                    </Expander>
+                                        
+                                </Expander>
                                     <Border Background="{DynamicResource MaterialDesignDivider}"
                                                   Height="1"
                                                   HorizontalAlignment="Stretch"

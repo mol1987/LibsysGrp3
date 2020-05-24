@@ -28,5 +28,10 @@ namespace LibsysGrp3WPF
         {
             _repo.RemoveBook(books);
         }
+
+        public void BorrowBookProcess(IStockWithBorrow stock)
+        {
+            _repo.BorrowBook(stock);
+        }
     }
 }

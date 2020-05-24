@@ -1,21 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class FullBooksModel : ItemsModel, IFullBooks
+    public class FullBooksModel : ItemsModel, IFullBooks, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public IBooksProcessor Processor { get; private set; }
         public int Pages { get; set; }
         public string Author { get; set; }
         public string Category { get; set; }
         public long ISBN { get; set; }
         public string Publisher { get; set; }
-        public ObservableCollection<IStockWithBorrow> StockItems { get; set; } = new ObservableCollection<IStockWithBorrow>();
+        public ObservableCollection<IStockWithBorrow> _stockItems = new ObservableCollection<IStockWithBorrow>();
+        private IStockWithBorrow _selectedStockItem;
+
+        /// <summary>
+        /// Property when user selects a specific book
+        /// </summary>
+        public IStockWithBorrow SelectedStockItem 
+        { 
+            get => _selectedStockItem;
+            set
+            {
+                _selectedStockItem = value;
+
+                OnPropertyChanged(nameof(SelectedStockItem));
+            }
+        }
+        /// <summary>
+        /// List of physical books
+        /// </summary>
+        public ObservableCollection<IStockWithBorrow> StockItems 
+        { 
+            get => _stockItems; 
+            set
+            {
+                _stockItems = value;
+
+                OnPropertyChanged(nameof(StockItems));
+            }
+       } 
 
         public FullBooksModel(IBooksProcessor processor)
         {
@@ -33,6 +65,29 @@ namespace LibsysGrp3WPF
         public void EditBook()
         {
             Processor.EditBookProcess(this);
+        }
+
+        public void BorrowBook(IUsers user)
+        {
+            // update the stock item from the list so it updates on the UI
+            var stockIndex = StockItems.IndexOf(SelectedStockItem);
+            var date = DateTime.Now;
+
+            var stock = new StockWithBorrow
+            {
+                StockID = StockItems[stockIndex].StockID,
+                BorrowDate = date,
+                DueDate = date.AddMonths(1),
+                UsersID = user.UsersID,
+                ItemsID = StockItems[stockIndex].ItemsID
+            };
+
+            // don't know why I have to do this shit to update on the UI
+            StockItems.RemoveAt(stockIndex);
+            StockItems.Insert(stockIndex, stock);
+            //OnPropertyChanged(nameof(StockItems));
+
+            Processor.BorrowBookProcess(StockItems[stockIndex]);
         }
 
         /// <summary>
@@ -93,6 +148,19 @@ namespace LibsysGrp3WPF
                 }
             }
             return booksList;
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            VerifyPropertyName(propertyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        [Conditional("DEBUG")]
+        private void VerifyPropertyName(string propertyName)
+        {
+            if (TypeDescriptor.GetProperties(this)[propertyName] == null)
+                throw new ArgumentNullException(GetType().Name + " does not contain property: " + propertyName);
         }
     }
 

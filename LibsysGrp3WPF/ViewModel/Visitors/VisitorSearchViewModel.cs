@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
@@ -12,6 +14,10 @@ namespace LibsysGrp3WPF
         #region Privete properties
         private string _btnborrowBook;
         private ICommand _borrowBook;
+        /// <summary>
+        /// Contains the search result
+        /// </summary>
+        private ObservableCollection<SearchItems> searchResultList;
 
         private ObservableCollection<FullBooksModel> _booksList;
         #endregion
@@ -57,9 +63,40 @@ namespace LibsysGrp3WPF
 
 
         /// <summary>
-        /// Contains the search result
+        /// Command for borrowing a specific physical book
+        /// is connected with the stock list.
         /// </summary>
-        private ObservableCollection<SearchItems> searchResultList;
+        public ICommand BorrowBook
+        {
+            get
+            {
+                return _borrowBook ?? (_borrowBook = new RelayCommand(x =>
+                {
+                    var obj = (FullBooksModel)x;
+                    if (obj != null)
+                    {
+                        // user hasn't chosen a book
+                        if (obj.SelectedStockItem == null)
+                        {
+                            MessageBox.Show("Du måste välja en fysisk bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            return;
+                        }
+                        // user has chosen a already loaned book
+                        if (obj.SelectedStockItem.UsersID > 0)
+                        {
+                            MessageBox.Show("Du måste välja en icke lånad bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            return;
+                        }
+                        var Result = MessageBox.Show("Vill du låna boken?", "Låna", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (Result == MessageBoxResult.Yes)
+                        {
+                            obj.BorrowBook(Mediator.User);
+                        }
+                    }
+                }));
+            }
+        }
+
         /// <summary>
         /// Contains the search result
         /// </summary>
@@ -132,7 +169,7 @@ namespace LibsysGrp3WPF
 
         public void run()
         {
-           
+            getBooks();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace LibsysGrp3WPF
         public void CreateBookProcess(IFullBooks books);
         public void RemoveBookProcess(IFullBooks books);
         public void EditBookProcess(IFullBooks books);
+        public void BorrowBookProcess(IStockWithBorrow stock);
     }
 }

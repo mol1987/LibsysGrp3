@@ -13,5 +13,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         public void RemoveBook(IFullBooks books);
         public void EditBook(IFullBooks books);
         public IEnumerable<IStockWithBorrow> GetStock(IItems item);
+        public void BorrowBook(IStockWithBorrow stock);
     }
 }
