@@ -8,8 +8,33 @@
              mc:Ignorable="d" >
 
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <!-- Search-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                      ItemsSource="{Binding CbxSearchFilters}" 
+                      SelectedIndex="{Binding FilterTypID}"
+                      SelectedItem="{Binding SelectedItem}"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 0 0"></TextBox>
+            <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
+                <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
+            </Button>
+        </Grid>
+        
         <!--#region List of books-->
-        <ListView Height="450"
+        <ListView Height="450" Grid.Row="1"  HorizontalAlignment="Left"  Margin="250,10 0 0"
            ItemsSource="{Binding BooksList, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
             <ListView.View>
                 <GridView>
@@ -17,51 +42,43 @@
 
                     <GridViewColumn DisplayMemberBinding="{Binding ISBN}"  Header="EAN" />
 
-
                     <GridViewColumn
                             Header="Fysisk bok ID            Aktiv                Syfte                Välja syfte">
-                            <GridViewColumn.CellTemplate>
+                        <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ListBox ItemsSource="{Binding StockItems}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" >
-                                                    
-                                                    <TextBlock Text="{Binding StockID}" Margin="30 0 70 0"/>
-                                                    <TextBlock Text="{Binding Available}" Margin="0 0 70 0"/>
-                                                    <TextBlock Text="{Binding Reason}" Margin="0 0 70 0"/>
-                                                    
-                                                    <ComboBox SelectedItem="{Binding SelectedReason, Mode=TwoWay}" Padding="0 0 0 10"
+                                <ItemsControl ItemsSource="{Binding StockItems}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{Binding StockID}" Margin="30 0 70 0"/>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding Available}" Margin="0 0 70 0"/>
+                                                <TextBlock Text="{Binding Reason}" Margin="0 0 70 0"/>
+
+                                                <ComboBox SelectedItem="{Binding SelectedReason, Mode=TwoWay}" Padding="0 0 0 10"
                                                          Width="100">
-                                                        <ComboBoxItem
+                                                    <ComboBoxItem
                                                              Content="OK" />
-                                                        <ComboBoxItem
+                                                    <ComboBoxItem
                                                          Content="Trasig" />
-                                                        <ComboBoxItem
+                                                    <ComboBoxItem
                                                          Content="Stulen" />
-                                                        <ComboBoxItem
+                                                    <ComboBoxItem
                                                         Content="Saknas" />
-                                                    </ComboBox>
+                                                </ComboBox>
 
                                             </StackPanel>
-                                                
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
 
-                                    </ListBox>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    
-
-
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
-
         </ListView>
-
-
-
     </Grid>
 
 </UserControl>

@@ -16,7 +16,6 @@ namespace LibsysGrp3WPF
         #region Private properties
         private ObservableCollection<FullBooksModel> _booksList;
         private ObservableCollection<StockModel> _stocklist;
-        private int _txbStockID;
         private ICommand _btnEditBook;
         private ICommand _btnAddStockID;
         private ICommand _btnAddBook;
