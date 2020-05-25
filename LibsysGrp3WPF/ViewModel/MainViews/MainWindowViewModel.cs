@@ -6,6 +6,7 @@ using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 
 namespace LibsysGrp3WPF
 {
@@ -379,7 +380,7 @@ namespace LibsysGrp3WPF
 
 
 
-            CurrentPageViewModel = PageViewModels[8];
+            CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
@@ -422,11 +423,16 @@ namespace LibsysGrp3WPF
         /// </summary>
         public void SignOutProcess()
         {
-            Mediator.User = null;
-            MenuList = null;
-            AccountCategory = "";
-            AccountName = "";
-            CurrentPageViewModel = PageViewModels[0];
+            var Result = MessageBox.Show("Är du säkert du vill logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (Result == MessageBoxResult.Yes)
+            {
+                Mediator.User = null;
+                MenuList = null;
+                AccountCategory = "";
+                AccountName = "";
+                CurrentPageViewModel = PageViewModels[0];
+            }
+         
         }
         #endregion
     }

@@ -55,15 +55,15 @@
 
             <!--views area-->
             <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
-
+            
             <!--account status-->
-            <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35">
-                <WrapPanel >
-                    <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
-                    <TextBlock  Foreground="white"   Text="{Binding AccountCategory}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="4">
+                <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
                     
-                </WrapPanel>
+                  
                 <StackPanel>
+                    <TextBlock  Foreground="white"   Text="{Binding AccountCategory}"/>
                     <TextBlock Grid.Row="4" Foreground="White" Text="{Binding AccountName}"/>
                 </StackPanel>
             </StackPanel>
@@ -71,12 +71,14 @@
 
 
             <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    Margin=" 10 0 0 0"
-            ToolTip="MaterialDesignFlatLightButton" 
+                   
+      
             Background="#304ffe" BorderThickness="0" Width="60" Height="50"
             BorderBrush="#304ffe" Grid.Column="4" Command="{Binding BtnUserAccess}" >
                 <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
             </Button>
+
+            </StackPanel>
 
             <Menu IsMainMenu="True" Background="#304ffe" Foreground="White">
                 <MenuItem  ItemsSource="{Binding MenuList}">
