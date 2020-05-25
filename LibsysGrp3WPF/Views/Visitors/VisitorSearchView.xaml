@@ -6,10 +6,41 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
-    <Grid>
-        <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+
+    <Grid Width="1000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="10,20,132,0" Grid.RowSpan="3" Grid.ColumnSpan="4">
+            <!-- Search-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+        <ComboBox Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                      ItemsSource="{Binding CbxSearchFilters}" 
+                      SelectedIndex="{Binding FilterTypID}"
+                      SelectedItem="{Binding SelectedItem}"/>
+
+        <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" ></TextBox>
+        <Button   Grid.Row="0" Grid.Column="2" Width="30" HorizontalAlignment="Left"  Command="{Binding btnSearch}"></Button>
+            </Grid>
+            <!-- End Search-->
             <!--#region List of books-->
-            <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+            <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
@@ -36,16 +67,20 @@
                                             <TextBlock Text="{Binding Category}" Margin="0 0 5 10" FontWeight="Normal"/>
                                             <TextBlock Text="Sidor:" Margin="0 0 5 10"/>
                                             <TextBlock Text="{Binding Pages}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                            <TextBlock Text="Inköpris:" Margin="0 0 5 10"/>
-                                            <TextBlock Text="{Binding Price}" Margin="0 0 0 10" FontWeight="Normal"/>
-                                            <TextBlock Text="Skapelsedatum:" Margin="5 0 5 10"/>
-                                            <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                         </StackPanel>
                                         <TextBlock Text="Beskrivning" />
                                         <TextBlock
                                                   Opacity=".68"
                                                   Text="{Binding Description}"
                                                   TextWrapping="Wrap" />
+
+                                        <!--StockList beginning-->
+ 
+                                        <ListBox ItemsSource="{Binding StockItems}" SelectedItem="{Binding SelectedStockItem}">
+                                            
+                                        </ListBox>
+                                        <!--StocList end-->
+
                                     </StackPanel>
                                 </Expander>
                                 <Border Background="{DynamicResource MaterialDesignDivider}"

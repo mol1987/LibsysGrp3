@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -37,6 +38,45 @@ namespace UtilLibrary.MsSqlRepsoitory
         #endregion
 
         #region Items
+        public IEnumerable<SearchItems> SearchItems(string Key)
+        {
+            IEnumerable<SearchItems> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<SearchItems>("SearchItems", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+        }
+
+
+        public IEnumerable<SearchItems> SearchBooks(string Key)
+        {
+            IEnumerable<SearchItems> booksList;
+            using (var conn = Create_Connection())
+            {
+                booksList = conn.Query<SearchItems>("SearchBook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return booksList;
+        }
+        public IEnumerable<SearchItems> SearchEbooks(string Key)
+        {
+            IEnumerable<SearchItems> moviesList;
+            using (var conn = Create_Connection())
+            {
+                moviesList = conn.Query<SearchItems>("SearchEbook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return moviesList;
+        }
+        public IEnumerable<SearchItems> SearchMovies(string Key)
+        {
+            IEnumerable<SearchItems> moviesList;
+            using (var conn = Create_Connection())
+            {
+                moviesList = conn.Query<SearchItems>("SearchMovie", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return moviesList;
+        }
+
         public IEnumerable<T> GetBooks<T>()
         {
             string storedProcedure = StoredProcedures.GetBooks.ToString();
@@ -48,6 +88,23 @@ namespace UtilLibrary.MsSqlRepsoitory
             return booksList;
         }
         
+        public void BorrowBook(IStockWithBorrow stock)
+        {
+            string storedProcedure = StoredProcedures.BorrowItem.ToString();
+            
+            var obj = new
+            {
+                StockID = stock.StockID,
+                UsersID = stock.UsersID,
+                BorrowDate = stock.BorrowDate,
+                DueDate = stock.DueDate
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         /// <summary>
         /// Gets all stockentries that is bind to items
         /// </summary>
@@ -69,6 +126,8 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return stockWithBorrow;
         }
+
+
 
         public void CreateBook(IFullBooks books)
         {
@@ -93,6 +152,25 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
 
             }
+        }
+
+        public void CreateItemWithStockID(IItems item)
+        {
+            string storedProcedure = StoredProcedures.CreateItemWithStockID.ToString();
+
+            var obj = new
+            {
+                ItemsID = item.ItemsID,
+                Available = true
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
+            }
+
         }
 
         public void RemoveBook(IFullBooks books)
@@ -217,6 +295,7 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+
 
         #endregion
 

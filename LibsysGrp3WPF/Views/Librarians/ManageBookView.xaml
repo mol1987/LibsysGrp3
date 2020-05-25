@@ -7,9 +7,43 @@
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
 
+
     <Grid>
         <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-            <!--#region List of books-->
+            <!--region Pop up for editing a book-->
+            <materialDesign:DialogHost>
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel  Width="400" Margin="10">
+
+                        <StackPanel >
+                            <TextBlock Text="Titel" FontWeight="Bold" />
+                            <TextBox Text="{Binding TxBEditTitel}"/>
+                            <TextBlock Text="ISBN" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditISBN}"/>
+                            <TextBlock Text="Författare" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditAuthor}"/>
+                            <TextBlock Text="Förlag" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditPublisher}"/>
+                            <TextBlock Text="Kategori" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditCategory}"/>
+                            <TextBlock Text="Sidor" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditPages}"/>
+                            <TextBlock Text="Inköpris" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditPrice}"/>
+                            <TextBlock Text="Beskrivning" FontWeight="Bold"/>
+                            <TextBox Text="{Binding TxBEditDescription}"/>
+                        </StackPanel>
+                        <StackPanel Margin="50 10 50 0">
+                            <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">Ändra</Button>
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </materialDesign:DialogHost.DialogContent>
+                <!--#endregion-->
+
+                <!--#region List of books-->
                 <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding BooksList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -18,16 +52,15 @@
                                     <Expander HorizontalAlignment="Stretch" Header="{Binding Title}" FontWeight="Bold" Width="700">
                                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                             <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
 
-                                            
 
-                                            <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
                                                 <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
                                                 <TextBlock Text="ISBN:" Margin="0 10 5 10"/>
-                                                <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
-                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
+                                                <TextBlock Text="{Binding ISBN}" Margin="0 10 170 10" FontWeight="Normal"/>
+                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 5 0"
                                                         Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
-                                                <Button Content="Ta bort" Command="{Binding Path = DataContext.BtnDeleteBook, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
+                                                <Button Content="Lägg till fysisk exempel" Command="{Binding Path = DataContext.BtnAddStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Författare:" Margin="0 0 5 10"/>
@@ -45,6 +78,28 @@
                                                 <TextBlock Text="Skapelsedatum:" Margin="5 0 5 10"/>
                                                 <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                             </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Fysisk bok ID:" Margin="0 0 5 10"/>
+                                                
+                                                <!--StockList beginning-->
+                                                <ItemsControl ItemsSource="{Binding StockItems}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding StockID}" Margin="0 0 0 5" FontWeight="Normal"/>
+                                                                <TextBlock Text=", "></TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel></WrapPanel>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                            <!--StocList end-->
+
                                             <TextBlock Text="Beskrivning" />
                                             <TextBlock
                                                   Opacity=".68"
@@ -68,8 +123,9 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ListBox>
-      
+            </materialDesign:DialogHost>
             <!--#endregion-->
+
 
             <!--#region Pop up for adding a book-->
             <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
@@ -105,16 +161,15 @@
                 <!--#endregion-->
 
                 <!--#region Button for adding a book-->
-                <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Lägg till ny bok" Margin="10"
                         Command="{Binding BtnOpenBookDialog}"/>
-                    <!--<Button Content="Lägg till e-bok" Margin="10"/>
-                <Button Content="Lägg till film" Margin="10"/>-->
                 </StackPanel>
             </materialDesign:DialogHost>
             <!--#endregion-->
-
         </StackPanel>
+
+
     </Grid>
 
 </UserControl>

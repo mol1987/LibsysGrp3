@@ -10,24 +10,19 @@
     <materialDesign:DialogHost IsOpen="{Binding IsOpen}" CloseOnClickAway="True">
 
         <materialDesign:DialogHost.DialogContent>
-            <StackPanel Height="200" Width="200" Margin="50,50,50,50">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Height="200" Width="200" Margin="50,50,50,50">
 
-                    <StackPanel Grid.Row="0" Grid.Column="0">
+                    <StackPanel Margin="0 0 0 30">
                         <TextBlock>Personnummer</TextBlock>
                         <TextBox Text="{Binding IDTextBox}"/>
                         <TextBlock>Lösenord</TextBlock>
                         <TextBox Text="{Binding PasswordTextBox}"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="2" Grid.Column="0">
+                    <StackPanel Orientation="Vertical">
                         <Button Command="{Binding btnSignIn}">Logga In</Button>
+                    <Button Command="materialDesign:DialogHost.CloseDialogCommand" Content="Avbryt" Margin="0 10 0 0" Background="#F9A20B" BorderBrush="#F9A20B"/>
                     </StackPanel>
-                </Grid>
+
             </StackPanel>
 
         </materialDesign:DialogHost.DialogContent>
@@ -56,24 +51,19 @@
             </StackPanel>
 
             <!--top search-->
-            <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="200" VerticalAlignment="Top"
-              materialDesign:HintAssist.Hint="Sök"
-              materialDesign:HintAssist.HintOpacity=".26"
-              IsEditable="True">
-                <ComboBoxItem Content="{Binding BookList}"/>
-            </ComboBox>
+           
 
             <!--views area-->
-            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
-
+            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
+            
             <!--account status-->
-            <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35">
-                <WrapPanel >
-                    <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
-                    <TextBlock  Foreground="white"   Text="{Binding AccountCategory}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="4">
+                <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
                     
-                </WrapPanel>
+                  
                 <StackPanel>
+                    <TextBlock  Foreground="white"   Text="{Binding AccountCategory}"/>
                     <TextBlock Grid.Row="4" Foreground="White" Text="{Binding AccountName}"/>
                 </StackPanel>
             </StackPanel>
@@ -81,12 +71,14 @@
 
 
             <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    Margin=" 10 0 0 0"
-            ToolTip="MaterialDesignFlatLightButton" 
+                   
+      
             Background="#304ffe" BorderThickness="0" Width="60" Height="50"
             BorderBrush="#304ffe" Grid.Column="4" Command="{Binding BtnUserAccess}" >
                 <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
             </Button>
+
+            </StackPanel>
 
             <Menu IsMainMenu="True" Background="#304ffe" Foreground="White">
                 <MenuItem  ItemsSource="{Binding MenuList}">

@@ -12,7 +12,18 @@ namespace UtilLibrary.MsSqlRepsoitory
             return;
         }
 
+        public void BorrowBook(IStockWithBorrow stock)
+        {
+            return;
+        }
+
         public void CreateBook(IFullBooks books)
+        {
+            return;
+        }
+
+
+        public void CreateItemWithStockID(IItems items)
         {
             return;
         }

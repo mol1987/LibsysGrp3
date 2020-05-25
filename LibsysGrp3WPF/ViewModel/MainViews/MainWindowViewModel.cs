@@ -6,6 +6,7 @@ using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 
 namespace LibsysGrp3WPF
 {
@@ -24,6 +25,8 @@ namespace LibsysGrp3WPF
         private string _accountCategory = "";
         private string _accountName = "";
         private bool _isOpen = false;
+
+       
 
         private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
         {
@@ -346,10 +349,12 @@ namespace LibsysGrp3WPF
 
 
         #endregion
-
+        
         #region Constructor
         public MainWindowViewModel()
         {
+     
+
             // Add available pages and set page
             PageViewModels.Add(new StartPageViewModel());
             PageViewModels.Add(new VisitorsProfilePageViewModel());
@@ -402,17 +407,32 @@ namespace LibsysGrp3WPF
         }
         #endregion
 
+        #region Command functions
+
+        /// <summary>
+        /// Search for objects
+        /// </summary>
+        /// <param name="o"></param>
+       
+
+        #endregion
+
         #region methods
         /// <summary>
         /// Reset the all data.
         /// </summary>
         public void SignOutProcess()
         {
-            Mediator.User = null;
-            MenuList = null;
-            AccountCategory = "";
-            AccountName = "";
-            CurrentPageViewModel = PageViewModels[0];
+            var Result = MessageBox.Show("Är du säkert du vill logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (Result == MessageBoxResult.Yes)
+            {
+                Mediator.User = null;
+                MenuList = null;
+                AccountCategory = "";
+                AccountName = "";
+                CurrentPageViewModel = PageViewModels[0];
+            }
+         
         }
         #endregion
     }
