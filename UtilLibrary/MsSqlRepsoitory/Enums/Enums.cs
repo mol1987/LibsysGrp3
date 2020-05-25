@@ -16,6 +16,7 @@
         GetBook,
         GetBooks,
         RemoveItem,
-        GetBorrowList
+        GetBorrowList,
+        DeleteItemFromBorrowList
     }
 }

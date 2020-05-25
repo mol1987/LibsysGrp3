@@ -8,33 +8,28 @@
 
     <Grid>
         <Expander>
+            <Expander.Header>
+                <TextBlock Text="Mina artiklar" FontWeight="Bold" FontSize="30" Foreground="White" 
+                           Background="Blue" TextAlignment="Center"/>
+            </Expander.Header>
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical">
                     <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
                         <StackPanel Orientation="Vertical">
-                            <ListView Margin="10" ItemsSource="{Binding items}" HorizontalAlignment="Left"
+                            <ListView x:Name="BorrowDate" Margin="10" ItemsSource="{Binding myBooks}" HorizontalAlignment="Left"
                                       SelectedItem="{Binding MySelectedItem}">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="Category" DisplayMemberBinding="{Binding ItemType}" />
-                                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
-                                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
+                                        <GridViewColumn Header="Kategori" DisplayMemberBinding="{Binding ItemType}" />
+                                        <GridViewColumn Header="Titel" DisplayMemberBinding="{Binding Title}" />
+                                        <GridViewColumn Header="Beskrivning" DisplayMemberBinding="{Binding Description}" />
+                                        <GridViewColumn Header="Utlånade datum" DisplayMemberBinding="{Binding BorrowDate}" />
+                                        <GridViewColumn Header="Förfallodatum" DisplayMemberBinding="{Binding DueDate}" />
+                                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding }" />
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button Content="Lämna tillbaka" Margin="320 2 2 2" Background="Orange" Command="{Binding btnLeaveBack}"/>
-                        </StackPanel>
-                    </Border>
-                    <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
-                        <StackPanel Orientation="Vertical">
-                            <ListView Margin="10" ItemsSource="{Binding }" HorizontalAlignment="Left">
-                                <ListView.View>
-                                    <GridView>
-                                        <!--ToDo-->
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            <Button Content="Få länk" Margin="320 2 2 2" Background="Blue" Command="{Binding GetLink}"/>
+
                         </StackPanel>
                     </Border>
                 </StackPanel>

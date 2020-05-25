@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using LibsysGrp3WPF.Model.Items;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
@@ -16,8 +17,7 @@ namespace LibsysGrp3WPF
 
         #region Public properties
 
-        public ObservableCollection<BorrowList> borrowed { get; set; } = new ObservableCollection<BorrowList>();
-        public ObservableCollection<ItemsModel> items { get; set; } = new ObservableCollection<ItemsModel>();
+        public ObservableCollection<FullBorrowListModel> myBooks { get; set; } = new ObservableCollection<FullBorrowListModel>();
         public ItemsModel MySelectedItem { get; set; }
 
         #endregion
@@ -25,15 +25,15 @@ namespace LibsysGrp3WPF
         #region public button commands
 
         // not working yet
-        public ICommand btnLeaveBack => _btnLeaveBack ?? (_btnLeaveBack = new RelayCommand(x =>
-                {
-                    var obj = (BorrowList)x;
-                    var bookIndex = borrowed.IndexOf(obj);
-                    borrowed.RemoveAt(bookIndex);
-                    //items.RemoveAt(bookIndex);
+        //public ICommand btnLeaveBack => _btnLeaveBack ?? (_btnLeaveBack = new RelayCommand(x =>
+        //        {
+        //            var obj = (BorrowList)x;
+        //            var bookIndex = borrowed.IndexOf(obj);
+        //            borrowed.RemoveAt(bookIndex);
+        //            //items.RemoveAt(bookIndex);
 
-                    //borrowed.RemoveAt(MySelectedItem.ItemsID);
-                }));
+        //            //borrowed.RemoveAt(MySelectedItem.ItemsID);
+        //        }));
 
         #endregion
 
@@ -47,35 +47,30 @@ namespace LibsysGrp3WPF
         #endregion
 
         /// <summary>
-        /// Run() metod körs varje gång när programmet startas. 
+        /// Run() method runs each time the program starts.
         /// </summary>
         public void Run()
         {
-            // Återsäller både lista.
-            borrowed.Clear();
-            items.Clear();
+            // Resets borrow list to null
+            myBooks.Clear();
 
             GetBorrowed();
         }
 
         private void GetBorrowed()
         {
-            // gets all borrowed books..
+            // gets borrowed list books..
 
             if (Mediator.User != null)
             {
                 var repo = new LibsysRepo();
-                var list = repo.GetBorrowList<BorrowList>(Mediator.User.UsersID);
-                var res = repo.GetBorrowList<ItemsModel>(Mediator.User.UsersID);
+                var list = repo.GetBorrowList<FullBorrowListModel>(Mediator.User.UsersID);
 
                 foreach (var item in list)
                 {
-                    borrowed.Add(item);
+                    myBooks.Add(item);
                 }
-                foreach (var item in res)
-                {
-                    items.Add(item);
-                }
+
             }
         }
     }

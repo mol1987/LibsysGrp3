@@ -70,6 +70,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        /// <summary>
+        /// Shows borrow list for selected user
+        /// </summary>
+        /// <param name="userID">gets users ID </param>
+        /// <returns></returns>
         public IEnumerable<T> GetBorrowList<T>(int userID)
         {
             string storedProcedure = StoredProcedures.GetBorrowList.ToString();
@@ -87,20 +92,22 @@ namespace UtilLibrary.MsSqlRepsoitory
             return borrowList;
         }
 
-        //public void RemoveBookFromBorrowList(IBorrowList items)
-        //{
+        public void RemoveBookFromBorrowList(IBorrowList items)
+        {
 
-        //    string storedProcedure = StoredProcedures.RemoveItem.ToString();
-        //    var obj = new
-        //    {
-        //        ItemsID = books.ItemsID
-        //    };
-        //    using (var conn = Create_Connection())
-        //    {
-        //        conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
-        //    }
+            string storedProcedure = StoredProcedures.DeleteItemFromBorrowList.ToString();
 
-        //}
+            var obj = new
+            {
+                ItemsID = items.UserID
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+
+        }
 
         public void RemoveBook(IFullBooks books)
         {

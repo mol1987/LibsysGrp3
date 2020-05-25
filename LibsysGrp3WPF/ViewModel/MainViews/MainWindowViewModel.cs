@@ -1,17 +1,14 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace LibsysGrp3WPF
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        
+
         private ICommand _btnSignIn;
         private ICommand _menuItemsCommand;
         private ICommand _btnUserAccess;
@@ -97,7 +94,7 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-        
+
         public ICommand BtnUserAccess
         {
             get
@@ -107,7 +104,8 @@ namespace LibsysGrp3WPF
                     if (Mediator.User == null)
                     {
                         IsOpen = true;
-                    } else
+                    }
+                    else
                     {
                         SignOutProcess();
                     }
@@ -199,7 +197,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public List<IPageViewModel> PageViewModels 
+        public List<IPageViewModel> PageViewModels
         {
             get
             {
