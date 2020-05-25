@@ -35,6 +35,7 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(SelectedStockItem));
             }
         }
+
         /// <summary>
         /// List of physical books
         /// </summary>

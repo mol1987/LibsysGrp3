@@ -29,24 +29,27 @@ namespace LibsysGrp3WPF
             }
         }
 
-        //public string SelectedReason
-        //{
-        //    get
-        //    {
-        //        return _selectedReason;
-        //    }
-        //    set
-        //    {
-        //        _selectedReason = value;
-        //        OnPropertyChanged(nameof(SelectedReason));
+        public string SelectedReason
+        {
+            get
+            {
+                return _selectedReason;
 
-        //        if (_selectedReason != null)
-        //        {
-        //            var item = new StockModel();
-        //            _selectedReason = item.Reason;
-        //        }
-        //    }
-        //}
+            }
+            set
+            {
+                _selectedReason = value;
+                OnPropertyChanged(nameof(SelectedReason));
+
+                var item = new FullBooksModel(new BooksProcessor(new LibsysRepo()));
+                if (_selectedReason != null)
+                {
+                    _selectedReason = item.SelectedStockItem.Reason;
+                    getBooks();
+                }
+
+            }
+        }
         #endregion
 
 

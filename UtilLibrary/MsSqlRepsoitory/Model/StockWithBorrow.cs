@@ -25,7 +25,18 @@ namespace UtilLibrary.MsSqlRepsoitory
             {
                 retStr = "Ex. " + StockID + ". finns.";
             }
+
+            //if (Reason == "OK")
+            //{
+            //    Available = true;
+            //}
+
+            //else
+            //{
+            //    Available = false;
+            //}
             return retStr;
         }
+
     }
 }
