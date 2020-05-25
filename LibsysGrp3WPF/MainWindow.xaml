@@ -7,29 +7,25 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <!--popup-->
     <materialDesign:DialogHost IsOpen="{Binding IsOpen}" CloseOnClickAway="True">
-
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Orientation="Vertical" Height="200" Width="200" Margin="50,50,50,50">
-
-                    <StackPanel Margin="0 0 0 30">
-                        <TextBlock>Personnummer</TextBlock>
-                        <TextBox Text="{Binding IDTextBox}"/>
-                        <TextBlock>Lösenord</TextBlock>
-                        <TextBox Text="{Binding PasswordTextBox}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Button Command="{Binding btnSignIn}">Logga In</Button>
+                <StackPanel Margin="0 0 0 30">
+                    <TextBlock>Personnummer</TextBlock>
+                    <TextBox Text="{Binding IDTextBox}"/>
+                    <TextBlock>Lösenord</TextBlock>
+                    <TextBox Text="{Binding PasswordTextBox}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Button Command="{Binding btnSignIn}">Logga In</Button>
                     <Button Command="materialDesign:DialogHost.CloseDialogCommand" Content="Avbryt" Margin="0 10 0 0" Background="#F9A20B" BorderBrush="#F9A20B"/>
-                    </StackPanel>
-
+                </StackPanel>
             </StackPanel>
-
         </materialDesign:DialogHost.DialogContent>
         <!-- put the content over which the dialog is shown here (e.g. your main window grid)-->
 
         <Grid Background="White">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -45,42 +41,54 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#304ffe" Grid.Row="0" Grid.RowSpan="1" 
-                    Grid.Column="0" Grid.ColumnSpan="5">
-                <Image Source="images/LIBSYS.png" Height="60" Margin="0 20" Width="146"/>
-            </StackPanel>
+            <!--<StackPanel Orientation="Vertical" Background="#304ffe" Grid.Row="0" Grid.RowSpan="2" 
+                    Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,15">
+                <Image Source="images/LIBSYS.png" Height="79" Margin="0 20" Width="176"/>
+            </StackPanel>-->
 
-            <!--top search-->
-           
+            <!--topbar-->
+            <materialDesign:ColorZone
+              Mode="PrimaryDark"
+              Padding="0"
+              CornerRadius="3"
+              materialDesign:ShadowAssist.ShadowDepth="Depth3"
+              Margin="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="5" Height="110">
+                <StackPanel
+                Orientation="Horizontal">
+
+                </StackPanel>
+            </materialDesign:ColorZone>
+
+            <Image Source="images/LIBSYS.png" Height="79" Margin="0,0" Width="176" Grid.Row="0" Grid.Column="2"/>
 
             <!--views area-->
-            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" />
-            
+            <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="0,15,0,0" />
+
             <!--account status-->
-            <StackPanel Orientation="Horizontal" Grid.Column="4">
-                <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0,35" Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30"/>
-                    
-                  
-                <StackPanel>
-                    <TextBlock  Foreground="white"   Text="{Binding AccountCategory}"/>
-                    <TextBlock Grid.Row="4" Foreground="White" Text="{Binding AccountName}"/>
-                </StackPanel>
+            
+            <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="60,40" HorizontalAlignment="Right">
+                <WrapPanel >
+                    <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </WrapPanel>
+
+            </StackPanel>
+            <StackPanel Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="35,0">
+                <TextBlock  Foreground="white"   Text="{Binding AccountCategory}" HorizontalAlignment="Center"/>
+                <TextBlock Foreground="White" Text="{Binding AccountName}" HorizontalAlignment="Center"/>
             </StackPanel>
             <!--buttons-->
 
-
+            <!--Loginbutton-->
             <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                   
-      
-            Background="#304ffe" BorderThickness="0" Width="60" Height="50"
-            BorderBrush="#304ffe" Grid.Column="4" Command="{Binding BtnUserAccess}" >
+                    Margin="90,35,0,25"
+            ToolTip="MaterialDesignFlatLightButton" 
+            Background="#304ffe" BorderThickness="0" Width="60" Height="40"
+            BorderBrush="#304ffe" Grid.Column="4" Command="{Binding BtnUserAccess}" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
             </Button>
 
-            </StackPanel>
-
-            <Menu IsMainMenu="True" Background="#304ffe" Foreground="White">
+            <!--LeftMenu-->
+            <Menu IsMainMenu="True" Background="#304ffe" Foreground="White" Margin="0,30,0,22">
                 <MenuItem  ItemsSource="{Binding MenuList}">
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
@@ -91,7 +99,6 @@
                     <MenuItem.Header>
                         <materialDesign:PackIcon Kind="Menu" Foreground="White" Width="30" Height="30"/>
                     </MenuItem.Header>
-
                 </MenuItem>
             </Menu>
         </Grid>

@@ -84,12 +84,12 @@ namespace LibsysGrp3WPF
         /// <summary>
         /// Contains the search result
         /// </summary>
-        private ObservableCollection<SearchItems> searchResultList;
+        private ObservableCollection<FullBooks> searchResultList;
         /// <summary>
         /// Contains the search result
         /// </summary>
 
-        public ObservableCollection<SearchItems> SearchResultList
+        public ObservableCollection<FullBooks> SearchResultList
         {
             get => searchResultList;
             set
@@ -550,7 +550,7 @@ namespace LibsysGrp3WPF
         #region Methods
         private void getBooks()
         {
-            // gets all books..
+            //gets all books..
             var repo = new LibsysRepo();
             var tempBooksList = repo.GetBooks<FullBooks>();
             BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
@@ -565,6 +565,7 @@ namespace LibsysGrp3WPF
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
+            getBooks();
         }
         /// <summary>
         /// Search for objects
@@ -578,7 +579,8 @@ namespace LibsysGrp3WPF
              
                 case 0:
                     {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchBooks(SearchKey));
+                        SearchResultList = new ObservableCollection<FullBooks>((new LibsysRepo()).SearchAllItemBook(SearchKey));
+                        BooksList = FullBooksModel.ConvertToObservableCollection(SearchResultList);
                     }
                     break;
                 

@@ -12,7 +12,7 @@ namespace LibsysGrp3WPF
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        
+        #region private
         private ICommand _btnSignIn;
         private ICommand _menuItemsCommand;
         private ICommand _btnUserAccess;
@@ -25,9 +25,12 @@ namespace LibsysGrp3WPF
         private string _accountCategory = "";
         private string _accountName = "";
         private bool _isOpen = false;
-
-       
-
+        
+        /// <summary>
+        /// Dictionary for the side menu
+        /// returns an obserablecollection of a list of PagesChoice that
+        /// corresponds with the logged in Users category
+        /// </summary>
         private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
         {
             {
@@ -61,7 +64,9 @@ namespace LibsysGrp3WPF
             }
         };
         private ObservableCollection<PagesChoice> _menuList = null;
+        #endregion
 
+        #region properties
         /// <summary>
         /// Sign in command
         /// </summary>
@@ -101,6 +106,11 @@ namespace LibsysGrp3WPF
             }
         }
         
+        /// <summary>
+        /// Sign in button
+        /// if no users has logged in open the popup
+        /// if there is one, sign out user
+        /// </summary>
         public ICommand BtnUserAccess
         {
             get
@@ -112,11 +122,21 @@ namespace LibsysGrp3WPF
                         IsOpen = true;
                     } else
                     {
-                        SignOutProcess();
+                        var Result = MessageBox.Show("Vill du logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (Result == MessageBoxResult.Yes)
+                        {
+                            SignOutProcess();
+                        }
+                        
                     }
                 }));
             }
         }
+
+        /// <summary>
+        /// Sends a PagesChoice enum from the sidemenu
+        /// for easy navigation
+        /// </summary>
         public ICommand MenuItemsCommand
         {
             get
@@ -128,6 +148,11 @@ namespace LibsysGrp3WPF
             }
         }
 
+        /// <summary>
+        /// The menulist of the sidemenu
+        /// just a list of enums that gets converted
+        /// to the right 'name'
+        /// </summary>
         public ObservableCollection<PagesChoice> MenuList
         {
             get
@@ -141,6 +166,10 @@ namespace LibsysGrp3WPF
             }
         }
 
+        /// <summary>
+        /// Property for the popup
+        /// if true popup is open
+        /// </summary>
         public bool IsOpen
         {
             get
@@ -224,10 +253,15 @@ namespace LibsysGrp3WPF
                 _currentPageViewModel = value;
                 // Runs this method everytime the view gets changed
                 _currentPageViewModel.run();
-                OnPropertyChanged("CurrentPageViewModel");
+                OnPropertyChanged(nameof(CurrentPageViewModel));
             }
         }
+        #endregion
 
+        /// <summary>
+        /// Method to change the page
+        /// </summary>
+        /// <param name="viewModel"></param>
         private void ChangeViewModel(IPageViewModel viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
@@ -423,16 +457,13 @@ namespace LibsysGrp3WPF
         /// </summary>
         public void SignOutProcess()
         {
-            var Result = MessageBox.Show("Är du säkert du vill logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (Result == MessageBoxResult.Yes)
-            {
-                Mediator.User = null;
-                MenuList = null;
-                AccountCategory = "";
-                AccountName = "";
-                CurrentPageViewModel = PageViewModels[0];
-            }
-         
+            Mediator.User = null;
+            MenuList = null;
+            AccountCategory = "";
+            AccountName = "";
+            IDTextBox = "";
+            PasswordTextBox = "";
+            CurrentPageViewModel = PageViewModels[0];
         }
         #endregion
     }
