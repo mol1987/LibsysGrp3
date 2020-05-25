@@ -550,10 +550,10 @@ namespace LibsysGrp3WPF
         #region Methods
         private void getBooks()
         {
-            // gets all books..
-           // var repo = new LibsysRepo();
-           // var tempBooksList = repo.GetBooks<FullBooks>();
-           // BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
+            //gets all books..
+            var repo = new LibsysRepo();
+            var tempBooksList = repo.GetBooks<FullBooks>();
+            BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
 
 
@@ -565,6 +565,7 @@ namespace LibsysGrp3WPF
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
+            getBooks();
         }
         /// <summary>
         /// Search for objects
