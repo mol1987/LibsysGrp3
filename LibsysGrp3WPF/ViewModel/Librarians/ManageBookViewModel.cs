@@ -560,7 +560,7 @@ namespace LibsysGrp3WPF
 
         public void run()
         {
-            CbxSearchFilters = new string[] { "Böcker" };
+            CbxSearchFilters = new string[] { "Böcker", " Författare", "ISBN" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
@@ -575,14 +575,24 @@ namespace LibsysGrp3WPF
             switch (FilterTypID)
             {
 
-             
+
                 case 0:
                     {
-                        SearchResultList = new ObservableCollection<FullBooks>((new LibsysRepo()).SearchAllItemBook(SearchKey));
-                        BooksList = FullBooksModel.ConvertToObservableCollection(SearchResultList);
+
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
-                
+                case 1:
+                    {
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchBookByAuthor(SearchKey));
+                    }
+                    break;
+                case 2:
+                    {
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchBookByISBN(SearchKey));
+                    }
+                    break;
+
             }
         }
     }

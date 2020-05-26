@@ -56,6 +56,25 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return itemList;
         }
+        public IEnumerable<FullBooks> SearchBookByISBN(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBookByISBN", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+
+        }
+        public IEnumerable<FullBooks> SearchBookByAuthor(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBookByAuthor", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+        }
 
 
         public IEnumerable<SearchItems> SearchBooks(string Key)
