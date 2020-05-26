@@ -66,6 +66,10 @@ namespace UtilLibrary.MsSqlRepsoitory
         {
             return;
         }
+        public void EditBookStatus(IStock stock)
+        {
+            return;
+        }
         #endregion
     }
 }

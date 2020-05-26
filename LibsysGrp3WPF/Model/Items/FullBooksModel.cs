@@ -158,7 +158,6 @@ namespace LibsysGrp3WPF
                     Price = item.Price,
                     Description = item.Description,
                     Date = item.Date,
-                    
                 }
                 );
 
