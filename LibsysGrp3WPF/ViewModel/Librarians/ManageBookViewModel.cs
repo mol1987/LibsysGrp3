@@ -542,7 +542,7 @@ namespace LibsysGrp3WPF
         #region Constructor
         public ManageBookViewModel()
         {
-            getBooks();
+            //getBooks();
         }
         #endregion
 
@@ -564,7 +564,7 @@ namespace LibsysGrp3WPF
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
-            getBooks();
+            //getBooks();
         }
         /// <summary>
         /// Search for objects
