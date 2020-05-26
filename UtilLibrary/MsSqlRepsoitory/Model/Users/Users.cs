@@ -7,7 +7,7 @@ namespace UtilLibrary.MsSqlRepsoitory
     public class Users : IUsers
     {
         public int UsersID { get; set; }
-        public string IdentityNo { get; set; }
+        public string IdentityNO{ get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime JoinDate { get; set; }

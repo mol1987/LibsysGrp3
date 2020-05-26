@@ -33,11 +33,11 @@ namespace LibsysGrp3WPF
             #region DatavValidation
             // Data validation
 
-            if (user.IdentityNo.Length != 12) throw new Exception();
+            if (user.IdentityNO.Length != 12) throw new Exception();
             if (String.IsNullOrEmpty(user.Password)) throw new Exception();
             if (String.IsNullOrEmpty(user.Firstname)) throw new Exception();
             if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
-            if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
+            if (String.IsNullOrEmpty(user.IdentityNO)) throw new Exception();
             if (user.Password.Length > 50) throw new Exception();
             #endregion
 
@@ -49,11 +49,11 @@ namespace LibsysGrp3WPF
             #region DatavValidation
             // Data validation
 
-            if (user.IdentityNo.Length != 12) throw new Exception();
+            if (user.IdentityNO.Length != 12) throw new Exception();
             if (String.IsNullOrEmpty(user.Password)) throw new Exception();
             if (String.IsNullOrEmpty(user.Firstname)) throw new Exception();
             if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
-            if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
+            if (String.IsNullOrEmpty(user.IdentityNO)) throw new Exception();
             if (user.Password.Length > 50) throw new Exception();
             #endregion
 
@@ -65,11 +65,11 @@ namespace LibsysGrp3WPF
             #region DatavValidation
             // Data validation
 
-            if (user.IdentityNo.Length != 12) throw new Exception();
+            if (user.IdentityNO.Length != 12) throw new Exception();
             if (String.IsNullOrEmpty(user.Password)) throw new Exception();
             if (String.IsNullOrEmpty(user.Firstname)) throw new Exception();
             if (String.IsNullOrEmpty(user.Lastname)) throw new Exception();
-            if (String.IsNullOrEmpty(user.IdentityNo)) throw new Exception();
+            if (String.IsNullOrEmpty(user.IdentityNO)) throw new Exception();
             if (user.Password.Length > 50) throw new Exception();
 
             #endregion

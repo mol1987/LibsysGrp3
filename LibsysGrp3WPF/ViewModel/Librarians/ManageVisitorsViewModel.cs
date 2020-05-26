@@ -144,7 +144,7 @@ namespace LibsysGrp3WPF
                 return _buttonOk ?? (_buttonOk = new RelayCommand(x =>
                 {
                     var listIndex = VisitorList.IndexOf(userToEdit);
-                    VisitorList[listIndex].IdentityNo = AddIDTextBox;
+                    VisitorList[listIndex].IdentityNO = AddIDTextBox;
                     VisitorList[listIndex].Firstname = AddFirstnameTextBox;
                     VisitorList[listIndex].Lastname = AddLastnameTextBox;
                     VisitorList[listIndex].PhoneNumber = AddMobilTextBox;
@@ -167,7 +167,7 @@ namespace LibsysGrp3WPF
                     AddEmailTextBox = obj.Email;
                     AddFirstnameTextBox = obj.Firstname;
                     AddLastnameTextBox = obj.Lastname;
-                    AddIDTextBox = obj.IdentityNo;
+                    AddIDTextBox = obj.IdentityNO;
                     AddPasswordTextBox = obj.Password;
                     AddMobilTextBox = obj.PhoneNumber;
                     IsOpen = true;
@@ -213,7 +213,7 @@ namespace LibsysGrp3WPF
                         item.JoinDate = DateTime.Now;
                         item.Firstname = AddFirstnameTextBox;
                         item.Lastname = AddLastnameTextBox;
-                        item.IdentityNo = AddIDTextBox;
+                        item.IdentityNO = AddIDTextBox;
                         item.Email = AddEmailTextBox;
                         item.PhoneNumber = AddMobilTextBox;
                         item.Password = AddPasswordTextBox;

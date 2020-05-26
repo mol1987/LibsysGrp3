@@ -22,7 +22,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         {
             return new Users()
             {
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Password = password,
                 UsersID = 1,
                 Banned = false,
