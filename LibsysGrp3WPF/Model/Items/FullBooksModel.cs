@@ -10,8 +10,13 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
+    /// <summary>
+    /// Model for our Books. Has alot of functionality bound with
+    /// our repository for easy bindings.
+    /// </summary>
     public class FullBooksModel : ItemsModel, IFullBooks, INotifyPropertyChanged
     {
+        #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
         public IBooksProcessor Processor { get; private set; }
         public int Pages { get; set; }
@@ -47,13 +52,17 @@ namespace LibsysGrp3WPF
 
                 OnPropertyChanged(nameof(StockItems));
             }
-       } 
+       }
+        #endregion
 
+        #region Constructor
         public FullBooksModel(IBooksProcessor processor)
         {
             Processor = processor;
         }
+        #endregion
 
+        #region Methods
         public void CreateBook()
         {
             Processor.CreateBookProcess(this);
@@ -66,7 +75,11 @@ namespace LibsysGrp3WPF
         {
             Processor.EditBookProcess(this);
         }
-
+        /// <summary>
+        /// Adds user and the corresponding stock to
+        /// borrowlist
+        /// </summary>
+        /// <param name="user">Borrowing user</param>
         public void BorrowBook(IUsers user)
         {
             // update the stock item from the list so it updates on the UI
@@ -89,9 +102,39 @@ namespace LibsysGrp3WPF
 
             Processor.BorrowBookProcess(StockItems[stockIndex]);
         }
+        /// <summary>
+        /// Puts a entry in the Reservation Table
+        /// with the Users and a Stock Object
+        /// Reserves a book
+        /// </summary>
+        /// <param name="user">Reserving user</param>
+        public void ReserveBook(IUsers user)
+        {
+            // update the stock item from the list so it updates on the UI
+            var stockIndex = StockItems.IndexOf(SelectedStockItem);
+
+            var stock = new StockWithBorrow
+            {
+                StockID = StockItems[stockIndex].StockID,
+                ReservationsUsersID = user.UsersID,
+                UsersID = user.UsersID,
+                ItemsID = StockItems[stockIndex].ItemsID,
+                BorrowDate = StockItems[stockIndex].BorrowDate,
+                DueDate = StockItems[stockIndex].DueDate,
+                Available = StockItems[stockIndex].Available,
+                Reason = StockItems[stockIndex].Reason
+            };
+
+            // don't know why I have to do this shit to update on the UI
+            StockItems.RemoveAt(stockIndex);
+            StockItems.Insert(stockIndex, stock);
+            //OnPropertyChanged(nameof(StockItems));
+
+            Processor.ReserveBookProcess(StockItems[stockIndex]);
+        }
 
         /// <summary>
-        /// Convert a list of FullBook items to a observablecollection
+        /// Converts a list of FullBook items to a observablecollection
         /// and adds a stock list to the item
         /// </summary>
         /// <param name="inData"></param>
@@ -102,7 +145,6 @@ namespace LibsysGrp3WPF
             foreach (var item in inData)
             {
                 // get items stock-list
-
                 booksList.Add(new FullBooksModel(new BooksProcessor(new LibsysRepo()))
                 {
                     ItemsID = item.ItemsID,
@@ -122,25 +164,6 @@ namespace LibsysGrp3WPF
 
                 // add all stockitems to book
                 var booksItem = booksList.Last();
-                //IEnumerable<IStockWithBorrow> stockList = new List<IStockWithBorrow>
-                //{
-                //    new StockWithBorrow()
-                //    {
-                //        StockID = 1,
-                //        Available = true,
-                //        BorrowDate = DateTime.Now,
-                //        DueDate = DateTime.Now,
-                //        ItemsID = 2,
-                //        UsersID = 1,
-                //        Reason = "no"
-                //    },
-                //    new StockWithBorrow()
-                //    {
-                //        StockID = 2,
-                //        Available = true,
-                //        Reason = ""
-                //    }
-                //};
                 var stockList = booksItem.Processor._repo.GetStock(booksItem);
                 foreach (var stock in stockList)
                 {
@@ -149,7 +172,9 @@ namespace LibsysGrp3WPF
             }
             return booksList;
         }
+        #endregion
 
+        #region PropertyChanged
         protected void OnPropertyChanged(string propertyName)
         {
             VerifyPropertyName(propertyName);
@@ -162,6 +187,7 @@ namespace LibsysGrp3WPF
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
                 throw new ArgumentNullException(GetType().Name + " does not contain property: " + propertyName);
         }
+        #endregion
     }
 
 }

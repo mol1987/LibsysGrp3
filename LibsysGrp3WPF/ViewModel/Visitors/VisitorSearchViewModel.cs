@@ -60,8 +60,6 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(BooksList));
             }
         }
-
-
         /// <summary>
         /// Command for borrowing a specific physical book
         /// is connected with the stock list.
@@ -75,32 +73,43 @@ namespace LibsysGrp3WPF
                     var obj = (FullBooksModel)x;
                     if (obj != null)
                     {
-                        // user hasn't chosen a book
+                        // User hasn't chosen a book
                         if (obj.SelectedStockItem == null)
                         {
                             MessageBox.Show("Du måste välja en fysisk bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                             return;
                         }
-                        // user has chosen a already loaned book
-                        if (obj.SelectedStockItem.UsersID > 0)
+                        // User has chosen a already reserved book
+                        if (obj.SelectedStockItem.ReservationsUsersID != 0)
                         {
-                            MessageBox.Show("Du måste välja en icke lånad bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            MessageBox.Show("Du måste välja en icke reserverad bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                             return;
                         }
-                        var Result = MessageBox.Show("Vill du låna boken?", "Låna", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (Result == MessageBoxResult.Yes)
+                        // If book is not borrowed
+                        if (obj.SelectedStockItem.UsersID == 0)
                         {
-                            obj.BorrowBook(Mediator.User);
+                            var Result = MessageBox.Show("Vill du låna boken?", "Låna", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                            if (Result == MessageBoxResult.Yes)
+                            {
+                                obj.BorrowBook(Mediator.User);
+                            }
+                        }
+                        // If book isn't borrowed and not reserved
+                        else
+                        {
+                            var Result = MessageBox.Show("Vill du reservera boken?", "Reservera", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                            if (Result == MessageBoxResult.Yes)
+                            {
+                                obj.ReserveBook(Mediator.User);
+                            }
                         }
                     }
                 }));
             }
         }
-
         /// <summary>
         /// Contains the search result
         /// </summary>
-
         public ObservableCollection<SearchItems> SearchResultList
         {
             get => searchResultList;
@@ -112,11 +121,10 @@ namespace LibsysGrp3WPF
             }
         }
         #endregion
-
-
+        #region Constructor
         public VisitorSearchViewModel()
         {
-            // Search Filter Options
+            // Search Fiter Options
             CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer" };
 
             // Create the search Command
@@ -124,7 +132,11 @@ namespace LibsysGrp3WPF
 
             getBooks();
         }
-
+        #endregion
+        #region Methods
+        /// <summary>
+        /// Gets all books and inserts them to BooksList and displays them to UI
+        /// </summary>
         private void getBooks()
         {
             // gets all books..
@@ -132,7 +144,6 @@ namespace LibsysGrp3WPF
             var tempBooksList = repo.GetBooks<FullBooks>();
             BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
-
         /// <summary>
         /// Search for objects
         /// </summary>
@@ -144,13 +155,12 @@ namespace LibsysGrp3WPF
 
                 case 0:
                     {
-
                         SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchItems(SearchKey));
                     }
                     break;
                 case 1:
                     {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchBooks(SearchKey));
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
                 case 2:
@@ -171,6 +181,7 @@ namespace LibsysGrp3WPF
         {
             getBooks();
         }
+        #endregion
     }
 }
 

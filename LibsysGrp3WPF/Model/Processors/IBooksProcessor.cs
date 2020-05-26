@@ -5,6 +5,12 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
+    /// <summary>
+    /// Every process that is involved with a book object
+    /// is defined here. So every functionality that is 
+    /// connected to a book is defined here. Usualy connected
+    /// to database.
+    /// </summary>
     public interface IBooksProcessor
     {
         public ILibsysRepo _repo { get; set; }
@@ -12,5 +18,6 @@ namespace LibsysGrp3WPF
         public void RemoveBookProcess(IFullBooks books);
         public void EditBookProcess(IFullBooks books);
         public void BorrowBookProcess(IStockWithBorrow stock);
+        public void ReserveBookProcess(IStockWithBorrow stock);
     }
 }

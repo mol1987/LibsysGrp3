@@ -34,7 +34,7 @@
 
         <!--#region List of books-->
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible"  
-                     ItemsSource="{Binding BooksList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
+                     ItemsSource="{Binding SearchResultList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
                      Margin="50,0">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

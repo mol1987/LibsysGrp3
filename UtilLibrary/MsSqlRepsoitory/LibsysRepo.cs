@@ -124,7 +124,10 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return booksList;
         }
-        
+        /// <summary>
+        /// Just stores the specific stockid to the BorrowList table
+        /// </summary>
+        /// <param name="stock">Stock object thats connected to the book</param>
         public void BorrowBook(IStockWithBorrow stock)
         {
             string storedProcedure = StoredProcedures.BorrowItem.ToString();
@@ -143,7 +146,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         }
 
         /// <summary>
-        /// Gets all stockentries that is bind to items
+        /// Gets all stock entries that is bind to items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
@@ -164,7 +167,25 @@ namespace UtilLibrary.MsSqlRepsoitory
             return stockWithBorrow;
         }
 
+        /// <summary>
+        /// Reserves a book if it's already loaned
+        /// </summary>
+        /// <param name="stock">Stock object thats connected to the book</param>
+        public void ReserveBook(IStockWithBorrow stock)
+        {
+            string storedProcedure = StoredProcedures.ReserveItem.ToString();
 
+            var obj = new
+            {
+                StockID = stock.StockID,
+                UsersID = stock.ReservationsUsersID,
+
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
 
         public void CreateBook(IFullBooks books)
         {
