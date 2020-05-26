@@ -38,14 +38,12 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageVisitorSearch,
                     PagesChoice.pageVisitorMyItems,
-                    PagesChoice.pageVisitorSeminar
+                    PagesChoice.pageVisitorEditProfil
                 }
             },
             {
                 UsersCategory.Librarian, new ObservableCollection<PagesChoice>
                 {
-                    PagesChoice.pageStartView,
-                    PagesChoice.pageManageLibrarian,
                     PagesChoice.pageManageVisitor,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
@@ -57,7 +55,6 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageStartView,
                     PagesChoice.pageManageUsers,
-                    PagesChoice.pageManageLibrarian,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageReport
                 }
@@ -281,12 +278,13 @@ namespace LibsysGrp3WPF
         {
             ChangeViewModel(PageViewModels[1]);
         }
-        private void OnGoSuperuserHomePage(object obj)
+
+        private void OnGoPageManageVisitor(object obj)
         {
             ChangeViewModel(PageViewModels[2]);
         }
 
-        private void OnGoPageManageVisitor(object obj)
+        private void OnGoSuperuserHomePage(object obj)
         {
             ChangeViewModel(PageViewModels[3]);
         }
@@ -296,12 +294,12 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[4]);
         }
 
-        private void OnGoPageManageSuperUser(object obj)
+        private void OnGoPageReport(object obj)
         {
             ChangeViewModel(PageViewModels[5]);
         }
 
-        private void OnGoPageReport(object obj)
+        private void OnGoPageManageSuperUser(object obj)
         {
             ChangeViewModel(PageViewModels[6]);
         }
@@ -381,6 +379,7 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[20]);
         }
 
+
         #endregion
         
         #region Constructor
@@ -391,11 +390,11 @@ namespace LibsysGrp3WPF
             // Add available pages and set page
             PageViewModels.Add(new StartPageViewModel());
             PageViewModels.Add(new VisitorsProfilePageViewModel());
-            PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageVisitorsViewModel());
+            PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageLibrariansViewModel());
-            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new ReportsViewModel());
+            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new LibrariansHomePageViewModel());
             PageViewModels.Add(new ManageBookViewModel());
             PageViewModels.Add(new ManageEbookPageViewModel());
@@ -413,8 +412,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
 
 
-
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentPageViewModel = PageViewModels[2];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);

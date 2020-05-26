@@ -23,7 +23,9 @@
         pageVisitorEditProfil = 18,
         pageVisitorMyItems = 19,
         pageVisitorSearch =20,
-        pageVisitorSeminar =21
+        pageVisitorSeminar =21,
+        pageManageStock= 22
+
 
     }
 

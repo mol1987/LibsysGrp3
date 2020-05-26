@@ -267,6 +267,26 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+
+        /// <summary>
+        ///  Updates changes that are made in stock report
+        /// </summary>
+        /// <param name="stock"></param>
+        public void EditBookStatus(IStock stock)
+        {
+            string storedProcedure = StoredProcedures.EditBookStatus.ToString();
+            var obj = new
+            {
+                ItemsID = stock.ItemsID,
+                StockID = stock.StockID,
+                Available = stock.Available,
+                Reason = stock.Reason
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
         #endregion
 
         #region Users
@@ -352,6 +372,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             {
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
+        }
+
+        public void EditBookStatus(IFullBooks books)
+        {
+            throw new NotImplementedException();
         }
 
 

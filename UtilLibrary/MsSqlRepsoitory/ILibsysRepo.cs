@@ -20,5 +20,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         public void BorrowBook(IStockWithBorrow stock);
         public void ReserveBook(IStockWithBorrow stock);
         public void CreateItemWithStockID(IItems items);
+        public void EditBookStatus(IStock stock);
     }
 }

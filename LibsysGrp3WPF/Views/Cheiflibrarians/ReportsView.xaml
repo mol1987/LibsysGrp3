@@ -3,9 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
 
-    <Grid Background="LightBlue">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <!-- Search-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                      ItemsSource="{Binding CbxSearchFilters}" 
+                      SelectedIndex="{Binding FilterTypID}"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+             materialDesign:HintAssist.Hint="Sök med titel eller bok ID"></TextBox>
+            <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
+                <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
+            </Button>
+        </Grid>
+
+            <!--#region List of books-->
+        <ListView Height="450" Grid.Row="1"  HorizontalAlignment="Left"  Margin="250,10 0 0"
+           ItemsSource="{Binding BooksList, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Namn"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding ISBN}"  Header="EAN" />
+
+                    <GridViewColumn
+                            Header="Fysisk bok ID                Aktiv                Kommentar">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding StockItems}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="{Binding StockID}" Margin="30 0 70 0" />
+                                                </StackPanel>
+                                                <CheckBox Margin="30 0 70 0" 
+                                                              IsChecked="{Binding Available, Mode=TwoWay}"/>
+
+                                                <TextBox Text="{Binding Reason, Mode=TwoWay}" Width="50" Margin="0 0 70 0" />
+
+                                                <Button Content="Spara ändringar" Margin="0 0 10 10" Background="#F9A20B" BorderBrush="#F9A20B"
+                                                            Command="{Binding Path = DataContext.SaveChanges, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
+
 </UserControl>

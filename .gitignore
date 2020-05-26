@@ -236,3 +236,4 @@ _Pvt_Extensions
 UtilLibrary/MsSqlRepsoitory/App.config
 UtilLibrary/MsSqlRepsoitory/App.config
 LibsysGrp3WPF/ViewModel/Librarians/ManageVisitorsViewModel.cs
+*.config
