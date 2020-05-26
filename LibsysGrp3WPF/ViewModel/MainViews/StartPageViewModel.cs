@@ -8,8 +8,22 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
+    /// <summary>
+    /// The first page a visitor sees
+    /// contains just a basic search window.
+    /// </summary>
     public class StartPageViewModel : ManageBookViewModel, IPageViewModel
     {
+        #region Private Properties
+        private ICommand _buttonPage2;
+        private ICommand _buttonLogin;
+        private ICommand _buttonGotoLogin;
+        private ICommand _buttonQuit;
+
+        private bool _popupIsOpen = false;
+        private string _iDTextBox;
+        private string _passwordTextBox;
+        #endregion
         #region Public Properties
 
         ///<summary>
@@ -33,11 +47,6 @@ namespace LibsysGrp3WPF
         /// </summary>
         public int FilterTypID { get; set; }
 
-        ///<summary>
-        ///Get Multiple Bindings
-        /// </summary>
-
-
         /// <summary>
         /// Contains the search result
         /// </summary>
@@ -45,7 +54,6 @@ namespace LibsysGrp3WPF
         /// <summary>
         /// Contains the search result
         /// </summary>
-
         public ObservableCollection<SearchItems> SearchResultList
         {
             get => searchResultList;
@@ -56,18 +64,6 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(SearchResultList));
             }
         }
-        #endregion
-
-
-        private ICommand _buttonPage2;
-        private ICommand _buttonLogin;
-        private ICommand _buttonGotoLogin;
-        private ICommand _buttonQuit;
-
-        private bool _popupIsOpen = false;
-        private string _iDTextBox;
-        private string _passwordTextBox;
-
         public string IDTextBox
         {
             get
@@ -92,27 +88,16 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(PasswordTextBox));
             }
         }
-
-        public bool PopupIsOpen { 
-            get 
-            {
-                return _popupIsOpen;
-            }
-            set 
-            {
-                _popupIsOpen = value;
-                OnPropertyChanged(nameof(PopupIsOpen));
-            } 
-        }
-
-        public ICommand ButtonPage2
+        public bool PopupIsOpen
         {
             get
             {
-                return _buttonPage2 ?? (_buttonPage2 = new RelayCommand(x =>
-                {
-                    Mediator.Notify(PagesChoice.Page2, "");
-                }));
+                return _popupIsOpen;
+            }
+            set
+            {
+                _popupIsOpen = value;
+                OnPropertyChanged(nameof(PopupIsOpen));
             }
         }
         public ICommand ButtonGotoLogin
@@ -149,9 +134,12 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
+        #endregion
+
+        #region Methods
         public void run()
         {
-            CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böker", "Filmer" };
+            CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
@@ -167,13 +155,12 @@ namespace LibsysGrp3WPF
 
                 case 0:
                     {
-
                         SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchItems(SearchKey));
                     }
                     break;
                 case 1:
                     {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchBooks(SearchKey));
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
                 case 2:
@@ -189,5 +176,6 @@ namespace LibsysGrp3WPF
                     break;
             }
         }
+        #endregion
     }
 }

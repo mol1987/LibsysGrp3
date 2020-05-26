@@ -106,11 +106,6 @@ namespace LibsysGrp3WPF
                     }
                 }));
             }
-                set{
-               
-
-                OnPropertyChanged(nameof(BooksList));
-            }
         }
         /// <summary>
         /// Contains the search result
@@ -130,7 +125,7 @@ namespace LibsysGrp3WPF
         public VisitorSearchViewModel()
         {
             // Search Fiter Options
-            CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer" };
+            CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer"};
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
@@ -149,7 +144,7 @@ namespace LibsysGrp3WPF
             var tempBooksList = repo.GetBooks<FullBooks>();
             BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
-        /// <summary>stock
+        /// <summary>
         /// Search for objects
         /// </summary>
         /// <param name="o"></param>
@@ -166,7 +161,6 @@ namespace LibsysGrp3WPF
                 case 1:
                     {
                         BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
-                        
                     }
                     break;
                 case 2:
@@ -180,6 +174,7 @@ namespace LibsysGrp3WPF
                         SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchMovies(SearchKey));
                     }
                     break;
+          
             }
         }
 

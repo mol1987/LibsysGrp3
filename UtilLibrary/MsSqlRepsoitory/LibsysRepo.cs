@@ -56,8 +56,7 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return itemList;
         }
-
-        public IEnumerable<FullBooks> SearchBookByISBN(string Key)
+         public IEnumerable<FullBooks> SearchBookByISBN(string Key)
         {
             IEnumerable<FullBooks> itemList;
             using (var conn = Create_Connection())
@@ -76,7 +75,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return itemList;
         }
-
 
 
         public IEnumerable<SearchItems> SearchBooks(string Key)
@@ -179,8 +177,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             {
                 ItemsID = item.ItemsID
             };
-
-
 
             IEnumerable <IStockWithBorrow> stockWithBorrow;
             using (var conn = Create_Connection())
