@@ -74,6 +74,7 @@ namespace LibsysGrp3WPF
         {
             get
             {
+                
                 return _btnSignIn ?? (_btnSignIn = new RelayCommand(x =>
                 {
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
