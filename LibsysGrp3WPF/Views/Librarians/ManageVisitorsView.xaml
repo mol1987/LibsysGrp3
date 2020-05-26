@@ -29,7 +29,7 @@
             </Button>
             </Grid>
             <!-- End Search-->
-            <!--#region Pop up for editing a book-->
+            <!--#region Pop up for editing a visitor-->
             <materialDesign:DialogHost>
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel  Width="400" Margin="10">
@@ -135,12 +135,10 @@
                 </materialDesign:DialogHost.DialogContent>
                 <!--#endregion-->
 
-                <!--#region Button for adding a book-->
+                <!--#region Button for adding a visitor-->
                 <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
                     <Button Content="Lägg till ny användare" Margin="10"
                         Command="{Binding BtnOpenVisitorDialog}"/>
-                    <!--<Button Content="Lägg till e-bok" Margin="10"/>
-                <Button Content="Lägg till film" Margin="10"/>-->
                 </StackPanel>
             </materialDesign:DialogHost>
             <!--#endregion-->
