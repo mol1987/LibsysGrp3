@@ -139,7 +139,7 @@ namespace LibsysGrp3WPF
         #region Methods
         public void run()
         {
-            CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böker", "Filmer" };
+            CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer", " Författare", "ISBN" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
@@ -155,13 +155,12 @@ namespace LibsysGrp3WPF
 
                 case 0:
                     {
-
                         SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchItems(SearchKey));
                     }
                     break;
                 case 1:
                     {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchBooks(SearchKey));
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
                 case 2:
@@ -173,6 +172,18 @@ namespace LibsysGrp3WPF
                     {
 
                         SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchMovies(SearchKey));
+                    }
+                    break;
+                case 4:
+                    {
+
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchBookByAuthor(SearchKey));
+                    }
+                    break;
+                case 5:
+                    {
+
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchBookByISBN(SearchKey));
                     }
                     break;
             }
