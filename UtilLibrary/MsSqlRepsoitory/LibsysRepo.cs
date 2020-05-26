@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -20,8 +21,8 @@ namespace UtilLibrary.MsSqlRepsoitory
         #region constructor
         public LibsysRepo()
         {
-            //_connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
-            _connectionString = "Data Source=SQL6009.site4now.net;Initial Catalog=DB_A53DDD_mpol;User Id=DB_A53DDD_mpol_admin;Password=Password123;";
+            _connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
+            //_connectionString = "Data Source=SQL6009.site4now.net;Initial Catalog=DB_A53DDD_mpol;User Id=DB_A53DDD_mpol_admin;Password=Password123;";
         }
         #endregion
 
