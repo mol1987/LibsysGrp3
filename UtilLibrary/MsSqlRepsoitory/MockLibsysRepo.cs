@@ -33,6 +33,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             return;
         }
 
+        public void EditBookStatus(IStock stock)
+        {
+            return;
+        }
+
         public void EditUser(IUsers user)
         {
             return;

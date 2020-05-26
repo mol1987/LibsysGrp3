@@ -21,23 +21,8 @@ namespace LibsysGrp3WPF
         public string Publisher { get; set; }
         public ObservableCollection<IStockWithBorrow> _stockItems = new ObservableCollection<IStockWithBorrow>();
         private IStockWithBorrow _selectedStockItem;
-        private IStockWithBorrow _selectedReason;
 
 
-        /// <summary>
-        /// Property when librarian selects a specific book to inactivate
-        /// </summary>
-        public IStockWithBorrow SelectedReason
-        {
-            get => _selectedReason;
-            set
-            {
-                _selectedReason = value;
-
-                OnPropertyChanged(nameof(SelectedReason));
-
-            }
-        }
 
         /// <summary>
         /// Property when user selects a specific book
@@ -84,6 +69,7 @@ namespace LibsysGrp3WPF
         {
             Processor.EditBookProcess(this);
         }
+
 
         public void BorrowBook(IUsers user)
         {
