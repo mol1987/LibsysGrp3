@@ -68,7 +68,7 @@ namespace LibsysGrp3WPF
             {
                 return _btnLogout ?? (_btnLogout = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.Page1, "");
+                    Mediator.Notify(PagesChoice.pageStartView, "");
                 }));
             }
         }
@@ -93,5 +93,8 @@ namespace LibsysGrp3WPF
             CurrentContent = null;
         }
         #endregion
+        public void run()
+        {
+        }
     }
 }

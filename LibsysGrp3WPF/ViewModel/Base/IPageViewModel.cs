@@ -4,7 +4,8 @@ using System.Text;
 
 namespace LibsysGrp3WPF
 {
-    public class LoginPopUpViewModel : BaseViewModel, IPageViewModel
+    public interface IPageViewModel
     {
+        public void run();
     }
 }

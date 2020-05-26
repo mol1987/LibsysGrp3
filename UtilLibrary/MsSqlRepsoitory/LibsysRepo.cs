@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,8 +25,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         #region constructor
         public LibsysRepo()
         {
-            //_connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
-            _connectionString = "Data Source=SQL6009.site4now.net;Initial Catalog=DB_A53DDD_mpol;User Id=DB_A53DDD_mpol_admin;Password=Password123;";
+            _connectionString = ConfigurationManager.ConnectionStrings["LibsysAzure"].ConnectionString;
         }
         #endregion
 
@@ -38,17 +38,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         #endregion
 
         #region Items
-
-        public IEnumerable<FullBooks> GetBooks()
-        {
-            string storedProcedure = StoredProcedures.GetBooks.ToString();
-            IEnumerable<FullBooks> booksList;
-            using (var conn = Create_Connection())
-            {
-                booksList = conn.Query<FullBooks>(storedProcedure, commandType: CommandType.StoredProcedure);
-            }
-            return booksList;
-        }
         public IEnumerable<SearchItems> SearchItems(string Key)
         {
             IEnumerable<SearchItems> itemList;
@@ -58,8 +47,38 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return itemList;
         }
-      
-        
+        public IEnumerable<FullBooks> SearchAllItemBook(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBooksAllItems", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+        }
+
+        public IEnumerable<FullBooks> SearchBookByISBN(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBookByISBN", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+
+        }
+        public IEnumerable<FullBooks> SearchBookByAuthor(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBookByAuthor", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+        }
+
+
+
         public IEnumerable<SearchItems> SearchBooks(string Key)
         {
             IEnumerable<SearchItems> booksList;
@@ -69,25 +88,127 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return booksList;
         }
-        public IEnumerable<SearchEbook> SearchEbooks(string Key)
+        public IEnumerable<SearchItems> SearchEbooks(string Key)
         {
-            IEnumerable<SearchEbook> moviesList;
+            IEnumerable<SearchItems> EbookList;
             using (var conn = Create_Connection())
             {
-                moviesList = conn.Query<SearchEbook>("SearchEbook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                EbookList = conn.Query<SearchItems>("SearchEbook", new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
-            return moviesList;
+            return EbookList;
         }
-        public IEnumerable<SearchMovie> SearchMovies(string Key)
+        public IEnumerable<SearchItems> SearchMovies(string Key)
         {
-            IEnumerable<SearchMovie> moviesList;
+            IEnumerable<SearchItems> moviesList;
             using (var conn = Create_Connection())
             {
-                moviesList = conn.Query<SearchMovie>("SearchMovie", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                moviesList = conn.Query<SearchItems>("SearchMovie", new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return moviesList;
         }
 
+        public IEnumerable<Users> SearchUserName(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchUserName", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+        public IEnumerable<Users> SearchUserIdentiteyNO(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchUserIdentityNO", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+        public IEnumerable<Users> SearchUserEmail(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchUserEmail", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+
+        public IEnumerable<T> GetBooks<T>()
+        {
+            string storedProcedure = StoredProcedures.GetBooks.ToString();
+            IEnumerable<T> booksList;
+            using (var conn = Create_Connection())
+            {
+                booksList = conn.Query<T>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return booksList;
+        }
+        /// <summary>
+        /// Just stores the specific stockid to the BorrowList table
+        /// </summary>
+        /// <param name="stock">Stock object thats connected to the book</param>
+        public void BorrowBook(IStockWithBorrow stock)
+        {
+            string storedProcedure = StoredProcedures.BorrowItem.ToString();
+            
+            var obj = new
+            {
+                StockID = stock.StockID,
+                UsersID = stock.UsersID,
+                BorrowDate = stock.BorrowDate,
+                DueDate = stock.DueDate
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        /// <summary>
+        /// Gets all stock entries that is bind to items
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public IEnumerable<IStockWithBorrow> GetStock(IItems item)
+        {
+            string storedProcedure = StoredProcedures.GetStock.ToString();
+            var obj = new
+            {
+                ItemsID = item.ItemsID
+            };
+
+
+
+            IEnumerable <IStockWithBorrow> stockWithBorrow;
+            using (var conn = Create_Connection())
+            {
+                stockWithBorrow = conn.Query<StockWithBorrow>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+            return stockWithBorrow;
+        }
+
+        /// <summary>
+        /// Reserves a book if it's already loaned
+        /// </summary>
+        /// <param name="stock">Stock object thats connected to the book</param>
+        public void ReserveBook(IStockWithBorrow stock)
+        {
+            string storedProcedure = StoredProcedures.ReserveItem.ToString();
+
+            var obj = new
+            {
+                StockID = stock.StockID,
+                UsersID = stock.ReservationsUsersID,
+
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
 
         public void CreateBook(IFullBooks books)
         {
@@ -114,6 +235,25 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        public void CreateItemWithStockID(IItems item)
+        {
+            string storedProcedure = StoredProcedures.CreateItemWithStockID.ToString();
+
+            var obj = new
+            {
+                ItemsID = item.ItemsID,
+                Available = true
+
+            };
+
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+
+            }
+
+        }
+
         public void RemoveBook(IFullBooks books)
         {
             
@@ -135,7 +275,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             var obj = new
             {
                 Title = books.Title,
-                ItemType = books.ItemType,
                 ISBN = books.ISBN,
                 Author = books.Author,
                 Publisher = books.Publisher,
@@ -143,7 +282,8 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Pages = books.Pages,
                 Price = books.Price,
                 Description = books.Description,
-                Date = books.Date
+                Date = books.Date,
+                ID = books.ItemsID
             };
             using (var conn = Create_Connection())
             {
@@ -151,6 +291,25 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        /// <summary>
+        ///  Updates changes that are made in stock report
+        /// </summary>
+        /// <param name="stock"></param>
+        public void EditBookStatus(IStock stock)
+        {
+            string storedProcedure = StoredProcedures.EditBookStatus.ToString();
+            var obj = new
+            {
+                ItemsID = stock.ItemsID,
+                StockID = stock.StockID,
+                Available = stock.Available,
+                Reason = stock.Reason
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
         #endregion
 
         #region Users
@@ -185,7 +344,9 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Lastname = user.Lastname,
                 JoinDate = user.JoinDate,
                 Banned = user.Banned,
-                UsersCategory = user.UsersCategory
+                UsersCategory = user.UsersCategory,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.Email
             };
 
             using (var conn = Create_Connection())
@@ -235,6 +396,12 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void EditBookStatus(IFullBooks books)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion
 

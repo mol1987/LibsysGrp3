@@ -60,9 +60,12 @@ namespace LibsysGrp3WPF
             {
                 return _btnLogout ?? (_btnLogout = new RelayCommand(x =>
                 {
-                    Mediator.Notify(PagesChoice.Page1, "");
+                    Mediator.Notify(PagesChoice.pageStartView, "");
                 }));
             }
+        }
+        public void run()
+        {
         }
     }
 }

@@ -1,24 +1,72 @@
-﻿using System.Collections.Generic;
+﻿using MaterialDesignThemes.Wpf;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System;
+using System.Windows;
 
 namespace LibsysGrp3WPF
 {
-    /// <summary>
-    /// The ViewModel for the MainWindow
-    /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
-        #region Commands
-
-        #region SignIn Command
-
+        #region private
         private ICommand _btnSignIn;
+        private ICommand _menuItemsCommand;
+        private ICommand _btnUserAccess;
 
+        private IPageViewModel _currentPageViewModel;
+        private List<IPageViewModel> _pageViewModels;
+
+        private string _iDTextBox;
+        private string _passwordTextBox;
+        private string _accountCategory = "";
+        private string _accountName = "";
+        private bool _isOpen = false;
+        
+        /// <summary>
+        /// Dictionary for the side menu
+        /// returns an obserablecollection of a list of PagesChoice that
+        /// corresponds with the logged in Users category
+        /// </summary>
+        private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
+        {
+            {
+                UsersCategory.Visitor, new ObservableCollection<PagesChoice>
+                {
+                    PagesChoice.pageVisitorSearch,
+                    PagesChoice.pageVisitorMyItems,
+                    PagesChoice.pageVisitorEditProfil
+                }
+            },
+            {
+                UsersCategory.Librarian, new ObservableCollection<PagesChoice>
+                {
+                    PagesChoice.pageManageVisitor,
+                    PagesChoice.pageManageSeminar,
+                    PagesChoice.pageManageBook,
+                    PagesChoice.pageReport
+                }
+            },
+            {
+                UsersCategory.Chieflibrarian, new ObservableCollection<PagesChoice>
+                {
+                    PagesChoice.pageStartView,
+                    PagesChoice.pageManageUsers,
+                    PagesChoice.pageManageSeminar,
+                    PagesChoice.pageReport
+                }
+            }
+        };
+        private ObservableCollection<PagesChoice> _menuList = null;
+        #endregion
+
+        #region properties
+        /// <summary>
+        /// Sign in command
+        /// </summary>
         public ICommand btnSignIn
         {
             get
@@ -28,6 +76,7 @@ namespace LibsysGrp3WPF
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
                     Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
                     AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
+                    AccountName = Mediator.User.Firstname + " " + Mediator.User.Lastname;
 
                     // Switches view to match User previlige and match menu content
                     switch ((UsersCategory)Mediator.User.UsersCategory)
@@ -37,11 +86,11 @@ namespace LibsysGrp3WPF
                             MenuList = _menuListCategories[UsersCategory.Visitor];
                             break;
                         case UsersCategory.Librarian:
-                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
+                            //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
                             MenuList = _menuListCategories[UsersCategory.Librarian];
                             break;
                         case UsersCategory.Chieflibrarian:
-                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
+                            //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
                             MenuList = _menuListCategories[UsersCategory.Chieflibrarian];
                             break;
                         default:
@@ -53,86 +102,71 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
+        
+        /// <summary>
+        /// Sign in button
+        /// if no users has logged in open the popup
+        /// if there is one, sign out user
+        /// </summary>
+        public ICommand BtnUserAccess
+        {
+            get
+            {
+                return _btnUserAccess ?? (_btnUserAccess = new RelayCommand(x =>
+                {
+                    if (Mediator.User == null)
+                    {
+                        IsOpen = true;
+                    } else
+                    {
+                        var Result = MessageBox.Show("Vill du logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (Result == MessageBoxResult.Yes)
+                        {
+                            SignOutProcess();
+                        }
+                        
+                    }
+                }));
+            }
+        }
 
-        #endregion
-
-        #region ManuItems Command
-
-        private ICommand _menuItemsCommand;
-
+        /// <summary>
+        /// Sends a PagesChoice enum from the sidemenu
+        /// for easy navigation
+        /// </summary>
         public ICommand MenuItemsCommand
         {
             get
             {
                 return _menuItemsCommand ?? (_menuItemsCommand = new RelayCommand(x =>
                 {
-
-                    Trace.WriteLine("hello " + x.ToString());
                     ChangeViewModel(PageViewModels[(int)((PagesChoice)x)]);
                 }));
             }
         }
 
-        #endregion
-
-        #region Search Command
-
         /// <summary>
-        /// Command for the search button
+        /// The menulist of the sidemenu
+        /// just a list of enums that gets converted
+        /// to the right 'name'
         /// </summary>
-        public ICommand btnSearch { get; set; }
-
-        #endregion
-
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Bound to the search key textbox
-        /// </summary>
-        public string SearchKey { get; set; } = "";
-
-        /// <summary>
-        /// Array that contains all of the search filters
-        /// </summary>
-        public string[] CbxSearchFilters { get; set; }
-
-        /// <summary>
-        /// Filet type ID
-        /// </summary>
-        public int FilterTypID { get; set; }
-
-        ///<summary>
-        ///Get Multiple Bindings
-        /// </summary>
-   
-
-        /// <summary>
-        /// Contains the search result
-        /// </summary>
-        private ObservableCollection<SearchItems> searchResultList;
-        /// <summary>
-        /// Contains the search result
-        /// </summary>
-
-        public ObservableCollection<SearchItems> SearchResultList
+        public ObservableCollection<PagesChoice> MenuList
         {
-            get => searchResultList;
+            get
+            {
+                return _menuList;
+            }
             set
             {
-                searchResultList = value;
-
-                OnPropertyChanged(nameof(SearchResultList));
+                _menuList = value;
+                OnPropertyChanged(nameof(MenuList));
             }
         }
-        
- 
 
-        
-
-
-
+        /// <summary>
+        /// Property for the popup
+        /// if true popup is open
+        /// </summary>
         public bool IsOpen
         {
             get
@@ -155,6 +189,18 @@ namespace LibsysGrp3WPF
             {
                 _accountCategory = value;
                 OnPropertyChanged(nameof(AccountCategory));
+            }
+        }
+        public string AccountName
+        {
+            get
+            {
+                return _accountName;
+            }
+            set
+            {
+                _accountName = value;
+                OnPropertyChanged(nameof(AccountName));
             }
         }
         public string IDTextBox
@@ -182,63 +228,6 @@ namespace LibsysGrp3WPF
             }
         }
 
-        #endregion
-
-        private IPageViewModel _currentPageViewModel;
-        private List<IPageViewModel> _pageViewModels;
-
-        private string _iDTextBox;
-        private string _passwordTextBox;
-        private string _accountCategory = "Bilfantast";
-        private bool _isOpen = false;
-
-        private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
-        {
-            {
-                UsersCategory.Visitor, new ObservableCollection<PagesChoice>
-                {
-                    PagesChoice.pageVisitorMyItems,
-                    PagesChoice.pageVisitorSeminar
-                }
-            },
-            {
-                UsersCategory.Librarian, new ObservableCollection<PagesChoice>
-                {
-                    PagesChoice.pageManageLibrarian,
-                    PagesChoice.pageManageUsers,
-                    PagesChoice.pageManageSeminar,
-                    PagesChoice.pageReport
-                }
-            },
-            {
-                UsersCategory.Chieflibrarian, new ObservableCollection<PagesChoice>
-                {
-                    PagesChoice.pageManageUsers,
-                    PagesChoice.pageManageLibrarian,
-                    PagesChoice.pageManageSeminar,
-                    PagesChoice.pageReport
-                }
-            }
-        };
-        private ObservableCollection<PagesChoice> _menuList = new ObservableCollection<PagesChoice> 
-        {
-            PagesChoice.pageAddLibrarian,
-            PagesChoice.pageAddVisitor
-        };
-
-        public ObservableCollection<PagesChoice> MenuList
-        {
-            get
-            {
-                return _menuList;
-            }
-            set
-            {
-                _menuList = value;
-                OnPropertyChanged(nameof(MenuList));
-            }
-        }
-
         public List<IPageViewModel> PageViewModels 
         {
             get
@@ -259,10 +248,17 @@ namespace LibsysGrp3WPF
             set
             {
                 _currentPageViewModel = value;
-                OnPropertyChanged("CurrentPageViewModel");
+                // Runs this method everytime the view gets changed
+                _currentPageViewModel.run();
+                OnPropertyChanged(nameof(CurrentPageViewModel));
             }
         }
+        #endregion
 
+        /// <summary>
+        /// Method to change the page
+        /// </summary>
+        /// <param name="viewModel"></param>
         private void ChangeViewModel(IPageViewModel viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
@@ -282,12 +278,13 @@ namespace LibsysGrp3WPF
         {
             ChangeViewModel(PageViewModels[1]);
         }
-        private void OnGoSuperuserHomePage(object obj)
+
+        private void OnGoPageManageVisitor(object obj)
         {
             ChangeViewModel(PageViewModels[2]);
         }
 
-        private void OnGoPageManageVisitor(object obj)
+        private void OnGoSuperuserHomePage(object obj)
         {
             ChangeViewModel(PageViewModels[3]);
         }
@@ -297,12 +294,12 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[4]);
         }
 
-        private void OnGoPageManageSuperUser(object obj)
+        private void OnGoPageReport(object obj)
         {
             ChangeViewModel(PageViewModels[5]);
         }
 
-        private void OnGoPageReport(object obj)
+        private void OnGoPageManageSuperUser(object obj)
         {
             ChangeViewModel(PageViewModels[6]);
         }
@@ -382,26 +379,22 @@ namespace LibsysGrp3WPF
             ChangeViewModel(PageViewModels[20]);
         }
 
-        #endregion   
 
+        #endregion
+        
+        #region Constructor
         public MainWindowViewModel()
         {
-            CbxSearchFilters = new string[] { "Allting","Böker"};
+     
 
-            // Create the search Command
-            btnSearch = new RelayCommand((o) => SearchItems(o));
-
-            #region VAFAN E DE HÄR!?
-
-            FilterTypID = 0;
             // Add available pages and set page
             PageViewModels.Add(new StartPageViewModel());
             PageViewModels.Add(new VisitorsProfilePageViewModel());
-            PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageVisitorsViewModel());
+            PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageLibrariansViewModel());
-            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new ReportsViewModel());
+            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new LibrariansHomePageViewModel());
             PageViewModels.Add(new ManageBookViewModel());
             PageViewModels.Add(new ManageEbookPageViewModel());
@@ -421,7 +414,7 @@ namespace LibsysGrp3WPF
 
             CurrentPageViewModel = PageViewModels[20];
 
-            Mediator.Subscribe(PagesChoice.Page1, OnGoPage1Screen);
+            Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
             Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
             Mediator.Subscribe(PagesChoice.pageSuperUserHomepage, OnGoSuperuserHomePage);
             Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);
@@ -443,10 +436,8 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
-
-
-            #endregion
         }
+        #endregion
 
         #region Command functions
 
@@ -454,36 +445,24 @@ namespace LibsysGrp3WPF
         /// Search for objects
         /// </summary>
         /// <param name="o"></param>
-        private void SearchItems(object o)
+       
+
+        #endregion
+
+        #region methods
+        /// <summary>
+        /// Reset the all data.
+        /// </summary>
+        public void SignOutProcess()
         {
-            switch (FilterTypID)
-            {
-
-                case 0:
-                    {
-
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchItems(SearchKey));
-                    }
-                    break;
-                case 1:
-                    {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchBooks(SearchKey));
-                    }
-                    break;
-                case 2:
-                    {
-                        //SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchEbooks(SearchKey));
-                    }
-                    break;
-                case 3:
-                    {
-
-                       // SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchEbooks(SearchKey));
-                    }
-                    break;
-            }
+            Mediator.User = null;
+            MenuList = null;
+            AccountCategory = "";
+            AccountName = "";
+            IDTextBox = "";
+            PasswordTextBox = "";
+            CurrentPageViewModel = PageViewModels[0];
         }
-
         #endregion
     }
 }

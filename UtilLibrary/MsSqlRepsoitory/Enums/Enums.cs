@@ -4,6 +4,9 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory.Enums
 {
+    /// <summary>
+    /// Enum for all our StoredProcedures on the DataBase
+    /// </summary>
     public enum StoredProcedures
     {
         AddNewLibrarians,
@@ -20,6 +23,10 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         GetBook,
         GetBooks,
         RemoveItem,
-        SearchItems
+        GetStock,
+        BorrowItem,
+        CreateItemWithStockID,
+        ReserveItem,
+        EditBookStatus
     }
 }
