@@ -35,7 +35,7 @@
 
             <!--#region List of books-->
         <ListView Height="450" Grid.Row="1"  HorizontalAlignment="Left"  Margin="250,10 0 0"
-           ItemsSource="{Binding BooksList, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+           ItemsSource="{Binding BooksList, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Namn"/>
