@@ -17,7 +17,7 @@ namespace LibsysGrp3WPF
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			var convertObject = (StockWithBorrow)value;
-            string retStr = "Ex. " + convertObject.StockID ".";
+            string retStr = "Ex. " + convertObject.StockID + ".";
 			if (convertObject.UsersID == 0)
 				retStr += " Finns i lagret";
 			else
