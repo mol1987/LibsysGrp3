@@ -334,7 +334,7 @@ namespace UtilLibrary.MsSqlRepsoitory
 
             var obj = new
             {
-                IdentityNo = user.IdentityNo,
+                IdentityNo = user.IdentityNO,
                 Password = user.Password,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
@@ -379,7 +379,7 @@ namespace UtilLibrary.MsSqlRepsoitory
             var obj = new
             {
                 UsersID = user.UsersID,
-                IdentityNo = user.IdentityNo,
+                IdentityNo = user.IdentityNO,
                 Password = user.Password,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
