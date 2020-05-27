@@ -51,7 +51,7 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="{Binding StockID}" Margin="0 0 0 20" />
+                                                <TextBlock Text="{Binding StockID}" Height="45" Margin="5 0 0 0"  />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -67,7 +67,7 @@
                                 <ItemsControl ItemsSource="{Binding StockItems}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <CheckBox Height="30"
+                                            <CheckBox Height="40"
                                                 IsChecked="{Binding Available, Mode=TwoWay}"/>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -83,7 +83,7 @@
                                 <ItemsControl ItemsSource="{Binding StockItems}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding Reason, Mode=TwoWay}" Width="150" />
+                                            <TextBox Text="{Binding Reason, Mode=TwoWay}" Height="40" Width="150" VerticalContentAlignment="Center" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
