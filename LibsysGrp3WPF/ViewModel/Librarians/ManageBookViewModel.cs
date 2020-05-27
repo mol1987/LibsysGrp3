@@ -14,7 +14,7 @@ namespace LibsysGrp3WPF
     public class ManageBookViewModel : BaseViewModel, IPageViewModel
     {
         #region Private properties
-        private ObservableCollection<FullBooksModel> _booksList;
+        private ObservableCollection<object> _booksList;
         private ObservableCollection<StockModel> _stocklist;
         private ICommand _btnEditBook;
         private ICommand _btnAddStockID;
@@ -346,7 +346,7 @@ namespace LibsysGrp3WPF
 
         #region Other public properties
 
-        public ObservableCollection<FullBooksModel> BooksList
+        public ObservableCollection<object> BooksList
         {
             get
             {
@@ -401,20 +401,20 @@ namespace LibsysGrp3WPF
             {
                 return _btnEditBook ?? (_btnEditBook = new RelayCommand(x =>
                 {
-                    var obj = (FullBooksModel)x;
+                    var obj = (FullBooksModel)x;                
                     if (obj != null)
                     {
                         var listIndex = BooksList.IndexOf(obj);
-                        BooksList[listIndex].Title = TxBEditTitel;
-                        BooksList[listIndex].ISBN = TxBEditISBN;
-                        BooksList[listIndex].Author = TxBEditAuthor;
-                        BooksList[listIndex].Publisher = TxBEditPublisher;
-                        BooksList[listIndex].Category = TxBEditCategory;
-                        BooksList[listIndex].Pages = TxBEditPages;
-                        BooksList[listIndex].Price = TxBEditPrice;
-                        BooksList[listIndex].Description = TxBEditDescription;
-                        BooksList[listIndex].ItemsID = obj.ItemsID;
-                        BooksList[listIndex].EditBook();
+                        ((FullBooksModel)BooksList[listIndex]).Title = TxBEditTitel;
+                        ((FullBooksModel)BooksList[listIndex]).ISBN = TxBEditISBN;
+                        ((FullBooksModel)BooksList[listIndex]).Author = TxBEditAuthor;
+                        ((FullBooksModel)BooksList[listIndex]).Publisher = TxBEditPublisher;
+                        ((FullBooksModel)BooksList[listIndex]).Category = TxBEditCategory;
+                        ((FullBooksModel)BooksList[listIndex]).Pages = TxBEditPages;
+                        ((FullBooksModel)BooksList[listIndex]).Price = TxBEditPrice;
+                        ((FullBooksModel)BooksList[listIndex]).Description = TxBEditDescription;
+                        ((FullBooksModel)BooksList[listIndex]).ItemsID = obj.ItemsID;
+                        ((FullBooksModel)BooksList[listIndex]).EditBook();
                         getBooks();
                     }
                 }));
@@ -497,16 +497,16 @@ namespace LibsysGrp3WPF
                     else
                     {
                         var listIndex = BooksList.IndexOf(objToEdit);
-                        BooksList[listIndex].Title = TxBAddTitel;
-                        BooksList[listIndex].ISBN = TxBAddISBN;
-                        BooksList[listIndex].Author = TxBAddAuthor;
-                        BooksList[listIndex].Publisher = TxBAddPublisher;
-                        BooksList[listIndex].Category = TxBAddCategory;
-                        BooksList[listIndex].Pages = TxBAddPages;
-                        BooksList[listIndex].Price = TxBAddPrice;
-                        BooksList[listIndex].Description = TxBAddDescription;
-                        BooksList[listIndex].ItemsID = objToEdit.ItemsID;
-                        BooksList[listIndex].EditBook();
+                        ((FullBooksModel)BooksList[listIndex]).Title = TxBAddTitel;
+                        ((FullBooksModel)BooksList[listIndex]).ISBN = TxBAddISBN;
+                        ((FullBooksModel)BooksList[listIndex]).Author = TxBAddAuthor;
+                        ((FullBooksModel)BooksList[listIndex]).Publisher = TxBAddPublisher;
+                        ((FullBooksModel)BooksList[listIndex]).Category = TxBAddCategory;
+                        ((FullBooksModel)BooksList[listIndex]).Pages = TxBAddPages;
+                        ((FullBooksModel)BooksList[listIndex]).Price = TxBAddPrice;
+                        ((FullBooksModel)BooksList[listIndex]).Description = TxBAddDescription;
+                        ((FullBooksModel)BooksList[listIndex]).ItemsID = objToEdit.ItemsID;
+                        ((FullBooksModel)BooksList[listIndex]).EditBook();
                         string str = "" + objToEdit.Title;
                         MessageBox.Show(str + " redigerad.", "Redigering lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
                         getBooks();

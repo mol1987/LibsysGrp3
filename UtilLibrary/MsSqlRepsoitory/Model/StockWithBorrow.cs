@@ -17,6 +17,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         public string Reason { get; set; }
 
         // borrowlist prop
+        public int BorrowListID { get; set; }
         public DateTime BorrowDate { get; set; }
         public DateTime DueDate { get; set; }
         public int UsersID { get; set; }

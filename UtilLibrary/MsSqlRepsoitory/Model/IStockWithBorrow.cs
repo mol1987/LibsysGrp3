@@ -13,5 +13,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         DateTime DueDate { get; set; }
         int UsersID { get; set; }
         int ReservationsUsersID { get; set; }
+        public int BorrowListID { get; set; }
     }
 }

@@ -5,6 +5,7 @@
              xmlns:views="clr-namespace:LibsysGrp3WPF.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary>
+            <!--resource dictionary for Material Design, so we can use the Premade design of the library-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
@@ -17,7 +18,7 @@
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
             <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#304ffe"/>
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
-            
+
             <!--accent-->
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#ff9100"/>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#ff9100"/>
@@ -53,6 +54,12 @@
             <DataTemplate DataType="{x:Type local:VisitorSeminarViewModel}">
                 <views:VisitorSeminarView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type local:ManageCheckInViewModel}">
+                <views:ManageCheckInView/>
+            </DataTemplate>
+
+            <!--Value converters-->
+            <local:StockWithBorrowToCheckInStrConverter x:Key="StockWithBorrowToCheckInStrConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

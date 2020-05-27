@@ -20,5 +20,6 @@ namespace LibsysGrp3WPF
         public void EditBookStatusProcess(IStock stock);
         public void BorrowBookProcess(IStockWithBorrow stock);
         public void ReserveBookProcess(IStockWithBorrow stock);
+        public void CheckInBookProcess(IStockWithBorrow stock);
     }
 }

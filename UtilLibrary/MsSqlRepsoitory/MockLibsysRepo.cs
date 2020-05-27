@@ -36,6 +36,10 @@ namespace UtilLibrary.MsSqlRepsoitory
         {
             return;
         }
+        public IEnumerable<IStockWithBorrow> GetUserStock(IUsers user)
+        {
+            return null;
+        }
         #endregion
         #region Items
         public void BorrowBook(IStockWithBorrow stock)
@@ -70,6 +74,13 @@ namespace UtilLibrary.MsSqlRepsoitory
         {
             return;
         }
+
+        public void CheckInBook(IStockWithBorrow stock)
+        {
+            return;
+        }
+
+        
         #endregion
     }
 }

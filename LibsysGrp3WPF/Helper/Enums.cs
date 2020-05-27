@@ -15,8 +15,10 @@
         pageVisitorMyItems =    7,
         pageVisitorSearch =     8,
         pageVisitorSeminar =    9,
-        pageManageStock =       10
+        pageManageCheckIn =     10,
+        pageManageStock =       11
     }
+    
     /// <summary>
     /// All types of User categories we have
     /// Determens a users priviligie

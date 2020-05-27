@@ -50,7 +50,8 @@ namespace LibsysGrp3WPF
                     PagesChoice.pageManageVisitor,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
-                    PagesChoice.pageReport
+                    PagesChoice.pageReport,
+                    PagesChoice.pageManageCheckIn
                 }
             },
             {
@@ -321,8 +322,12 @@ namespace LibsysGrp3WPF
         {
             ChangeViewModel(PageViewModels[(int)PagesChoice.pageVisitorSeminar]);
         }
+        private void OnGoCheckInPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageManageCheckIn]);
+        }
         #endregion
-        
+
         #region Constructor
         public MainWindowViewModel()
         {
@@ -337,8 +342,9 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorMyItemsViewModel());
             PageViewModels.Add(new VisitorSearchViewModel());
             PageViewModels.Add(new VisitorSeminarViewModel());
+            PageViewModels.Add(new ManageCheckInViewModel());
 
-            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageReport];
+            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageManageCheckIn];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoStartPage);
             Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);
@@ -350,6 +356,7 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
+            Mediator.Subscribe(PagesChoice.pageManageCheckIn, OnGoCheckInPage);
         }
         #endregion
 

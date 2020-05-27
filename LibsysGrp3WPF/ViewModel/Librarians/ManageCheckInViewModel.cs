@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Text;
-using System.Windows;
-using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
+using System.Text;
+using System.Windows.Input;
+using System.Windows;
 
 namespace LibsysGrp3WPF
 {
-    public class VisitorSearchViewModel : BaseViewModel, IPageViewModel
+    public class ManageCheckInViewModel : BaseViewModel, IPageViewModel
     {
         #region Privete properties
         private string _btnborrowBook;
-        private ICommand _borrowBook;
+        private ICommand _checkInItem;
         /// <summary>
         /// Contains the search result
         /// </summary>
         private ObservableCollection<SearchItems> searchResultList;
 
         private ObservableCollection<object> _booksList;
+        private ObservableCollection<object> _usersList;
         #endregion
 
         #region Public Properties
@@ -49,58 +49,84 @@ namespace LibsysGrp3WPF
         ///Get Multiple Bindings
         /// </summary>
         /// 
-
         public ObservableCollection<object> BooksList
         {
             get => _booksList;
             set
             {
-                _booksList = value;
-
+                _booksList = value;                
                 OnPropertyChanged(nameof(BooksList));
+            }
+        }
+
+        public ObservableCollection<object> UsersList
+        {
+            get => _usersList;
+            set
+            {
+                _usersList = value;            
+                OnPropertyChanged(nameof(UsersList));
             }
         }
         /// <summary>
         /// Command for borrowing a specific physical book
         /// is connected with the stock list.
         /// </summary>
-        public ICommand BorrowBook
+        public ICommand CheckInItem
         {
             get
             {
-                return _borrowBook ?? (_borrowBook = new RelayCommand(x =>
+                return _checkInItem ?? (_checkInItem = new RelayCommand(x =>
                 {
-                    var obj = (FullBooksModel)x;
-                    if (obj != null)
+                    // If it's a book
+                    if (x is FullBooksModel)
                     {
-                        // User hasn't chosen a book
-                        if (obj.SelectedStockItem == null)
+                        var obj = (FullBooksModel)x;
+                        if (obj != null)
                         {
-                            MessageBox.Show("Du måste välja en fysisk bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                            return;
-                        }
-                        // User has chosen a already reserved book
-                        if (obj.SelectedStockItem.ReservationsUsersID != 0)
-                        {
-                            MessageBox.Show("Du måste välja en icke reserverad bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                            return;
-                        }
-                        // If book is not borrowed
-                        if (obj.SelectedStockItem.UsersID == 0)
-                        {
-                            var Result = MessageBox.Show("Vill du låna boken?", "Låna", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                            if (Result == MessageBoxResult.Yes)
+                            // User hasn't chosen a book
+                            if (obj.SelectedStockItem == null)
                             {
-                                obj.BorrowBook(Mediator.User);
+                                MessageBox.Show("Du måste välja en fysisk bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                return;
+                            }
+                            // If book is not borrowed
+                            if (obj.SelectedStockItem.UsersID == 0)
+                            {
+                                MessageBox.Show("Boken är redan i lagret", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                return;
+                            }
+                            // If book is valid to be checked in
+                            else
+                            {
+                                var Result = MessageBox.Show("Vill du återlämna boken?", "Återlämna", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                if (Result == MessageBoxResult.Yes)
+                                {
+                                    obj.CheckInBook();
+                                }
                             }
                         }
-                        // If book isn't borrowed and not reserved
-                        else
+                    }
+                    // if it's a user
+                    else if (x is UsersModel)
+                    {
+                        var obj = (UsersModel)x;
+                        if (obj != null)
                         {
-                            var Result = MessageBox.Show("Vill du reservera boken?", "Reservera", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                            if (Result == MessageBoxResult.Yes)
+                            // User hasn't chosen a book
+                            if (obj.SelectedStockItem == null)
                             {
-                                obj.ReserveBook(Mediator.User);
+                                MessageBox.Show("Du måste välja en fysisk bok", "Fel", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                return;
+                            }
+                            // If book is valid to be checked in
+                            else
+                            {
+                                var Result = MessageBox.Show("Vill du återlämna boken?", "Återlämna", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                if (Result == MessageBoxResult.Yes)
+                                {
+                                    obj.CheckInItem();
+                                }
                             }
                         }
                     }
@@ -122,10 +148,10 @@ namespace LibsysGrp3WPF
         }
         #endregion
         #region Constructor
-        public VisitorSearchViewModel()
+        public ManageCheckInViewModel()
         {
             // Search Fiter Options
-            CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer"};
+            CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böker", "Filmer", "Användare" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
@@ -160,6 +186,9 @@ namespace LibsysGrp3WPF
                     break;
                 case 1:
                     {
+                        // empty userslist
+                        UsersList = null;
+
                         BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
@@ -174,7 +203,15 @@ namespace LibsysGrp3WPF
                         SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchMovies(SearchKey));
                     }
                     break;
-          
+                case 4:
+                    {
+                        // empty bookslist
+                        BooksList = null;
+
+                        UsersList = UsersModel.convertToObservableCollection((new LibsysRepo()).SearchUserName(SearchKey));
+                    }
+                    break;
+
             }
         }
 
@@ -185,9 +222,3 @@ namespace LibsysGrp3WPF
         #endregion
     }
 }
-
-
-
-
-
-
