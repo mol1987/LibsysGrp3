@@ -10,7 +10,7 @@ namespace LibsysGrp3WPF
     {
         public IUsersProcessor Processor { get; private set; }
         public int UsersID { get; set; }
-        public string IdentityNo { get; set; }
+        public string IdentityNO { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime JoinDate { get; set; }
@@ -31,7 +31,7 @@ namespace LibsysGrp3WPF
             this.Firstname = tempVisitor.Firstname;
             this.Lastname = tempVisitor.Lastname;
             this.Banned = tempVisitor.Banned;
-            this.IdentityNo = tempVisitor.IdentityNo;
+            this.IdentityNO = tempVisitor.IdentityNO;
             this.JoinDate = tempVisitor.JoinDate;
             this.Password = tempVisitor.Password;
             this.UsersID = tempVisitor.UsersID;
@@ -59,7 +59,7 @@ namespace LibsysGrp3WPF
                 usersList.Add(new UsersModel(new UsersProcessor(new LibsysRepo()))
                 {
                     UsersID = item.UsersID,
-                    IdentityNo = item.IdentityNo,
+                    IdentityNO = item.IdentityNO,
                     Firstname = item.Firstname,
                     Lastname = item.Lastname,
                     Password = item.Password,
@@ -75,7 +75,7 @@ namespace LibsysGrp3WPF
         }
         public override string ToString()
         {
-            return "" + IdentityNo + ": " + Firstname + " " + Lastname;
+            return "" + IdentityNO + ": " + Firstname + " " + Lastname;
         }
     }
 }

@@ -56,6 +56,25 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return itemList;
         }
+         public IEnumerable<FullBooks> SearchBookByISBN(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBookByISBN", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+
+        }
+        public IEnumerable<FullBooks> SearchBookByAuthor(string Key)
+        {
+            IEnumerable<FullBooks> itemList;
+            using (var conn = Create_Connection())
+            {
+                itemList = conn.Query<FullBooks>("SearchBookByAuthor", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return itemList;
+        }
 
 
         public IEnumerable<SearchItems> SearchBooks(string Key)
@@ -315,7 +334,7 @@ namespace UtilLibrary.MsSqlRepsoitory
 
             var obj = new
             {
-                IdentityNo = user.IdentityNo,
+                IdentityNo = user.IdentityNO,
                 Password = user.Password,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
@@ -360,7 +379,7 @@ namespace UtilLibrary.MsSqlRepsoitory
             var obj = new
             {
                 UsersID = user.UsersID,
-                IdentityNo = user.IdentityNo,
+                IdentityNo = user.IdentityNO,
                 Password = user.Password,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
