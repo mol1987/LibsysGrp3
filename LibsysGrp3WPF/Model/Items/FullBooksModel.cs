@@ -28,7 +28,8 @@ namespace LibsysGrp3WPF
         public string Category { get; set; }
         public long ISBN { get; set; }
         public string Publisher { get; set; }
-
+        public string SAB { get; set; }
+        public string DDK { get; set; }
 
         /// <summary>
         /// Property when user selects a specific book
@@ -187,6 +188,8 @@ namespace LibsysGrp3WPF
                     Price = item.Price,
                     Description = item.Description,
                     Date = item.Date,
+                    SAB = item.SAB,
+                    DDK = item.DDK
                 }
                 );
 

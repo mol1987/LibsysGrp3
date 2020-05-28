@@ -57,7 +57,11 @@
                                         </Grid.ColumnDefinitions>
                                         <Label FontSize="16" Grid.Column="0" Content="{Binding Title}"/>
                                         <!-- Margin is needed, to bring the Button into the view -->
-                                        <Label Grid.Column="1" Content="{Binding Category}" Margin="0,0,100,0" Opacity=".68"/>
+                                        <WrapPanel Grid.Column="1" Margin="0,0,100,0">
+                                            <Label Content="{Binding Category}"  Opacity=".68"/>
+                                            <Label FontSize="12" Content="{Binding SAB}" Opacity=".68"/>
+                                            <Label FontSize="12" Content="{Binding DDK}" Opacity=".68"/>
+                                        </WrapPanel>
                                     </Grid>
                                 </Expander.Header>
                                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
