@@ -54,6 +54,8 @@ namespace LibsysGrp3WPF
         /// <summary>
         /// Contains the search result
         /// </summary>
+      
+
         public ObservableCollection<SearchItems> SearchResultList
         {
             get => searchResultList;
@@ -148,6 +150,7 @@ namespace LibsysGrp3WPF
         /// Search for objects
         /// </summary>
         /// <param name="o"></param>
+      
         private void SearchItems(object o)
         {
             switch (FilterTypID)

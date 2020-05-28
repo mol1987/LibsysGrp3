@@ -163,6 +163,28 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
+        /// <summary>
+        /// Just stores the specific stockid to the BorrowList table
+        /// </summary>
+        /// <param name="stock">Stock object thats connected to the book</param>
+        public void CheckInBook(IStockWithBorrow stock)
+        {
+            string storedProcedure = StoredProcedures.CheckInItem.ToString();
+
+            var obj = new
+            {
+                BorrowListID = stock.BorrowListID,
+                StockID = stock.StockID,
+                UsersID = stock.UsersID,
+                BorrowDate = stock.BorrowDate,
+                DueDate = stock.DueDate,
+                ReturnDate = DateTime.Now
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+        }
 
         /// <summary>
         /// Gets all stock entries that is bind to items
@@ -198,14 +220,17 @@ namespace UtilLibrary.MsSqlRepsoitory
             {
                 StockID = stock.StockID,
                 UsersID = stock.ReservationsUsersID,
-
             };
             using (var conn = Create_Connection())
             {
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
-
+        /// <summary>
+        /// Creates an entry to the database,
+        /// stores it in both item table and books table.
+        /// </summary>
+        /// <param name="books">Books object</param>
         public void CreateBook(IFullBooks books)
         {
             string storedProcedure = StoredProcedures.CreateBook.ToString();
@@ -252,7 +277,6 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         public void RemoveBook(IFullBooks books)
         {
-            
                 string storedProcedure = StoredProcedures.RemoveItem.ToString();
                 var obj = new
                 {
@@ -393,7 +417,25 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
         }
-
+        /// <summary>
+        /// Gets all the stock items that is connected with the user
+        /// </summary>
+        /// <param name="user">The user object to be get all the stock items to</param>
+        /// <returns>List of stock items</returns>
+        public IEnumerable<IStockWithBorrow> GetUserStock(IUsers user)
+        {
+            string storedProcedure = StoredProcedures.GetUserStock.ToString();
+            var obj = new
+            {
+                UsersID = user.UsersID,
+            };
+            IEnumerable<IStockWithBorrow> stockList;
+            using (var conn = Create_Connection())
+            {
+                stockList = conn.Query<StockWithBorrow>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+            return stockList;
+        }
         public void EditBookStatus(IFullBooks books)
         {
             throw new NotImplementedException();

@@ -77,6 +77,10 @@ namespace LibsysGrp3WPF
 
             _repo.EditUser(user);
         }
+        public void CheckInItemProcess(IStockWithBorrow stock)
+        {
+            _repo.CheckInBook(stock);
+        }
 
     }
 }

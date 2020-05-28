@@ -16,6 +16,10 @@ namespace LibsysGrp3WPF
     /// </summary>
     public class FullBooksModel : ItemsModel, IFullBooks, INotifyPropertyChanged
     {
+        #region Privates
+        private ObservableCollection<IStockWithBorrow> _stockItems = new ObservableCollection<IStockWithBorrow>();
+        private IStockWithBorrow _selectedStockItem;
+        #endregion 
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
         public IBooksProcessor Processor { get; private set; }
@@ -24,8 +28,7 @@ namespace LibsysGrp3WPF
         public string Category { get; set; }
         public long ISBN { get; set; }
         public string Publisher { get; set; }
-        public ObservableCollection<IStockWithBorrow> _stockItems = new ObservableCollection<IStockWithBorrow>();
-        private IStockWithBorrow _selectedStockItem;
+
 
         /// <summary>
         /// Property when user selects a specific book
@@ -98,7 +101,6 @@ namespace LibsysGrp3WPF
             // don't know why I have to do this shit to update on the UI
             StockItems.RemoveAt(stockIndex);
             StockItems.Insert(stockIndex, stock);
-            //OnPropertyChanged(nameof(StockItems));
 
             Processor.BorrowBookProcess(StockItems[stockIndex]);
         }
@@ -113,8 +115,10 @@ namespace LibsysGrp3WPF
             // update the stock item from the list so it updates on the UI
             var stockIndex = StockItems.IndexOf(SelectedStockItem);
 
+            // Create a new object to be used in the updated list
             var stock = new StockWithBorrow
             {
+                BorrowListID = StockItems[stockIndex].BorrowListID,
                 StockID = StockItems[stockIndex].StockID,
                 ReservationsUsersID = user.UsersID,
                 UsersID = user.UsersID,
@@ -132,6 +136,31 @@ namespace LibsysGrp3WPF
 
             Processor.ReserveBookProcess(StockItems[stockIndex]);
         }
+        /// <summary>
+        /// Chec
+        /// </summary>
+        public void CheckInBook()
+        {
+            // Check In process to database
+            Processor.CheckInBookProcess(SelectedStockItem);
+
+            // update the stock item from the list so it updates on the UI
+            var stockIndex = StockItems.IndexOf(SelectedStockItem);
+
+            // Create a new object to be used in the updated list
+            var stock = new StockWithBorrow
+            {
+                StockID = StockItems[stockIndex].StockID,
+                ReservationsUsersID = StockItems[stockIndex].UsersID,
+                ItemsID = StockItems[stockIndex].ItemsID,
+                Available = StockItems[stockIndex].Available,
+                Reason = StockItems[stockIndex].Reason
+            };
+
+            // don't know why I have to do this shit to update on the UI
+            StockItems.RemoveAt(stockIndex);
+            StockItems.Insert(stockIndex, stock);      
+        }
 
         /// <summary>
         /// Converts a list of FullBook items to a observablecollection
@@ -139,9 +168,9 @@ namespace LibsysGrp3WPF
         /// </summary>
         /// <param name="inData"></param>
         /// <returns></returns>
-        public static ObservableCollection<FullBooksModel> ConvertToObservableCollection(IEnumerable<IFullBooks> inData)
+        public static ObservableCollection<object> ConvertToObservableCollection(IEnumerable<IFullBooks> inData)
         {
-            var booksList = new ObservableCollection<FullBooksModel>();
+            var booksList = new ObservableCollection<object>();
             foreach (var item in inData)
             {
                 // get items stock-list
@@ -162,7 +191,7 @@ namespace LibsysGrp3WPF
                 );
 
                 // add all stockitems to book
-                var booksItem = booksList.Last();
+                var booksItem = (FullBooksModel)booksList.Last();
                 var stockList = booksItem.Processor._repo.GetStock(booksItem);
                 foreach (var stock in stockList)
                 {
