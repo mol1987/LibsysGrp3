@@ -1,19 +1,11 @@
 ﻿using LibsysGrp3WPF.Model.Items;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
     public class VisitorMyItemsViewModel : BaseViewModel, IPageViewModel
     {
-        #region Private properties
-
-        //private ItemsModel _selectedItem;
-        private ICommand _btnLeaveBack;
-        private ICommand _btnGetLink;
-
-        #endregion
 
         #region Public properties
 

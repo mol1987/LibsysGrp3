@@ -10,14 +10,14 @@
         <Expander>
             <Expander.Header>
                 <TextBlock Text="Mina artiklar" FontWeight="Bold" FontSize="30" Foreground="White" 
-                           Background="Blue" TextAlignment="Center"/>
+                        Background="Blue" TextAlignment="Center"/>
             </Expander.Header>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
                 <StackPanel Orientation="Vertical">
                     <Border CornerRadius="4" BorderThickness="1" BorderBrush="Black" Height="auto" Margin="5">
                         <StackPanel Orientation="Vertical">
                             <ListView x:Name="BorrowDate" Margin="10" ItemsSource="{Binding myBooks}" HorizontalAlignment="Left"
-                                      SelectedItem="{Binding MySelectedItem}">
+                                SelectedItem="{Binding MySelectedItem}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Kategori" DisplayMemberBinding="{Binding ItemType}" />
