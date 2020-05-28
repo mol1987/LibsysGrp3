@@ -111,9 +111,12 @@
 
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Användare typ " FontWeight="Bold" />
-                                <TextBlock
-                                    Text="(0 = Besökare, 1 = Bibliotekarie, 2 = Bibliotekschef)" FontWeight="Normal"/>
+                                <TextBlock Text="Användartyp " FontWeight="Bold" />
+                                <ComboBox>
+                                    <ComboBoxItem Content="Besökare"/>
+                                    <ComboBoxItem Content="Bibliotekarie"/>
+                                    <ComboBoxItem Content="Bibliotekschef"/>
+                                </ComboBox>
                             </StackPanel>
                             <TextBox Text="{Binding AddUserCategoryTextBox}"/>
                             <TextBlock Text="Förstnamn" FontWeight="Bold" />
