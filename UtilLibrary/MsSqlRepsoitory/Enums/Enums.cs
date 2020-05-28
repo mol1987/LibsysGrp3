@@ -29,6 +29,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         ReserveItem,
         EditBookStatus,
         CheckInItem,
-        GetUserStock
+        GetUserStock,
+        GetBorrowList
     }
 }

@@ -287,7 +287,7 @@ namespace LibsysGrp3WPF
 
         #endregion
 
-        public void Run()
+        public void run()
         {
         }
     }

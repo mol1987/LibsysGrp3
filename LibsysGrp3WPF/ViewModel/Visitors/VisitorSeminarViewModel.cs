@@ -7,7 +7,7 @@ namespace LibsysGrp3WPF
     public class VisitorSeminarViewModel :  BaseViewModel, IPageViewModel
     {
 
-        public void Run()
+        public void run()
         {
         }
     }

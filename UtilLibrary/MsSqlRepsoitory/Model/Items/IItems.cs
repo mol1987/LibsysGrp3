@@ -10,6 +10,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         string Title { get; set; }
         int Price { get; set; }
         DateTime Date { get; set; }
+        bool Available { get; set; }
 
     }
 }

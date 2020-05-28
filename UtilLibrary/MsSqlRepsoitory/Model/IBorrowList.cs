@@ -8,6 +8,6 @@ namespace UtilLibrary.MsSqlRepsoitory
         int BorrowListID { get; set; }
         DateTime DueDate { get; set; }
         int StockID { get; set; }
-        int UserID { get; set; }
+        int VisitorID { get; set; }
     }
 }

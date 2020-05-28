@@ -41,7 +41,7 @@ namespace LibsysGrp3WPF
         /// <summary>
         /// Run() method runs each time the program starts.
         /// </summary>
-        public void Run()
+        public void run()
         {
             // Resets borrow list to null
             myBooks.Clear();

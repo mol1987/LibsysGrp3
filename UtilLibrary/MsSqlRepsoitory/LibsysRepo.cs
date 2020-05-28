@@ -132,7 +132,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return SearchUserList;
         }
-
+        /// <summary>
+        /// Get a list of books from the database
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IEnumerable<T> GetBooks<T>()
         {
             string storedProcedure = StoredProcedures.GetBooks.ToString();
@@ -254,6 +258,23 @@ namespace UtilLibrary.MsSqlRepsoitory
                 conn.Query<FullBooks>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
 
             }
+        }
+
+        public IEnumerable<T> GetBorrowList<T>(int userID)
+        {
+            string storedProcedure = StoredProcedures.GetBorrowList.ToString();
+            IEnumerable<T> borrowList;
+
+            var obj = new
+            {
+                UserID = userID
+            };
+
+            using (var conn = Create_Connection())
+            {
+                borrowList = conn.Query<T>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+            return borrowList;
         }
 
         public void CreateItemWithStockID(IItems item)

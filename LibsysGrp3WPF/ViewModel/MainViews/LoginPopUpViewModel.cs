@@ -6,7 +6,7 @@ namespace LibsysGrp3WPF
 {
     public class LoginPopUpViewModel : BaseViewModel, IPageViewModel
     {
-        public void Run()
+        public void run()
         {
         }
     }

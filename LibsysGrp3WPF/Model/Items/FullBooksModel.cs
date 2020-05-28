@@ -28,6 +28,8 @@ namespace LibsysGrp3WPF
         public string Category { get; set; }
         public long ISBN { get; set; }
         public string Publisher { get; set; }
+        public string DDK { get; set; }
+        public string SAB { get; set; }
 
 
         /// <summary>
