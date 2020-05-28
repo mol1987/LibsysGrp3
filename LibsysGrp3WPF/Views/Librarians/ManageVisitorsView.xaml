@@ -18,12 +18,12 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Sök filter" Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
                       ItemsSource="{Binding CbxSearchFilters}" 
                       SelectedIndex="{Binding FilterTypID}"></ComboBox>
 
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-                 materialDesign:HintAssist.Hint="Sök med namn"/>
+                 materialDesign:HintAssist.Hint="Sök"/>
                            <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
             </Button>

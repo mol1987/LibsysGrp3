@@ -400,7 +400,7 @@ namespace LibsysGrp3WPF
 
         public void run()
         {
-            CbxSearchFilters = new string[] { "Namn", "Email", "Id" };
+            CbxSearchFilters = new string[] {"Alla användare", "Besökare", "Bibliotekarier", "Bibliotekschef", "Personnummer"};
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
@@ -414,23 +414,36 @@ namespace LibsysGrp3WPF
                 case 0:
                     {
 
-                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchUserName(SearchKey));
+                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchAllUsers(SearchKey));
                         UserList = UsersModel.convertToObservableCollection(SearchResultList);
                     }
                     break;
+
                 case 1:
                     {
-                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchUserEmail(SearchKey));
+
+                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchVisitors(SearchKey));
                         UserList = UsersModel.convertToObservableCollection(SearchResultList);
                     }
                     break;
                 case 2:
                     {
-                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchUserIdentiteyNO(SearchKey));
+                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchLibrarians(SearchKey));
                         UserList = UsersModel.convertToObservableCollection(SearchResultList);
                     }
                     break;
-
+                case 3:
+                    {
+                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchCheifLibrarians(SearchKey));
+                        UserList = UsersModel.convertToObservableCollection(SearchResultList);
+                    }
+                    break;
+                case 4:
+                    {
+                        SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchAllUsersWithIdentityNO(SearchKey));
+                        UserList = UsersModel.convertToObservableCollection(SearchResultList);
+                    }
+                    break;
             }
         }
     }

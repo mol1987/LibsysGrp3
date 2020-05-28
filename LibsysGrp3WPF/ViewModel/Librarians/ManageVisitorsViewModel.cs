@@ -374,7 +374,7 @@ namespace LibsysGrp3WPF
 
         public void run()
         {
-            CbxSearchFilters = new string[] { "Namn", "Email", "Id" };
+            CbxSearchFilters = new string[] { "Namn", "Email", "Personnummer" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
