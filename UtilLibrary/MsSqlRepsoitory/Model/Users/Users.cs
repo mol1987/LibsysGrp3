@@ -16,6 +16,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         public int UsersCategory { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get ; set ; }
+        public string Reason { get; set; }
     }
 
 }

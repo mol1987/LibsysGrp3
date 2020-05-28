@@ -141,7 +141,7 @@ namespace LibsysGrp3WPF
         #region Methods
         public void run()
         {
-            CbxSearchFilters = new string[] { "Allting", "Böker", "Online Böker", "Filmer" };
+            CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böcker", "Filmer" };
 
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
