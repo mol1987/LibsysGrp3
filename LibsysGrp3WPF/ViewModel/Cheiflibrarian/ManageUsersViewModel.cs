@@ -14,7 +14,7 @@ namespace LibsysGrp3WPF
 
         #region privates
         private ICommand _buttonOk;
-        private ObservableCollection<UsersModel> _userList;
+        private ObservableCollection<object> _userList;
         private string _addiDTextBox;
         private string _addfirstnameTextBox;
         private string _addlastnameTextBox;
@@ -25,11 +25,11 @@ namespace LibsysGrp3WPF
         private string _addReasonTextBox;
         private int _addUserCategoryTextBox;
 
-        private ICommand _btnDeleteVisitor;
+        private ICommand _btnDeleteUser;
         private ICommand _btnAddUser;
 
 
-        private ICommand _btnOpenVisitorDialog;
+        private ICommand _btnOpenUsersDialog;
         private ICommand _showDialogCommand;
         private bool _isOpen = false;
 
@@ -166,7 +166,7 @@ namespace LibsysGrp3WPF
 
 
 
-        public ObservableCollection<UsersModel> UserList
+        public ObservableCollection<object> UserList
         {
             get
             {
@@ -186,16 +186,16 @@ namespace LibsysGrp3WPF
                 return _buttonOk ?? (_buttonOk = new RelayCommand(x =>
                 {
                     var listIndex = UserList.IndexOf(userToEdit);
-                    UserList[listIndex].UsersCategory = AddUserCategoryTextBox;
-                    UserList[listIndex].IdentityNO = AddIDTextBox;
-                    UserList[listIndex].Firstname = AddFirstnameTextBox;
-                    UserList[listIndex].Lastname = AddLastnameTextBox;
-                    UserList[listIndex].PhoneNumber = AddMobilTextBox;
-                    UserList[listIndex].Email = AddEmailTextBox;
-                    UserList[listIndex].Password = AddPasswordTextBox;
-                    UserList[listIndex].Banned = BannedCheckBox;
-                    UserList[listIndex].Reason = AddReasonTextBox;
-                    UserList[listIndex].EditUser();
+                    ((UsersModel)UserList[listIndex]).UsersCategory = AddUserCategoryTextBox;
+                    ((UsersModel)UserList[listIndex]).IdentityNO = AddIDTextBox;
+                    ((UsersModel)UserList[listIndex]).Firstname = AddFirstnameTextBox;
+                    ((UsersModel)UserList[listIndex]).Lastname = AddLastnameTextBox;
+                    ((UsersModel)UserList[listIndex]).PhoneNumber = AddMobilTextBox;
+                    ((UsersModel)UserList[listIndex]).Email = AddEmailTextBox;
+                    ((UsersModel)UserList[listIndex]).Password = AddPasswordTextBox;
+                    ((UsersModel)UserList[listIndex]).Banned = BannedCheckBox;
+                    ((UsersModel)UserList[listIndex]).Reason = AddReasonTextBox;
+                    ((UsersModel)UserList[listIndex]).EditUser();
 
                     getUsers();
                 }));
@@ -229,11 +229,11 @@ namespace LibsysGrp3WPF
         /// Button command for opening visitor dialog for adding
         /// clears the object to edit and all textboxes
         /// </summary>
-        public ICommand BtnOpenVisitorDialog
+        public ICommand BtnOpenUsersDialog
         {
             get
             {
-                return _btnOpenVisitorDialog ?? (_btnOpenVisitorDialog = new RelayCommand(x =>
+                return _btnOpenUsersDialog ?? (_btnOpenUsersDialog = new RelayCommand(x =>
                 {
                     IsOpen = true;
                     AddUserCategoryTextBox = 0;
@@ -273,7 +273,7 @@ namespace LibsysGrp3WPF
                         item.Reason = AddReasonTextBox;
                         item.AddUser();
                         string str = "" + item.Firstname;
-                        MessageBox.Show(str + " tillagd .", "Tillagd lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " tillagd.", "Tillagd lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
                         IsOpen = false;
 
                         getUsers();
@@ -282,15 +282,15 @@ namespace LibsysGrp3WPF
                     else
                     {
                         var listIndex = UserList.IndexOf(userToEdit);
-                        UserList[listIndex].UsersCategory = AddUserCategoryTextBox;
-                        UserList[listIndex].Firstname = AddFirstnameTextBox;
-                        UserList[listIndex].Lastname = AddLastnameTextBox;
-                        UserList[listIndex].Email = AddEmailTextBox;
-                        UserList[listIndex].PhoneNumber = AddMobilTextBox;
-                        UserList[listIndex].Password = AddPasswordTextBox;
-                        UserList[listIndex].Banned = BannedCheckBox;
-                        UserList[listIndex].Reason = AddReasonTextBox;
-                        UserList[listIndex].EditUser();
+                        ((UsersModel)UserList[listIndex]).UsersCategory = AddUserCategoryTextBox;
+                        ((UsersModel)UserList[listIndex]).Firstname = AddFirstnameTextBox;
+                        ((UsersModel)UserList[listIndex]).Lastname = AddLastnameTextBox;
+                        ((UsersModel)UserList[listIndex]).Email = AddEmailTextBox;
+                        ((UsersModel)UserList[listIndex]).PhoneNumber = AddMobilTextBox;
+                        ((UsersModel)UserList[listIndex]).Password = AddPasswordTextBox;
+                        ((UsersModel)UserList[listIndex]).Banned = BannedCheckBox;
+                        ((UsersModel)UserList[listIndex]).Reason = AddReasonTextBox;
+                        ((UsersModel)UserList[listIndex]).EditUser();
                         string str = "" + userToEdit.Firstname;
                         MessageBox.Show(str + " redigerad.", "Redigering lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
                         getUsers();
@@ -304,18 +304,18 @@ namespace LibsysGrp3WPF
         }
 
 
-        public ICommand BtnDeleteVisitor
+        public ICommand BtnDeleteUser
         {
             get
             {
-                return _btnDeleteVisitor ?? (_btnDeleteVisitor = new RelayCommand(x =>
+                return _btnDeleteUser ?? (_btnDeleteUser = new RelayCommand(x =>
                 {
                     var Result = MessageBox.Show("Är du säkert att du vill ta bort denna användare?", "Ta bort användare", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (Result == MessageBoxResult.Yes)
                     {
                         var obj = (UsersModel)x;
                         var userIndex = UserList.IndexOf(obj);
-                        UserList[userIndex].RemoveUser();
+                        ((UsersModel)UserList[userIndex]).RemoveUser();
                         UserList.RemoveAt(userIndex);
 
                         string str = obj.Firstname;
