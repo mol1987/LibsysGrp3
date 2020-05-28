@@ -14,7 +14,7 @@ namespace LibsysGrp3WPF
 
         #region privates
         private ICommand _buttonOk;
-        private ObservableCollection<UsersModel> _visitorList;
+        private ObservableCollection<object> _visitorList;
         private string _addiDTextBox;
         private string _addfirstnameTextBox;
         private string _addlastnameTextBox;
@@ -124,7 +124,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public ObservableCollection<UsersModel> VisitorList
+        public ObservableCollection<object> VisitorList
         {
             get
             {
@@ -144,13 +144,13 @@ namespace LibsysGrp3WPF
                 return _buttonOk ?? (_buttonOk = new RelayCommand(x =>
                 {
                     var listIndex = VisitorList.IndexOf(userToEdit);
-                    VisitorList[listIndex].IdentityNo = AddIDTextBox;
-                    VisitorList[listIndex].Firstname = AddFirstnameTextBox;
-                    VisitorList[listIndex].Lastname = AddLastnameTextBox;
-                    VisitorList[listIndex].PhoneNumber = AddMobilTextBox;
-                    VisitorList[listIndex].Email = AddEmailTextBox;
-                    VisitorList[listIndex].Password = AddPasswordTextBox;
-                    VisitorList[listIndex].EditUser();
+                    ((UsersModel)VisitorList[listIndex]).IdentityNO = AddIDTextBox;
+                    ((UsersModel)VisitorList[listIndex]).Firstname = AddFirstnameTextBox;
+                    ((UsersModel)VisitorList[listIndex]).Lastname = AddLastnameTextBox;
+                    ((UsersModel)VisitorList[listIndex]).PhoneNumber = AddMobilTextBox;
+                    ((UsersModel)VisitorList[listIndex]).Email = AddEmailTextBox;
+                    ((UsersModel)VisitorList[listIndex]).Password = AddPasswordTextBox;
+                    ((UsersModel)VisitorList[listIndex]).EditUser();
 
                     getVisitors();
                 }));
@@ -167,7 +167,7 @@ namespace LibsysGrp3WPF
                     AddEmailTextBox = obj.Email;
                     AddFirstnameTextBox = obj.Firstname;
                     AddLastnameTextBox = obj.Lastname;
-                    AddIDTextBox = obj.IdentityNo;
+                    AddIDTextBox = obj.IdentityNO;
                     AddPasswordTextBox = obj.Password;
                     AddMobilTextBox = obj.PhoneNumber;
                     IsOpen = true;
@@ -213,7 +213,7 @@ namespace LibsysGrp3WPF
                         item.JoinDate = DateTime.Now;
                         item.Firstname = AddFirstnameTextBox;
                         item.Lastname = AddLastnameTextBox;
-                        item.IdentityNo = AddIDTextBox;
+                        item.IdentityNO = AddIDTextBox;
                         item.Email = AddEmailTextBox;
                         item.PhoneNumber = AddMobilTextBox;
                         item.Password = AddPasswordTextBox;
@@ -229,12 +229,12 @@ namespace LibsysGrp3WPF
                     else
                     {
                         var listIndex = VisitorList.IndexOf(userToEdit);
-                        VisitorList[listIndex].Firstname = AddFirstnameTextBox;
-                        VisitorList[listIndex].Lastname = AddLastnameTextBox;
-                        VisitorList[listIndex].Email = AddEmailTextBox;
-                        VisitorList[listIndex].PhoneNumber = AddMobilTextBox;
-                        VisitorList[listIndex].Password = AddPasswordTextBox;
-                        VisitorList[listIndex].EditUser();
+                        ((UsersModel)VisitorList[listIndex]).Firstname = AddFirstnameTextBox;
+                        ((UsersModel)VisitorList[listIndex]).Lastname = AddLastnameTextBox;
+                        ((UsersModel)VisitorList[listIndex]).Email = AddEmailTextBox;
+                        ((UsersModel)VisitorList[listIndex]).PhoneNumber = AddMobilTextBox;
+                        ((UsersModel)VisitorList[listIndex]).Password = AddPasswordTextBox;
+                        ((UsersModel)VisitorList[listIndex]).EditUser();
                         string str = "" + userToEdit.Firstname;
                         MessageBox.Show(str + " edited.", "Edit Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
                         getVisitors();
@@ -256,7 +256,7 @@ namespace LibsysGrp3WPF
                 {
                     var obj = (UsersModel)x;
                     var userIndex = VisitorList.IndexOf(obj);
-                    VisitorList[userIndex].RemoveUser();
+                    ((UsersModel)VisitorList[userIndex]).RemoveUser();
                     VisitorList.RemoveAt(userIndex);
 
                     string str = obj.Firstname;

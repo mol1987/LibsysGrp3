@@ -1,14 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using MaterialDesignThemes.Wpf;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows;
 
 namespace LibsysGrp3WPF
 {
+    /// <summary>
+    /// Contains mostly code for navigation
+    /// </summary>
     public class MainWindowViewModel : BaseViewModel
     {
-
+        #region private
         private ICommand _btnSignIn;
         private ICommand _menuItemsCommand;
         private ICommand _btnUserAccess;
@@ -21,7 +28,12 @@ namespace LibsysGrp3WPF
         private string _accountCategory = "";
         private string _accountName = "";
         private bool _isOpen = false;
-
+        
+        /// <summary>
+        /// Dictionary for the side menu
+        /// returns an obserablecollection of a list of PagesChoice that
+        /// corresponds with the logged in Users category
+        /// </summary>
         private Dictionary<UsersCategory, ObservableCollection<PagesChoice>> _menuListCategories = new Dictionary<UsersCategory, ObservableCollection<PagesChoice>>
         {
             {
@@ -29,18 +41,17 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageVisitorSearch,
                     PagesChoice.pageVisitorMyItems,
-                    PagesChoice.pageVisitorSeminar
+                    PagesChoice.pageVisitorEditProfil
                 }
             },
             {
                 UsersCategory.Librarian, new ObservableCollection<PagesChoice>
                 {
-                    PagesChoice.pageStartView,
-                    PagesChoice.pageManageLibrarian,
-                    PagesChoice.pageManageUsers,
+                    PagesChoice.pageManageVisitor,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
-                    PagesChoice.pageReport
+                    PagesChoice.pageReport,
+                    PagesChoice.pageManageCheckIn
                 }
             },
             {
@@ -48,14 +59,15 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageStartView,
                     PagesChoice.pageManageUsers,
-                    PagesChoice.pageManageLibrarian,
                     PagesChoice.pageManageSeminar,
                     PagesChoice.pageReport
                 }
             }
         };
         private ObservableCollection<PagesChoice> _menuList = null;
+        #endregion
 
+        #region properties
         /// <summary>
         /// Sign in command
         /// </summary>
@@ -63,6 +75,7 @@ namespace LibsysGrp3WPF
         {
             get
             {
+                
                 return _btnSignIn ?? (_btnSignIn = new RelayCommand(x =>
                 {
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
@@ -94,7 +107,12 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-
+        
+        /// <summary>
+        /// Sign in button
+        /// if no users has logged in open the popup
+        /// if there is one, sign out user
+        /// </summary>
         public ICommand BtnUserAccess
         {
             get
@@ -104,14 +122,23 @@ namespace LibsysGrp3WPF
                     if (Mediator.User == null)
                     {
                         IsOpen = true;
-                    }
-                    else
+                    } else
                     {
-                        SignOutProcess();
+                        var Result = MessageBox.Show("Vill du logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (Result == MessageBoxResult.Yes)
+                        {
+                            SignOutProcess();
+                        }
+                        
                     }
                 }));
             }
         }
+
+        /// <summary>
+        /// Sends a PagesChoice enum from the sidemenu
+        /// for easy navigation
+        /// </summary>
         public ICommand MenuItemsCommand
         {
             get
@@ -123,6 +150,11 @@ namespace LibsysGrp3WPF
             }
         }
 
+        /// <summary>
+        /// The menulist of the sidemenu
+        /// just a list of enums that gets converted
+        /// to the right 'name'
+        /// </summary>
         public ObservableCollection<PagesChoice> MenuList
         {
             get
@@ -136,6 +168,10 @@ namespace LibsysGrp3WPF
             }
         }
 
+        /// <summary>
+        /// Property for the popup
+        /// if true popup is open
+        /// </summary>
         public bool IsOpen
         {
             get
@@ -197,7 +233,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public List<IPageViewModel> PageViewModels
+        public List<IPageViewModel> PageViewModels 
         {
             get
             {
@@ -218,11 +254,16 @@ namespace LibsysGrp3WPF
             {
                 _currentPageViewModel = value;
                 // Runs this method everytime the view gets changed
-                _currentPageViewModel.Run();
-                OnPropertyChanged("CurrentPageViewModel");
+                _currentPageViewModel.run();
+                OnPropertyChanged(nameof(CurrentPageViewModel));
             }
         }
+        #endregion
 
+        /// <summary>
+        /// Method to change the page
+        /// </summary>
+        /// <param name="viewModel"></param>
         private void ChangeViewModel(IPageViewModel viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
@@ -233,115 +274,58 @@ namespace LibsysGrp3WPF
         }
 
         #region Enums page assignment
-        private void OnGoPage1Screen(object obj)
+        private void OnGoStartPage(object obj)
         {
-            ChangeViewModel(PageViewModels[0]);
-        }
-
-        private void OnGoPage2Screen(object obj)
-        {
-            ChangeViewModel(PageViewModels[1]);
-        }
-        private void OnGoSuperuserHomePage(object obj)
-        {
-            ChangeViewModel(PageViewModels[2]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageStartView]);
         }
 
         private void OnGoPageManageVisitor(object obj)
         {
-            ChangeViewModel(PageViewModels[3]);
-        }
-
-        private void OnGoPageManageLibrarian(object obj)
-        {
-            ChangeViewModel(PageViewModels[4]);
-        }
-
-        private void OnGoPageManageSuperUser(object obj)
-        {
-            ChangeViewModel(PageViewModels[5]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageManageVisitor]);
         }
 
         private void OnGoPageReport(object obj)
         {
-            ChangeViewModel(PageViewModels[6]);
-        }
-
-        private void OnGoLibrarianHomePage(object obj)
-        {
-            ChangeViewModel(PageViewModels[7]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageReport]);
         }
 
         private void OnGoBookPage(object obj)
         {
-            ChangeViewModel(PageViewModels[8]);
-        }
-
-        private void OnGoEbookPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[9]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageManageBook]);
         }
 
         private void OnGoSeminarPage(object obj)
         {
-            ChangeViewModel(PageViewModels[10]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageManageSeminar]);
         }
-
-        private void OnGoAddLibrarianPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[11]);
-        }
-
-        private void OnGoDeleteLibrarianPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[12]);
-        }
-
-        private void OnGoEditLibrarianPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[13]);
-        }
-
-        private void OnGoAddVisitorPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[14]);
-        }
-
-        private void OnGoDeleteVisitorPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[15]);
-        }
-
-        private void OnGoEditVisitorPage(object obj)
-        {
-            ChangeViewModel(PageViewModels[16]);
-        }
-
         private void OnGoManageUsersPage(object obj)
         {
-            ChangeViewModel(PageViewModels[17]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageManageUsers]);
         }
 
         private void OnGoEditProfilPage(object obj)
         {
-            ChangeViewModel(PageViewModels[18]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageVisitorEditProfil]);
         }
 
-        private void OnGoMyItemsPage(object obj)
+        private void OnGoVisitorMyItemsPage(object obj)
         {
-            ChangeViewModel(PageViewModels[19]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageVisitorMyItems]);
         }
 
         private void OnGoVisitorSearchPage(object obj)
         {
-            ChangeViewModel(PageViewModels[20]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageVisitorSearch]);
         }
 
         private void OnGoVisitorSeminarPage(object obj)
         {
-            ChangeViewModel(PageViewModels[20]);
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageVisitorSeminar]);
         }
-
+        private void OnGoCheckInPage(object obj)
+        {
+            ChangeViewModel(PageViewModels[(int)PagesChoice.pageManageCheckIn]);
+        }
         #endregion
 
         #region Constructor
@@ -349,53 +333,30 @@ namespace LibsysGrp3WPF
         {
             // Add available pages and set page
             PageViewModels.Add(new StartPageViewModel());
-            PageViewModels.Add(new VisitorsProfilePageViewModel());
-            PageViewModels.Add(new SuperUserHomePageViewModel());
             PageViewModels.Add(new ManageVisitorsViewModel());
-            PageViewModels.Add(new ManageLibrariansViewModel());
-            PageViewModels.Add(new ManageSuperuserViewModel());
             PageViewModels.Add(new ReportsViewModel());
-            PageViewModels.Add(new LibrariansHomePageViewModel());
             PageViewModels.Add(new ManageBookViewModel());
-            PageViewModels.Add(new ManageEbookPageViewModel());
             PageViewModels.Add(new ManageSeminarViewModel());
-            PageViewModels.Add(new AddLibrarianViewModel());
-            PageViewModels.Add(new DeleteLibrarianViewModel());
-            PageViewModels.Add(new EditLibrarianViewModel());
-            PageViewModels.Add(new AddVisitorViewModel());
-            PageViewModels.Add(new DeleteVisitorViewModel());
-            PageViewModels.Add(new EditLibrarianViewModel());
             PageViewModels.Add(new ManageUsersViewModel());
             PageViewModels.Add(new VisitorEditProfilViewModel());
             PageViewModels.Add(new VisitorMyItemsViewModel());
             PageViewModels.Add(new VisitorSearchViewModel());
             PageViewModels.Add(new VisitorSeminarViewModel());
+            PageViewModels.Add(new ManageCheckInViewModel());
 
+            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageManageCheckIn];
 
-            CurrentPageViewModel = PageViewModels[3];
-
-            Mediator.Subscribe(PagesChoice.pageStartView, OnGoPage1Screen);
-            Mediator.Subscribe(PagesChoice.Page2, OnGoPage2Screen);
-            Mediator.Subscribe(PagesChoice.pageSuperUserHomepage, OnGoSuperuserHomePage);
+            Mediator.Subscribe(PagesChoice.pageStartView, OnGoStartPage);
             Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);
-            Mediator.Subscribe(PagesChoice.pageManageLibrarian, OnGoPageManageLibrarian);
-            Mediator.Subscribe(PagesChoice.pageManageSuperUser, OnGoPageManageSuperUser);
             Mediator.Subscribe(PagesChoice.pageReport, OnGoPageReport);
-            Mediator.Subscribe(PagesChoice.pageLibrarianHomepage, OnGoLibrarianHomePage);
             Mediator.Subscribe(PagesChoice.pageManageBook, OnGoBookPage);
-            Mediator.Subscribe(PagesChoice.pageManageEbook, OnGoEbookPage);
             Mediator.Subscribe(PagesChoice.pageManageSeminar, OnGoSeminarPage);
-            Mediator.Subscribe(PagesChoice.pageAddLibrarian, OnGoAddLibrarianPage);
-            Mediator.Subscribe(PagesChoice.pageDeleteLibrarian, OnGoDeleteLibrarianPage);
-            Mediator.Subscribe(PagesChoice.pageEditLibrarian, OnGoEditLibrarianPage);
-            Mediator.Subscribe(PagesChoice.pageAddVisitor, OnGoAddVisitorPage);
-            Mediator.Subscribe(PagesChoice.pageDeleteVisitor, OnGoDeleteVisitorPage);
-            Mediator.Subscribe(PagesChoice.pageEditVisitor, OnGoEditVisitorPage);
             Mediator.Subscribe(PagesChoice.pageManageUsers, OnGoManageUsersPage);
             Mediator.Subscribe(PagesChoice.pageVisitorEditProfil, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorMyItems, OnGoEditProfilPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
+            Mediator.Subscribe(PagesChoice.pageManageCheckIn, OnGoCheckInPage);
         }
         #endregion
 
@@ -409,9 +370,9 @@ namespace LibsysGrp3WPF
             MenuList = null;
             AccountCategory = "";
             AccountName = "";
+            IDTextBox = "";
+            PasswordTextBox = "";
             CurrentPageViewModel = PageViewModels[0];
-
-            //ObservableCollection < BorrowList > = null;
         }
         #endregion
     }

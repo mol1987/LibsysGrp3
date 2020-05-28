@@ -1,16 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
-    public class UsersModel : IUsers
+    public class UsersModel : IUsers, INotifyPropertyChanged
     {
+        #region Privates
+        private ObservableCollection<IStockWithBorrow> _stockItems = new ObservableCollection<IStockWithBorrow>();
+        private IStockWithBorrow _selectedStockItem;
+        #endregion
+        public event PropertyChangedEventHandler PropertyChanged;
         public IUsersProcessor Processor { get; private set; }
         public int UsersID { get; set; }
-        public string IdentityNo { get; set; }
+        public string IdentityNO { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime JoinDate { get; set; }
@@ -19,6 +28,35 @@ namespace LibsysGrp3WPF
         public int UsersCategory { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Property when user selects a specific book
+        /// </summary>
+        public IStockWithBorrow SelectedStockItem
+        {
+            get => _selectedStockItem;
+            set
+            {
+                _selectedStockItem = value;
+
+                OnPropertyChanged(nameof(SelectedStockItem));
+            }
+        }
+        /// <summary>
+        /// List of physical books
+        /// </summary>
+        public ObservableCollection<IStockWithBorrow> StockItems
+        {
+            get => _stockItems;
+            set
+            {
+                _stockItems = value;
+
+                OnPropertyChanged(nameof(StockItems));
+            }
+        }
+
+
 
         public UsersModel(IUsersProcessor processor)
         {
@@ -31,7 +69,7 @@ namespace LibsysGrp3WPF
             this.Firstname = tempVisitor.Firstname;
             this.Lastname = tempVisitor.Lastname;
             this.Banned = tempVisitor.Banned;
-            this.IdentityNo = tempVisitor.IdentityNo;
+            this.IdentityNO = tempVisitor.IdentityNO;
             this.JoinDate = tempVisitor.JoinDate;
             this.Password = tempVisitor.Password;
             this.UsersID = tempVisitor.UsersID;
@@ -51,15 +89,28 @@ namespace LibsysGrp3WPF
         {
             Processor.EditUserProcess(this);
         }
-        public static ObservableCollection<UsersModel> convertToObservableCollection(IEnumerable<IUsers> inData)
+        /// <summary>
+        /// Chec
+        /// </summary>
+        public void CheckInItem()
         {
-            var usersList = new ObservableCollection<UsersModel>();
+            // Check In process to database
+            Processor.CheckInItemProcess(SelectedStockItem);
+
+            // remove from list
+            StockItems.Remove(SelectedStockItem);
+
+        }
+
+        public static ObservableCollection<object> convertToObservableCollection(IEnumerable<IUsers> inData)
+        {
+            var usersList = new ObservableCollection<object>();
             foreach (var item in inData)
             {
                 usersList.Add(new UsersModel(new UsersProcessor(new LibsysRepo()))
                 {
                     UsersID = item.UsersID,
-                    IdentityNo = item.IdentityNo,
+                    IdentityNO = item.IdentityNO,
                     Firstname = item.Firstname,
                     Lastname = item.Lastname,
                     Password = item.Password,
@@ -70,12 +121,35 @@ namespace LibsysGrp3WPF
                     PhoneNumber = item.PhoneNumber
                 }
                 );
+
+                // add all stockitems to the user
+                var usersItem = (UsersModel)usersList.Last();
+                var stockList = usersItem.Processor._repo.GetUserStock(usersItem);
+                foreach (var stock in stockList)
+                {
+                    usersItem.StockItems.Add(stock);
+                }
             }
             return usersList;
         }
         public override string ToString()
         {
-            return "" + IdentityNo + ": " + Firstname + " " + Lastname;
+            return "" + IdentityNO + ": " + Firstname + " " + Lastname;
         }
+
+        #region PropertyChanged
+        protected void OnPropertyChanged(string propertyName)
+        {
+            VerifyPropertyName(propertyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        [Conditional("DEBUG")]
+        private void VerifyPropertyName(string propertyName)
+        {
+            if (TypeDescriptor.GetProperties(this)[propertyName] == null)
+                throw new ArgumentNullException(GetType().Name + " does not contain property: " + propertyName);
+        }
+        #endregion
     }
 }

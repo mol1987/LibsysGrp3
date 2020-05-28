@@ -10,7 +10,25 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+            <!-- Search-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
+                <ComboBox Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                      ItemsSource="{Binding CbxSearchFilters}" 
+                      SelectedIndex="{Binding FilterTypID}"></ComboBox>
+
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                 materialDesign:HintAssist.Hint="Sök med namn"/>
+                           <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
+                <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
+            </Button>
+            </Grid>
+            <!-- End Search-->
             <!--#region Pop up for editing a book-->
             <materialDesign:DialogHost>
                 <materialDesign:DialogHost.DialogContent>
@@ -39,7 +57,7 @@
                 <!--#endregion-->
 
                 <!--#region List of visitors-->
-                <ListBox Height="450" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding VisitorList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center" Grid.RowSpan="2" >
+                <ListBox Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding VisitorList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center"  Margin="50,10 50 0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >

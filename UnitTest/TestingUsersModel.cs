@@ -27,17 +27,17 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = "123",
-                IdentityNo = "198012121111"                
+                IdentityNO = "198012121111"                
             };
 
             // Act
-            user.LoginUser(expected.IdentityNo, expected.Password);
+            user.LoginUser(expected.IdentityNO, expected.Password);
 
             // Assert
             Assert.NotNull(user);
             Assert.Equal(expected.Password, user.Password);
             output.WriteLine("This is output from {0}", user.Password);
-            Assert.Equal(expected.IdentityNo, user.IdentityNo);
+            Assert.Equal(expected.IdentityNO, user.IdentityNO);
         }
 
         [Theory]
@@ -53,11 +53,11 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = identityNo,
-                IdentityNo = password
+                IdentityNO = password
             };
 
             // Act
-            Assert.Throws<Exception>(() => user.LoginUser(expected.IdentityNo, expected.Password));
+            Assert.Throws<Exception>(() => user.LoginUser(expected.IdentityNO, expected.Password));
 
             // Assert
             Assert.NotNull(user);
@@ -71,7 +71,7 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = "123",
-                IdentityNo = "198012121111",
+                IdentityNO = "198012121111",
                 Firstname = "Arne",
                 Lastname = "Weise",
                 UsersCategory = (int)UsersCategory.Librarian
@@ -79,7 +79,7 @@ namespace UnitTest
             var user = new UsersModel(new UsersProcessor(new MockLibsysRepo()))
             {
                 Password = "123",
-                IdentityNo = "198012121111",
+                IdentityNO = "198012121111",
                 Firstname = "Arne",
                 Lastname = "Weise",
                 UsersCategory = (int)UsersCategory.Librarian
@@ -91,7 +91,7 @@ namespace UnitTest
             // Assert
             Assert.NotNull(user);
             Assert.Equal(expected.Password, user.Password);
-            Assert.Equal(expected.IdentityNo, user.IdentityNo);
+            Assert.Equal(expected.IdentityNO, user.IdentityNO);
             Assert.Equal(expected.Firstname, user.Firstname);
             Assert.Equal(expected.UsersCategory, user.UsersCategory);
         }
@@ -110,7 +110,7 @@ namespace UnitTest
             var user = new UsersModel(new UsersProcessor(new MockLibsysRepo()))
             {
                 Password = password,
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Firstname = firstname,
                 Lastname = lastname,
                 UsersCategory = (int)usersCategory
@@ -118,7 +118,7 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = password,
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Firstname = firstname,
                 Lastname = lastname,
                 UsersCategory = (int)usersCategory
@@ -139,7 +139,7 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = "123",
-                IdentityNo = "198012121111",
+                IdentityNO = "198012121111",
                 Firstname = "Arne",
                 Lastname = "Weise",
                 UsersCategory = (int)UsersCategory.Librarian
@@ -147,7 +147,7 @@ namespace UnitTest
             var user = new UsersModel(new UsersProcessor(new MockLibsysRepo()))
             {
                 Password = "123",
-                IdentityNo = "198012121111",
+                IdentityNO = "198012121111",
                 Firstname = "Arne",
                 Lastname = "Weise",
                 UsersCategory = (int)UsersCategory.Librarian
@@ -159,7 +159,7 @@ namespace UnitTest
             // Assert
             Assert.NotNull(user);
             Assert.Equal(expected.Password, user.Password);
-            Assert.Equal(expected.IdentityNo, user.IdentityNo);
+            Assert.Equal(expected.IdentityNO, user.IdentityNO);
             Assert.Equal(expected.Firstname, user.Firstname);
             Assert.Equal(expected.UsersCategory, user.UsersCategory);
         }
@@ -178,7 +178,7 @@ namespace UnitTest
             var user = new UsersModel(new UsersProcessor(new MockLibsysRepo()))
             {
                 Password = password,
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Firstname = firstname,
                 Lastname = lastname,
                 UsersCategory = (int)usersCategory
@@ -186,7 +186,7 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = password,
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Firstname = firstname,
                 Lastname = lastname,
                 UsersCategory = (int)usersCategory
@@ -207,7 +207,7 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = "123",
-                IdentityNo = "198012121111",
+                IdentityNO = "198012121111",
                 Firstname = "Arne",
                 Lastname = "Weise",
                 UsersCategory = (int)UsersCategory.Librarian
@@ -215,7 +215,7 @@ namespace UnitTest
             var user = new UsersModel(new UsersProcessor(new MockLibsysRepo()))
             {
                 Password = "123",
-                IdentityNo = "198012121111",
+                IdentityNO = "198012121111",
                 Firstname = "Arne",
                 Lastname = "Weise",
                 UsersCategory = (int)UsersCategory.Librarian
@@ -227,7 +227,7 @@ namespace UnitTest
             // Assert
             Assert.NotNull(user);
             Assert.Equal(expected.Password, user.Password);
-            Assert.Equal(expected.IdentityNo, user.IdentityNo);
+            Assert.Equal(expected.IdentityNO, user.IdentityNO);
             Assert.Equal(expected.Firstname, user.Firstname);
             Assert.Equal(expected.UsersCategory, user.UsersCategory);
         }
@@ -246,7 +246,7 @@ namespace UnitTest
             var user = new UsersModel(new UsersProcessor(new MockLibsysRepo()))
             {
                 Password = password,
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Firstname = firstname,
                 Lastname = lastname,
                 UsersCategory = (int)usersCategory
@@ -254,7 +254,7 @@ namespace UnitTest
             var expected = new Users()
             {
                 Password = password,
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Firstname = firstname,
                 Lastname = lastname,
                 UsersCategory = (int)usersCategory

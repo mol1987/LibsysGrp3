@@ -1,36 +1,32 @@
 ﻿namespace LibsysGrp3WPF
 {
+    /// <summary>
+    /// Enum's for navigation
+    /// </summary>
     public enum PagesChoice
     {
-        pageStartView = 0,
-        Page2 = 1,
-        pageManageVisitor = 2,
-        pageManageLibrarian = 3,
-        pageManageSuperUser = 4,
-        pageReport = 5,
-        pageSuperUserHomepage = 6,
-        pageLibrarianHomepage = 7,
-        pageManageBook = 8,
-        pageManageEbook = 9, 
-        pageManageSeminar = 10,
-        pageAddLibrarian = 11,
-        pageDeleteLibrarian = 12,
-        pageEditLibrarian = 13,
-        pageAddVisitor = 14,
-        pageDeleteVisitor = 15,
-        pageEditVisitor= 16,
-        pageManageUsers= 17,
-        pageVisitorEditProfil = 18,
-        pageVisitorMyItems = 19,
-        pageVisitorSearch =20,
-        pageVisitorSeminar =21
-
+        pageStartView =         0,
+        pageManageVisitor =     1,
+        pageReport =            2,
+        pageManageBook =        3,
+        pageManageSeminar =     4,
+        pageManageUsers =       5,
+        pageVisitorEditProfil = 6,
+        pageVisitorMyItems =    7,
+        pageVisitorSearch =     8,
+        pageVisitorSeminar =    9,
+        pageManageCheckIn =     10,
+        pageManageStock =       11
     }
-
+    
+    /// <summary>
+    /// All types of User categories we have
+    /// Determens a users priviligie
+    /// </summary>
     public enum UsersCategory
     {
-        Visitor = 0,
-        Librarian = 1,
-        Chieflibrarian = 2
+        Visitor =           0,
+        Librarian =         1,
+        Chieflibrarian =    2
     }
 }

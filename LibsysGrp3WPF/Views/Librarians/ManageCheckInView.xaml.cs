@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace LibsysGrp3WPF.Views
 {
     /// <summary>
-    /// Interaction logic for DeleteLibrarianView.xaml
+    /// Interaction logic for ManageCheckInView.xaml
     /// </summary>
-    public partial class DeleteLibrarianView : UserControl
+    public partial class ManageCheckInView : UserControl
     {
-        public DeleteLibrarianView()
+        public ManageCheckInView()
         {
             InitializeComponent();
         }

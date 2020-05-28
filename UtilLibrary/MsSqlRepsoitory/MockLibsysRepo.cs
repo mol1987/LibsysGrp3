@@ -4,34 +4,25 @@ using System.Text;
 
 namespace UtilLibrary.MsSqlRepsoitory
 {
+    /// <summary>
+    /// Just a mockup of our repository for testing purposes.
+    /// </summary>
     public class MockLibsysRepo : ILibsysRepo
     {
-
+        #region Users
         public void AddUser(IUsers user)
         {
             return;
         }
-
-        public void CreateBook(IFullBooks books)
-        {
-            return;
-        }
-
-        public void EditBook(IFullBooks books)
-        {
-            return;
-        }
-
         public void EditUser(IUsers user)
         {
             return;
         }
-
         public IUsers LoginUser(string identityNo, string password)
         {
             return new Users()
             {
-                IdentityNo = identityNo,
+                IdentityNO = identityNo,
                 Password = password,
                 UsersID = 1,
                 Banned = false,
@@ -41,15 +32,55 @@ namespace UtilLibrary.MsSqlRepsoitory
                 JoinDate = DateTime.Now
             };
         }
-
-        public void RemoveBook(IFullBooks books)
-        {
-            return;
-        }
-
         public void RemoveUser(IUsers user)
         {
             return;
         }
+        public IEnumerable<IStockWithBorrow> GetUserStock(IUsers user)
+        {
+            return null;
+        }
+        #endregion
+        #region Items
+        public void BorrowBook(IStockWithBorrow stock)
+        {
+            return;
+        }
+        public void CreateBook(IFullBooks books)
+        {
+            return;
+        }
+        public void CreateItemWithStockID(IItems items)
+        {
+            return;
+        }
+        public void EditBook(IFullBooks books)
+        {
+            return;
+        }
+        public IEnumerable<IStockWithBorrow> GetStock(IItems item)
+        {
+            return null;
+        }
+        public void RemoveBook(IFullBooks books)
+        {
+            return;
+        }
+        public void ReserveBook(IStockWithBorrow stock)
+        {
+            return;
+        }
+        public void EditBookStatus(IStock stock)
+        {
+            return;
+        }
+
+        public void CheckInBook(IStockWithBorrow stock)
+        {
+            return;
+        }
+
+        
+        #endregion
     }
 }
