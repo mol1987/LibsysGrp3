@@ -40,7 +40,7 @@
         </Grid>
 
         <!--#region List of books-->
-        <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible"  
+        <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  
                      ItemsSource="{Binding BooksList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
                       Margin="50,10 50 0">
             <ItemsControl.ItemTemplate>
