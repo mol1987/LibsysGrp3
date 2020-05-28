@@ -60,6 +60,7 @@
 
             <!--Value converters-->
             <local:StockWithBorrowToCheckInStrConverter x:Key="StockWithBorrowToCheckInStrConverter" />
+            <local:UserCategoryToStr x:Key="UserCategoryToStr" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

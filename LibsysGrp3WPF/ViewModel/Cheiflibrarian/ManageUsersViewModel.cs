@@ -38,6 +38,11 @@ namespace LibsysGrp3WPF
 
         #region Public Properties
 
+        /// <summary>
+        /// Array that contains all of the category types 
+        /// </summary>
+        public string[] CbxCategoryTyp { get; set; }
+
         public bool IsOpen
         {
             get
@@ -379,6 +384,7 @@ namespace LibsysGrp3WPF
         }
         public ManageUsersViewModel()
         {
+            CbxCategoryTyp = new string[] { "Besökare", "Bibliotekariet", "Bibliotekschef" };
             getUsers();
         }
 
