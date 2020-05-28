@@ -9,24 +9,24 @@ using UtilLibrary.MsSqlRepsoitory;
 namespace LibsysGrp3WPF
 {
     public class ManageUsersViewModel : BaseViewModel, IPageViewModel
-    {
-
-        #region private properties
+    { 
+         #region private properties
 
         #region privates
         private ICommand _buttonOk;
-        private ObservableCollection<UsersModel> _visitorList;
+        private ObservableCollection<UsersModel> _userList;
         private string _addiDTextBox;
         private string _addfirstnameTextBox;
         private string _addlastnameTextBox;
         private string _addpasswordTextBox;
         private string _addmobilTextBox;
         private string _addemailTextBox;
+        private bool _bannedCheckBox;
+        private string _addReasonTextBox;
+        private int _addUserCategoryTextBox;
 
-
-        private ICommand _btnEditVisitor;
         private ICommand _btnDeleteVisitor;
-        private ICommand _btnAddVisitor;
+        private ICommand _btnAddUser;
 
 
         private ICommand _btnOpenVisitorDialog;
@@ -125,16 +125,57 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public ObservableCollection<UsersModel> VisitorList
+        public bool BannedCheckBox
         {
             get
             {
-                return _visitorList;
+                return _bannedCheckBox;
             }
             set
             {
-                _visitorList = value;
-                OnPropertyChanged(nameof(VisitorList));
+                _bannedCheckBox = value;
+                OnPropertyChanged(nameof(BannedCheckBox));
+            }
+        }
+
+        public string AddReasonTextBox
+        {
+            get
+            {
+                return _addReasonTextBox;
+            }
+            set
+            {
+                _addReasonTextBox = value;
+                OnPropertyChanged(nameof(AddReasonTextBox));
+            }
+        }
+
+        public int AddUserCategoryTextBox
+        {
+            get
+            {
+                return _addUserCategoryTextBox;
+            }
+            set
+            {
+                _addUserCategoryTextBox = value;
+                OnPropertyChanged(nameof(AddUserCategoryTextBox));
+            }
+        }
+
+
+
+        public ObservableCollection<UsersModel> UserList
+        {
+            get
+            {
+                return _userList;
+            }
+            set
+            {
+                _userList = value;
+                OnPropertyChanged(nameof(UserList));
             }
         }
 
@@ -144,16 +185,19 @@ namespace LibsysGrp3WPF
             {
                 return _buttonOk ?? (_buttonOk = new RelayCommand(x =>
                 {
-                    var listIndex = VisitorList.IndexOf(userToEdit);
-                    VisitorList[listIndex].IdentityNo = AddIDTextBox;
-                    VisitorList[listIndex].Firstname = AddFirstnameTextBox;
-                    VisitorList[listIndex].Lastname = AddLastnameTextBox;
-                    VisitorList[listIndex].PhoneNumber = AddMobilTextBox;
-                    VisitorList[listIndex].Email = AddEmailTextBox;
-                    VisitorList[listIndex].Password = AddPasswordTextBox;
-                    VisitorList[listIndex].EditUser();
+                    var listIndex = UserList.IndexOf(userToEdit);
+                    UserList[listIndex].UsersCategory = AddUserCategoryTextBox;
+                    UserList[listIndex].IdentityNO = AddIDTextBox;
+                    UserList[listIndex].Firstname = AddFirstnameTextBox;
+                    UserList[listIndex].Lastname = AddLastnameTextBox;
+                    UserList[listIndex].PhoneNumber = AddMobilTextBox;
+                    UserList[listIndex].Email = AddEmailTextBox;
+                    UserList[listIndex].Password = AddPasswordTextBox;
+                    UserList[listIndex].Banned = BannedCheckBox;
+                    UserList[listIndex].Reason = AddReasonTextBox;
+                    UserList[listIndex].EditUser();
 
-                    getVisitors();
+                    getUsers();
                 }));
             }
         }
@@ -165,12 +209,15 @@ namespace LibsysGrp3WPF
                 return _showDialogCommand ?? (_showDialogCommand = new RelayCommand(x =>
                 {
                     var obj = (UsersModel)x;
+                    AddUserCategoryTextBox = obj.UsersCategory;
                     AddEmailTextBox = obj.Email;
                     AddFirstnameTextBox = obj.Firstname;
                     AddLastnameTextBox = obj.Lastname;
-                    AddIDTextBox = obj.IdentityNo;
+                    AddIDTextBox = obj.IdentityNO;
                     AddPasswordTextBox = obj.Password;
                     AddMobilTextBox = obj.PhoneNumber;
+                    BannedCheckBox = obj.Banned;
+                    AddReasonTextBox = obj.Reason;
                     IsOpen = true;
 
                     userToEdit = obj;
@@ -189,22 +236,25 @@ namespace LibsysGrp3WPF
                 return _btnOpenVisitorDialog ?? (_btnOpenVisitorDialog = new RelayCommand(x =>
                 {
                     IsOpen = true;
+                    AddUserCategoryTextBox = 0;
                     AddEmailTextBox = "";
                     AddFirstnameTextBox = "";
                     AddLastnameTextBox = "";
                     AddIDTextBox = "";
                     AddPasswordTextBox = "";
                     AddMobilTextBox = "";
+                    BannedCheckBox = false;
+                    AddReasonTextBox = "";
                     userToEdit = null;
                 }));
             }
         }
 
-        public ICommand BtnAddVisitor
+        public ICommand BtnAddUser
         {
             get
             {
-                return _btnAddVisitor ?? (_btnAddVisitor = new RelayCommand(x =>
+                return _btnAddUser ?? (_btnAddUser = new RelayCommand(x =>
                 {
                     // if there isnt an object to edit make it so it will add instead
                     if (userToEdit == null)
@@ -212,33 +262,38 @@ namespace LibsysGrp3WPF
                         var item = new UsersModel(new UsersProcessor(new LibsysRepo()));
 
                         item.JoinDate = DateTime.Now;
+                        item.UsersCategory = AddUserCategoryTextBox;
                         item.Firstname = AddFirstnameTextBox;
                         item.Lastname = AddLastnameTextBox;
-                        item.IdentityNo = AddIDTextBox;
+                        item.IdentityNO = AddIDTextBox;
                         item.Email = AddEmailTextBox;
                         item.PhoneNumber = AddMobilTextBox;
                         item.Password = AddPasswordTextBox;
                         item.Banned = false;
+                        item.Reason = AddReasonTextBox;
                         item.AddUser();
                         string str = "" + item.Firstname;
-                        MessageBox.Show(str + " added.", "Added Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " tillagd .", "Tillagd lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
                         IsOpen = false;
 
-                        getVisitors();
+                        getUsers();
                     }
                     // if there is an object to edit update changes
                     else
                     {
-                        var listIndex = VisitorList.IndexOf(userToEdit);
-                        VisitorList[listIndex].Firstname = AddFirstnameTextBox;
-                        VisitorList[listIndex].Lastname = AddLastnameTextBox;
-                        VisitorList[listIndex].Email = AddEmailTextBox;
-                        VisitorList[listIndex].PhoneNumber = AddMobilTextBox;
-                        VisitorList[listIndex].Password = AddPasswordTextBox;
-                        VisitorList[listIndex].EditUser();
+                        var listIndex = UserList.IndexOf(userToEdit);
+                        UserList[listIndex].UsersCategory = AddUserCategoryTextBox;
+                        UserList[listIndex].Firstname = AddFirstnameTextBox;
+                        UserList[listIndex].Lastname = AddLastnameTextBox;
+                        UserList[listIndex].Email = AddEmailTextBox;
+                        UserList[listIndex].PhoneNumber = AddMobilTextBox;
+                        UserList[listIndex].Password = AddPasswordTextBox;
+                        UserList[listIndex].Banned = BannedCheckBox;
+                        UserList[listIndex].Reason = AddReasonTextBox;
+                        UserList[listIndex].EditUser();
                         string str = "" + userToEdit.Firstname;
-                        MessageBox.Show(str + " edited.", "Edit Succesfull", MessageBoxButton.OK, MessageBoxImage.Question);
-                        getVisitors();
+                        MessageBox.Show(str + " redigerad.", "Redigering lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
+                        getUsers();
                         // toggle it to null so there is no object to change
                         IsOpen = false;
                         userToEdit = null;
@@ -255,13 +310,17 @@ namespace LibsysGrp3WPF
             {
                 return _btnDeleteVisitor ?? (_btnDeleteVisitor = new RelayCommand(x =>
                 {
-                    var obj = (UsersModel)x;
-                    var userIndex = VisitorList.IndexOf(obj);
-                    VisitorList[userIndex].RemoveUser();
-                    VisitorList.RemoveAt(userIndex);
+                    var Result = MessageBox.Show("Är du säkert att du vill ta bort denna användare?", "Ta bort användare", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (Result == MessageBoxResult.Yes)
+                    {
+                        var obj = (UsersModel)x;
+                        var userIndex = UserList.IndexOf(obj);
+                        UserList[userIndex].RemoveUser();
+                        UserList.RemoveAt(userIndex);
 
-                    string str = obj.Firstname;
-                    MessageBox.Show(str + " bortagen", "Bortagen", MessageBoxButton.OK, MessageBoxImage.Question);
+                        string str = obj.Firstname;
+                        MessageBox.Show(str + " bortagen", "Bortagen", MessageBoxButton.OK, MessageBoxImage.Question);
+                    }
 
                 }));
             }
@@ -320,15 +379,15 @@ namespace LibsysGrp3WPF
         }
         public ManageUsersViewModel()
         {
-            getVisitors();
+            getUsers();
         }
 
-        private void getVisitors()
+        private void getUsers()
         {
-            // gets all users and filters to all librarians.
-            //var repo = new LibsysRepo();
-            // var tempUsersList = repo.GetUsers<Users>().Where(x => x.UsersCategory == (int)UsersCategory.Visitor);
-            // VisitorList = UsersModel.convertToObservableCollection(tempUsersList);
+            //gets all users and filters to all librarians.
+            var repo = new LibsysRepo();
+            var tempUsersList = repo.GetUsers<Users>();
+            UserList = UsersModel.convertToObservableCollection(tempUsersList);
         }
 
         #endregion
@@ -340,6 +399,7 @@ namespace LibsysGrp3WPF
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
         }
+
         private void SearchItems(object o)
         {
             switch (FilterTypID)
@@ -349,19 +409,19 @@ namespace LibsysGrp3WPF
                     {
 
                         SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchUserName(SearchKey));
-                        VisitorList = UsersModel.convertToObservableCollection(SearchResultList);
+                        UserList = UsersModel.convertToObservableCollection(SearchResultList);
                     }
                     break;
                 case 1:
                     {
                         SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchUserEmail(SearchKey));
-                        VisitorList = UsersModel.convertToObservableCollection(SearchResultList);
+                        UserList = UsersModel.convertToObservableCollection(SearchResultList);
                     }
                     break;
                 case 2:
                     {
                         SearchResultList = new ObservableCollection<Users>((new LibsysRepo()).SearchUserIdentiteyNO(SearchKey));
-                        VisitorList = UsersModel.convertToObservableCollection(SearchResultList);
+                        UserList = UsersModel.convertToObservableCollection(SearchResultList);
                     }
                     break;
 

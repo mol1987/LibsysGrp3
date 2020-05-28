@@ -19,6 +19,7 @@ namespace LibsysGrp3WPF
         public int UsersCategory { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public string Reason { get; set; }
 
         public UsersModel(IUsersProcessor processor)
         {
@@ -38,6 +39,7 @@ namespace LibsysGrp3WPF
             this.Email = tempVisitor.Email;
             this.PhoneNumber = tempVisitor.PhoneNumber;
             this.UsersCategory = tempVisitor.UsersCategory;
+            this.Reason = tempVisitor.Reason;
         }
         public void AddUser()
         {
@@ -67,7 +69,8 @@ namespace LibsysGrp3WPF
                     JoinDate = item.JoinDate,
                     UsersCategory = item.UsersCategory,
                     Email = item.Email,
-                    PhoneNumber = item.PhoneNumber
+                    PhoneNumber = item.PhoneNumber,
+                    Reason = item.Reason
                 }
                 );
             }
