@@ -107,7 +107,6 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-        
         /// <summary>
         /// Sign in button
         /// if no users has logged in open the popup
