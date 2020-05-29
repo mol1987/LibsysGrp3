@@ -23,7 +23,7 @@ namespace LibsysGrp3WPF
 			else
 			{
 				retStr += " Återlämningsdatum: " + convertObject.DueDate;
-				if (convertObject.DueDate > DateTime.Now)
+				if (convertObject.DueDate < DateTime.Now)
 					retStr += " (Försenad)";
 			}
 			return retStr;

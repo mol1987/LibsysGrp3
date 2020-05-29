@@ -48,7 +48,6 @@ namespace LibsysGrp3WPF
                 UsersCategory.Librarian, new ObservableCollection<PagesChoice>
                 {
                     PagesChoice.pageManageVisitor,
-                    PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
                     PagesChoice.pageReport,
                     PagesChoice.pageManageCheckIn
@@ -59,7 +58,6 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageStartView,
                     PagesChoice.pageManageUsers,
-                    PagesChoice.pageManageSeminar,
                     PagesChoice.pageReport
                 }
             }
@@ -366,7 +364,7 @@ namespace LibsysGrp3WPF
         public void SignOutProcess()
         {
             Mediator.User = null;
-            MenuList.Clear();
+            MenuList = new ObservableCollection<PagesChoice>();
             AccountCategory = "";
             AccountName = "";
             IDTextBox = "";
