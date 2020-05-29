@@ -47,6 +47,9 @@ namespace LibsysGrp3WPF
             myBooks.Clear();
 
             GetBorrowed();
+
+            // delete commetns
+
         }
 
         private void GetBorrowed()
