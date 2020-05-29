@@ -61,6 +61,9 @@
             <!--Value converters-->
             <local:StockWithBorrowToCheckInStrConverter x:Key="StockWithBorrowToCheckInStrConverter" />
             <local:UserCategoryToStr x:Key="UserCategoryToStr" />
+            <local:PagesChoiceToCorrectStrConverter x:Key="PagesChoiceToCorrectStrConverter" />
+            <local:ZeroToHiddenConverter x:Key="ZeroToHiddenConverter" />
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

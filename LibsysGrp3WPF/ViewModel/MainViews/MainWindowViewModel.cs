@@ -64,7 +64,7 @@ namespace LibsysGrp3WPF
                 }
             }
         };
-        private ObservableCollection<PagesChoice> _menuList = null;
+        private ObservableCollection<PagesChoice> _menuList = new ObservableCollection<PagesChoice>();
         #endregion
 
         #region properties
@@ -366,7 +366,7 @@ namespace LibsysGrp3WPF
         public void SignOutProcess()
         {
             Mediator.User = null;
-            MenuList = null;
+            MenuList.Clear();
             AccountCategory = "";
             AccountName = "";
             IDTextBox = "";
