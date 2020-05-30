@@ -65,13 +65,14 @@
             <ContentControl Content="{Binding CurrentPageViewModel}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="0,15,0,0" />
 
             <!--account status-->
-            
-            <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="60,40" HorizontalAlignment="Right">
-                <WrapPanel >
-                    <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </WrapPanel>
+            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                    Background="#304ffe" BorderThickness="0" Width="60" Height="40"
+                    BorderBrush="#304ffe" 
+                    Grid.Column="4" Margin="0,10,47,0" HorizontalAlignment="Right"
+                    Visibility="{Binding Path=Mediator.User,Converter={StaticResource ZeroToHiddenConverter}}">
+                <materialDesign:PackIcon Kind="Account" Foreground="White" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
 
-            </StackPanel>
             <StackPanel Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="35,0">
                 <TextBlock  Foreground="white"   Text="{Binding AccountCategory}" HorizontalAlignment="Center"/>
                 <TextBlock Foreground="White" Text="{Binding AccountName}" HorizontalAlignment="Center"/>
@@ -87,10 +88,12 @@
             </Button>
 
             <!--LeftMenu-->
-            <Menu IsMainMenu="True" Background="#304ffe" Foreground="White" Margin="0,30,0,22">
-                <MenuItem  ItemsSource="{Binding MenuList}">
+            <Menu IsMainMenu="True" Background="#304ffe" Foreground="White" Margin="0,30,0,22" >
+                <MenuItem  ItemsSource="{Binding MenuList}" Visibility="{Binding Path=MenuList.Count,Converter={StaticResource ZeroToHiddenConverter}}">
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem">
+
+                            <Setter Property="Header" Value="{Binding Converter={StaticResource PagesChoiceToCorrectStrConverter}}"/>
                             <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.MenuItemsCommand}"/>
                             <Setter Property="CommandParameter" Value="{Binding}" />
                         </Style>

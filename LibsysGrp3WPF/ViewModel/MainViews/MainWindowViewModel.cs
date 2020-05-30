@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using MaterialDesignThemes.Wpf;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
+using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows;
 
 namespace LibsysGrp3WPF
 {
@@ -25,7 +28,7 @@ namespace LibsysGrp3WPF
         private string _accountCategory = "";
         private string _accountName = "";
         private bool _isOpen = false;
-
+        
         /// <summary>
         /// Dictionary for the side menu
         /// returns an obserablecollection of a list of PagesChoice that
@@ -45,7 +48,6 @@ namespace LibsysGrp3WPF
                 UsersCategory.Librarian, new ObservableCollection<PagesChoice>
                 {
                     PagesChoice.pageManageVisitor,
-                    PagesChoice.pageManageSeminar,
                     PagesChoice.pageManageBook,
                     PagesChoice.pageReport,
                     PagesChoice.pageManageCheckIn
@@ -56,12 +58,11 @@ namespace LibsysGrp3WPF
                 {
                     PagesChoice.pageStartView,
                     PagesChoice.pageManageUsers,
-                    PagesChoice.pageManageSeminar,
                     PagesChoice.pageReport
                 }
             }
         };
-        private ObservableCollection<PagesChoice> _menuList = null;
+        private ObservableCollection<PagesChoice> _menuList = new ObservableCollection<PagesChoice>();
         #endregion
 
         #region properties
@@ -72,7 +73,7 @@ namespace LibsysGrp3WPF
         {
             get
             {
-
+                
                 return _btnSignIn ?? (_btnSignIn = new RelayCommand(x =>
                 {
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
@@ -104,7 +105,6 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-
         /// <summary>
         /// Sign in button
         /// if no users has logged in open the popup
@@ -119,15 +119,14 @@ namespace LibsysGrp3WPF
                     if (Mediator.User == null)
                     {
                         IsOpen = true;
-                    }
-                    else
+                    } else
                     {
                         var Result = MessageBox.Show("Vill du logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (Result == MessageBoxResult.Yes)
                         {
                             SignOutProcess();
                         }
-
+                        
                     }
                 }));
             }
@@ -231,7 +230,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public List<IPageViewModel> PageViewModels
+        public List<IPageViewModel> PageViewModels 
         {
             get
             {
@@ -342,7 +341,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
             PageViewModels.Add(new ManageCheckInViewModel());
 
-            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageManageCheckIn];
+            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageManageBook];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoStartPage);
             Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);
@@ -365,7 +364,7 @@ namespace LibsysGrp3WPF
         public void SignOutProcess()
         {
             Mediator.User = null;
-            MenuList = null;
+            MenuList = new ObservableCollection<PagesChoice>();
             AccountCategory = "";
             AccountName = "";
             IDTextBox = "";

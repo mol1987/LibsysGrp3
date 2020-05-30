@@ -432,7 +432,8 @@ namespace UtilLibrary.MsSqlRepsoitory
                 Lastname = user.Lastname,
                 JoinDate = user.JoinDate,
                 Banned = user.Banned,
-                UsersCategory = user.UsersCategory
+                UsersCategory = user.UsersCategory,
+                Reason = user.Reason
             };
             using (var conn = Create_Connection())
             {
@@ -458,10 +459,57 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return stockList;
         }
-        public void EditBookStatus(IFullBooks books)
+
+        public IEnumerable<Users> SearchLibrarians(string Key)
         {
-            throw new NotImplementedException();
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchLibrarians", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
         }
+
+        public IEnumerable<Users> SearchVisitors(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchVisitors", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+
+        public IEnumerable<Users> SearchCheifLibrarians(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchCheifLibrarians", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+
+        public IEnumerable<Users> SearchAllUsers(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchAllUsers", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+
+        public IEnumerable<Users> SearchAllUsersWithIdentityNO(string Key)
+        {
+            IEnumerable<Users> SearchUserList;
+            using (var conn = Create_Connection())
+            {
+                SearchUserList = conn.Query<Users>("SearchAllUsersWithIdentityNO", new { Search = Key }, commandType: CommandType.StoredProcedure);
+            }
+            return SearchUserList;
+        }
+
 
 
         #endregion

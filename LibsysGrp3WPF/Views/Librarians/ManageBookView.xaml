@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +25,7 @@
             </ComboBox>
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-             materialDesign:HintAssist.Hint="Sök med titel eller bok ID">
+             materialDesign:HintAssist.Hint="Sök med titel, författare, ISBN eller bok ID">
             </TextBox>
             <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
@@ -34,7 +33,7 @@
         </Grid>
 
         <!--#region List of books-->
-                <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" 
                          ItemsSource="{Binding BooksList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
                          Margin="50,10 50 0">
                     <ItemsControl.ItemTemplate>
@@ -51,8 +50,12 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Label FontSize="16" Grid.Column="0" Content="{Binding Title}"/>
                                                 <!-- Margin is needed, to bring the Button into the view -->
-                                                <Label Grid.Column="1" Content="{Binding Category}" Margin="0,0,100,0" Opacity=".68"/>
-                                        </Grid>
+                                                <WrapPanel Grid.Column="1" Margin="0,0,100,0">
+                                                    <Label Content="{Binding Category}"  Opacity=".68"/>
+                                                    <Label FontSize="12" Content="{Binding SAB}" Opacity=".68"/>
+                                                    <Label FontSize="12" Content="{Binding DDK}" Opacity=".68"/>
+                                                </WrapPanel>
+                                    </Grid>
                                     </Expander.Header>
                                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                             <StackPanel Orientation="Horizontal">

@@ -574,15 +574,12 @@ namespace LibsysGrp3WPF
         {
             switch (FilterTypID)
             {
-
-
                 case 0:
                     {
 
                         BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
-              
             }
         }
     }
