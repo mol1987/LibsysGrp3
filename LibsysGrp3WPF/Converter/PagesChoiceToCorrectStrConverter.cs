@@ -15,40 +15,40 @@ namespace LibsysGrp3WPF
 			switch (convertObject)
 			{
                 case PagesChoice.pageStartView:
-                    retStr = "Start Sida";
+                    retStr = "Start sida";
                     break;
                 case PagesChoice.pageManageVisitor:
-                    retStr = "Hantera Besökare";
+                    retStr = "Hantera besökare";
                     break;
                 case PagesChoice.pageReport:
-                    retStr = "Rapportera Objekt";
+                    retStr = "Rapportera objekt";
                     break;
                 case PagesChoice.pageManageBook:
-                    retStr = "Hantera Objekt";
+                    retStr = "Hantera objekt";
                     break;
                 case PagesChoice.pageManageSeminar:
-                    retStr = "Hantera Seminarier";
+                    retStr = "Hantera seminarier";
                     break;
                 case PagesChoice.pageManageUsers:
-                    retStr = "Hantera Användare";
+                    retStr = "Hantera användare";
                     break;
                 case PagesChoice.pageVisitorEditProfil:
-                    retStr = "Ändra Profil";
+                    retStr = "Ändra profil";
                     break;
                 case PagesChoice.pageVisitorMyItems:
-                    retStr = "Mina Lån";
+                    retStr = "Mina lån";
                     break;
                 case PagesChoice.pageVisitorSearch:
-                    retStr = "Låna Objekt";
+                    retStr = "Låna objekt";
                     break;
                 case PagesChoice.pageVisitorSeminar:
-                    retStr = "Seminarier";
+                    retStr = "seminarier";
                     break;
                 case PagesChoice.pageManageCheckIn:
-                    retStr = "Återlämna Objekt";
+                    retStr = "Återlämna objekt";
                     break;
                 case PagesChoice.pageManageStock:
-                    retStr = "Hantera Lager";
+                    retStr = "Hantera lager";
                     break;
                 default:
                     break;

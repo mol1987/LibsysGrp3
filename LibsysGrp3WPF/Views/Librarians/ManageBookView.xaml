@@ -11,13 +11,15 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <!-- Search-->
+
+        <StackPanel>
+            <!-- Search-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
 
             <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" 
                       Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
@@ -30,7 +32,50 @@
             <Button Grid.Row="0" Grid.Column="2" Width="50" Height="40" HorizontalAlignment="Left"  Command="{Binding btnSearch}" Margin="0 20 5 0">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
             </Button>
-        </Grid>
+
+                <!--#region Pop up for adding a book-->
+                <materialDesign:DialogHost IsOpen="{Binding IsOpen}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" Height="40" Margin="70 0 0 0" CloseOnClickAway="True">
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel  Width="400" Margin="10" >
+                            <StackPanel >
+                                <TextBlock Text="Titel" FontWeight="Bold" />
+                                <TextBox Text="{Binding TxBAddTitel}"/>
+                                <TextBlock Text="ISBN" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddISBN}"/>
+                                <TextBlock Text="Författare" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddAuthor}"/>
+                                <TextBlock Text="Förlag" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddPublisher}"/>
+                                <TextBlock Text="Kategori" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddCategory}"/>
+                                <TextBlock Text="Sidor" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddPages}"/>
+                                <TextBlock Text="Inköpris" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddPrice}"/>
+                                <TextBlock Text="Beskrivning" FontWeight="Bold"/>
+                                <TextBox Text="{Binding TxBAddDescription}"/>
+                            </StackPanel>
+                            <StackPanel Margin="50 10 50 0">
+                                <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
+                                <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </materialDesign:DialogHost.DialogContent >
+                    <!--#endregion-->
+
+
+                    <!--#region Button for adding a book-->
+                    <Button Content="Lägg till ny bok"
+                            Command="{Binding BtnOpenBookDialog}" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2"/>
+                </materialDesign:DialogHost>
+                <!--#endregion-->
+            </Grid>
+
+
+
+        </StackPanel>
 
         <!--#region List of books-->
                 <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -58,16 +103,13 @@
                                     </Grid>
                                     </Expander.Header>
                                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
 
-
-                                                <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
+                                        <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
                                                 <TextBlock Text="ISBN:" Margin="0 10 5 10"/>
                                                 <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
-                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
-                                                        Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
-                                                <Button Content="Lägg till fysisk exempel" Command="{Binding Path = DataContext.BtnAddStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
+                                               
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Författare:" Margin="0 0 5 10"/>
@@ -108,11 +150,17 @@
                                             <!--StocList end-->
 
                                             <TextBlock Text="Beskrivning" />
-                                            <TextBlock
+                                            <TextBlock Margin="0 0 0 10"
                                                   Opacity=".68"
                                                   Text="{Binding Description}"
                                                   TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 10 0"
+                                                        Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                                        <Button Content="Lägg till fysisk exempel" Command="{Binding Path = DataContext.BtnAddStockID, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
                                     </StackPanel>
+
+                                </StackPanel>
                                     </Expander>
                                     <Border Background="{DynamicResource MaterialDesignDivider}"
                                                   Height="1"
@@ -134,45 +182,7 @@
             <!--#endregion-->
 
 
-            <!--#region Pop up for adding a book-->
-        <materialDesign:DialogHost IsOpen="{Binding IsOpen}" Grid.Row="2" CloseOnClickAway="True">
-                <materialDesign:DialogHost.DialogContent>
-                <StackPanel  Width="400" Margin="10">
-                    <StackPanel >
-                            <TextBlock Text="Titel" FontWeight="Bold" />
-                            <TextBox Text="{Binding TxBAddTitel}"/>
-                            <TextBlock Text="ISBN" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddISBN}"/>
-                            <TextBlock Text="Författare" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddAuthor}"/>
-                            <TextBlock Text="Förlag" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddPublisher}"/>
-                            <TextBlock Text="Kategori" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddCategory}"/>
-                            <TextBlock Text="Sidor" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddPages}"/>
-                            <TextBlock Text="Inköpris" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddPrice}"/>
-                            <TextBlock Text="Beskrivning" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddDescription}"/>
-                        </StackPanel>
-                        <StackPanel Margin="50 10 50 0">
-                            <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
-                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
-                        </StackPanel>
 
-                    </StackPanel>
-
-                </materialDesign:DialogHost.DialogContent >
-                <!--#endregion-->
-
-                <!--#region Button for adding a book-->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
-                <Button Content="Lägg till ny bok" Margin="10"
-                            Command="{Binding BtnOpenBookDialog}" Grid.Row="2"/>
-            </StackPanel>
-            </materialDesign:DialogHost>
-            <!--#endregion-->
 
     </Grid>
 
