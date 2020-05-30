@@ -57,7 +57,7 @@ namespace LibsysGrp3WPF
             {
                 UsersCategory.Chieflibrarian, new ObservableCollection<PagesChoice>
                 {
-                    PagesChoice.pageStartView,
+                    //PagesChoice.pageStartView,
                     PagesChoice.pageManageUsers,
                     PagesChoice.pageReport
                 }
@@ -376,7 +376,7 @@ namespace LibsysGrp3WPF
             PageViewModels.Add(new VisitorSeminarViewModel());
             PageViewModels.Add(new ManageCheckInViewModel());
 
-            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageVisitorSearch];
+            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageStartView];
 
             Mediator.Subscribe(PagesChoice.pageStartView, OnGoStartPage);
             Mediator.Subscribe(PagesChoice.pageManageVisitor, OnGoPageManageVisitor);

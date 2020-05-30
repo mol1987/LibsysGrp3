@@ -15,14 +15,11 @@ namespace LibsysGrp3WPF
     public class StartPageViewModel : ManageBookViewModel, IPageViewModel
     {
         #region Private Properties
-        private ICommand _buttonPage2;
-        private ICommand _buttonLogin;
-        private ICommand _buttonGotoLogin;
-        private ICommand _buttonQuit;
+        private ICommand _btnInfo;
 
         private bool _popupIsOpen = false;
-        private string _iDTextBox;
-        private string _passwordTextBox;
+        private string _txBInfo;
+
         #endregion
         #region Public Properties
 
@@ -66,30 +63,7 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(SearchResultList));
             }
         }
-        public string IDTextBox
-        {
-            get
-            {
-                return _iDTextBox;
-            }
-            set
-            {
-                _iDTextBox = value;
-                OnPropertyChanged(nameof(IDTextBox));
-            }
-        }
-        public string PasswordTextBox
-        {
-            get
-            {
-                return _passwordTextBox;
-            }
-            set
-            {
-                _passwordTextBox = value;
-                OnPropertyChanged(nameof(PasswordTextBox));
-            }
-        }
+
         public bool PopupIsOpen
         {
             get
@@ -102,47 +76,43 @@ namespace LibsysGrp3WPF
                 OnPropertyChanged(nameof(PopupIsOpen));
             }
         }
-        public ICommand ButtonGotoLogin
+
+        public string TxBInfo
         {
             get
             {
-                return _buttonGotoLogin ?? (_buttonGotoLogin = new RelayCommand(x =>
+                return _txBInfo;
+            }
+            set
+            {
+                _txBInfo = value;
+                OnPropertyChanged(nameof(TxBInfo));
+            }
+        }
+
+
+
+
+        public ICommand BtnInfo
+        {
+            get
+            {
+                return _btnInfo ?? (_btnInfo = new RelayCommand(x =>
                 {
                     PopupIsOpen = true;
                 }));
             }
         }
-        public ICommand ButtonQuit
-        {
-            get
-            {
-                return _buttonQuit ?? (_buttonQuit = new RelayCommand(x =>
-                {
-                    Mediator.CloseApplication();
-                }));
-            }
-        }
-        public ICommand ButtonLogin
-        {
-            get
-            {
-                return _buttonLogin ?? (_buttonLogin = new RelayCommand(x =>
-                {
-                    var visitor = new UsersModel(new UsersProcessor(new LibsysRepo()));
-                    visitor.LoginUser(IDTextBox, PasswordTextBox);
-                    string str = "" + visitor.UsersID + ": " + visitor.Firstname + " " + visitor.Lastname + " Joined: " + visitor.JoinDate;
-                    PopupIsOpen = false;
-                    MessageBox.Show(str, "Confirmation", MessageBoxButton.OK, MessageBoxImage.Question);
-                }));
-            }
-        }
+
         #endregion
 
         #region Methods
         public void run()
         {
             CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böcker", "Filmer" };
-
+            TxBInfo = "För att låna böckerna vänligen logga in.\n" +
+                "Om du inte har konto vänligen besöka vår reception och bibliotekariet skapar en konto åt dig.\n" +
+                "Om du har glömt din inloggningsuppgifter vänligen kontakta bibliotekspersonal.";
             // Create the search Command
             btnSearch = new RelayCommand((o) => SearchItems(o));
         }

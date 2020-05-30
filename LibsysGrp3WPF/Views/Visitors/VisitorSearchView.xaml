@@ -81,10 +81,6 @@
                                         <TextBlock Text="{Binding Category}" Margin="0 0 5 10" FontWeight="Normal"/>
                                         <TextBlock Text="Sidor:" Margin="0 0 5 10"/>
                                         <TextBlock Text="{Binding Pages}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                        <TextBlock Text="Inköpris:" Margin="0 0 5 10"/>
-                                        <TextBlock Text="{Binding Price}" Margin="0 0 0 10" FontWeight="Normal"/>
-                                        <TextBlock Text="Skapelsedatum:" Margin="5 0 5 10"/>
-                                        <TextBlock Text="{Binding Date}" Margin="0 0 0 10" FontWeight="Normal"/>
                                     </StackPanel>
                                     <TextBlock Text="Beskrivning" />
                                     <TextBlock
