@@ -19,6 +19,7 @@ namespace LibsysGrp3WPF
         private ICommand _btnSignIn;
         private ICommand _menuItemsCommand;
         private ICommand _btnUserAccess;
+        private ICommand _ButtonHome;
 
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
@@ -143,6 +144,40 @@ namespace LibsysGrp3WPF
                 return _menuItemsCommand ?? (_menuItemsCommand = new RelayCommand(x =>
                 {
                     ChangeViewModel(PageViewModels[(int)((PagesChoice)x)]);
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Navigates to the first page depending on which user is logged in
+        /// for easy navigation
+        /// </summary>
+
+        public ICommand ButtonHome
+        {
+            get
+            {
+                return _ButtonHome ?? (_ButtonHome = new RelayCommand(x =>
+                {
+                    if (Mediator.User == null)
+                    {
+                        ChangeViewModel(PageViewModels[(int)((PagesChoice.pageStartView))]);
+                    }
+                    else if (Mediator.User.UsersCategory == (int) UsersCategory.Chieflibrarian)
+                    {
+                        ChangeViewModel(PageViewModels[(int)((PagesChoice.pageStartView))]);
+                    }
+
+                    else if (Mediator.User.UsersCategory == (int)UsersCategory.Librarian)
+                    {
+                        ChangeViewModel(PageViewModels[(int)((PagesChoice.pageStartView))]);
+                    }
+
+                    else if (Mediator.User.UsersCategory == (int)UsersCategory.Visitor)
+                    {
+                        ChangeViewModel(PageViewModels[(int)((PagesChoice.pageVisitorSearch))]);
+                    }
+
                 }));
             }
         }
