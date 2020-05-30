@@ -9,20 +9,19 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Label Content="Mina artiklar" Foreground="Blue" FontSize="28" Grid.Row="0" HorizontalAlignment="Center"/>
         <!--#region List of books-->
-        
-        <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible"
+
+        <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
                      ItemsSource="{Binding myBooks, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
-                      Margin="50,10 50 0">
+                      Margin="50,10 50 0" >
             
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <ScrollViewer>
                     <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
                         <StackPanel>
                             <Expander  FontWeight="Bold" HorizontalAlignment="Stretch">
@@ -32,8 +31,8 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Label FontSize="16" Grid.Column="0" Content="{Binding ItemType}"/>
-                                        <Label Grid.Column="1" Content="{Binding Title}" Margin="0,0,100,0" Opacity=".68"/>
+                                        <Label FontSize="16" Grid.Column="0" Content="{Binding Title}"/>
+                                        <Label Grid.Column="1" Content="{Binding ItemType}" Margin="0,0,100,0" Opacity=".68"/>
                                     </Grid>
                                 </Expander.Header>
                                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
@@ -50,26 +49,21 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Lånade datum:" Margin="0 0 5 10"/>
-                                        <TextBlock Text="{Binding BorrowDate}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                        <TextBlock Text="{Binding BorrowDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                                       Margin="0 0 5 10" FontWeight="Normal"/>
                                         <TextBlock Text="Förfallodatum:" Margin="5 0 5 10"/>
-                                        <TextBlock Text="{Binding DueDate}" Margin="0 0 0 10" FontWeight="Normal"/>
-                                        <TextBlock Text="Status:" Margin="5 0 5 10"/>
-                                        <TextBlock Text="Återlämnade - " Margin="5 0 5 10"/>
-                                        <TextBlock Text="{Binding ReturnDate}" Margin="0 0 0 10" FontWeight="Normal"/>
+                                        <TextBlock Text="{Binding DueDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                                       Margin="0 0 0 10" FontWeight="Normal"/>
+                                        <TextBlock Text="  Status:" Margin="5 0 5 10"/>
+                                        <TextBlock Text="Återlämnade - " Margin="5 0 5 10" FontWeight="Normal"/>
+                                        <TextBlock Text="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                                       Margin="0 0 0 10" FontWeight="Normal"/>
                                     </StackPanel>
                                     <TextBlock Text="Beskrivning" />
                                     <TextBlock
                                                   Opacity=".68"
                                                   Text="{Binding Description}"
                                                   TextWrapping="Wrap" HorizontalAlignment="Left"/>
-                                    <!--Reservations -->
-                                    <ListView ItemsSource="{Binding StockItems}" SelectedItem="{Binding SelectedStockItem}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding}"/>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ListView>
                                 </StackPanel>
                             </Expander>
                             <Border Background="{DynamicResource MaterialDesignDivider}"
@@ -82,10 +76,9 @@
                                               HorizontalAlignment="Stretch"
                                               SnapsToDevicePixels="True" />
 
-                           
+
                         </StackPanel>
                     </materialDesign:Card>
-                    </ScrollViewer>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             
