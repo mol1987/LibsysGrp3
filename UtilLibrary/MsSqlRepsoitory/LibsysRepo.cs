@@ -1,13 +1,10 @@
 ﻿using Dapper;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UtilLibrary.MsSqlRepsoitory.Enums;
 
 namespace UtilLibrary.MsSqlRepsoitory
@@ -56,7 +53,7 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
             return itemList;
         }
-         public IEnumerable<FullBooks> SearchBookByISBN(string Key)
+        public IEnumerable<FullBooks> SearchBookByISBN(string Key)
         {
             IEnumerable<FullBooks> itemList;
             using (var conn = Create_Connection())
@@ -154,7 +151,7 @@ namespace UtilLibrary.MsSqlRepsoitory
         public void BorrowBook(IStockWithBorrow stock)
         {
             string storedProcedure = StoredProcedures.BorrowItem.ToString();
-            
+
             var obj = new
             {
                 StockID = stock.StockID,
@@ -204,7 +201,7 @@ namespace UtilLibrary.MsSqlRepsoitory
                 ItemsID = item.ItemsID
             };
 
-            IEnumerable <IStockWithBorrow> stockWithBorrow;
+            IEnumerable<IStockWithBorrow> stockWithBorrow;
             using (var conn = Create_Connection())
             {
                 stockWithBorrow = conn.Query<StockWithBorrow>(storedProcedure, obj, commandType: CommandType.StoredProcedure);
@@ -260,6 +257,11 @@ namespace UtilLibrary.MsSqlRepsoitory
             }
         }
 
+        /// <summary>
+        /// Gets the items from users borrowed list
+        /// </summary>
+        /// <param name="userID">Users id by login</param>
+        /// <returns></returns>
         public IEnumerable<T> GetBorrowList<T>(int userID)
         {
             string storedProcedure = StoredProcedures.GetBorrowList.ToString();
@@ -298,16 +300,16 @@ namespace UtilLibrary.MsSqlRepsoitory
 
         public void RemoveBook(IFullBooks books)
         {
-                string storedProcedure = StoredProcedures.RemoveItem.ToString();
-                var obj = new
-                {
-                    ItemsID = books.ItemsID
-                };
-                using (var conn = Create_Connection())
-                {
-                    conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
-                }
-            
+            string storedProcedure = StoredProcedures.RemoveItem.ToString();
+            var obj = new
+            {
+                ItemsID = books.ItemsID
+            };
+            using (var conn = Create_Connection())
+            {
+                conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
+            }
+
         }
 
         public void EditBook(IFullBooks books)

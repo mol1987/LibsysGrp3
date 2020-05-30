@@ -12,13 +12,17 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
         <Label Content="Mina artiklar" Foreground="Blue" FontSize="28" Grid.Row="0" HorizontalAlignment="Center"/>
         <!--#region List of books-->
+        
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible"
                      ItemsSource="{Binding myBooks, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
                       Margin="50,10 50 0">
+            
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
+                    <ScrollViewer>
                     <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
                         <StackPanel>
                             <Expander  FontWeight="Bold" HorizontalAlignment="Stretch">
@@ -78,11 +82,15 @@
                                               HorizontalAlignment="Stretch"
                                               SnapsToDevicePixels="True" />
 
+                           
                         </StackPanel>
                     </materialDesign:Card>
+                    </ScrollViewer>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+            
         </ListBox>
+        
     </Grid>
 
 </UserControl>

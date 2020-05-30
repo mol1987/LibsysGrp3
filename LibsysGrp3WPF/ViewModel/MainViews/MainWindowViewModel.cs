@@ -1,12 +1,9 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
-using LibsysGrp3WPF.Views;
-using UtilLibrary.MsSqlRepsoitory;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
@@ -28,7 +25,7 @@ namespace LibsysGrp3WPF
         private string _accountCategory = "";
         private string _accountName = "";
         private bool _isOpen = false;
-        
+
         /// <summary>
         /// Dictionary for the side menu
         /// returns an obserablecollection of a list of PagesChoice that
@@ -75,7 +72,7 @@ namespace LibsysGrp3WPF
         {
             get
             {
-                
+
                 return _btnSignIn ?? (_btnSignIn = new RelayCommand(x =>
                 {
                     Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
@@ -107,7 +104,7 @@ namespace LibsysGrp3WPF
                 }));
             }
         }
-        
+
         /// <summary>
         /// Sign in button
         /// if no users has logged in open the popup
@@ -122,14 +119,15 @@ namespace LibsysGrp3WPF
                     if (Mediator.User == null)
                     {
                         IsOpen = true;
-                    } else
+                    }
+                    else
                     {
                         var Result = MessageBox.Show("Vill du logga ut?", "Logga ut", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (Result == MessageBoxResult.Yes)
                         {
                             SignOutProcess();
                         }
-                        
+
                     }
                 }));
             }
@@ -233,7 +231,7 @@ namespace LibsysGrp3WPF
             }
         }
 
-        public List<IPageViewModel> PageViewModels 
+        public List<IPageViewModel> PageViewModels
         {
             get
             {

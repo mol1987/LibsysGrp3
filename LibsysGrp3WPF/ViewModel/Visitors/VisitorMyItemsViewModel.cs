@@ -14,23 +14,8 @@ namespace LibsysGrp3WPF
 
         #endregion
 
-        #region public button commands
-
-        // not working yet
-        //public ICommand btnLeaveBack => _btnLeaveBack ?? (_btnLeaveBack = new RelayCommand(x =>
-        //        {
-        //            var obj = (BorrowList)x;
-        //            var bookIndex = borrowed.IndexOf(obj);
-        //            borrowed.RemoveAt(bookIndex);
-        //            //items.RemoveAt(bookIndex);
-
-        //            //borrowed.RemoveAt(MySelectedItem.ItemsID);
-        //        }));
-
-        #endregion
-
-
         #region Constructor
+
         public VisitorMyItemsViewModel()
         {
             GetBorrowed();
@@ -43,18 +28,15 @@ namespace LibsysGrp3WPF
         /// </summary>
         public void run()
         {
-            // Resets borrow list to null
+            // Resets the borrow list to null
             myBooks.Clear();
 
             GetBorrowed();
-
-            // delete commetns
-
         }
 
         private void GetBorrowed()
         {
-            // gets borrowed list books..
+            // gets borrowed list of books..
 
             if (Mediator.User != null)
             {

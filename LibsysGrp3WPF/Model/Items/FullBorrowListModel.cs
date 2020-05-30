@@ -3,7 +3,8 @@
 namespace LibsysGrp3WPF.Model.Items
 {
 
-    // This class is a model for users borrow list with properties from Items and BorrowList classes.
+    // This class is a model for users borrow list with properties from 
+    // Items and BorrowList model classes.
 
     public class FullBorrowListModel
     {
