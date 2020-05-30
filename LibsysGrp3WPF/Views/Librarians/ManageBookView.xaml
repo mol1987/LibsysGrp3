@@ -7,7 +7,7 @@
              mc:Ignorable="d" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
@@ -19,15 +19,15 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" 
+                      Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
                       ItemsSource="{Binding CbxSearchFilters}" 
-                      SelectedIndex="{Binding FilterTypID}">
-            </ComboBox>
+                      SelectedIndex="{Binding FilterTypID}"
+                      SelectedItem="{Binding SelectedItem}"/>
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-             materialDesign:HintAssist.Hint="Sök med titel, författare, ISBN eller bok ID">
-            </TextBox>
-            <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
+             materialDesign:HintAssist.Hint="Sök med ISBN, titel eller med författare"/>
+            <Button Grid.Row="0" Grid.Column="2" Width="50" Height="40" HorizontalAlignment="Left"  Command="{Binding btnSearch}" Margin="0 20 5 0">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
             </Button>
         </Grid>
@@ -135,7 +135,7 @@
 
 
             <!--#region Pop up for adding a book-->
-        <materialDesign:DialogHost IsOpen="{Binding IsOpen}" Grid.Row="2">
+        <materialDesign:DialogHost IsOpen="{Binding IsOpen}" Grid.Row="2" CloseOnClickAway="True">
                 <materialDesign:DialogHost.DialogContent>
                 <StackPanel  Width="400" Margin="10">
                     <StackPanel >

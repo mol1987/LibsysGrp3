@@ -45,7 +45,7 @@ namespace LibsysGrp3WPF
         /// <summary>
         /// FiltertypeID
         /// </summary>
-        public int FilterTypID { get; set; }
+        public int FilterTypID { get; set; } = 1;
 
         /// <summary>
         /// Contains the search result

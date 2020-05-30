@@ -9,144 +9,146 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-            <!-- Search-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <!-- Search-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Sök filter" Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" 
+                      Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
                       ItemsSource="{Binding CbxSearchFilters}" 
-                      SelectedIndex="{Binding FilterTypID}"></ComboBox>
+                      SelectedIndex="{Binding FilterTypID}"
+                      SelectedItem="{Binding SelectedItem}"/>
 
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-                 materialDesign:HintAssist.Hint="Sök"/>
-                           <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+             materialDesign:HintAssist.Hint="Sök med ISBN, titel eller med författare"/>
+            <Button Grid.Row="0" Grid.Column="2" Width="50" Height="40" HorizontalAlignment="Left"  Command="{Binding btnSearch}" Margin="0 20 5 0">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
             </Button>
-            </Grid>
-            <!-- End Search-->
-            <!--#region Pop up for editing a visitor-->
-            <materialDesign:DialogHost>
-                <!--#region List of visitors-->
-                <ListBox Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding VisitorList, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Center"  Margin="50,10 50 0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
-                                <StackPanel>
-                                    <Expander HorizontalAlignment="Stretch" FontWeight="Bold">
-                                        <Expander.Header >
-                                            <!-- Width-Binding is needed, to fill the whole header horizontally-->
-                                            <Grid HorizontalAlignment="Stretch" Margin="0" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Orientation="Horizontal" Grid.Column="0" >
-                                                    <Label FontSize="16" Content="{Binding Firstname}"/>
-                                                    <Label FontSize="16" Content="{Binding Lastname}"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Expander.Header>
-                                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Förstnamn:" Margin="0 10 5 10"/>
-                                                <TextBlock Text="{Binding Firstname}" Margin="0 10 5 10" FontWeight="Normal"/>
-                                                <TextBlock Text="Efternamn:" Margin="0 10 5 10"/>
-                                                <TextBlock Text="{Binding Lastname}" Margin="0 10 5 10" FontWeight="Normal"/>
-                                                <TextBlock Text="Email:" Margin="0 10 5 10"/>
-                                                <TextBlock Text="{Binding Email}" Margin="0 10 200 10" FontWeight="Normal"/>
-                                                <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
+        </Grid>
+        <!-- End Search-->
+        <!--#region Pop up for editing a visitor-->
+        <materialDesign:DialogHost Grid.Row="1">
+            <!--#region List of visitors-->
+            <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding VisitorList, Mode=OneWay}" Grid.Row="0" HorizontalAlignment="Center" Margin="50,10 50 0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
+                            <StackPanel>
+                                <Expander HorizontalAlignment="Stretch" FontWeight="Bold">
+                                    <Expander.Header >
+                                        <!-- Width-Binding is needed, to fill the whole header horizontally-->
+                                        <Grid HorizontalAlignment="Stretch" Margin="0" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal" Grid.Column="0" >
+                                                <Label FontSize="16" Content="{Binding Firstname}"/>
+                                                <Label FontSize="16" Content="{Binding Lastname}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Expander.Header>
+                                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Förstnamn:" Margin="0 10 5 10"/>
+                                            <TextBlock Text="{Binding Firstname}" Margin="0 10 5 10" FontWeight="Normal"/>
+                                            <TextBlock Text="Efternamn:" Margin="0 10 5 10"/>
+                                            <TextBlock Text="{Binding Lastname}" Margin="0 10 5 10" FontWeight="Normal"/>
+                                            <TextBlock Text="Email:" Margin="0 10 5 10"/>
+                                            <TextBlock Text="{Binding Email}" Margin="0 10 200 10" FontWeight="Normal"/>
+                                            <Button Content="Förändra" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
                                                         Command="{Binding Path = DataContext.ShowDialogCommandForEditing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}"/>
-                                                <Button Content="Ta bort" Command="{Binding Path = DataContext.BtnDeleteVisitor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Personnummer:" Margin="0 0 5 10"/>
-                                                <TextBlock Text="{Binding IdentityNO}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                                <TextBlock Text="Mobil:" Margin="0 0 5 10"/>
-                                                <TextBlock Text="{Binding PhoneNumber}" Margin="0 0 0 10" FontWeight="Normal"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Password:" Margin="0 0 5 10"/>
-                                                <TextBlock Text="{Binding Password}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                                <TextBlock Text="Datum för registrering:" Margin="0 0 5 10"/>
-                                                <TextBlock Text="{Binding JoinDate}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Spärrad:" Margin="0 0 5 10"/>
-                                                <CheckBox IsChecked="{Binding Banned}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                                <TextBlock Text="Kommentar:" Margin="0 0 5 10"/>
-                                                <TextBlock Text="{Binding Reason}" Margin="0 0 5 10" FontWeight="Normal"/>
-                                            </StackPanel>
+                                            <Button Content="Ta bort" Command="{Binding Path = DataContext.BtnDeleteVisitor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#F9A20B" BorderBrush="#F9A20B"/>
                                         </StackPanel>
-                                    </Expander>
-                                    <Border Background="{DynamicResource MaterialDesignDivider}"
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Personnummer:" Margin="0 0 5 10"/>
+                                            <TextBlock Text="{Binding IdentityNO}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                            <TextBlock Text="Mobil:" Margin="0 0 5 10"/>
+                                            <TextBlock Text="{Binding PhoneNumber}" Margin="0 0 0 10" FontWeight="Normal"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Password:" Margin="0 0 5 10"/>
+                                            <TextBlock Text="{Binding Password}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                            <TextBlock Text="Datum för registrering:" Margin="0 0 5 10"/>
+                                            <TextBlock Text="{Binding JoinDate}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Spärrad:" Margin="0 0 5 10"/>
+                                            <CheckBox IsChecked="{Binding Banned}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                            <TextBlock Text="Kommentar:" Margin="0 0 5 10"/>
+                                            <TextBlock Text="{Binding Reason}" Margin="0 0 5 10" FontWeight="Normal"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
+                                <Border Background="{DynamicResource MaterialDesignDivider}"
                                                   Height="1"
                                                   HorizontalAlignment="Stretch"
                                                   SnapsToDevicePixels="True" />
 
-                                    <Border
+                                <Border
                                               Background="{DynamicResource MaterialDesignDivider}"
                                               Height="1"
                                               HorizontalAlignment="Stretch"
                                               SnapsToDevicePixels="True" />
 
-                                </StackPanel>
-                            </materialDesign:Card>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ListBox>
-            </materialDesign:DialogHost>
-            <!--#endregion-->
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+        </materialDesign:DialogHost>
+        <!--#endregion-->
 
-            <!--#region Pop up for adding a visitor-->
-            <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel  Width="480" Margin="10">
+        <!--#region Pop up for adding a visitor-->
+        <materialDesign:DialogHost Grid.Row="2" IsOpen="{Binding IsOpen}" CloseOnClickAway="True"  >
+            <materialDesign:DialogHost.DialogContent >
+                <StackPanel  Width="480" Margin="10" >
 
-                        <StackPanel >
-                            <TextBlock Text="Förstnamn" FontWeight="Bold" />
-                            <TextBox Text="{Binding AddFirstnameTextBox}"/>
-                            <TextBlock Text="Efternamn" FontWeight="Bold"/>
-                            <TextBox Text="{Binding AddLastnameTextBox}"/>
-                            <TextBlock Text="Personnummer (12 siffror)" FontWeight="Bold"/>
-                            <TextBox Text="{Binding AddIDTextBox}"/>
-                            <TextBlock Text="Email" FontWeight="Bold"/>
-                            <TextBox Text="{Binding AddEmailTextBox}"/>
-                            <TextBlock Text="Mobil" FontWeight="Bold"/>
-                            <TextBox Text="{Binding AddMobilTextBox}"/>
-                            <TextBlock Text="Lösenord" FontWeight="Bold"/>
-                            <TextBox Text="{Binding AddPasswordTextBox}"/>
-                            <StackPanel Orientation="Horizontal">
+                    <StackPanel >
+                        <TextBlock Text="Förstnamn" FontWeight="Bold" />
+                        <TextBox Text="{Binding AddFirstnameTextBox}"/>
+                        <TextBlock Text="Efternamn" FontWeight="Bold"/>
+                        <TextBox Text="{Binding AddLastnameTextBox}"/>
+                        <TextBlock Text="Personnummer (12 siffror)" FontWeight="Bold"/>
+                        <TextBox Text="{Binding AddIDTextBox}"/>
+                        <TextBlock Text="Email" FontWeight="Bold"/>
+                        <TextBox Text="{Binding AddEmailTextBox}"/>
+                        <TextBlock Text="Mobil" FontWeight="Bold"/>
+                        <TextBox Text="{Binding AddMobilTextBox}"/>
+                        <TextBlock Text="Lösenord" FontWeight="Bold"/>
+                        <TextBox Text="{Binding AddPasswordTextBox}"/>
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Anledning för spärrning" FontWeight="Bold" Margin="0 0 5 0"/>
                             <TextBlock Text="(Många sena böcker, Många försvunna böcker, Stöld)" FontWeight="Normal"/>
-                            </StackPanel>
-                            <TextBox Text="{Binding AddReasonTextBox}"/>
-                            <TextBlock Text="Spärra" FontWeight="Bold"/>
-                            <CheckBox IsChecked="{Binding BannedCheckBox}"/>
                         </StackPanel>
-                        <StackPanel Margin="50 10 50 0">
-                            <Button Margin="0 0 0 10" Command="{Binding BtnAddVisitor}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
-                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
-                        </StackPanel>
-
+                        <TextBox Text="{Binding AddReasonTextBox}"/>
+                        <TextBlock Text="Spärra" FontWeight="Bold"/>
+                        <CheckBox IsChecked="{Binding BannedCheckBox}"/>
                     </StackPanel>
-
-                </materialDesign:DialogHost.DialogContent>
-                <!--#endregion-->
-
-                <!--#region Button for adding a visitor-->
-                <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center">
-                    <Button Content="Lägg till ny användare" Margin="10"
-                        Command="{Binding BtnOpenVisitorDialog}"/>
+                    <StackPanel Margin="50 10 50 0">
+                        <Button Margin="0 0 0 10" Command="{Binding BtnAddVisitor}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
+                        <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>
+                    </StackPanel>
                 </StackPanel>
-            </materialDesign:DialogHost>
+            </materialDesign:DialogHost.DialogContent >
             <!--#endregion-->
 
-        </StackPanel>
-    </Grid>
+            <!--#region Button for adding a visitor-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                <Button Content="Lägg till ny användare" Margin="10"
+                        Command="{Binding BtnOpenVisitorDialog}" Grid.Row="2"/>
+            </StackPanel>
+        </materialDesign:DialogHost>
+        <!--#endregion-->
 
+    </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
@@ -21,24 +21,18 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0"  
+                      Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
                       ItemsSource="{Binding CbxSearchFilters}" 
-                      SelectedIndex="{Binding FilterTypID}"
+                      SelectedIndex="1"
                       SelectedItem="{Binding SelectedItem}"/>
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-             materialDesign:HintAssist.Hint="Sök med ISBN, titel eller med författare">
-
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding EnterKeyCommand}"/>
-                    
-                </TextBox.InputBindings>
-            </TextBox>
-            <Button Grid.Row="0" Grid.Column="2" Width="50" HorizontalAlignment="Left"  Command="{Binding btnSearch}">
+             materialDesign:HintAssist.Hint="Sök med ISBN, titel eller med författare"/>
+            <Button Grid.Row="0" Grid.Column="2" Width="50" Height="40" HorizontalAlignment="Left"  Command="{Binding btnSearch}" Margin="0 20 5 0">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
             </Button>
         </Grid>
-
         <!--#region List of books-->
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  
                      ItemsSource="{Binding BooksList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
@@ -58,9 +52,12 @@
                                         <Label FontSize="16" Grid.Column="0" Content="{Binding Title}"/>
                                         <!-- Margin is needed, to bring the Button into the view -->
                                         <WrapPanel Grid.Column="1" Margin="0,0,100,0">
-                                            <Label Content="{Binding Category}"  Opacity=".68"/>
-                                            <Label FontSize="12" Content="{Binding SAB}" Opacity=".68"/>
-                                            <Label FontSize="12" Content="{Binding DDK}" Opacity=".68"/>
+                                            <Label Content="Kategori: "  Opacity=".68"/>
+                                            <Label Content="{Binding Category}"   Opacity=".50" Margin="-9 0 0 0"/>
+                                            <Label Content="Plats: "  Opacity=".68"/>
+                                            <Label FontSize="12" Content="{Binding SAB}" Opacity=".50" Margin="-9 0 0 0"/>
+                                            <Label Content="DDK: "  Opacity=".68"/>
+                                            <Label FontSize="12" Content="{Binding DDK}" Opacity=".50" Margin="-9 0 0 0"/>
                                         </WrapPanel>
                                     </Grid>
                                 </Expander.Header>

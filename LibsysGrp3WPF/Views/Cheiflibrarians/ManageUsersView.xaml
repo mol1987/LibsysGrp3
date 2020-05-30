@@ -103,7 +103,7 @@
             <!--#endregion-->
 
             <!--#region Pop up for adding a visitor-->
-            <materialDesign:DialogHost IsOpen="{Binding IsOpen}">
+            <materialDesign:DialogHost IsOpen="{Binding IsOpen}" CloseOnClickAway="True">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel  Width="480" Margin="10">
 
