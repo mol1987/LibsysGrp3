@@ -390,7 +390,25 @@ namespace LibsysGrp3WPF
 
         public LibsysRepo repo = new LibsysRepo();
 
-
+        public List<string> Categories { get; set; } = new List<string>
+        {
+            "Drama",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+            "Fiction",
+        };
+            
 
         #endregion
 
@@ -542,6 +560,7 @@ namespace LibsysGrp3WPF
         #region Constructor
         public ManageBookViewModel()
         {
+            Categories = repo.GetBookCategories().ToList();
             //getBooks();
         }
         #endregion

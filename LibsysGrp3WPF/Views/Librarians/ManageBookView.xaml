@@ -139,23 +139,22 @@
                 <materialDesign:DialogHost.DialogContent>
                 <StackPanel  Width="400" Margin="10">
                     <StackPanel >
-                            <TextBlock Text="Titel" FontWeight="Bold" />
-                            <TextBox Text="{Binding TxBAddTitel}"/>
-                            <TextBlock Text="ISBN" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddISBN}"/>
-                            <TextBlock Text="Författare" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddAuthor}"/>
-                            <TextBlock Text="Förlag" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddPublisher}"/>
-                            <TextBlock Text="Kategori" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddCategory}"/>
-                            <TextBlock Text="Sidor" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddPages}"/>
-                            <TextBlock Text="Inköpris" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddPrice}"/>
-                            <TextBlock Text="Beskrivning" FontWeight="Bold"/>
-                            <TextBox Text="{Binding TxBAddDescription}"/>
-                        </StackPanel>
+                        <Label Content="Lägg till en bok (Tryck OK för att lägga till)"/>
+                        <TextBox Text="{Binding TxBAddTitel}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Titel"/>
+                        <TextBox Text="{Binding TxBAddISBN}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="ISBN"/>
+                        <TextBox Text="{Binding TxBAddAuthor}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Författare"/>
+                        <TextBox Text="{Binding TxBAddPublisher}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Förlag"/>
+                        <!--<TextBlock Text="Kategori" FontWeight="Bold"/>-->
+                        <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Margin="0 10 0 20"
+                                  Width="395" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
+                                  ItemsSource="{Binding Categories}" 
+                                  SelectedIndex="{Binding FilterTypI}"
+                                  SelectedItem="{Binding TxBAddCategory}"/>
+ 
+                        <TextBox Text="{Binding TxBAddPages}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Sidor"/>
+                        <TextBox Text="{Binding TxBAddPrice}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Inköpspris"/>
+                        <TextBox Text="{Binding TxBAddDescription}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" materialDesign:HintAssist.Hint="Beskrivning"/>
+                    </StackPanel>
                         <StackPanel Margin="50 10 50 0">
                             <Button Margin="0 0 0 10" Command="{Binding BtnAddBook}" Background="#F9A20B" BorderBrush="#F9A20B">OK</Button>
                             <Button Command="materialDesign:DialogHost.CloseDialogCommand">TILLBAKA</Button>

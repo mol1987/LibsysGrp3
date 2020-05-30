@@ -73,7 +73,6 @@ namespace UtilLibrary.MsSqlRepsoitory
             return itemList;
         }
 
-
         public IEnumerable<SearchItems> SearchBooks(string Key)
         {
             IEnumerable<SearchItems> booksList;
@@ -352,6 +351,22 @@ namespace UtilLibrary.MsSqlRepsoitory
             {
                 conn.Execute(storedProcedure, obj, commandType: CommandType.StoredProcedure);
             }
+        }
+        /// <summary>
+        /// Just get's a list of the categories we have stored for books
+        /// in the BooksCategory table where we store books category SAB and DDK.
+        /// </summary>
+        /// <returns>A list of book categories of strings.</returns>
+        public IEnumerable<string> GetBookCategories()
+        {
+            string storedProcedure = StoredProcedures.GetBookCategories.ToString();
+            IEnumerable<string> categoryList;
+
+            using (var conn = Create_Connection())
+            {
+                categoryList = conn.Query<string>(storedProcedure, commandType: CommandType.StoredProcedure);
+            }
+            return categoryList;
         }
         #endregion
 

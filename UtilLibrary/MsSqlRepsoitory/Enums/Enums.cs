@@ -30,6 +30,7 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         EditBookStatus,
         CheckInItem,
         GetUserStock,
-        GetBorrowList
+        GetBorrowList,
+        GetBookCategories
     }
 }
