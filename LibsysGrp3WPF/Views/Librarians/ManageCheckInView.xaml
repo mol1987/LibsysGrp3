@@ -65,10 +65,7 @@
                                         <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
                                         <TextBlock Text="ISBN:" Margin="0 10 5 10"/>
                                         <TextBlock Text="{Binding ISBN}" Margin="0 10 200 10" FontWeight="Normal"/>
-                                        <Button Content="Återlämna" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
-                                                        Command="{Binding Path = DataContext.CheckInItem, 
-                                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" 
-                                                        CommandParameter="{Binding}"/>
+                                        
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Författare:" Margin="0 0 5 10"/>
@@ -98,6 +95,10 @@
                                                 <TextBlock Text="{Binding Converter={StaticResource StockWithBorrowToCheckInStrConverter}}"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
+                                        <Button Content="Återlämna" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
+                                                        Command="{Binding Path = DataContext.CheckInItem, 
+                                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" 
+                                                        CommandParameter="{Binding}"/>
                                     </ListView>
                                 </StackPanel>
                             </Expander>
@@ -147,10 +148,7 @@
                                         <TextBlock Text="{Binding Firstname}" Margin="0 10 5 10" FontWeight="Normal"/>
                                         <TextBlock Text="Efternamn:" Margin="0 10 5 10"/>
                                         <TextBlock Text="{Binding Lastname}" Margin="0 10 200 10" FontWeight="Normal"/>
-                                        <Button Content="Återlämna" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
-                                                        Command="{Binding Path = DataContext.CheckInItem, 
-                                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" 
-                                                        CommandParameter="{Binding}"/>
+                                        
                                         </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Personnummer:" Margin="0 0 5 10"/>
@@ -171,6 +169,10 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ListView>
+                                    <Button Content="Återlämna" Background="#F9A20B" BorderBrush="#F9A20B" Margin="0 0 20 0"
+                                                        Command="{Binding Path = DataContext.CheckInItem, 
+                                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" 
+                                                        CommandParameter="{Binding}"/>
                                 </StackPanel>
                             </Expander>
                             <Border Background="{DynamicResource MaterialDesignDivider}"
