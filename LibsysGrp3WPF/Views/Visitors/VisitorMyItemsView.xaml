@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Label Content="Mina artiklar" Foreground="Blue" FontSize="28" Grid.Row="0" HorizontalAlignment="Center"/>
+        <Label Content="Mina artiklar" Foreground="Blue" FontSize="28" Grid.Row="0" HorizontalAlignment="Center" FontWeight="Bold"/>
         <!--#region List of books-->
 
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -28,11 +28,16 @@
                                 <Expander.Header >
                                     <Grid HorizontalAlignment="Stretch" Margin="0" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Expander}}, Path=ActualWidth}">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="650"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="auto" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <Label FontSize="16" Grid.Column="0" Content="{Binding Title}"/>
                                         <Label Grid.Column="1" Content="{Binding ItemType}" Margin="0,0,100,0" Opacity=".68"/>
+                                        <TextBlock Grid.Column="2" Text="  Status för återlämning - " Margin="5 0 5 10"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                                       Margin="0 0 0 10" FontWeight="Normal"/>
                                     </Grid>
                                 </Expander.Header>
                                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
