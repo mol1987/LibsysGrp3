@@ -7,7 +7,13 @@
              xmlns:local="clr-namespace:LibsysGrp3WPF.Views"
              mc:Ignorable="d" >
 
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+            <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -32,11 +38,17 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="auto" />
                                             <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <Label FontSize="16" Grid.Column="0" Content="{Binding Title}"/>
                                         <Label Grid.Column="1" Content="{Binding ItemType}" Margin="0,0,100,0" Opacity=".68"/>
-                                        <TextBlock Grid.Column="2" Text="  Status för återlämning - " Margin="5 0 5 10"/>
-                                        <TextBlock Grid.Column="3" Text="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                        <TextBlock Grid.Column="2" Text="Förfallodatum:" Margin="5 0 5 10" 
+                                                   Visibility="{Binding Converter={StaticResource BookToVisibilityConverter}}"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding DueDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                                   Visibility="{Binding Converter={StaticResource BookToVisibilityConverter}}"/>
+                                        <TextBlock Grid.Column="4" Text="Status för återlämning - " Margin="5 0 5 10"/>
+                                        <TextBlock Grid.Column="5" Text="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy}'}" 
                                                        Margin="0 0 0 10" FontWeight="Normal"/>
                                     </Grid>
                                 </Expander.Header>

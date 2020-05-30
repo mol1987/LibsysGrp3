@@ -1,5 +1,6 @@
 ﻿using LibsysGrp3WPF.Model.Items;
 using System.Collections.ObjectModel;
+using System.Windows;
 using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
@@ -11,6 +12,12 @@ namespace LibsysGrp3WPF
 
         public ObservableCollection<FullBorrowListModel> myBooks { get; set; } = new ObservableCollection<FullBorrowListModel>();
         public ItemsModel MySelectedItem { get; set; }
+
+
+        //public bool IsVisible
+        //{
+        //    get; set;
+        //}
 
         #endregion
 
@@ -33,6 +40,14 @@ namespace LibsysGrp3WPF
 
             GetBorrowed();
         }
+
+        //public void ShowStatus()
+        //{
+        //    if(!myBooks. is null)
+        //    {
+        //        IsVisible = true;
+        //    }
+        //}
 
         private void GetBorrowed()
         {
