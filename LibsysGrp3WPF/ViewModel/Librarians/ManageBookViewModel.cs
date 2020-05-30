@@ -390,26 +390,11 @@ namespace LibsysGrp3WPF
 
         public LibsysRepo repo = new LibsysRepo();
 
-        public List<string> Categories { get; set; } = new List<string>
-        {
-            "Drama",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-            "Fiction",
-        };
+        /// <summary>
+        /// List of categories collected from the database
+        /// </summary>
+        public List<string> Categories { get; set; } = new List<string>();
             
-
         #endregion
 
         #region Commands
