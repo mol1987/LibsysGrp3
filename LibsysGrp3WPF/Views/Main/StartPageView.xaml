@@ -32,7 +32,32 @@
             <Button Grid.Row="0" Grid.Column="2" Width="50" Height="40" HorizontalAlignment="Left"  Command="{Binding btnSearch}" Margin="0 20 5 0">
                 <materialDesign:PackIcon Kind="Magnify" Height="20" Width="20" Foreground="White"/>
             </Button>
+
+            <!--#region Pop up for info-->
+            <materialDesign:DialogHost  IsOpen="{Binding PopupIsOpen}" VerticalAlignment="Bottom" Height="40" Margin="70 0 0 0" CloseOnClickAway="True">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel  Width="600" Margin="10" >
+                        <StackPanel >
+                            <Label Content="Välkommen till Libsys biblioteket!" FontWeight="Bold" />
+                            <Label Content="{Binding TxBInfo}" FontWeight="Normal" />
+                        </StackPanel>
+                        <StackPanel Margin="50 10 50 0">
+                            <Button Command="materialDesign:DialogHost.CloseDialogCommand">OK</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </materialDesign:DialogHost.DialogContent >
+                <!--#endregion-->
+
+                <!--#region Button for info -->
+                <Button Grid.Row="0" Grid.Column="0" Width="50" Height="40" HorizontalAlignment="Left"  Command="{Binding BtnInfo}" Margin="0 0 40 0">
+                    <materialDesign:PackIcon Kind="InformationOutline" Height="20" Width="20" Foreground="White"/>
+                </Button>
+            </materialDesign:DialogHost>
+            <!--#endregion-->
         </Grid>
+        
         <!--#region List of books-->
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  
                      ItemsSource="{Binding BooksList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
