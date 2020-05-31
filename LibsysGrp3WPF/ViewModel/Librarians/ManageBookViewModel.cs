@@ -492,7 +492,7 @@ namespace LibsysGrp3WPF
                         item.Available = false;
                         item.CreateBook();
                         string str = "" + item.Title;
-                        MessageBox.Show(str + " tillagd .", "Tillagd lyckats", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MessageBox.Show(str + " tillagd.", "Ny bok tillagd", MessageBoxButton.OK, MessageBoxImage.Question);
 
                         getBooks();
                     } 
