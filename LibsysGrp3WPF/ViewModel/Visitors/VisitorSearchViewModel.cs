@@ -143,7 +143,7 @@ namespace LibsysGrp3WPF
         public VisitorSearchViewModel()
         {
             // Search Fiter Options
-            CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böcker", "Filmer"};
+            CbxSearchFilters = new string[] { "Böcker"};
 
             // Create the search Command
             btnSearch = new RelayCommand((o) =>
@@ -180,7 +180,7 @@ namespace LibsysGrp3WPF
 
                 case 0:
                     {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchItems(SearchKey));
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
                 case 1:

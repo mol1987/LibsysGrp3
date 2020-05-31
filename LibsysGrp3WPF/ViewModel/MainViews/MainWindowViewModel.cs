@@ -88,14 +88,17 @@ namespace LibsysGrp3WPF
                         case UsersCategory.Visitor:
                             CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageVisitorSearch];
                             MenuList = _menuListCategories[UsersCategory.Visitor];
+                            AccountCategory = "Besökare";
                             break;
                         case UsersCategory.Librarian:
                             //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
                             MenuList = _menuListCategories[UsersCategory.Librarian];
+                            AccountCategory = "Bibliotekarie";
                             break;
                         case UsersCategory.Chieflibrarian:
                             //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
                             MenuList = _menuListCategories[UsersCategory.Chieflibrarian];
+                            AccountCategory = "Admin";
                             break;
                         default:
                             break;
@@ -389,6 +392,7 @@ namespace LibsysGrp3WPF
             Mediator.Subscribe(PagesChoice.pageVisitorSearch, OnGoVisitorSearchPage);
             Mediator.Subscribe(PagesChoice.pageVisitorSeminar, OnGoVisitorSeminarPage);
             Mediator.Subscribe(PagesChoice.pageManageCheckIn, OnGoCheckInPage);
+            AccountCategory = "Gäst";
         }
         #endregion
 
