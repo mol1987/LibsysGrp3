@@ -188,7 +188,7 @@ namespace LibsysGrp3WPF
                 case 1:
                     {
                         // empty userslist
-                        UsersList.Clear();
+                        UsersList = null;
 
                         BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
@@ -207,7 +207,7 @@ namespace LibsysGrp3WPF
                 case 4:
                     {
                         // empty bookslist
-                        BooksList.Clear();
+                        BooksList = null;
 
                         UsersList = UsersModel.convertToObservableCollection((new LibsysRepo()).SearchUserName(SearchKey));
                     }
@@ -218,7 +218,7 @@ namespace LibsysGrp3WPF
 
         public void run()
         {
-            getBooks();
+            //getBooks();
         }
         #endregion
     }

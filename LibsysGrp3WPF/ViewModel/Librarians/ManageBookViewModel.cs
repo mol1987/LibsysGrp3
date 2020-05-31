@@ -593,7 +593,7 @@ namespace LibsysGrp3WPF
                 }
             });
 
-            getBooks();
+            //getBooks();
         }
         /// <summary>
         /// Search for objects
