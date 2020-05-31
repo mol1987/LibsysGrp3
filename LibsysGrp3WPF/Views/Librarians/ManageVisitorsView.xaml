@@ -77,7 +77,9 @@
             <!--#endregion-->
         </Grid>
         <!-- End Search-->
-        <!--#region Pop up for editing a visitor-->
+        
+        <TextBlock Text="{Binding SearchResultatText}" Grid.Row="1" HorizontalAlignment="Center" Margin="0 20 0 0"/>
+        
         <materialDesign:DialogHost Grid.Row="1">
             <!--#region List of visitors-->
             <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding VisitorList, Mode=OneWay}" Grid.Row="0" HorizontalAlignment="Center" Margin="50,10 50 0">

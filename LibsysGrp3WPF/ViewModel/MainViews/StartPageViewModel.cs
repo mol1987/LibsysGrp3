@@ -15,6 +15,7 @@ namespace LibsysGrp3WPF
     public class StartPageViewModel : ManageBookViewModel, IPageViewModel
     {
         #region Private Properties
+        private string _searchResultat;
         private ICommand _btnInfo;
 
         private bool _popupIsOpen = false;
@@ -51,6 +52,7 @@ namespace LibsysGrp3WPF
         /// <summary>
         /// Contains the search result
         /// </summary>
+        /// 
       
 
         public ObservableCollection<SearchItems> SearchResultList
@@ -104,6 +106,23 @@ namespace LibsysGrp3WPF
             }
         }
 
+        /// <summary>
+        /// Message that comes after search
+        /// </summary>
+        public string SearchResultatText
+        {
+            get
+            {
+                return _searchResultat;
+            }
+            set
+            {
+                _searchResultat = value;
+                OnPropertyChanged(nameof(SearchResultatText));
+            }
+        }
+
+
         #endregion
 
         #region Methods
@@ -114,7 +133,14 @@ namespace LibsysGrp3WPF
                 "Om du inte har konto vänligen besöka vår reception och bibliotekariet skapar en konto åt dig.\n" +
                 "Om du har glömt din inloggningsuppgifter vänligen kontakta bibliotekspersonal.";
             // Create the search Command
-            btnSearch = new RelayCommand((o) => SearchItems(o));
+            btnSearch = new RelayCommand((o) =>
+            {
+                SearchItems(o);
+                if (o == null)
+                {
+                    SearchResultatText = "Hittade inga produkter, vänligen sök igen.";
+                }
+            });
         }
         /// <summary>
         /// Search for objects

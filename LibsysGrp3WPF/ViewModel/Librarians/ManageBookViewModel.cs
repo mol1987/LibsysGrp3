@@ -24,6 +24,7 @@ namespace LibsysGrp3WPF
         private ICommand _btnOpenBookDialog;
         private ICommand _showDialogCommand;
         private bool _isOpen = false;
+        private string _searchResultat;
 
         private FullBooksModel objToEdit = null;
         #endregion
@@ -388,6 +389,22 @@ namespace LibsysGrp3WPF
             }
         }
 
+        /// <summary>
+        /// Message that comes after search
+        /// </summary>
+        public string SearchResultatText
+        {
+            get
+            {
+                return _searchResultat;
+            }
+            set
+            {
+                _searchResultat = value;
+                OnPropertyChanged(nameof(SearchResultatText));
+            }
+        }
+
         public LibsysRepo repo = new LibsysRepo();
 
         /// <summary>
@@ -567,8 +584,16 @@ namespace LibsysGrp3WPF
             CbxSearchFilters = new string[] { "Böcker" };
 
             // Create the search Command
-            btnSearch = new RelayCommand((o) => SearchItems(o));
-            //getBooks();
+            btnSearch = new RelayCommand((o) =>
+            {
+                SearchItems(o);
+            if (o == null)
+                {
+                    SearchResultatText = "Hittade inga produkter, vänligen sök igen.";
+                }
+            });
+
+            getBooks();
         }
         /// <summary>
         /// Search for objects

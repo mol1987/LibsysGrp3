@@ -23,6 +23,7 @@ namespace LibsysGrp3WPF
         private string _addemailTextBox;
         private bool _bannedCheckBox;
         private string _addReasonTextBox;
+        private string _searchResultat;
 
         private ICommand _btnDeleteVisitor;
         private ICommand _btnAddVisitor;
@@ -147,6 +148,22 @@ namespace LibsysGrp3WPF
             {
                 _addReasonTextBox = value;
                 OnPropertyChanged(nameof(AddReasonTextBox));
+            }
+        }
+
+        /// <summary>
+        /// Message that comes after search
+        /// </summary>
+        public string SearchResultatText
+        {
+            get
+            {
+                return _searchResultat;
+            }
+            set
+            {
+                _searchResultat = value;
+                OnPropertyChanged(nameof(SearchResultatText));
             }
         }
 
@@ -377,8 +394,16 @@ namespace LibsysGrp3WPF
             CbxSearchFilters = new string[] { "Namn", "Email", "Personnummer" };
 
             // Create the search Command
-            btnSearch = new RelayCommand((o) => SearchItems(o));
+            btnSearch = new RelayCommand((o) =>
+            {
+                SearchItems(o);
+                if (o == null)
+                {
+                    SearchResultatText = "Hittade inga besökare, vänligen sök igen.";
+                }
+            });
         }
+
         private void SearchItems(object o)
         {
             switch (FilterTypID)
