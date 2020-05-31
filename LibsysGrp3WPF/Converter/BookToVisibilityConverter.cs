@@ -1,7 +1,6 @@
 ﻿using LibsysGrp3WPF.Model.Items;
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace LibsysGrp3WPF
@@ -15,13 +14,15 @@ namespace LibsysGrp3WPF
         {
             var convertObject = (FullBorrowListModel)value;
 
-            if (convertObject.ReturnDate == null)
+            string dueDate = "Förfallodatum: " + convertObject.DueDate.ToString("dd/MM/yyyy");
+            string returnDate = "Återlämnades " + convertObject.ReturnDate?.ToString("dd/MM/yyyy");
+
+            if (convertObject.ReturnDate != null)
             {
-                return Visibility.Visible;
+                //returnDate.Foreground = Brushes.Red;
+                return returnDate;
             }
-
-            return Visibility.Hidden;
-
+            return dueDate;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
