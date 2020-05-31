@@ -168,9 +168,8 @@ namespace LibsysGrp3WPF
             // gets all books..
             var repo = new LibsysRepo();
             var tempBooksList = repo.GetBooks<FullBooks>();
-            //BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
             UsersList = null;
-            UsersList = UsersModel.convertToObservableCollection((new LibsysRepo()).SearchUserName(SearchKey));
+            BooksList = FullBooksModel.ConvertToObservableCollection(tempBooksList);
         }
         /// <summary>
         /// Search for objects
