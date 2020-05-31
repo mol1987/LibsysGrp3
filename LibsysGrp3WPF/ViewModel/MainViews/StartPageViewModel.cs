@@ -128,7 +128,7 @@ namespace LibsysGrp3WPF
         #region Methods
         public void run()
         {
-            CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böcker", "Filmer" };
+            CbxSearchFilters = new string[] {  "Böcker" };
             TxBInfo = "För att låna böckerna vänligen logga in.\n" +
                 "Om du inte har konto vänligen besöka vår reception och bibliotekariet skapar en konto åt dig.\n" +
                 "Om du har glömt din inloggningsuppgifter vänligen kontakta bibliotekspersonal.";
@@ -154,7 +154,7 @@ namespace LibsysGrp3WPF
 
                 case 0:
                     {
-                        SearchResultList = new ObservableCollection<SearchItems>((new LibsysRepo()).SearchItems(SearchKey));
+                        BooksList = FullBooksModel.ConvertToObservableCollection((new LibsysRepo()).SearchAllItemBook(SearchKey));
                     }
                     break;
                 case 1:
