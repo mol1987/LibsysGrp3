@@ -64,7 +64,8 @@
             <local:PagesChoiceToCorrectStrConverter x:Key="PagesChoiceToCorrectStrConverter" />
             <local:ZeroToHiddenConverter x:Key="ZeroToHiddenConverter" />
             <local:BookToVisibilityConverter x:Key="BookToVisibilityConverter"/>
-
+            <local:IPageViewModelToStrConverter x:Key="IPageViewModelToStrConverter"/>
+ 
         </ResourceDictionary>
     </Application.Resources>
 </Application>

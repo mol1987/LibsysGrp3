@@ -8,6 +8,25 @@ namespace LibsysGrp3WPF
 {
     public static class Mediator
     {
+        // Dictionary to couple page names in string with
+        // page ENUM
+        public static Dictionary<PagesChoice, string> PagesChoiceToStringName = new Dictionary<PagesChoice, string>
+        {
+
+            { PagesChoice.pageStartView, "Startsida" },
+            { PagesChoice.pageManageVisitor, "Hantera Besökare" },
+            { PagesChoice.pageReport, "Rapportera Objekt" },
+            { PagesChoice.pageManageBook, "Hantera Objekt" },
+            { PagesChoice.pageManageSeminar, "Hantera Seminarier" },
+            { PagesChoice.pageManageUsers, "Hantera Användare" },
+            { PagesChoice.pageVisitorEditProfil, "Ändra Profil" },
+            { PagesChoice.pageVisitorMyItems, "Mina Lån" },
+            { PagesChoice.pageVisitorSearch, "Låna Objekt" },
+            { PagesChoice.pageManageCheckIn, "Återlämna Objekt" },
+            { PagesChoice.pageManageStock, "Hantera Lager" },
+            { PagesChoice.pageVisitorSeminar, "Seminarier" },
+        };
+
         // Global user, so user can be accessed across views
         public static UsersModel User = null;
 

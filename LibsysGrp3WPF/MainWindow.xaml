@@ -100,7 +100,11 @@
             BorderBrush="#304ffe" Grid.Column="4" Command="{Binding BtnUserAccess}" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="LoginVariant" Height="30" Width="30" Foreground="White"/>
             </Button>
-
+            
+            <!--Side Info-->
+            <Label Foreground="White" Grid.Column="0" VerticalAlignment="Bottom" 
+                   HorizontalContentAlignment="Left" FontSize="12" Content="{Binding CurrentPageViewModel, Converter={StaticResource IPageViewModelToStrConverter}}"
+                   /> 
             <!--LeftMenu-->
             <Menu IsMainMenu="True" Background="#304ffe" Foreground="White" Margin="0,30,0,22" >
                 <MenuItem  ItemsSource="{Binding MenuList}" Visibility="{Binding Path=MenuList.Count,Converter={StaticResource ZeroToHiddenConverter}}">
@@ -117,6 +121,7 @@
                     </MenuItem.Header>
                 </MenuItem>
             </Menu>
+            
         </Grid>
     </materialDesign:DialogHost>
 </Window>
