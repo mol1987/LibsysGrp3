@@ -16,6 +16,6 @@ namespace LibsysGrp3WPF.Model.Items
         public DateTime BorrowDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
-
+        public int Reservation { get; set; }
     }
 }

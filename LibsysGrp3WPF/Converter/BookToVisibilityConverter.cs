@@ -16,12 +16,18 @@ namespace LibsysGrp3WPF
 
             string dueDate = "Förfallodatum: " + convertObject.DueDate.ToString("dd/MM/yyyy");
             string returnDate = "Återlämnades " + convertObject.ReturnDate?.ToString("dd/MM/yyyy");
+            string reserved = "Reserved";
 
-            if (convertObject.ReturnDate != null)
+            if (convertObject.Reservation != 0)
             {
-                //returnDate.Foreground = Brushes.Red;
+                return reserved;
+            }
+
+            else if (convertObject.ReturnDate != null)
+            {
                 return returnDate;
             }
+
             return dueDate;
         }
 

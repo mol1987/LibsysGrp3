@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
         
         <Label Content="Mina artiklar" Foreground="Blue" FontSize="28" Grid.Row="0" HorizontalAlignment="Center" FontWeight="Bold"/>
-        <!--#region List of books-->
-
+        
+                <!--#region List of books--> 
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
                      ItemsSource="{Binding myBooks, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
                       Margin="50,10 50 0" >
@@ -38,8 +38,8 @@
                                                    Margin="5 0 5 10" />
                                     </Grid>
                                 </Expander.Header>
+
                                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                    <!--StockList ending-->
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Objekt:" Margin="0 10 5 10"/>
                                         <TextBlock Text="{Binding ItemType}" Margin="0 10 5 10" FontWeight="Normal"/>
@@ -78,8 +78,6 @@
                                               Height="1"
                                               HorizontalAlignment="Stretch"
                                               SnapsToDevicePixels="True" />
-
-
                         </StackPanel>
                     </materialDesign:Card>
                 </DataTemplate>
