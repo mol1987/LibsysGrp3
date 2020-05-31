@@ -101,6 +101,7 @@ namespace LibsysGrp3WPF
                             AccountCategory = "Admin";
                             break;
                         default:
+                           
                             break;
                     }
 
@@ -404,7 +405,7 @@ namespace LibsysGrp3WPF
         {
             Mediator.User = null;
             MenuList = new ObservableCollection<PagesChoice>();
-            AccountCategory = "";
+            AccountCategory = "Gäst";
             AccountName = "";
             IDTextBox = "";
             PasswordTextBox = "";
