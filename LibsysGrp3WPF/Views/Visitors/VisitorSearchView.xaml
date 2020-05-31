@@ -22,7 +22,7 @@
             <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Kategori" Grid.Row="0" 
                       Grid.Column="0" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsSynchronizedWithCurrentItem="True" 
                       ItemsSource="{Binding CbxSearchFilters}" 
-                      SelectedIndex="1"
+                      SelectedIndex="{Binding FilterTypID}"
                       SelectedItem="{Binding SelectedItem}"/>
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SearchKey, Mode=TwoWay}" VerticalAlignment="Bottom" Margin="5 0 5 0" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
