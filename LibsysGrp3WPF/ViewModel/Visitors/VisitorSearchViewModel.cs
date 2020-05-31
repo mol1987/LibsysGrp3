@@ -12,6 +12,7 @@ namespace LibsysGrp3WPF
     public class VisitorSearchViewModel : BaseViewModel, IPageViewModel
     {
         #region Privete properties
+        private string _searchResultat;
         private string _btnborrowBook;
         private ICommand _borrowBook;
         /// <summary>
@@ -45,10 +46,27 @@ namespace LibsysGrp3WPF
         /// </summary>
         public int FilterTypID { get; set; } = 1;
 
+        /// <summary>
+        /// Message that comes after search
+        /// </summary>
+        public string SearchResultatText
+        {
+            get
+            {
+                return _searchResultat;
+            }
+            set
+            {
+                _searchResultat = value;
+                OnPropertyChanged(nameof(SearchResultatText));
+            }
+        }
+
         ///<summary>
         ///Get Multiple Bindings
         /// </summary>
         /// 
+
 
         public ObservableCollection<object> BooksList
         {
@@ -128,7 +146,14 @@ namespace LibsysGrp3WPF
             CbxSearchFilters = new string[] { "Allting", "Böcker", "Online Böcker", "Filmer"};
 
             // Create the search Command
-            btnSearch = new RelayCommand((o) => SearchItems(o));
+            btnSearch = new RelayCommand((o) =>
+            {
+                SearchItems(o);
+                if (o == null)
+                {
+                    SearchResultatText = "Hittade inga produkter, vänligen sök igen.";
+                }
+            });
 
             getBooks();
         }

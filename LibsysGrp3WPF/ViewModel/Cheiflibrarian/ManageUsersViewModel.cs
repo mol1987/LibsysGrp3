@@ -24,6 +24,7 @@ namespace LibsysGrp3WPF
         private bool _bannedCheckBox;
         private string _addReasonTextBox;
         private int _addUserCategoryTextBox;
+        private string _searchResultat;
 
         private ICommand _btnDeleteUser;
         private ICommand _btnAddUser;
@@ -166,6 +167,23 @@ namespace LibsysGrp3WPF
             {
                 _addUserCategoryTextBox = value;
                 OnPropertyChanged(nameof(AddUserCategoryTextBox));
+            }
+        }
+
+
+        /// <summary>
+        /// Message that comes after search
+        /// </summary>
+        public string SearchResultatText
+        {
+            get
+            {
+                return _searchResultat;
+            }
+            set
+            {
+                _searchResultat = value;
+                OnPropertyChanged(nameof(SearchResultatText));
             }
         }
 
@@ -403,7 +421,14 @@ namespace LibsysGrp3WPF
             CbxSearchFilters = new string[] {"Alla användare", "Besökare", "Bibliotekarier", "Bibliotekschef", "Personnummer"};
 
             // Create the search Command
-            btnSearch = new RelayCommand((o) => SearchItems(o));
+            btnSearch = new RelayCommand((o) =>
+            {
+                SearchItems(o);
+                if (o == null)
+                {
+                    SearchResultatText = "Hittade inga användare, vänligen sök igen.";
+                }
+            });
         }
 
         private void SearchItems(object o)

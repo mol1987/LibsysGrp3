@@ -57,7 +57,9 @@
             </materialDesign:DialogHost>
             <!--#endregion-->
         </Grid>
-        
+
+        <TextBlock Text="{Binding SearchResultatText}" Grid.Row="1" HorizontalAlignment="Center" Margin="0 20 0 0"/>
+
         <!--#region List of books-->
         <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  
                      ItemsSource="{Binding BooksList, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Center" 
