@@ -88,7 +88,7 @@
             </Button>
 
             <StackPanel Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="35,0">
-                <TextBlock  Foreground="white"   Text="{Binding AccountCategory}" HorizontalAlignment="left"/>
+                <TextBlock  Foreground="white"   Text="{Binding AccountCategory}" HorizontalAlignment="Center" Width="85" TextAlignment="Center"/>
                 <TextBlock Foreground="White" Text="{Binding AccountName}" HorizontalAlignment="Center"/>
             </StackPanel>
             <!--buttons-->
