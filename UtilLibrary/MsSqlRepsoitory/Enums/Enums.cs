@@ -31,6 +31,15 @@ namespace UtilLibrary.MsSqlRepsoitory.Enums
         CheckInItem,
         GetUserStock,
         GetBorrowList,
-        GetBookCategories
+        GetBookCategories,
+        SearchItems,
+        SearchBooksAllItems,
+        SearchBookByISBN,
+        SearchBookByAuthor,
+        SearchEbook,
+        SearchMovie,
+        SearchUserName,
+        SearchUserIdentityNO,
+        SearchUserEmail
     }
 }

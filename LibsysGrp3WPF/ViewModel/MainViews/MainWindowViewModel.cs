@@ -1,12 +1,10 @@
-﻿using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using LibsysGrp3WPF.Views;
 using UtilLibrary.MsSqlRepsoitory;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
+using System;
 
 namespace LibsysGrp3WPF
 {
@@ -77,37 +75,42 @@ namespace LibsysGrp3WPF
                 
                 return _btnSignIn ?? (_btnSignIn = new RelayCommand(x =>
                 {
-                    Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
-                    Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
-                    AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
-                    AccountName = Mediator.User.Firstname + " " + Mediator.User.Lastname;
+                    try { 
+                        Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
+                        Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
+                        AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
+                        AccountName = Mediator.User.Firstname + " " + Mediator.User.Lastname;
 
-                    // Switches view to match User previlige and match menu content
-                    switch ((UsersCategory)Mediator.User.UsersCategory)
-                    {
-                        case UsersCategory.Visitor:
-                            CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageVisitorSearch];
-                            MenuList = _menuListCategories[UsersCategory.Visitor];
-                            AccountCategory = "Besökare";
-                            break;
-                        case UsersCategory.Librarian:
-                            //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
-                            MenuList = _menuListCategories[UsersCategory.Librarian];
-                            AccountCategory = "Bibliotekarie";
-                            break;
-                        case UsersCategory.Chieflibrarian:
-                            //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
-                            MenuList = _menuListCategories[UsersCategory.Chieflibrarian];
-                            AccountCategory = "Admin";
-                            break;
-                        default:
+                        // Switches view to match User previlige and match menu content
+                        switch ((UsersCategory)Mediator.User.UsersCategory)
+                        {
+                            case UsersCategory.Visitor:
+                                CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageVisitorSearch];
+                                MenuList = _menuListCategories[UsersCategory.Visitor];
+                                AccountCategory = "Besökare";
+                                break;
+                            case UsersCategory.Librarian:
+                                //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageLibrarianHomepage];
+                                MenuList = _menuListCategories[UsersCategory.Librarian];
+                                AccountCategory = "Bibliotekarie";
+                                break;
+                            case UsersCategory.Chieflibrarian:
+                                //CurrentPageViewModel = PageViewModels[(int)PagesChoice.pageSuperUserHomepage];
+                                MenuList = _menuListCategories[UsersCategory.Chieflibrarian];
+                                AccountCategory = "Admin";
+                                break;
+                            default:
                            
-                            break;
-                    }
+                                break;
+                        }
 
-                    // close popup
-                    IsOpen = false;
-                }));
+                        // close popup
+                        IsOpen = false;
+                    } catch (Exception e)
+                    {
+                        MessageBox.Show("Login-uppgifter stämde inte överens, försök igen.", "Login fel!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+            }));
             }
         }
         /// <summary>
@@ -290,7 +293,7 @@ namespace LibsysGrp3WPF
             {
                 _currentPageViewModel = value;
                 // Runs this method everytime the view gets changed
-                _currentPageViewModel.run();
+                _currentPageViewModel.Run();
                 OnPropertyChanged(nameof(CurrentPageViewModel));
             }
         }

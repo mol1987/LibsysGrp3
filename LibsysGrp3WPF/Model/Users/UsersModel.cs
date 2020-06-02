@@ -44,7 +44,7 @@ namespace LibsysGrp3WPF
             }
         }
         /// <summary>
-        /// List of physical books
+        /// List of physical books in our stock table.
         /// </summary>
         public ObservableCollection<IStockWithBorrow> StockItems
         {
@@ -57,27 +57,31 @@ namespace LibsysGrp3WPF
             }
         }
 
-
-
         public UsersModel(IUsersProcessor processor)
         {
             Processor = processor;
         }
 
+        /// <summary>
+        /// Code for handling user login.
+        /// </summary>
+        /// <param name="IdentityNo">A visitors Identity number</param>
+        /// <param name="Password">A password string</param>
         public void LoginUser(string IdentityNo, string Password)
         {
-            var tempVisitor = Processor.LoginUsersProcess(IdentityNo, Password);
-            this.Firstname = tempVisitor.Firstname;
-            this.Lastname = tempVisitor.Lastname;
-            this.Banned = tempVisitor.Banned;
-            this.IdentityNO = tempVisitor.IdentityNO;
-            this.JoinDate = tempVisitor.JoinDate;
-            this.Password = tempVisitor.Password;
-            this.UsersID = tempVisitor.UsersID;
-            this.Email = tempVisitor.Email;
-            this.PhoneNumber = tempVisitor.PhoneNumber;
-            this.UsersCategory = tempVisitor.UsersCategory;
-            this.Reason = tempVisitor.Reason;
+                var tempVisitor = Processor.LoginUsersProcess(IdentityNo, Password);
+                this.Firstname = tempVisitor.Firstname;
+                this.Lastname = tempVisitor.Lastname;
+                this.Banned = tempVisitor.Banned;
+                this.IdentityNO = tempVisitor.IdentityNO;
+                this.JoinDate = tempVisitor.JoinDate;
+                this.Password = tempVisitor.Password;
+                this.UsersID = tempVisitor.UsersID;
+                this.Email = tempVisitor.Email;
+                this.PhoneNumber = tempVisitor.PhoneNumber;
+                this.UsersCategory = tempVisitor.UsersCategory;
+                this.Reason = tempVisitor.Reason;
+            
         }
         public void AddUser()
         {
@@ -104,6 +108,13 @@ namespace LibsysGrp3WPF
 
         }
 
+        /// <summary>
+        /// This converts a list from the Database to a Obseservable Collection. Used in wpf.
+        /// Also collects a list for every entry that contains every actual physical book connected the the
+        /// user object, from the Stock table.
+        /// </summary>
+        /// <param name="inData">The list to be converted</param>
+        /// <returns>An ObservableCollection of a user. Also connected books to the user.</returns>
         public static ObservableCollection<object> convertToObservableCollection(IEnumerable<IUsers> inData)
         {
             var usersList = new ObservableCollection<object>();
@@ -135,6 +146,10 @@ namespace LibsysGrp3WPF
             }
             return usersList;
         }
+        /// <summary>
+        /// Just a simple representation of a user.
+        /// </summary>
+        /// <returns>String with IdentityNO and name</returns>
         public override string ToString()
         {
             return "" + IdentityNO + ": " + Firstname + " " + Lastname;
