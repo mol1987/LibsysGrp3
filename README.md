@@ -4,10 +4,10 @@ A library application for school project. Made by group 3 (Fredrik Molén, Elchi
 It's a complete graphical library-application system with Users, Librarians and Cheif Librarians. Where users can search and borrow books and librarians have an interface to orginize the library and return books. 
 ## Installation
 
-* Use the reconstruct_tables.sql script to recreate the whole Microsoft SQL database with data and stored procedures.
+* Use the 'reconstruct_tables.sql' script to recreate the whole Microsoft SQL database with data and stored procedures.
 
 
-* Add the App.config file to the LibsysGrp3WPF project. And add the correct database info to the file, in the connectionString. 
+* Add a 'App.config' file to the LibsysGrp3WPF project. And add the correct database info to the file, in the connectionString. Add this the file: 
 
 ```C#
 <?xml version="1.0"?>
