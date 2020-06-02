@@ -109,6 +109,7 @@ namespace LibsysGrp3WPF
                     } catch (Exception e)
                     {
                         MessageBox.Show("Login-uppgifter stämde inte överens, försök igen.", "Login fel!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        Mediator.User = null;
                     }
             }));
             }
