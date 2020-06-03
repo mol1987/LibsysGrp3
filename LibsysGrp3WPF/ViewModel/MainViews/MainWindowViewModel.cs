@@ -77,7 +77,7 @@ namespace LibsysGrp3WPF
                 {
                     try { 
                         Mediator.User = new UsersModel(new UsersProcessor(new LibsysRepo()));
-                        Mediator.User.LoginUser(IDTextBox, PasswordTextBox);
+                        Mediator.User.LoginUser(IDTextBox, PasswordEncrypt.StoredCleanPassword.ToString());
                         AccountCategory = ((UsersCategory)Mediator.User.UsersCategory).ToString();
                         AccountName = Mediator.User.Firstname + " " + Mediator.User.Lastname;
 

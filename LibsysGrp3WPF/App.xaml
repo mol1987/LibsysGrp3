@@ -65,6 +65,7 @@
             <local:ZeroToHiddenConverter x:Key="ZeroToHiddenConverter" />
             <local:BookToVisibilityConverter x:Key="BookToVisibilityConverter"/>
             <local:IPageViewModelToStrConverter x:Key="IPageViewModelToStrConverter"/>
+            <local:PasswordEncrypt x:Key="PasswordEncrypt"/>
  
         </ResourceDictionary>
     </Application.Resources>

@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowState="Maximized" 
         WindowStyle="None" ResizeMode="NoResize" >
+        
     <!--#region inputbinding -->
     <Window.InputBindings>
         <!--<KeyBinding Key="F1" Command="{Binding ToggeleFullscreen}"/>
@@ -22,7 +23,7 @@
                     <TextBlock>Personnummer (12 siffror)</TextBlock>
                     <TextBox Text="{Binding IDTextBox}"/>
                     <TextBlock>Lösenord</TextBlock>
-                    <TextBox x:Name="txtPassword" Text="{Binding PasswordTextBox}"/>
+                    <TextBox Text="{Binding PasswordTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource PasswordEncrypt}}" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Button Command="{Binding btnSignIn}" CommandParameter="{Binding ElementName=PasswordBox}">Logga In</Button>

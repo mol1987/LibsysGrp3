@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Globalization;
 
-namespace LibsysGrp3WPF.Converter
+
+namespace LibsysGrp3WPF
 {
     /// <summary>
     /// Encrypt password with * converter
     /// </summary>
-    public class PasswordEncrypt
+    public class PasswordEncrypt : System.Windows.Data.IValueConverter
     {
-        private static string StoredCleanPassword;
+        public static string StoredCleanPassword;
 
         /// <summary>
         /// String to masked
@@ -23,7 +24,7 @@ namespace LibsysGrp3WPF.Converter
 
             foreach (char chr in cleanPassword)
             {
-                maskedPassword += "";
+                maskedPassword += "*";
             }
 
             StoredCleanPassword = cleanPassword;
