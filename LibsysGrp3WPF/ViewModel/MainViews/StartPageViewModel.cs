@@ -126,7 +126,7 @@ namespace LibsysGrp3WPF
         #endregion
 
         #region Methods
-        public void run()
+        public void Run()
         {
             CbxSearchFilters = new string[] {  "Böcker" };
             TxBInfo = "För att låna böckerna vänligen logga in.\n" +

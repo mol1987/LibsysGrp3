@@ -10,6 +10,11 @@ using Moq;
 
 namespace UnitTest
 {
+    /// <summary>
+    /// Testing class to the the UsersModel. Using XUnit. And have it uses
+    /// a mockup of our Repository to be able the test the class without using the real database.
+    /// Mocklibsysrepo
+    /// </summary>
     public class TestingUsersModel
     {
         private readonly ITestOutputHelper output;

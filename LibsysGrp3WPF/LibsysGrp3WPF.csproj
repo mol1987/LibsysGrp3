@@ -31,4 +31,8 @@
     <Resource Include="Views\Photos\LIBSYS.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Seminars\" />
+  </ItemGroup>
+
 </Project>

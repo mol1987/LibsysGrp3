@@ -6,6 +6,12 @@ using UtilLibrary.MsSqlRepsoitory;
 
 namespace LibsysGrp3WPF
 {
+    /// <summary>
+    /// Contain handy global variables to be used across the program.
+    /// Also has code to handle navigation in any viewmodel.
+    /// You subscribe the viewmodel using the Subscribe(PagesChoice token, Action<object> callback)
+    /// and then use Notify(PagesChoice token, object args = null) anywhere to go to that view.
+    /// </summary>
     public static class Mediator
     {
         // Dictionary to couple page names in string with

@@ -19,7 +19,7 @@
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Orientation="Vertical" Height="200" Width="200" Margin="50,50,50,50">
                 <StackPanel Margin="0 0 0 30">
-                    <TextBlock>Personnummer</TextBlock>
+                    <TextBlock>Personnummer (12 siffror)</TextBlock>
                     <TextBox Text="{Binding IDTextBox}"/>
                     <TextBlock>Lösenord</TextBlock>
                     <TextBox x:Name="txtPassword" Text="{Binding PasswordTextBox}"/>
@@ -30,8 +30,8 @@
                 </StackPanel>
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
+        
         <!-- put the content over which the dialog is shown here (e.g. your main window grid)-->
-
         <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -48,10 +48,6 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <!--<StackPanel Orientation="Vertical" Background="#304ffe" Grid.Row="0" Grid.RowSpan="2" 
-                    Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,15">
-                <Image Source="images/LIBSYS.png" Height="79" Margin="0 20" Width="176"/>
-            </StackPanel>-->
 
             <!--topbar-->
             <materialDesign:ColorZone
@@ -62,12 +58,10 @@
               Margin="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="5" Height="110">
                 <StackPanel
                 Orientation="Horizontal">
-
                 </StackPanel>
             </materialDesign:ColorZone>
             
-            <!--Buttom that take you to the start site -->
-            
+            <!--Buttom that take you to the start site -->     
             <Button Height="79" Margin="0,0" Width="176" Grid.Row="0" Grid.Column="2" Command="{Binding ButtonHome }">
 
                 <Image Source="images/LIBSYS.png" />
@@ -121,7 +115,6 @@
                     </MenuItem.Header>
                 </MenuItem>
             </Menu>
-            
         </Grid>
     </materialDesign:DialogHost>
 </Window>

@@ -416,7 +416,7 @@ namespace LibsysGrp3WPF
 
         #endregion
 
-        public void run()
+        public void Run()
         {
             CbxSearchFilters = new string[] {"Alla användare", "Besökare", "Bibliotekarier", "Bibliotekschef", "Personnummer"};
 

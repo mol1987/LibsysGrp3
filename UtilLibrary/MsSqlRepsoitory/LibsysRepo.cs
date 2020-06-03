@@ -37,94 +37,104 @@ namespace UtilLibrary.MsSqlRepsoitory
         #region Items
         public IEnumerable<SearchItems> SearchItems(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchItems.ToString();
             IEnumerable<SearchItems> itemList;
             using (var conn = Create_Connection())
             {
-                itemList = conn.Query<SearchItems>("SearchItems", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                itemList = conn.Query<SearchItems>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return itemList;
         }
         public IEnumerable<FullBooks> SearchAllItemBook(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchBooksAllItems.ToString();
             IEnumerable<FullBooks> itemList;
             using (var conn = Create_Connection())
             {
-                itemList = conn.Query<FullBooks>("SearchBooksAllItems", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                itemList = conn.Query<FullBooks>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return itemList;
         }
         public IEnumerable<FullBooks> SearchBookByISBN(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchBookByISBN.ToString();
             IEnumerable<FullBooks> itemList;
             using (var conn = Create_Connection())
             {
-                itemList = conn.Query<FullBooks>("SearchBookByISBN", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                itemList = conn.Query<FullBooks>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return itemList;
 
         }
         public IEnumerable<FullBooks> SearchBookByAuthor(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchBookByAuthor.ToString();
             IEnumerable<FullBooks> itemList;
             using (var conn = Create_Connection())
             {
-                itemList = conn.Query<FullBooks>("SearchBookByAuthor", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                itemList = conn.Query<FullBooks>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return itemList;
         }
 
         public IEnumerable<SearchItems> SearchBooks(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchBook.ToString();
             IEnumerable<SearchItems> booksList;
             using (var conn = Create_Connection())
             {
-                booksList = conn.Query<SearchItems>("SearchBook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                booksList = conn.Query<SearchItems>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return booksList;
         }
         public IEnumerable<SearchItems> SearchEbooks(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchEbook.ToString();
             IEnumerable<SearchItems> EbookList;
             using (var conn = Create_Connection())
             {
-                EbookList = conn.Query<SearchItems>("SearchEbook", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                EbookList = conn.Query<SearchItems>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return EbookList;
         }
         public IEnumerable<SearchItems> SearchMovies(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchMovie.ToString();
             IEnumerable<SearchItems> moviesList;
             using (var conn = Create_Connection())
             {
-                moviesList = conn.Query<SearchItems>("SearchMovie", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                moviesList = conn.Query<SearchItems>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return moviesList;
         }
 
         public IEnumerable<Users> SearchUserName(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchUserName.ToString();
             IEnumerable<Users> SearchUserList;
             using (var conn = Create_Connection())
             {
-                SearchUserList = conn.Query<Users>("SearchUserName", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                SearchUserList = conn.Query<Users>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return SearchUserList;
         }
         public IEnumerable<Users> SearchUserIdentiteyNO(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchUserIdentityNO.ToString();
             IEnumerable<Users> SearchUserList;
             using (var conn = Create_Connection())
             {
-                SearchUserList = conn.Query<Users>("SearchUserIdentityNO", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                SearchUserList = conn.Query<Users>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return SearchUserList;
         }
         public IEnumerable<Users> SearchUserEmail(string Key)
         {
+            string storedProcedure = StoredProcedures.SearchUserIdentityNO.ToString();
             IEnumerable<Users> SearchUserList;
             using (var conn = Create_Connection())
             {
-                SearchUserList = conn.Query<Users>("SearchUserEmail", new { Search = Key }, commandType: CommandType.StoredProcedure);
+                SearchUserList = conn.Query<Users>(storedProcedure, new { Search = Key }, commandType: CommandType.StoredProcedure);
             }
             return SearchUserList;
         }
