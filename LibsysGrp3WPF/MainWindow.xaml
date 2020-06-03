@@ -22,7 +22,7 @@
                     <TextBlock>Personnummer</TextBlock>
                     <TextBox Text="{Binding IDTextBox}"/>
                     <TextBlock>Lösenord</TextBlock>
-                    <TextBox Text="{Binding PasswordTextBox}"/>
+                    <TextBox x:Name="txtPassword" Text="{Binding PasswordTextBox}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Button Command="{Binding btnSignIn}" CommandParameter="{Binding ElementName=PasswordBox}">Logga In</Button>
